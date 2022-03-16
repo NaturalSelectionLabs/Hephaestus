@@ -1,0 +1,25 @@
+metrics:
+  deploy: false
+tracing:
+  deploy: false
+  jaeger:
+    enabled: false
+proxy:
+  resources:
+    limit:
+      mem: 500Mi
+      cpu: 600m
+    request:
+      mem: 100Mi
+      cpu: 200m
+  additionalArguments:
+    - "--accesslog=true"
+    - "--accesslog.bufferingsize=100"
+controller:
+  resources:
+    limit:
+      mem: 500Mi
+      cpu: 800m
+    request:
+      mem: 100Mi
+      cpu: 300m
