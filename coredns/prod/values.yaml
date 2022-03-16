@@ -1,0 +1,24 @@
+service:
+  clusterIP: 10.100.0.10
+fullnameOverride: coredns
+resources:
+  limits:
+    cpu: 700m
+    memory: 1000Mi
+  requests:
+    cpu: 300m
+    memory: 128Mi
+prometheus:
+  service:
+    enabled: true
+hpa:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
