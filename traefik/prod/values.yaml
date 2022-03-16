@@ -1,0 +1,20 @@
+service:
+  enabled: false
+deployment:
+  kind: DaemonSet
+ports:
+  web:
+    hostPort: "8000"  # for HTTP
+logs:
+  access:
+    enabled: true
+    bufferingsize: "100"
+additionalArguments:
+  - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
+resources:
+  requests:
+    cpu: "300m"
+    memory: "150Mi"
+  limits:
+    cpu: "800m"
+    memory: "600Mi"
