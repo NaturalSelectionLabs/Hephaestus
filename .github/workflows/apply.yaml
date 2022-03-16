@@ -21,11 +21,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       - run: |
-        curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
-        helm repo add coredns https://coredns.github.io/helm
-        helm repo add traefik https://helm.traefik.io/traefik
-        helm repo add traefik-mesh https://helm.traefik.io/mesh
-        helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
-        helm repo add grafana https://grafana.github.io/helm-charts
-        helm repo update
+          curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
+          helm repo add coredns https://coredns.github.io/helm
+          helm repo add traefik https://helm.traefik.io/traefik
+          helm repo add traefik-mesh https://helm.traefik.io/mesh
+          helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo update
       - run: bash ./apply.sh
