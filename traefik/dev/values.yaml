@@ -3,12 +3,11 @@ service:
 deployment:
   kind: DaemonSet
 ports:
-  traefik:
-    hostPort: "9000"  # for ALB health check
   web:
     hostPort: "8000"  # for HTTP
 logs:
   access:
     enabled: true
+    bufferingsize: "100"
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"
