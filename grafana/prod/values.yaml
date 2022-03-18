@@ -1,0 +1,57 @@
+serviceAccount:
+ annotations:
+   eks.amazonaws.com/role-arn: arn:aws:iam::235243881813:role/grafana
+resources:
+ limits:
+   cpu: 300m
+   memory: 300Mi
+ requests:
+   cpu: 100m
+   memory: 128Mi
+nodeSelector:
+  rss3.io/usage: internal
+tolerations:
+  - key: "rss3.io/usage"
+    operator: "Equal"
+    value: "internal"
+    effect: "NoSchedule"
+persistence:
+  type: pvc
+  enabled: false
+admin:
+  existingSecret: "grafana-secrets"
+  userKey: admin-user
+  passwordKey: admin-password
+env:
+  AWS_ROLE_ARN: arn:aws:iam::235243881813:role/grafana
+  AWS_WEB_IDENTITY_TOKEN_FILE: /var/run/secrets/eks.amazonaws.com/serviceaccount/token
+  AWS_REGION: us-west-2
+extraSecretMounts:
+  - name: aws-iam-token
+    mountPath: /var/run/secrets/eks.amazonaws.com/serviceaccount
+    readOnly: true
+    projected:
+      defaultMode: 420
+      sources:
+        - serviceAccountToken:
+            audience: sts.amazonaws.com
+            expirationSeconds: 86400
+            path: token
+datasources:
+ datasources.yaml:
+   apiVersion: 1
+   datasources:
+   - name: Prometheus
+     type: prometheus
+     url: http://prometheus-prometheus-server
+     access: proxy
+     isDefault: true
+   - name: CloudWatch
+     type: cloudwatch
+     access: proxy
+     uid: cloudwatch
+     editable: false
+     jsonData:
+       authType: default
+       defaultRegion: us-west-2
+namespaceOverride: "guardian"
