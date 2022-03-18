@@ -1,0 +1,31 @@
+alertmanager:
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+  nodeSelector:
+    rss3.io/usage: internal
+  resources:
+    limits:
+      cpu: 150m
+      memory: 300Mi
+    requests:
+      cpu: 50m
+      memory: 50Mi
+nodeExporter:
+  tolerations:
+    - operator: "Exists"
+server:
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+  nodeSelector:
+    rss3.io/usage: internal
+  persistentVolume:
+    size: 80Gi
+  retention: "7d"
+pushgateway:
+  enabled: false
