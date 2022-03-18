@@ -37,21 +37,4 @@ extraSecretMounts:
             audience: sts.amazonaws.com
             expirationSeconds: 86400
             path: token
-datasources:
- datasources.yaml:
-   apiVersion: 1
-   datasources:
-   - name: Prometheus
-     type: prometheus
-     url: http://prometheus-prometheus-server
-     access: proxy
-     isDefault: true
-   - name: CloudWatch
-     type: cloudwatch
-     access: proxy
-     uid: cloudwatch
-     editable: false
-     jsonData:
-       authType: default
-       defaultRegion: us-west-2
 namespaceOverride: "guardian"
