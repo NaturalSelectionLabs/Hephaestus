@@ -15,6 +15,8 @@ proxy:
   additionalArguments:
     - "--accesslog=true"
     - "--accesslog.bufferingsize=100"
+    - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
+    - "--metrics.prometheus.buckets=0.001,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0"
 controller:
   resources:
     limit:
