@@ -20,3 +20,8 @@ admin:
   userKey: admin-user
   passwordKey: admin-password
 namespaceOverride: "guardian"
+grafana.ini:
+  server:
+    domain: grafana.kindjeff.com
+    root_url: "https://%(domain)s"
+    serve_from_sub_path: false
