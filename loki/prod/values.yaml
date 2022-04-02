@@ -20,9 +20,6 @@ promtail:
       operator: "Equal"
       value: "internal"
       effect: "NoSchedule"
-  config:
-    logLevel: warning
-    lokiAddress: http://loki.guardian/loki/api/v1/push
 
 fluent-bit:
   enabled: false
