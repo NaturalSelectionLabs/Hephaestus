@@ -1,6 +1,6 @@
 AWS_REGION=us-west-2
 CLUSTER_NAME=production
-VALUES=traefik-mesh/production/values.yaml
+VALUES=traefik-mesh/prod/values.yaml
 RELEASE=traefik-mesh
 CHART=traefik-mesh/traefik-mesh
 NS=default
