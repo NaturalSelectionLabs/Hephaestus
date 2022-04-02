@@ -1,0 +1,40 @@
+loki:
+  enabled: true
+  nodeSelector:
+    rss3.io/usage: internal
+  tolerations: 
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+  persistence:
+    enabled: true
+    accessModes:
+    - ReadWriteOnce
+    size: 200Gi
+
+promtail:
+  enabled: true
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+  config:
+    logLevel: warning
+    lokiAddress: http://loki.guardian/loki/api/v1/push
+
+fluent-bit:
+  enabled: false
+
+grafana:
+  enabled: false
+
+prometheus:
+  enabled: false
+
+filebeat:
+  enabled: false
+
+logstash:
+  enabled: false
