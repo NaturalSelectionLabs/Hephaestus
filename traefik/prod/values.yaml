@@ -9,6 +9,7 @@ logs:
   access:
     enabled: true
     bufferingsize: "100"
+    format: "json"
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
   - "--metrics.prometheus.buckets=0.001,0.002,0.005,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0"

@@ -8,3 +8,4 @@ proxy:
   additionalArguments:
     - "--accesslog=true"
     - "--accesslog.bufferingsize=100"
+    - "--accesslog.format=json"

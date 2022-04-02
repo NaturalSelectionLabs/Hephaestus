@@ -9,5 +9,6 @@ logs:
   access:
     enabled: true
     bufferingsize: "100"
+    format: "json"
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"
