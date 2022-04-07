@@ -8,7 +8,6 @@ tolerations:
     value: "internal"
     effect: "NoSchedule"
 labels:
-  prometheus.io/path: "/metrics"
   prometheus.io/port: "9121"
   prometheus.io/scrape: "true"
 redisAddressConfig:
