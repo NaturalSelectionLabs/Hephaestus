@@ -1,8 +1,8 @@
 AWS_REGION=us-west-2
 CLUSTER_NAME=production
-VALUES=loki/prod/values.yaml
-RELEASE=loki
-CHART=grafana/loki-stack
+VALUES=exporters/redis/values.yaml
+RELEASE=redis-exporter-pregod
+CHART=prometheus-community/prometheus-redis-exporter
 NS=guardian
 
 aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
