@@ -1,8 +1,8 @@
 AWS_REGION=us-west-2
 CLUSTER_NAME=production
-VALUES=exporters/redis/values.yaml
-RELEASE=redis-exporter-pregod
-CHART=prometheus-community/prometheus-redis-exporter
+VALUES=exporters/pgsql/values.yaml
+RELEASE=pg-exporter
+CHART=prometheus-community/prometheus-postgres-exporter
 NS=guardian
 
 aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
