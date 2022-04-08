@@ -1,5 +1,8 @@
 image:
   tag: v0.10.1
+annotations:
+  prometheus.io/port: "9187"
+  prometheus.io/scrape: "true"
 config:
   datasourceSecret:
     name: pg-addrs
