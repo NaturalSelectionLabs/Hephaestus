@@ -1,6 +1,6 @@
 AWS_REGION=us-west-2
-CLUSTER_NAME=development
-VALUES=traefik/dev/values.yaml
+CLUSTER_NAME=production
+VALUES=traefik/prod/values.yaml
 RELEASE=traefik
 CHART=traefik/traefik
 NS=default
