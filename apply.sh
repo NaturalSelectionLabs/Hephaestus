@@ -1,9 +1,9 @@
 AWS_REGION=us-west-2
 CLUSTER_NAME=production
-VALUES=exporters/pgsql/values.yaml
-RELEASE=pg-exporter
-CHART=prometheus-community/prometheus-postgres-exporter
-NS=guardian
+VALUES=traefik/prod/values.yaml
+RELEASE=traefik
+CHART=traefik/traefik
+NS=default
 
 aws eks update-kubeconfig --region $AWS_REGION --name $CLUSTER_NAME
 helm upgrade $RELEASE $CHART -f $VALUES -i -n $NS
