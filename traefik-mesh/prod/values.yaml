@@ -17,7 +17,7 @@ proxy:
     - "--accesslog.bufferingsize=100"
     - "--accesslog.format=json"
     - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
-    - "--metrics.prometheus.buckets=0.001,0.002,0.005,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0"
+    - "--metrics.prometheus.buckets=0.001,0.002,0.005,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0,25.0,35.0,50.0"
 controller:
   resources:
     limit:
