@@ -27,5 +27,6 @@ jobs:
           helm repo add traefik-mesh https://helm.traefik.io/mesh
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
           helm repo add grafana https://grafana.github.io/helm-charts
+          helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
           helm repo update
       - run: bash ./apply.sh
