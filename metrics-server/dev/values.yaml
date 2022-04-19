@@ -1,0 +1,11 @@
+metrics:
+  enabled: false
+
+nodeSelector:
+  rss3.io/usage: internal
+
+tolerations:
+  - key: "rss3.io/usage"
+    operator: "Equal"
+    value: "internal"
+    effect: "NoSchedule"
