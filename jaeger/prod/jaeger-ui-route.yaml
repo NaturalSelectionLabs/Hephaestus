@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: jaeger-ui
+  namespace: guardian
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`jaeger.kindjeff.com`)
+      kind: Rule
+      services:
+        - name: jaeger-query
+          port: 80

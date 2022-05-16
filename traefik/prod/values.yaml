@@ -15,8 +15,8 @@ additionalArguments:
   - "--metrics.prometheus.buckets=0.001,0.002,0.005,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0,25.0,35.0,50.0"
   - "--providers.kubernetescrd.allowexternalnameservices=true"
   - "--tracing.jaeger=true"
-  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.default.svc.cluster.local:5778/sampling"
-  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.default.svc.cluster.local:6831"
+  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.guardian:5778/sampling"
+  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.guardian:6831"
   - "--tracing.jaeger.disableAttemptReconnecting=false"
 resources:
   requests:
