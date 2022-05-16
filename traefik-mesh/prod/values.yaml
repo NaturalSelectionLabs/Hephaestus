@@ -3,7 +3,9 @@ metrics:
 tracing:
   deploy: false
   jaeger:
-    enabled: false
+    enabled: true
+    localAgentHostPort: "jaeger-agent.guardian:6831"
+    samplingServerURL: "http://jaeger-agent.guardian:5778/sampling"
 proxy:
   resources:
     limit:
