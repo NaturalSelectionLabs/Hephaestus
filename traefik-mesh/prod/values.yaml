@@ -1,9 +1,9 @@
 metrics:
   deploy: false
 tracing:
-  deploy: false
+  deploy: true
   jaeger:
-    enabled: false
+    enabled: true
 proxy:
   resources:
     limit:
