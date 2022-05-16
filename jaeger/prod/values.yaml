@@ -6,8 +6,9 @@ storage:
   cassandra:
     host: cassandra
     port: 9042
-    user: cassandra
-    usePassword: false
+    user: user
+    password: password
+    usePassword: true
     keyspace: jaeger_v1_test
 
 cassandra:
