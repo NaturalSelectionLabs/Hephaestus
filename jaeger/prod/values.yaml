@@ -1,0 +1,81 @@
+provisionDataStore:
+  cassandra: true
+
+storage:
+  type: cassandra
+  cassandra:
+    host: cassandra
+    port: 9042
+    user: cassandra
+    usePassword: false
+    keyspace: jaeger_v1_test
+
+cassandra:
+  persistence:
+    enabled: true
+    size: 10Gi
+  nodeSelector:
+    rss3.io/usage: internal
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+
+agent:
+  enabled: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 256m
+      memory: 128Mi
+
+collector:
+  enabled: true
+  replicaCount: 1
+  autoscaling:
+    enabled: true
+    minReplicas: 1
+    maxReplicas: 4
+  service:
+    type: ClusterIP
+    grpc:
+      port: 14250
+    http:
+      port: 14268
+  resources:
+    limits:
+      cpu: 1
+      memory: 1Gi
+    requests:
+      cpu: 500m
+      memory: 512Mi
+  nodeSelector:
+    rss3.io/usage: internal
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
+
+query:
+  enabled: true
+  agentSidecar:
+    enabled: false
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+       cpu: 256m
+       memory: 128Mi
+  nodeSelector:
+    rss3.io/usage: internal
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
