@@ -1,0 +1,13 @@
+nodeSelector:
+  rss3.io/usage: internal
+tolerations:
+  - key: "rss3.io/usage"
+    operator: "Equal"
+    value: "internal"
+    effect: "NoSchedule"
+
+rabbitmq:
+  url: https://b-87e4ed14-97dc-42ee-8f60-948d7fe16b1e.mq.us-west-2.amazonaws.com
+  user: root
+  existingPasswordSecret: rabbitmq
+  existingPasswordSecretKey: password
