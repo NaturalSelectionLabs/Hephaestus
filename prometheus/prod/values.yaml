@@ -29,3 +29,12 @@ server:
   retention: "7d"
 pushgateway:
   enabled: false
+extraScrapeConfigs: |
+  - job_name: 'crossbell-faucet'
+    metrics_path: /metrics
+    params:
+      module: [http_2xx]
+    scheme: "https"
+    static_configs:
+      - targets:
+        - faucet.crossbell.io
