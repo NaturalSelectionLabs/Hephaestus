@@ -1,3 +1,7 @@
+image:
+  repository: kbudde/rabbitmq-exporter
+  tag: 1.0.0-RC16
+  pullPolicy: IfNotPresent
 nodeSelector:
   rss3.io/usage: internal
 tolerations:
