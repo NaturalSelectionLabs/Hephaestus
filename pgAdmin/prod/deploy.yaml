@@ -1,0 +1,151 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pgadmin
+  namespace: default
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 5
+  selector:
+    matchLabels:
+      app: pgadmin
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      labels:
+        app: pgadmin
+    spec:
+      containers:
+        - image: dpage/pgadmin4
+          imagePullPolicy: Always
+          name: pgadmin
+          env:
+            - name: PGADMIN_DEFAULT_EMAIL
+              value: fake@rss3.io
+            - name: PGADMIN_DEFAULT_PASSWORD
+              value: $PGADMIN_DEFAULT_PASSWORD  # TODO: to be replaced
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          readinessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          livenessProbe:
+            tcpSocket:
+              port: 80
+            initialDelaySeconds: 20
+            periodSeconds: 20
+          volumeMounts:
+            - name: pgadmin-servers
+              mountPath: "/pgadmin4/servers.json"
+              subPath: servers.json
+              readOnly: true
+            - name: storage
+              mountPath: "/var/lib/pgadmin"
+              subPath: "var/lib/pgadmin"
+              readOnly: false
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        runAsUser: 0
+        runAsGroup: 0
+        fsGroup: 0
+      terminationGracePeriodSeconds: 30
+      volumes:
+        - name: pgadmin-servers
+          configMap:
+            name: pgadmin-servers
+        - name: storage
+          persistentVolumeClaim:
+            claimName: pgadmin-storage
+---
+apiVersion: v1
+data:
+  servers.json: |
+    {
+        "Servers": {
+            "pregod": {
+                "Name": "pregod",
+                "Port": 5432,
+                "Group": "pregod",
+                "SSLMode": "prefer",
+                "Username": "pregod",
+                "Host": "pregod.cbecaot23mdi.us-west-2.rds.amazonaws.com",
+                "MaintenanceDB": "pregod2"
+            },
+            "crossbell-indexer": {
+                "Name": "crossbell-indexer",
+                "Port": 5432,
+                "Group": "crossbell",
+                "SSLMode": "prefer",
+                "Username": "postgres",
+                "Host": "crossbell-indexer.cbecaot23mdi.us-west-2.rds.amazonaws.com",
+                "MaintenanceDB": "indexer"
+            },
+            "blockscout": {
+                "Name": "blockscout",
+                "Port": 5432,
+                "Group": "crossbell",
+                "SSLMode": "prefer",
+                "Username": "postgres",
+                "Host": "blockscout-crossbell-new.cbecaot23mdi.us-west-2.rds.amazonaws.com",
+                "MaintenanceDB": "blockscout"
+            }
+        }
+    }
+kind: ConfigMap
+metadata:
+  name: pgadmin-servers
+  namespace: default
+---
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: pgadmin-storage
+  namespace: default
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: gp2
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: pgadmin
+  namespace: default
+spec:
+  selector:
+    app: pgadmin
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pgadmin
+  namespace: default
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`pg.kindjeff.com`)
+    services:
+    - name: pgadmin
+      port: 80
