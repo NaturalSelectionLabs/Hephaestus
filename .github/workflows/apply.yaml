@@ -1,4 +1,4 @@
-name: Run apply.sh
+name: Run apply
 
 on:
   push:
@@ -7,7 +7,12 @@ on:
 
 env:
   REGION_ID: us-east-1
-  ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
+  DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
+  PROD_ACK_CLUSTER_ID: ""
+  VALUES: traefik-mesh/dev/values.yaml
+  RELEASE: traefik-mesh
+  CHART: traefik-mesh/traefik-mesh
+  NS: default
 
 jobs:
   apply:
@@ -20,7 +25,7 @@ jobs:
         with:
           access-key-id: "${{ secrets.ACCESS_KEY_ID }}"
           access-key-secret: "${{ secrets.ACCESS_KEY_SECRET }}"
-          cluster-id: "${{ env.ACK_CLUSTER_ID }}"
+          cluster-id: "${{ env.DEV_ACK_CLUSTER_ID }}"
       - run: |
           curl https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash
           helm repo add coredns https://coredns.github.io/helm
@@ -31,4 +36,5 @@ jobs:
           helm repo add metrics-server https://kubernetes-sigs.github.io/metrics-server/
           helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
           helm repo update
-      - run: bash ./apply.sh
+      - run: |
+          helm upgrade $RELEASE $CHART -f $VALUES -i -n $NS
