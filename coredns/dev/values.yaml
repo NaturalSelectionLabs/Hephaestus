@@ -1,3 +1,0 @@
-service:
-  clusterIP: 10.100.0.10
-fullnameOverride: coredns
