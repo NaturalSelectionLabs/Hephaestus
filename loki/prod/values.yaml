@@ -12,6 +12,7 @@ loki:
     accessModes:
     - ReadWriteOnce
     size: 200Gi
+    storageClassName: "alicloud-disk-ssd"
 
 promtail:
   enabled: true
