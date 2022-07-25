@@ -2,7 +2,7 @@ loki:
   enabled: true
   nodeSelector:
     rss3.io/usage: internal
-  tolerations:
+  tolerations: 
     - key: "rss3.io/usage"
       operator: "Equal"
       value: "internal"
@@ -13,17 +13,14 @@ loki:
     - ReadWriteOnce
     size: 200Gi
     storageClassName: "alicloud-disk-ssd"
-  config:
-    limits_config:
-      per_stream_rate_limit: "15MB"
-      per_stream_rate_limit_burst: "30MB"
-      ingestion_rate_mb: 15
-      ingestion_burst_size_mb: 30
-      max_entries_limit_per_query: 10000
-      max_global_streams_per_user: 10000
 
 promtail:
-  enabled: false
+  enabled: true
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "internal"
+      effect: "NoSchedule"
 
 fluent-bit:
   enabled: false
@@ -35,65 +32,7 @@ prometheus:
   enabled: false
 
 filebeat:
-  enabled: true
-  filebeatConfig:
-    filebeat.yml: |
-      # logging.level: debug
-      filebeat.inputs:
-      - type: container
-        tail_files: true
-        paths:
-          - /var/log/containers/*.log
-        processors:
-        - add_kubernetes_metadata:
-            host: ${NODE_NAME}
-            matchers:
-            - logs_path:
-                logs_path: "/var/log/containers/"
-      output.logstash:
-        hosts: ["loki-logstash-headless.guardian:5044"]
+  enabled: false
 
 logstash:
-  enabled: true
-  nodeSelector:
-    rss3.io/usage: internal
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
-  image: grafana/logstash-output-loki
-  imageTag: "2.6.1-amd64"
-  logstashConfig:
-    logstash.yml: |
-      http.host: "0.0.0.0"
-  logstashPipeline:
-    logstash.conf: |
-      input {
-        beats {
-          port => 5044
-        }
-      }
-      filter {
-        if [kubernetes] {
-          mutate {
-            add_field => {
-              "container_name" => "%{[kubernetes][container][name]}"
-              "namespace" => "%{[kubernetes][namespace]}"
-              "pod" => "%{[kubernetes][pod][name]}"
-            }
-            replace => { "host" => "%{[kubernetes][node][name]}"}
-          }
-        }
-        mutate {
-          remove_field => ["tags"]
-        }
-      }
-      output {
-        loki {
-          url => "http://loki:3100/loki/api/v1/push"
-          #username => "test"
-          #password => "test"
-        }
-        # stdout { codec => rubydebug }
-      }
+  enabled: false
