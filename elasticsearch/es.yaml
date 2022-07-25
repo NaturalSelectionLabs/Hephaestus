@@ -1,0 +1,64 @@
+apiVersion: elasticsearch.k8s.elastic.co/v1
+kind: Elasticsearch
+metadata:
+  name: elasticsearch
+  namespace: elastic-system
+spec:
+  version: 8.3.2
+  nodeSets:
+  - name: default
+    config:
+      # most Elasticsearch configuration parameters are possible to set, e.g: node.attr.attr_name: attr_value
+      node.store.allow_mmap: false
+    podTemplate:
+      metadata:
+        labels:
+          k8s-app: elasticsearch
+      spec:
+        nodeSelector:
+          rss3.io/usage: internal
+        tolerations:
+        - key: "rss3.io/usage"
+          operator: "Equal"
+          value: "internal"
+          effect: "NoSchedule"
+        containers:
+        - name: elasticsearch
+          # specify resource limits and requests
+          resources:
+            requests:
+              memory: 2Gi
+              cpu: 1
+            limits:
+              memory: 4Gi
+              cpu: 1
+          env:
+          - name: ES_JAVA_OPTS
+            value: "-Xms2g -Xmx2g"
+    count: 3
+    volumeClaimTemplates:
+    - metadata:
+        name: elasticsearch-data # Do not change this name unless you set up a volume mount for the data path.
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 50Gi
+        storageClassName: alicloud-disk-essd
+  # # inject secure settings into Elasticsearch nodes from k8s secrets references
+  # secureSettings:
+  # - secretName: ref-to-secret
+  # - secretName: another-ref-to-secret
+  #   # expose only a subset of the secret keys (optional)
+  #   entries:
+  #   - key: value1
+  #     path: newkey # project a key to a specific path (optional)
+  http:
+    # service:
+    #   spec:
+    #     # expose this cluster Service with a LoadBalancer
+    #     type: LoadBalancer
+    tls:
+      selfSignedCertificate:
+        disabled: true
