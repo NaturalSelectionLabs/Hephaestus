@@ -13,6 +13,14 @@ loki:
     - ReadWriteOnce
     size: 200Gi
     storageClassName: "alicloud-disk-ssd"
+  config:
+    limits_config:
+      per_stream_rate_limit: "15MB"
+      per_stream_rate_limit_burst: "30MB"
+      ingestion_rate_mb: 15
+      ingestion_burst_size_mb: 30
+      max_entries_limit_per_query: 10000
+      max_global_streams_per_user: 10000
 
 promtail:
   enabled: false
@@ -28,16 +36,12 @@ prometheus:
 
 filebeat:
   enabled: true
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
   filebeatConfig:
     filebeat.yml: |
       # logging.level: debug
       filebeat.inputs:
       - type: container
+        tail_files: true
         paths:
           - /var/log/containers/*.log
         processors:
@@ -47,7 +51,7 @@ filebeat:
             - logs_path:
                 logs_path: "/var/log/containers/"
       output.logstash:
-        hosts: ["loki-logstash-headless:9600"]
+        hosts: ["loki-logstash-headless.guardian:5044"]
 
 logstash:
   enabled: true
@@ -59,13 +63,17 @@ logstash:
       value: "internal"
       effect: "NoSchedule"
   image: grafana/logstash-output-loki
-  imageTag: 1.0.1
+  imageTag: "2.6.1-amd64"
   logstashConfig:
     logstash.yml: |
       http.host: "0.0.0.0"
-      xpack.monitoring.elasticsearch.hosts: [ "http://elasticsearch-es-internal-http.elastic-system:9200" ]
   logstashPipeline:
     logstash.conf: |
+      input {
+        beats {
+          port => 5044
+        }
+      }
       filter {
         if [kubernetes] {
           mutate {
