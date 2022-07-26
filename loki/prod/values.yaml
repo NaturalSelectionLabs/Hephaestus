@@ -14,6 +14,8 @@ loki:
     size: 200Gi
     storageClassName: "alicloud-disk-ssd"
   config:
+    server:
+      grpc_server_max_recv_msg_size: 104857600
     limits_config:
       per_stream_rate_limit: "15MB"
       per_stream_rate_limit_burst: "30MB"
