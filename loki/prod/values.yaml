@@ -53,6 +53,11 @@ filebeat:
             matchers:
             - logs_path:
                 logs_path: "/var/log/containers/"
+        - add_tags:
+            when:
+              regexp:
+                message: "^\[DATABEAT\].*"
+            tags: [databeat]
       output.logstash:
         hosts: ["logstash-loki.guardian:5044"]
 
@@ -89,15 +94,37 @@ logstash:
             replace => { "host" => "%{[kubernetes][node][name]}"}
           }
         }
+
+        if "databeat" in [tags] {
+          dissect {
+            mapping => {
+              "message" => "[DATABEAT]%{msg}"
+            }
+          }
+          json {
+            source => "msg"
+          }
+          mutate {
+            remove_field => ["msg"]
+          }
+        }
+
         mutate {
           remove_field => ["tags"]
         }
       }
       output {
-        loki {
-          url => "http://loki:3100/loki/api/v1/push"
-          #username => "test"
-          #password => "test"
+        if ("" in [index]) {
+          elasticsearch {
+            hosts => "elasticsearch.guardian:9200"
+            index => "%{[index]}-%{+YYYY.MM.dd}"
+            user => "elastic"
+            password => ""
+          }
+        } else {
+          loki {
+            url => "http://loki:3100/loki/api/v1/push"
+          }
         }
         # stdout { codec => rubydebug }
       }
