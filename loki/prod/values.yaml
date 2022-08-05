@@ -49,6 +49,10 @@ filebeat:
           - /var/log/containers/*.log
         processors:
         - add_kubernetes_metadata:
+            when:
+              not:
+                regexp:
+                  message: "^\\[DATABEAT\\].*"
             host: ${NODE_NAME}
             matchers:
             - logs_path:
@@ -56,7 +60,7 @@ filebeat:
         - add_tags:
             when:
               regexp:
-                message: "^\[DATABEAT\].*"
+                message: "^\\[DATABEAT\\].*"
             tags: [databeat]
       output.logstash:
         hosts: ["logstash-loki.guardian:5044"]
@@ -105,18 +109,14 @@ logstash:
             source => "msg"
           }
           mutate {
-            remove_field => ["msg"]
+            remove_field => ["msg", "message"]
           }
-        }
-
-        mutate {
-          remove_field => ["tags"]
         }
       }
       output {
-        if ("" in [index]) {
+        if ("databeat" in [tags]) {
           elasticsearch {
-            hosts => "elasticsearch.guardian:9200"
+            hosts => "elasticsearch-es-internal-http.elastic-system:9200"
             index => "%{[index]}-%{+YYYY.MM.dd}"
             user => "elastic"
             password => ""
