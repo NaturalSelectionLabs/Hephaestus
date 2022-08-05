@@ -9,11 +9,11 @@ env:
   REGION_ID: us-east-1
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
-  VALUES: loki/prod/values.yaml
-  RELEASE: loki
-  CHART: grafana/loki-stack
-  NS: guardian
-  CLUSTER: prod
+  VALUES: traefik/dev/values.yaml
+  RELEASE: traefik
+  CHART: traefik/traefik
+  NS: default
+  CLUSTER: dev
 
 jobs:
   apply:
