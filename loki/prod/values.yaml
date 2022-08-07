@@ -64,6 +64,10 @@ filebeat:
             tags: [databeat]
       output.logstash:
         hosts: ["logstash-loki.guardian:5044"]
+  resources:
+    limits:
+      cpu: 2000m
+      memory: 1024Mi
 
 logstash:
   enabled: true
@@ -128,3 +132,7 @@ logstash:
         }
         # stdout { codec => rubydebug }
       }
+  resources:
+    limits:
+      cpu: 1200m
+      memory: 2560Mi
