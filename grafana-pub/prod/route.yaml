@@ -8,7 +8,7 @@ spec:
   - web
   routes:
   - kind: Rule
-    match: Host(`dashboard.rss3.dev`) && PathPrefix(`/`)
+    match: Host(`dashboard.rss3.dev`)
     services:
     - name: grafana-pub
       port: 80
@@ -23,3 +23,18 @@ spec:
   headers:
     customRequestHeaders:
       X-WEBAUTH-USER: "viewer"
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-pub-admin
+  namespace: guardian
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`grafana-pub.kindjeff.com`)
+    services:
+    - name: grafana-pub
+      port: 80
