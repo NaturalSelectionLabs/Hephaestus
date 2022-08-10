@@ -12,3 +12,14 @@ spec:
     services:
     - name: grafana-pub
       port: 80
+    middlewares:
+      - name: grafana-pub-add-x-webauth-user
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: grafana-pub-add-x-webauth-user
+spec:
+  headers:
+    customRequestHeaders:
+      X-WEBAUTH-USER: "viewer"
