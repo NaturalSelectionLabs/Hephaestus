@@ -19,6 +19,7 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
 metadata:
   name: grafana-pub-add-x-webauth-user
+  namespace: guardian
 spec:
   headers:
     customRequestHeaders:
@@ -38,3 +39,15 @@ spec:
     services:
     - name: grafana-pub
       port: 80
+    middlewares:
+      - name: rm-x-webauth-user
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rm-x-webauth-user
+  namespace: guardian
+spec:
+  headers:
+    customRequestHeaders:
+      X-WEBAUTH-USER: ""
