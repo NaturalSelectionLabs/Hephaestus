@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-pub
+  namespace: guardian
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`dashboard.rss3.dev`) && PathPrefix(`/`)
+    services:
+    - name: grafana-pub
+      port: 80

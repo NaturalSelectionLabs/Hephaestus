@@ -1,0 +1,31 @@
+fullnameOverride: grafana-pub
+resources:
+ limits:
+   cpu: 300m
+   memory: 300Mi
+ requests:
+   cpu: 100m
+   memory: 128Mi
+nodeSelector:
+  rss3.io/usage: internal
+tolerations:
+  - key: "rss3.io/usage"
+    operator: "Equal"
+    value: "internal"
+    effect: "NoSchedule"
+persistence:
+  type: pvc
+  enabled: true
+  storageClassName: alicloud-disk-ssd
+  size: 20Gi
+admin:
+  existingSecret: "grafana-pub-secrets"
+  userKey: admin-user
+  passwordKey: admin-password
+namespaceOverride: "guardian"
+grafana.ini:
+  server:
+    domain: dashboard.rss3.dev
+    root_url: "https://%(domain)s"
+    serve_from_sub_path: false
+enableServiceLinks: false
