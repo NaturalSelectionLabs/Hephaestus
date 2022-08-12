@@ -65,6 +65,9 @@ filebeat:
       output.logstash:
         hosts: ["logstash-loki.guardian:5044"]
   resources:
+    requests:
+      cpu: 100m
+      memory: 300Mi
     limits:
       cpu: 2000m
       memory: 1024Mi
