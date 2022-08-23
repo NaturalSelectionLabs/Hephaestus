@@ -13,7 +13,7 @@ env:
   RELEASE: nats
   CHART: nats/nats
   NS: default
-  CLUSTER: dev
+  CLUSTER: prod
   RUN: yes
 
 jobs:

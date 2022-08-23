@@ -1,0 +1,72 @@
+nats:
+  image: nats:2.8.4-alpine
+  pullPolicy: IfNotPresent
+
+  profiling:
+    enabled: false
+
+  configChecksumAnnotation: true
+  externalAccess: false
+  advertise: false
+  serviceAccount:
+    create: false
+  connectRetries: 120
+
+  resources: {}
+
+  client:
+    port: 4222
+    portName: "client"
+
+  jetstream:
+    enabled: false
+    memStorage:
+      enabled: true
+      size: 1Gi
+    fileStorage:
+      enabled: true
+      storageDirectory: /data
+      size: 20Gi
+      storageClassName: ""
+      accessModes:
+        - ReadWriteOnce
+
+mqtt:
+  enabled: false
+
+nameOverride: ""
+namespaceOverride: ""
+
+nodeSelector: {}
+
+tolerations: []
+
+cluster:
+  enabled: false
+  replicas: 1
+  noAdvertise: true
+
+leafnodes:
+  enabled: false
+
+gateway:
+  enabled: false
+
+natsbox:
+  enabled: false
+
+reloader:
+  enabled: true
+
+exporter:
+  enabled: true
+  image: natsio/prometheus-nats-exporter:0.10.0
+
+auth:
+  enabled: false
+
+websocket:
+  enabled: false
+
+networkPolicy:
+  enabled: false
