@@ -84,7 +84,7 @@ server:
   readinessProbe:
     enabled: true
     # If you need to use a http path instead of the default exec
-    # path: /v1/sys/health?standbyok=true
+    path: /v1/sys/health?standbyok=true
 
     # When a probe fails, Kubernetes will try failureThreshold times before giving up
     failureThreshold: 2
