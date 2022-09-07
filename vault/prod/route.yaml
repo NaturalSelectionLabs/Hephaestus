@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: httpbin
+  namespace: guardian
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`vault.kindjeff.com`)
+      kind: Rule
+      services:
+        - name: vault-ui
+          port: 8200
