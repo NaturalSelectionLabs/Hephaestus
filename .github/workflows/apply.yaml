@@ -14,7 +14,7 @@ env:
   CHART: hashicorp/vault
   NS: guardian
   CLUSTER: prod
-  RUN: no
+  RUN: yes
 
 jobs:
   apply:

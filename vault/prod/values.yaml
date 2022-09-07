@@ -10,7 +10,7 @@ injector:
 
     # Default template type for secrets when no custom template is specified.
     # Possible values include: "json" and "map".
-    template: "map"
+    template: "json"
 
   # Mount Path of the Vault Kubernetes Auth Method.
   authPath: "auth/kubernetes"
