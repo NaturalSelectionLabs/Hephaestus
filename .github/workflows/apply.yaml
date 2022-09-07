@@ -9,10 +9,10 @@ env:
   REGION_ID: us-east-1
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
-  VALUES: nats/dev/values.yaml
-  RELEASE: nats
-  CHART: nats/nats
-  NS: default
+  VALUES: vault/prod/values.yaml
+  RELEASE: vault
+  CHART: hashicorp/vault
+  NS: guardian
   CLUSTER: prod
   RUN: yes
 
@@ -43,6 +43,7 @@ jobs:
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
           helm repo add nats https://nats-io.github.io/k8s/helm/charts/
+          helm repo add hashicorp https://helm.releases.hashicorp.com
           helm repo update
       - if: env.RUN == 'yes'
         run: |
