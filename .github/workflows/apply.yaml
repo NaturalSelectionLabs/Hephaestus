@@ -9,12 +9,12 @@ env:
   REGION_ID: us-east-1
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
-  VALUES: vault/prod/values.yaml
-  RELEASE: vault
-  CHART: hashicorp/vault
+  VALUES: jaeger/prod/values.yaml
+  RELEASE: jaeger
+  CHART: jaegertracing/jaeger
   NS: guardian
   CLUSTER: prod
-  RUN: no
+  RUN: yes
 
 jobs:
   apply:
