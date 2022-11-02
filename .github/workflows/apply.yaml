@@ -15,7 +15,7 @@ env:
   CHART: grafana/loki-stack
   NS: guardian
   CLUSTER: prod
-  RUN: no
+  RUN: yes
 
 jobs:
   apply:

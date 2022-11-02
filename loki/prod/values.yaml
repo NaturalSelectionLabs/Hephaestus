@@ -48,6 +48,8 @@ prometheus:
 
 filebeat:
   enabled: true
+  tolerations:
+    - operator: "Exists"
   filebeatConfig:
     filebeat.yml: |
       logging.level: warning
