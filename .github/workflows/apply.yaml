@@ -10,11 +10,11 @@ env:
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
   # if you run loki, notice that logstash es password should be edited manually
-  VALUES: loki/prod/values.yaml
-  RELEASE: loki
-  CHART: grafana/loki-stack
+  VALUES: cassandra/dev/values.yaml
+  RELEASE: cassandra
+  CHART: bitnami/cassandra
   NS: guardian
-  CLUSTER: prod
+  CLUSTER: dev
   RUN: yes
 
 jobs:
@@ -45,6 +45,7 @@ jobs:
           helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
           helm repo add nats https://nats-io.github.io/k8s/helm/charts/
           helm repo add hashicorp https://helm.releases.hashicorp.com
+          helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo update
       - if: env.RUN == 'yes'
         run: |
