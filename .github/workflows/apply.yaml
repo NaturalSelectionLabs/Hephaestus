@@ -15,7 +15,7 @@ env:
   CHART: bitnami/cassandra
   NS: guardian
   CLUSTER: dev
-  RUN: yes
+  RUN: no
 
 jobs:
   apply:
