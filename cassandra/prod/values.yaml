@@ -1,0 +1,62 @@
+global:
+  storageClass: "alicloud-disk-ssd"
+
+image:
+  registry: docker.io
+  repository: bitnami/cassandra
+  tag: 4.0.7-debian-11-r9
+  digest: ""
+  pullPolicy: IfNotPresent
+
+dbUser:
+  user: cassandra
+  forcePassword: false
+  existingSecret:
+    name: cassandra
+    keyMapping:
+      cassandra-password: password
+
+replicaCount: 3
+updateStrategy:
+  type: RollingUpdate
+## @param podAnnotations Additional pod annotations
+## ref: https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+##
+podAnnotations: {}
+nodeSelector:
+  rss3.io/usage: cassandra
+tolerations:
+  - key: "rss3.io/usage"
+    operator: "Equal"
+    value: "cassandra"
+    effect: "NoSchedule"
+## Minimum memory for development is 4GB and 2 CPU cores
+## Minimum memory for production is 8GB and 4 CPU cores
+## ref: http://docs.datastax.com/en/archived/cassandra/2.0/cassandra/architecture/architecturePlanningHardware_c.html
+resources:
+  limits:
+     cpu: 3000m
+     memory: 7Gi
+  requests:
+     cpu: 3000m
+     memory: 7Gi
+
+containerPorts:
+  intra: 7000
+  jmx: 7199
+  cql: 9042
+
+service:
+  type: ClusterIP
+  ports:
+    cql: 9042
+    metrics: 8080
+
+persistence:
+  enabled: true
+  storageClass: "alicloud-disk-ssd"
+  size: 300Gi
+  mountPath: /bitnami/cassandra
+
+metrics:
+  enabled: enabled
