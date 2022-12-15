@@ -10,9 +10,9 @@ env:
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
   # if you run loki, notice that logstash es password should be edited manually
-  VALUES: kafka/prod/values.yaml
-  RELEASE: kafka
-  CHART: bitnami/kafka
+  VALUES: jaeger/prod/values.yaml
+  RELEASE: jaeger
+  CHART: jaegertracing/jaeger
   NS: guardian
   CLUSTER: prod
   RUN: yes
