@@ -6,6 +6,9 @@ deleteTopicEnable: false
 autoCreateTopicsEnable: true
 maxMessageBytes: _1000012
 
+advertisedListeners:
+  - PLAINTEXT://192.168.0.243:9092
+
 replicaCount: 3
 containerPorts:
   client: 9092
