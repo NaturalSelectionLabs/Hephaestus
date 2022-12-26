@@ -6,14 +6,6 @@ deleteTopicEnable: false
 autoCreateTopicsEnable: true
 maxMessageBytes: _1000012
 
-listeners:
-  - CLIENT://0.0.0.0:9092
-  - INTERNAL://0.0.0.0:9093
-
-advertisedListeners:
-  - CLIENT://192.168.0.243:9092
-  - INTERNAL://192.168.0.243:9093
-
 replicaCount: 3
 containerPorts:
   client: 9092
@@ -32,18 +24,35 @@ updateStrategy:
   type: RollingUpdate
   rollingUpdate: {}
 
-service:
-  type: LoadBalancer
-  ports:
-    client: 9092
-    internal: 9093
-    external: 9094
-  annotations:
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: kafka
+externalAccess:
+  enabled: true
+  autoDiscovery:
+    enabled: true
+  service:
+    type: LoadBalancer
+    ports:
+      external: 9094
+    loadBalancerIPs: []
+    loadBalancerNames: []
+    loadBalancerAnnotations: []
+    loadBalancerSourceRanges: []
+    nodePorts: []
+    useHostIPs: false
+    usePodIPs: false
+    domain: ""
+    publishNotReadyAddresses: false
+    labels: {}
+    annotations:
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: kafka-external
+    extraPorts: []
+
 persistence:
   storageClass: "alicloud-disk-ssd"
   size: 100Gi
+
+rbac:
+  create: true
 
 metrics:
   kafka:
