@@ -6,8 +6,13 @@ deleteTopicEnable: false
 autoCreateTopicsEnable: true
 maxMessageBytes: _1000012
 
+listeners:
+  - CLIENT://0.0.0.0:9092
+  - INTERNAL://0.0.0.0:9093
+
 advertisedListeners:
-  - PLAINTEXT://192.168.0.243:9092
+  - CLIENT://192.168.0.243:9092
+  - INTERNAL://192.168.0.243:9093
 
 replicaCount: 3
 containerPorts:
