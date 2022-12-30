@@ -82,7 +82,7 @@ filebeat:
       memory: 300Mi
     limits:
       cpu: 2000m
-      memory: 1024Mi
+      memory: 2000Mi
 
 logstash:
   enabled: true
@@ -149,5 +149,8 @@ logstash:
       }
   resources:
     limits:
+      cpu: 4000m
+      memory: 6000Mi
+    requests:
       cpu: 1200m
-      memory: 2560Mi
+      memory: 2000Mi
