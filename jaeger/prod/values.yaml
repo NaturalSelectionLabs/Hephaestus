@@ -50,10 +50,10 @@ collector:
   resources:
     limits:
       cpu: 1200m
-      memory: 2Gi
+      memory: 1200Mi
     requests:
       cpu: 500m
-      memory: 512Mi
+      memory: 1200Mi
   nodeSelector:
     rss3.io/usage: internal
   tolerations:
