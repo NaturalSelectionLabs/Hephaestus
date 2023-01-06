@@ -87,7 +87,6 @@ filebeat:
 
 logstash:
   enabled: true
-  replicas: 3
   fullnameOverride: logstash-loki
   nodeSelector:
     rss3.io/usage: internal
