@@ -10,12 +10,12 @@ env:
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
   # if you run loki, notice that logstash es password should be edited manually
-  VALUES: loki/prod/values.yaml
-  RELEASE: loki
-  CHART: grafana/loki-stack
+  VALUES: rabbitmq/prod/values.yaml
+  RELEASE: rabbitmq
+  CHART: bitnami/rabbitmq
   NS: guardian
   CLUSTER: prod
-  RUN: no
+  RUN: yes
 
 jobs:
   apply:
