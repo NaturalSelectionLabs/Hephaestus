@@ -1,5 +1,5 @@
 global:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
 
 image:
   registry: docker.io
@@ -148,7 +148,7 @@ resources:
      memory: 24Gi
 
 persistence:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
   size: 50Gi
 
 service:
