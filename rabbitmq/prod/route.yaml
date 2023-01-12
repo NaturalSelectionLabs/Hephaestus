@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rabbitmq
+  namespace: guardian
+spec:
+  entryPoints:
+  - web
+  routes:
+  - kind: Rule
+    match: Host(`mq.kindjeff.com`) && PathPrefix(`/`)
+    services:
+    - name: rabbitmq
+      port: 15672
