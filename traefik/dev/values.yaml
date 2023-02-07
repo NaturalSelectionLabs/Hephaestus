@@ -13,3 +13,4 @@ logs:
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"
   - "--providers.kubernetescrd.allowexternalnameservices=true"
+  - "--metrics.prometheus.addEntryPointsLabels=false" # web,metrics,etc
