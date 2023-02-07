@@ -12,12 +12,13 @@ logs:
     format: "json"
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
-  - "--metrics.prometheus.buckets=0.001,0.002,0.005,0.01,0.1,0.3,0.5,1.2,5.0,10.0,15.0,25.0,35.0,50.0"
+  - "--metrics.prometheus.buckets=0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
   - "--providers.kubernetescrd.allowexternalnameservices=true"
   - "--tracing.jaeger=true"
   - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.guardian:5778/sampling"
   - "--tracing.jaeger.localAgentHostPort=jaeger-agent.guardian:6831"
   - "--tracing.jaeger.disableAttemptReconnecting=false"
+  - "--metrics.prometheus.addEntryPointsLabels=false" # web,metrics,etc
 resources:
   requests:
     cpu: "300m"
@@ -25,3 +26,4 @@ resources:
   limits:
     cpu: "800m"
     memory: "600Mi"
+instanceLabelOverride: traefik
