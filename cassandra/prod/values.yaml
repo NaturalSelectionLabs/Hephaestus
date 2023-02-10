@@ -1,5 +1,5 @@
 global:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
 
 image:
   registry: docker.io
@@ -54,7 +54,7 @@ service:
 
 persistence:
   enabled: true
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
   size: 300Gi
   mountPath: /bitnami/cassandra
 

@@ -1,5 +1,5 @@
 global:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
 
 heapOpts: -Xmx1024m -Xms1024m
 deleteTopicEnable: false
@@ -48,7 +48,7 @@ externalAccess:
     extraPorts: []
 
 persistence:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "alicloud-disk-essd"
   size: 100Gi
 
 rbac:
@@ -63,7 +63,7 @@ zookeeper:
   replicaCount: 3
   persistence:
     enabled: true
-    storageClass: "alicloud-disk-ssd"
+    storageClass: "alicloud-disk-essd"
     accessModes:
       - ReadWriteOnce
     size: 100Gi

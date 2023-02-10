@@ -15,7 +15,7 @@ env:
   CHART: traefik/traefik
   NS: default
   CLUSTER: prod
-  RUN: yes
+  RUN: no
 
 jobs:
   apply:

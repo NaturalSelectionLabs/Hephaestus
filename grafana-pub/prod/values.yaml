@@ -16,7 +16,7 @@ tolerations:
 persistence:
   type: pvc
   enabled: true
-  storageClassName: alicloud-disk-ssd
+  storageClassName: alicloud-disk-essd
   size: 20Gi
 admin:
   existingSecret: "grafana-pub-secrets"
