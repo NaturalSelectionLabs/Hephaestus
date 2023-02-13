@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: additional-scrape-configs
+  namespace: guardian
+stringData:
+  prometheus-additional.yaml: |
+    - job_name: 'crossbell-faucet'
+      metrics_path: /metrics
+      params:
+        module: [http_2xx]
+      scheme: "https"
+      static_configs:
+        - targets:
+          - faucet.crossbell.io
