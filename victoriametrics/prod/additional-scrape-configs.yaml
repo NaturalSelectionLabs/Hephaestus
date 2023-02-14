@@ -13,3 +13,86 @@ stringData:
       static_configs:
         - targets:
           - faucet.crossbell.io
+    - job_name: kubernetes-pods
+      honor_timestamps: true
+      honor_labels: false
+      scrape_interval: 30s
+      scheme: http
+      metrics_path: /metrics
+      relabel_configs:
+      - regex: 'true'
+        action: keep
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scrape
+        replacement: $1
+        separator: ;
+      - regex: Running
+        action: keep
+        source_labels:
+        - __meta_kubernetes_pod_phase
+        replacement: $1
+        separator: ;
+      - regex: '10254'
+        action: drop
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        replacement: $1
+        separator: ;
+      - regex: '9153'
+        action: drop
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        replacement: $1
+        separator: ;
+      - regex: (.+)
+        action: replace
+        source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_path
+        replacement: $1
+        separator: ;
+        target_label: __metrics_path__
+      - regex: (.+)
+        action: replace
+        source_labels:
+        - __meta_kubernetes_pod_label_targetId
+        replacement: $1
+        separator: ;
+        target_label: arms_instance_id
+      - regex: (.+)
+        action: replace
+        source_labels:
+        - __meta_kubernetes_pod_label_uid
+        replacement: $1
+        separator: ;
+        target_label: arms_instance_name
+      - regex: ([^:]+)(?::\d+)?;(\d+)
+        action: replace
+        source_labels:
+        - __address__
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+        replacement: $1:$2
+        separator: ;
+        target_label: __address__
+      - regex: __meta_kubernetes_pod_label_(.+)
+        action: labelmap
+        replacement: $1
+        separator: ;
+      - regex: (.*)
+        action: replace
+        source_labels:
+        - __meta_kubernetes_namespace
+        replacement: $1
+        separator: ;
+        target_label: namespace
+      - regex: (.*)
+        action: replace
+        source_labels:
+        - __meta_kubernetes_pod_name
+        replacement: $1
+        separator: ;
+        target_label: pod
+      scrape_timeout: 30s
+      kubernetes_sd_configs:
+      - role: pod
+        namespaces: {}
+        # follow_redirects: true

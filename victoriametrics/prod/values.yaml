@@ -1,5 +1,5 @@
 nameOverride: ""
-fullnameOverride: ""
+fullnameOverride: "victoriametrics"
 tenant: "0"
 # -- If this chart is used in "Argocd" with "releaseName" field then
 # -- VMServiceScrapes couldn't select the proper services.
@@ -74,6 +74,7 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
+      storageClassName: alicloud-disk-essd
       accessModes:
         - ReadWriteOnce
       resources:
@@ -157,6 +158,8 @@ prometheus-node-exporter:
 kube-state-metrics:
   enabled: true
   ## all values for kube-state-metrics helm chart can be specified here
+  image:
+    tag: "v2.8.0"
 
   # spec for VMServiceScrape crd
   # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
