@@ -10,12 +10,12 @@ env:
   DEV_ACK_CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
   PROD_ACK_CLUSTER_ID: cfc647c22fd6848b5a602ad4d7470632b
   # if you run loki, notice that logstash es password should be edited manually
-  VALUES: traefik/prod/values.yaml
-  RELEASE: traefik
-  CHART: traefik/traefik
-  NS: default
-  CLUSTER: prod
-  RUN: no
+  VALUES: victoriametrics/dev/values.yaml
+  RELEASE: victoriametrics
+  CHART: vm/victoria-metrics-k8s-stack
+  NS: guardian
+  CLUSTER: dev
+  RUN: yes
 
 jobs:
   apply:
@@ -41,6 +41,7 @@ jobs:
           helm repo add traefik https://helm.traefik.io/traefik
           helm repo add traefik-mesh https://helm.traefik.io/mesh
           helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+          helm repo add vm https://victoriametrics.github.io/helm-charts/
           helm repo add grafana https://grafana.github.io/helm-charts
           helm repo add jaegertracing https://jaegertracing.github.io/helm-charts
           helm repo add nats https://nats-io.github.io/k8s/helm/charts/
