@@ -15,7 +15,7 @@ env:
   CHART: vm/victoria-metrics-k8s-stack
   NS: guardian
   CLUSTER: dev
-  RUN: yes
+  RUN: no
 
 jobs:
   apply:
