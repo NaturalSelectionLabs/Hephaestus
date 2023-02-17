@@ -74,7 +74,7 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
-      storageClassName: alicloud-disk-essd
+      storageClassName: alicloud-disk-ssd
       accessModes:
         - ReadWriteOnce
       resources:
