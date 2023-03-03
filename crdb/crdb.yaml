@@ -1,0 +1,35 @@
+apiVersion: crdb.cockroachlabs.com/v1alpha1
+kind: CrdbCluster
+metadata:
+  name: cockroachdb
+spec:
+  dataStore:
+    pvc:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "1000Gi"
+        volumeMode: Filesystem
+        storageClassName: alicloud-disk-essd
+  resources:
+    requests:
+      cpu: 6500m
+      memory: 24000Mi
+    limits:
+      cpu: 6500m
+      memory: 24000Mi
+  tlsEnabled: true
+  image:
+    name: cockroachdb/cockroach:v22.2.2
+  nodes: 5
+  additionalLabels:
+    crdb: default
+  nodeSelector:
+    rss3.io/usage: crdb
+  tolerations:
+    - key: "rss3.io/usage"
+      operator: "Equal"
+      value: "crdb"
+      effect: "NoSchedule"
