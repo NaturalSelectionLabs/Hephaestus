@@ -13,7 +13,7 @@ spec:
     protocol: TCP
     targetPort: 26258
   - name: http
-    port: 8080
+    port: 443
     protocol: TCP
     targetPort: 8080
   - name: sql
