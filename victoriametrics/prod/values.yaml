@@ -87,6 +87,13 @@ vmsingle:
         operator: "Equal"
         value: "internal"
         effect: "NoSchedule"
+    resources:
+      requests:
+        cpu: "500m"
+        memory: "1500Mi"
+      limits:
+        cpu: "1200m"
+        memory: "2500Mi"
 
 alertmanager:
   enabled: false
@@ -123,6 +130,13 @@ vmagent:
         operator: "Equal"
         value: "internal"
         effect: "NoSchedule"
+    resources:
+      requests:
+        cpu: "100m"
+        memory: "263Mi"
+      limits:
+        cpu: "300m"
+        memory: "800Mi"
 
 grafana:
   enabled: false
