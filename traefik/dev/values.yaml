@@ -2,7 +2,7 @@ service:
   enabled: true
   type: LoadBalancer
   annotations:
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: internet
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
 deployment:
