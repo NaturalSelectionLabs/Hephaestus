@@ -10,6 +10,13 @@ deployment:
 ports:
   web:
     hostPort: "8000"  # for HTTP
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: Host(`traefik.rss3.dev`)
+    entryPoints: ["web", "websecure"]
+    middlewares: []
+    tls: {}
 logs:
   access:
     enabled: true
