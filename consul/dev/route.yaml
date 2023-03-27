@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: consul
+  namespace: guardian
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: Host(`consul.rss3.dev`)
+      kind: Rule
+      services:
+        - name: consul-ui
+          port: 80
