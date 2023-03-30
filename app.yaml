@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root
+  namespace: guardian
+spec:
+  destination:
+    name: prod
+    namespace: guardian
+  project: default
+  source:
+    repoURL: 'https://github.com/NaturalSelectionLabs/Hephaestus.git'
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: false
+      selfHeal: false
