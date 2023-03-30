@@ -9,7 +9,7 @@ spec:
     namespace: default
   project: prod
   sources:
-    - chart: argo-cd
+    - chart: traefik
       helm:
         releaseName: traefik
         valueFiles:
