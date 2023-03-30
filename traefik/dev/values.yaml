@@ -13,7 +13,7 @@ ports:
 ingressRoute:
   dashboard:
     enabled: true
-    matchRule: Host(`traefik.rss3.dev`)
+    matchRule: Host(`traefik.dev.nsl.xyz`)
     entryPoints: ["web", "websecure"]
     middlewares: []
     tls: {}
