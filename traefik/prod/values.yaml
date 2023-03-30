@@ -10,6 +10,15 @@ deployment:
 ports:
   web:
     hostPort: "8000"  # for HTTP
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: Host(`traefik.prod.nsl.xyz`)
+    entryPoints: ["websecure"]
+    middlewares:
+      - name: traefik-forward-auth
+    tls:
+      secretName: traefik-cert
 logs:
   access:
     enabled: true
