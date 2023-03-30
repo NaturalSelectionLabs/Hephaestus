@@ -22,9 +22,17 @@ admin:
   userKey: admin-user
   passwordKey: admin-password
 namespaceOverride: "guardian"
+envFromSecrets:
+  - name: grafana-google-auth
 grafana.ini:
   server:
     domain: grafana.kindjeff.com
     root_url: "https://%(domain)s"
     serve_from_sub_path: false
+  auth.google:
+    enabled: true
+    auto_login: false
+    auth_url: https://accounts.google.com/o/oauth2/auth
+    scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+    token_url: https://accounts.google.com/o/oauth2/token
 enableServiceLinks: false
