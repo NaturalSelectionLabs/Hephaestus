@@ -14,9 +14,10 @@ ingressRoute:
   dashboard:
     enabled: true
     matchRule: Host(`traefik.dev.nsl.xyz`)
-    entryPoints: ["web", "websecure"]
+    entryPoints: ["websecure"]
     middlewares: []
-    tls: {}
+    tls:
+      secretName: traefik-cert
 logs:
   access:
     enabled: true
