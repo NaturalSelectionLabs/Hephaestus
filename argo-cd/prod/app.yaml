@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-cd
+  namespace: guardian
+spec:
+  destination:
+    name: prod
+    namespace: guardian
+  project: prod
+  sources:
+    - chart: argo-cd
+      helm:
+        releaseName: argo-c
+        valueFiles:
+          - $values/argo-cd/prod/values.yaml
+      repoURL: https://argoproj.github.io/argo-helm
+      targetRevision: 5.27.4
+    - ref: values
+      repoURL: https://github.com/NaturalSelectionLabs/Hephaestus.git
+      targetRevision: main

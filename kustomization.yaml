@@ -5,3 +5,5 @@ resources:
   - argo-cd/prod/app.yaml
   - traefik/dev/app.yaml
   - traefik/prod/app.yaml
+  - cert-manager/dev/app.yaml
+  - cert-manager/prod/app.yaml

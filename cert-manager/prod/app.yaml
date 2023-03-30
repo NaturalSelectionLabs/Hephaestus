@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cert-manager-prod
+  namespace: guardian
+spec:
+  destination:
+    name: prod
+    namespace: guardian
+  project: prod
+  sources:
+    - chart: cert-manager
+      helm:
+        releaseName: cert-manager
+        valueFiles:
+          - $values/cert-manager/prod/values.yaml
+      repoURL: https://charts.jetstack.io
+      targetRevision: 1.11.0
+    - ref: values
+      repoURL: https://github.com/NaturalSelectionLabs/Hephaestus.git
+      targetRevision: main
