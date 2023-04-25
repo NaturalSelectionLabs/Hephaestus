@@ -1,0 +1,53 @@
+## Keycloak Configuration
+keycloak:
+  persistence:
+    deployPostgres: false
+
+extraEnv: |
+  - name: JAVA_OPTS
+    value: >-
+      -XX:+UseContainerSupport
+      -XX:MaxRAMPercentage=50.0
+      -Djava.net.preferIPv4Stack=true
+      -Djboss.modules.system.pkgs=$JBOSS_MODULES_SYSTEM_PKGS
+      -Djava.awt.headless=true
+  - name: PROXY_ADDRESS_FORWARDING
+    value: "true"
+  - name: KC_PROXY
+    value: edge
+  - name: KC_HOSTNAME_URL
+    value: https://account.nsl.xyz
+  - name: DB_VENDOR
+    value: postgres
+  - name: DB_ADDR
+    value: pgm-7go76ijtdor158l6195200.pg.rds.aliyuncs.com
+  - name: DB_PORT
+    value: "5432"
+  - name: DB_DATABASE
+    value: keycloak
+  - name: DB_USER_FILE
+    value: /secrets/db-creds/username
+  - name: DB_PASSWORD_FILE
+    value: /secrets/db-creds/password
+
+extraVolumeMounts: |
+  - name: db-creds
+    mountPath: /secrets/db-creds
+    readOnly: true
+
+extraVolumes: |
+  - name: db-creds
+    secret:
+      secretName: keycloak-db-creds
+## PostgreSQL Configuration
+postgresql:
+  enabled: false
+
+## Resources Configuration
+resources:
+  limits:
+    cpu: "1"
+    memory: 2048Mi
+  requests:
+    cpu: "500m"
+    memory: 1024Mi
