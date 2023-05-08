@@ -10,7 +10,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: "3600Gi"
+            storage: "5000Gi"
         volumeMode: Filesystem
         storageClassName: alicloud-disk-essd
   resources:
