@@ -22,7 +22,7 @@ spec:
       memory: 115000Mi
   tlsEnabled: true
   image:
-    name: cockroachdb/cockroach:v22.2.7
+    name: cockroachdb/cockroach:v22.2.8
   nodes: 5
   additionalLabels:
     crdb: default
