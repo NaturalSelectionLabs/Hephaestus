@@ -15,11 +15,11 @@ spec:
         storageClassName: alicloud-disk-essd
   resources:
     requests:
-      cpu: 30500m
-      memory: 115000Mi
+      cpu: 38000m
+      memory: 82000Mi
     limits:
-      cpu: 30500m
-      memory: 115000Mi
+      cpu: 38000m
+      memory: 82000Mi
   tlsEnabled: true
   image:
     name: cockroachdb/cockroach:v22.2.9
