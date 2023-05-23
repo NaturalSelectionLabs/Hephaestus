@@ -70,7 +70,7 @@ vmsingle:
   spec:
     image:
       tag: v1.87.1
-    retentionPeriod: "14"
+    retentionPeriod: "14d"
     replicaCount: 1
     extraArgs: {}
     storage:
