@@ -1,0 +1,52 @@
+global:
+  storageClass: "alicloud-disk-ssd"
+
+heapOpts: -Xmx1024m -Xms1024m
+deleteTopicEnable: false
+autoCreateTopicsEnable: true
+maxMessageBytes: _1000012
+
+replicaCount: 1
+containerPorts:
+  client: 9092
+  internal: 9093
+  external: 9094
+resources:
+ limits:
+   cpu: 1200m
+   memory: 1500Mi
+ requests:
+   cpu: 100m
+   memory: 1024Mi
+nodeSelector: {}
+tolerations: []
+updateStrategy:
+  type: RollingUpdate
+  rollingUpdate: {}
+
+externalAccess:
+  enabled: false
+
+kraft:
+  enabled: false
+
+persistence:
+  storageClass: "alicloud-disk-ssd"
+  size: 100Gi
+
+rbac:
+  create: true
+
+metrics:
+  kafka:
+    enabled: false
+
+zookeeper:
+  enabled: true
+  replicaCount: 1
+  persistence:
+    enabled: true
+    storageClass: "alicloud-disk-ssd"
+    accessModes:
+      - ReadWriteOnce
+    size: 100Gi
