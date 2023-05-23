@@ -4,7 +4,7 @@ global:
 heapOpts: -Xmx1024m -Xms1024m
 deleteTopicEnable: false
 autoCreateTopicsEnable: true
-maxMessageBytes: _1000012
+maxMessageBytes: _10485760
 
 replicaCount: 3
 containerPorts:
