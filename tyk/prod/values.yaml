@@ -1,0 +1,81 @@
+# !!!
+# replace REPLACEME and then apply
+# !!!
+secrets:
+  APISecret: "REPLACEME"
+
+redis:
+  addrs:
+    - REPLACEME
+
+  pass: "REPLACEME"
+
+  enableCluster: false
+
+  storage:
+    database: 17
+
+backend: "postgres"
+postgres:
+  host: REPLACEME
+  port: 5432
+  user: postgres
+  password: REPLACEME
+  database: tyk
+  sslmode:
+
+gateway:
+  # The hostname to bind the Gateway to.
+  hostName: tyk-gw.rss3.io
+  # When true, sets the gateway protocol to HTTPS.
+  tls: false
+
+  kind: Deployment
+  replicaCount: 3
+  containerPort: 8080
+  image:
+    repository: docker.tyk.io/tyk-gateway/tyk-gateway
+    tag: v5.0.0
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+    externalTrafficPolicy: Local
+    annotations: {}
+  control:
+    enabled: false
+    containerPort: 9696
+    port: 9696
+    type: ClusterIP
+    annotations: {}
+  # Creates an ingress object in k8s. Will require an ingress-controller and
+  # annotation to that ingress controller.
+  ingress:
+    enabled: false
+
+  resources:
+    limits:
+     cpu: 300m
+     memory: 512Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+pump:
+  enabled: true
+
+  replicaCount: 1
+  image:
+    repository: docker.tyk.io/tyk-pump/tyk-pump
+    tag: v1.7.0
+    pullPolicy: IfNotPresent
+  annotations: {}
+  resources:
+    limits:
+     cpu: 500m
+     memory: 1024Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+rbac: true
