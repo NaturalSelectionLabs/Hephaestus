@@ -60,6 +60,9 @@ gateway:
     requests:
      cpu: 100m
      memory: 128Mi
+  extraEnvs:
+    - name: TYK_DB_ALLOWEXPLICITPOLICYID
+      value: "true"
 
 pump:
   enabled: true

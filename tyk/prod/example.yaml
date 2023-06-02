@@ -1,0 +1,14 @@
+apiVersion: tyk.tyk.io/v1alpha1
+kind: ApiDefinition
+metadata:
+  name: pregod-v1-hub
+  namespace: pregod
+spec:
+  name: pregod-v1-hub
+  use_keyless: true
+  protocol: http
+  active: true
+  proxy:
+    target_url: http://pregod-1-1-hub-api.pregod
+    listen_path: /pregod
+    strip_listen_path: true
