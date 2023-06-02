@@ -1,0 +1,140 @@
+# !!!
+# edit CHANGEME and then apply
+# !!!
+secrets:
+  APISecret: CHANGEME
+  AdminSecret: "CHANGEME"
+
+redis:
+  addrs:
+    - CHANGEME
+
+  pass: "CHANGEME"
+
+  enableCluster: false
+
+  storage:
+    database: 17
+
+backend: postgres
+postgres:
+  host: CHANGEME
+  port: 5432
+  user: postgres
+  password: CHANGEME
+  database: tyk
+  sslmode:
+
+dash:
+  enabled: true
+  bootstrap: true
+  operatorSecret: true
+  # It creates a secret for Tyk Enterprise Developer Portal along with bootstraping dasboard. Enterprise Developer Portal
+  # Secret is only created if the dash.bootstrap and enterprisePortalSecret are set to true.
+  # Set false to disable creating a secret for Tyk Enterprise Developer Portal.
+  enterprisePortalSecret: true
+
+  # The hostname to bind the Dashboard to.
+  hostName: tyk.rss3.io
+  # If set to true the Dashboard will use SSL connection.
+  # You will also need to set the:
+  # - TYK_DB_SERVEROPTIONS_CERTIFICATE_CERTFILE
+  # - TYK_DB_SERVEROPTIONS_CERTIFICATE_KEYFILE
+  # variables in extraEnvs object array to define your SSL cert and key files.
+  tls: false
+  # Dashboard license.
+  license: "CHANGEME"
+  # Dashboard admin information.
+  adminUser:
+    firstName: admin
+    lastName: user
+    email: jeff@rss3.io
+    # Set a password or a random one will be assigned.
+    password: "CHANGEME"
+  # Dashboard Organisation information.
+  org:
+    name: Default Org
+    # The hostname to bind the Portal to.
+    cname: tyk-portal.local
+
+  replicaCount: 1
+  containerPort: 3000
+  image:
+    repository: tykio/tyk-dashboard
+    tag: v5.0.0
+    pullPolicy: Always
+  service:
+    type: ClusterIP
+    port: 3000
+    externalTrafficPolicy: Local
+    annotations: {}
+  resources:
+    limits:
+     cpu: 300m
+     memory: 512Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+portal:
+  bootstrap: true
+  path: /
+
+gateway:
+  enabled: true
+  hostName: tyk-gw.rss3.io
+  # When true, sets the gateway protocol to HTTPS.
+  tls: false
+
+  kind: Deployment
+  replicaCount: 3
+  containerPort: 8080
+  image:
+    repository: docker.tyk.io/tyk-gateway/tyk-gateway
+    tag: v5.0.0
+    pullPolicy: IfNotPresent
+  service:
+    type: ClusterIP
+    port: 8080
+    externalTrafficPolicy: Local
+    annotations: {}
+  control:
+    enabled: false
+    containerPort: 9696
+    port: 9696
+    type: ClusterIP
+    annotations: {}
+  # Creates an ingress object in k8s. Will require an ingress-controller and
+  # annotation to that ingress controller.
+  ingress:
+    enabled: false
+
+  resources:
+    limits:
+     cpu: 300m
+     memory: 512Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+  extraEnvs:
+    - name: TYK_DB_ALLOWEXPLICITPOLICYID
+      value: "true"
+
+pump:
+  enabled: true
+
+  replicaCount: 1
+  image:
+    repository: docker.tyk.io/tyk-pump/tyk-pump
+    tag: v1.7.0
+    pullPolicy: IfNotPresent
+  annotations: {}
+  resources:
+    limits:
+     cpu: 500m
+     memory: 1024Mi
+    requests:
+     cpu: 100m
+     memory: 128Mi
+
+rbac: true
