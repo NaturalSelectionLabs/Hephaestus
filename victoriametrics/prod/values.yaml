@@ -90,10 +90,10 @@ vmsingle:
     resources:
       requests:
         cpu: "500m"
-        memory: "1500Mi"
+        memory: "2500Mi"
       limits:
         cpu: "1200m"
-        memory: "2500Mi"
+        memory: "4000Mi"
 
 alertmanager:
   enabled: false
