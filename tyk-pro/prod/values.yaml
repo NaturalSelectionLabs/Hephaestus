@@ -55,7 +55,7 @@ dash:
   org:
     name: Default Org
     # The hostname to bind the Portal to.
-    cname: tyk-portal.local
+    cname: portal.rss3.io
 
   replicaCount: 1
   containerPort: 3000

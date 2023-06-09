@@ -9,7 +9,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`tyk.rss3.io`)
+    match: Host(`tyk.rss3.io`) || Host(`portal.rss3.io`)
     services:
     - name: dashboard-svc-tyk-pro
       port: 3000
