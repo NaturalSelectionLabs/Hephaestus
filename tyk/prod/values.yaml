@@ -63,6 +63,8 @@ gateway:
   extraEnvs:
     - name: TYK_DB_ALLOWEXPLICITPOLICYID
       value: "true"
+    - name: TYK_GW_ENABLEHASHEDKEYSLISTING
+      value: "true"
 
 pump:
   enabled: true
