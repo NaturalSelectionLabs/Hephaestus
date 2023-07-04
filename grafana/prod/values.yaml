@@ -1,10 +1,10 @@
 resources:
- limits:
-   cpu: 300m
-   memory: 300Mi
- requests:
-   cpu: 100m
-   memory: 128Mi
+  limits:
+    cpu: 300m
+    memory: 300Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
 nodeSelector:
   rss3.io/usage: internal
 tolerations:
@@ -26,13 +26,26 @@ envFromSecrets:
   - name: grafana-google-auth
 grafana.ini:
   server:
-    domain: grafana.kindjeff.com
+    domain: grafana.nsl.xyz
     root_url: "https://%(domain)s"
     serve_from_sub_path: false
-  auth.google:
+  auth.generic_oauth:
     enabled: true
-    auto_login: false
-    auth_url: https://accounts.google.com/o/oauth2/auth
-    scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
-    token_url: https://accounts.google.com/o/oauth2/token
+    name: Natural Selection Labs
+    allow_sign_up: false
+    scopes: openid email profile offline_access roles
+    email_attribute_path: email
+    login_attribute_path: username
+    name_attribute_path: full_name
+    auth_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/auth
+    token_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/token
+    api_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/userinfo
+    signout_redirect_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2grafana.nsl.xyz%2Flogin
+    role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
+  # auth.google:
+  #   enabled: true
+  #   auto_login: false
+  #   auth_url: https://accounts.google.com/o/oauth2/auth
+  #   scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
+  #   token_url: https://accounts.google.com/o/oauth2/token
 enableServiceLinks: false
