@@ -1,0 +1,61 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kafka-console
+  namespace: guardian
+  labels:
+    k8s-app: kafka-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: kafka-console
+  template:
+    metadata:
+      name: kafka-console
+      labels:
+        k8s-app: kafka-console
+    spec:
+      containers:
+        - name: kafka-console
+          image: docker.redpanda.com/redpandadata/console:latest
+          env:
+            - name: KAFKA_BROKERS
+              value: 192.168.0.7:9094,192.168.0.8:9094,192.168.0.9:9094
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: kafka-console
+  namespace: guardian
+  labels:
+    k8s-app: kafka-console
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  selector:
+    k8s-app: kafka-console
+  type: ClusterIP
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kafka-console
+  namespace: guardian
+spec:
+  entryPoints:
+  - web
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`kafka.kindjeff.com`)
+    services:
+    - name: kafka-console
+      port: 8080
