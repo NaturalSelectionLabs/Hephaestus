@@ -32,7 +32,7 @@ grafana.ini:
   auth.generic_oauth:
     enabled: true
     name: Natural Selection Labs
-    allow_sign_up: false
+    allow_sign_up: true
     scopes: openid email profile offline_access roles
     email_attribute_path: email
     login_attribute_path: username
