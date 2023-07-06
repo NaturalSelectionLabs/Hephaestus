@@ -46,11 +46,13 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: httpbin
+  annotations:
+    traefik-route-validate.incubator4.com/validate: 'false'
 spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/httpbin`)
+    - match: PathPrefix(`/httpbin`) && !HeadersRegexp(`Accept-Language`, `.*`)
       kind: Rule
       services:
         - name: httpbin
@@ -66,3 +68,31 @@ spec:
   stripPrefix:
     prefixes:
       - /httpbin
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: httpbin-test-header
+  annotations:
+    traefik-route-validate.incubator4.com/validate: 'false'
+spec:
+  entryPoints:
+    - web
+  routes:
+    - match: PathPrefix(`/httpbin`) && HeadersRegexp(`Accept-Language`, `.*`)
+      kind: Rule
+      services:
+        - name: httpbin
+          port: 8000
+      middlewares:
+        - name: httpbin-stripprefix
+        - name: httpbin-add-header
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: httpbin-add-header
+spec:
+  headers:
+    customRequestHeaders:
+      X-Is-Human: "yes"
