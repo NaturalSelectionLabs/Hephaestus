@@ -44,7 +44,7 @@ spec:
         - ReadWriteOnce
         resources:
           requests:
-            storage: 300Gi
+            storage: 400Gi
         storageClassName: alicloud-disk-essd
   # # inject secure settings into Elasticsearch nodes from k8s secrets references
   # secureSettings:
