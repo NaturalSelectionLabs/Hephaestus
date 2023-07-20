@@ -48,6 +48,7 @@ jobs:
           helm repo add hashicorp https://helm.releases.hashicorp.com
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add tyk-helm https://helm.tyk.io/public/helm/charts/
+          helm repo add weaviate https://weaviate.github.io/weaviate-helm
           helm repo update
       - if: env.RUN == 'yes'
         run: |
