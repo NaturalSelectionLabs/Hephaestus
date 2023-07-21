@@ -88,3 +88,18 @@ stringData:
       - role: pod
         namespaces: {}
         # follow_redirects: true
+    - job_name: cockroachdb
+      honor_timestamps: true
+      honor_labels: false
+      scrape_interval: 30s
+      scheme: https
+      metrics_path: /_status/vars
+      relabel_configs:
+        - source_labels: [__meta_kubernetes_namespace, __meta_kubernetes_service_name, __meta_kubernetes_endpoint_port_name]
+          action: keep
+          regex: default;cockroachdb;http
+      scrape_timeout: 30s
+      kubernetes_sd_configs:
+      - role: endpoints
+      tls_config:
+        insecure_skip_verify: true

@@ -1,0 +1,21 @@
+apiVersion: crdb.cockroachlabs.com/v1alpha1
+kind: CrdbCluster
+metadata:
+  name: cockroachdb
+spec:
+  dataStore:
+    pvc:
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: "40Gi"
+        volumeMode: Filesystem
+        storageClassName: alicloud-disk-ssd
+  tlsEnabled: true
+  image:
+    name: cockroachdb/cockroach:v23.1.5
+  nodes: 3
+  additionalLabels:
+    crdb: default
