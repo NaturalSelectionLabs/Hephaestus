@@ -117,7 +117,8 @@ vmagent:
       tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
-      cluster: cluster-name
+      cluster: prod
+      region: us-east-1
     extraArgs:
       promscrape.streamParse: "true"
     additionalScrapeConfigs:
