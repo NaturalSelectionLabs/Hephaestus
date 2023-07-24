@@ -130,22 +130,13 @@ configuration: |-
 replicaCount: 5
 podAnnotations: {}
 
-nodeSelector:
-  rss3.io/usage: rabbitmq
-tolerations:
-  - key: "rss3.io/usage"
-    operator: "Equal"
-    value: "rabbitmq"
-    effect: "NoSchedule"
-
-
 resources:
   limits:
-     cpu: 14000m
-     memory: 24Gi
+     cpu: 2000m
+     memory: 2Gi
   requests:
-     cpu: 14000m
-     memory: 24Gi
+     cpu: 100m
+     memory: 300Mi
 
 persistence:
   storageClass: "alicloud-disk-essd"
