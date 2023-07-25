@@ -6,7 +6,8 @@ service:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
 deployment:
-  kind: DaemonSet
+  kind: Deployment
+  replicas: 3
 ports:
   web:
     hostPort: "8000"  # for HTTP

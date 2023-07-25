@@ -6,7 +6,8 @@ service:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s2.small
 deployment:
-  kind: DaemonSet
+  kind: Deployment
+  replicas: 3
 ingressRoute:
   dashboard:
     enabled: true
@@ -38,3 +39,22 @@ resources:
     cpu: "800m"
     memory: "600Mi"
 instanceLabelOverride: traefik
+
+autoscaling:
+  # -- Create HorizontalPodAutoscaler object.
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 60
+#  - type: Resource
+#    resource:
+#      name: memory
+#      target:
+#        type: Utilization
+#        averageUtilization: 60
