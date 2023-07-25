@@ -4,7 +4,7 @@ global:
 heapOpts: -Xmx1024m -Xms1024m
 numPartitions: 3
 logRetentionBytes: "30000000000"
-deleteTopicEnable: false
+deleteTopicEnable: true
 autoCreateTopicsEnable: true
 maxMessageBytes: _10485760
 
