@@ -1,0 +1,54 @@
+name: Dev Cluster
+on:
+  push:
+    paths:
+      - "dev/*"
+    branches:
+      - "*"
+  pull_request:
+    types:
+      - opened
+
+defaults:
+  run:
+    working-directory: dev
+
+env:
+  CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
+  ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
+  ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on:
+      group: Dev
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "16"
+
+      - name: Set K8s context
+        uses: aliyun/ack-set-context@v1
+        with:
+          access-key-id: "${{ env.ALICLOUD_ACCESS_KEY }}"
+          access-key-secret: "${{ env.ALICLOUD_SECRET_KEY }}"
+          cluster-id: "${{ env.CLUSTER_ID }}"
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Init
+        run: terraform init
+
+      - name: Plan
+        id: plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
