@@ -15,8 +15,8 @@ defaults:
 
 env:
   CLUSTER_ID: cd1d0ffc40b5242b39ddda1864e71e30d
-  ALICLOUD_ACCESS_KEY: ${{ secrets.ALICLOUD_ACCESS_KEY }}
-  ALICLOUD_SECRET_KEY: ${{ secrets.ALICLOUD_SECRET_KEY }}
+  ALICLOUD_ACCESS_KEY: ${{ secrets.ACCESS_KEY_ID }}
+  ALICLOUD_SECRET_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
 
 jobs:
   terraform:
