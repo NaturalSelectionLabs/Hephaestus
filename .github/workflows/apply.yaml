@@ -49,6 +49,7 @@ jobs:
           helm repo add bitnami https://charts.bitnami.com/bitnami
           helm repo add tyk-helm https://helm.tyk.io/public/helm/charts/
           helm repo add weaviate https://weaviate.github.io/weaviate-helm
+          helm repo add christianknell https://christianknell.github.io/helm-charts
           helm repo update
       - if: env.RUN == 'yes'
         run: |

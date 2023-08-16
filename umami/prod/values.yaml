@@ -1,0 +1,71 @@
+image:
+  registry: ghcr.io
+  repository: umami-software/umami
+  pullPolicy: Always
+  tag: "postgresql-v1.40.0"
+
+replicaCount: 1
+
+revisionHistoryLimit: 5
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #   cpu: 100m
+  #   memory: 128Mi
+  # requests:
+  #   cpu: 100m
+  #   memory: 128Mi
+
+service:
+  type: ClusterIP
+  port: 3000
+
+ingress:
+  enabled: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 100
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
+
+umami:
+  # -- HTTP header to check for the client's IP address. This is useful when you're behind a proxy that uses non-standard headers.
+  clientIpHeader: ""
+  # -- Allows you to send metrics to a location different than the default /api/collect. This is to help you avoid some ad-blockers.
+  collectApiEndpoint: ""
+  # -- Disables the login page for the application
+  disableLogin: "0"
+  # -- Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
+  disableTelemetry: "1"
+  # -- Disables the check for new versions of Umami
+  disableUpdates: "1"
+  # -- This will redirect all requests from http to https in the Umami application. Note, this does not apply to the tracking script.
+  forceSSL: "1"
+  hash:
+    # -- Name of an existing secret containing the hash salt under the key hash-salt
+    existingSecret: ""
+    # -- A random string used to generate unique values.
+    salt: ""
+  # -- hostname under which Umami will be reached
+  hostname: "umami.rss3.io"
+  # -- You can provide a comma-delimited list of IP address to exclude from data collection.
+  ignoredIpAddresses: ""
+  # -- setting this to true removes the environment variable DISABLE_LOGIN defined in `umami.disableLogin` from the deployment as this caused errors in some setups
+  removeDisableLoginEnv: true
+  # -- Removes the trailing slash from all incoming urls.
+  removeTrailingSlash: "1"
+  # -- Allows you to assign a custom name to the tracker script different from the default umami. This is to help you avoid some ad-blockers.
+  trackerScriptName: "umami"
+
+postgresql:
+  enabled: false
+
+database:
+  databaseUrlKey: "umami-db-url"
+  existingSecret: "umami-db-url"
