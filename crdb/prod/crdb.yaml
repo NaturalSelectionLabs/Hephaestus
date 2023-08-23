@@ -10,7 +10,7 @@ spec:
           - ReadWriteOnce
         resources:
           requests:
-            storage: "6000Gi"
+            storage: "7000Gi"
         volumeMode: Filesystem
         storageClassName: alicloud-disk-essd
   resources:
@@ -22,7 +22,7 @@ spec:
       memory: 110000Mi
   tlsEnabled: true
   image:
-    name: cockroachdb/cockroach:v23.1.6
+    name: cockroachdb/cockroach:v23.1.8
   nodes: 5
   additionalLabels:
     crdb: default
