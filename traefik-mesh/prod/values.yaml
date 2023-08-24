@@ -9,11 +9,11 @@ tracing:
 proxy:
   resources:
     limit:
-      mem: 500Mi
-      cpu: 600m
-    request:
-      mem: 100Mi
+      mem: 128Mi
       cpu: 200m
+    request:
+      mem: 64Mi
+      cpu: 50m
   additionalArguments:
     - "--accesslog=true"
     - "--accesslog.bufferingsize=100"
@@ -23,8 +23,8 @@ proxy:
 controller:
   resources:
     limit:
-      mem: 500Mi
-      cpu: 800m
+      mem: 128Mi
+      cpu: 100m
     request:
-      mem: 100Mi
-      cpu: 300m
+      mem: 64Mi
+      cpu: 50m

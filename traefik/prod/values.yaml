@@ -33,11 +33,11 @@ additionalArguments:
   - "--metrics.prometheus.addEntryPointsLabels=false" # web,metrics,etc
 resources:
   requests:
-    cpu: "300m"
-    memory: "150Mi"
+    cpu: "100m"
+    memory: "256Mi"
   limits:
-    cpu: "800m"
-    memory: "600Mi"
+    cpu: "500m"
+    memory: "512Mi"
 instanceLabelOverride: traefik
 
 autoscaling:
@@ -51,7 +51,7 @@ autoscaling:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 60
+          averageUtilization: 300
 #  - type: Resource
 #    resource:
 #      name: memory
