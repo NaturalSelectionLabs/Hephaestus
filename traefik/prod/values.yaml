@@ -43,7 +43,7 @@ instanceLabelOverride: traefik
 autoscaling:
   # -- Create HorizontalPodAutoscaler object.
   enabled: true
-  minReplicas: 3
+  minReplicas: 5
   maxReplicas: 10
   metrics:
     - type: Resource
@@ -51,7 +51,7 @@ autoscaling:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 300
+          averageUtilization: 200
 #  - type: Resource
 #    resource:
 #      name: memory
