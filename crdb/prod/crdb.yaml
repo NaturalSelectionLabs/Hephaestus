@@ -15,10 +15,10 @@ spec:
         storageClassName: alicloud-disk-essd
   resources:
     requests:
-      cpu: 61000m
-      memory: 110000Mi
+      cpu: 40000m
+      memory: 70000Mi
     limits:
-      cpu: 61000m
+      cpu: 51000m
       memory: 110000Mi
   tlsEnabled: true
   image:
