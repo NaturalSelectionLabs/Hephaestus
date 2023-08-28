@@ -19,7 +19,7 @@ spec:
       memory: 70000Mi
     limits:
       cpu: 51000m
-      memory: 110000Mi
+      memory: 100000Mi
   tlsEnabled: true
   image:
     name: cockroachdb/cockroach:v23.1.8
