@@ -49,6 +49,7 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
     - match: PathPrefix(`/httpbin`)
       kind: Rule
@@ -57,6 +58,7 @@ spec:
           port: 8000
       middlewares:
         - name: httpbin-stripprefix
+        - name: httpbin-replace-host
 ---
 apiVersion: traefik.containo.us/v1alpha1
 kind: Middleware
@@ -66,3 +68,13 @@ spec:
   stripPrefix:
     prefixes:
       - /httpbin
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: httpbin-replace-host
+spec:
+  headers:
+    customRequestHeaders:
+      Host: jeff.test
+      X-Forwarded-Host: jeff.test
