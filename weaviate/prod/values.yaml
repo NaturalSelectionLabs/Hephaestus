@@ -1,3 +1,6 @@
+# !!!!!!!!!!!!!!!!!!!
+# notice: TOBEREPLACED should be replaced before deploying
+# !!!!!!!!!!!!!!!!!!!
 image:
   registry: docker.io
   tag: 1.21.0
@@ -483,12 +486,12 @@ modules:
   text2vec-openai:
 
     # enable if you want to use OpenAI module
-    enabled: false
+    enabled: true
 
     # Set your OpenAI API Key to be passed to Weaviate pod as
     # an environment variable. You can set either the OpenAI's Service API key
     # OR the Azure OpenAI's Service Key. Note that you cannot set both of the at the same time.
-    apiKey: ''
+    apiKey: 'TOBEREPLACED'
     azureApiKey: ''
 
   # The text2vec-huggingface module uses HuggingFace API
@@ -697,12 +700,12 @@ modules:
   generative-openai:
 
     # enable if you want to use OpenAI module
-    enabled: false
+    enabled: true
 
     # Set your OpenAI API Key to be passed to Weaviate pod as
     # an environment variable. You can set either the OpenAI's Service API key
     # OR the Azure OpenAI's Service Key. Note that you cannot set both of the at the same time.
-    apiKey: ''
+    apiKey: 'TOBEREPLACED'
     azureApiKey: ''
 
   # The generative-cohere module uses Cohere Generate API
@@ -1060,4 +1063,4 @@ modules:
   # use this module as the vectorizer if nothing else is specified. Can be
   # overwritten on a per-class basis.
   # set to text2vec-transformers if running with transformers instead
-  default_vectorizer_module: none
+  default_vectorizer_module: text2vec-openai
