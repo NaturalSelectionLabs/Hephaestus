@@ -1,6 +1,6 @@
 image:
   registry: docker.io
-  tag: 1.20.0
+  tag: 1.21.0
   repo: semitechnologies/weaviate
 
 command: ["/bin/weaviate"]
@@ -36,8 +36,8 @@ resources: {}
   #   memory: '1Gi'
 
 storage:
-  size: 100Gi
-  storageClassName: "alicloud-disk-essd"
+  size: 50Gi
+  storageClassName: "alicloud-disk-ssd"
 
 # The service controls how weaviate is exposed to the outside world. If you
 # don't want a public load balancer, you can also choose 'ClusterIP' to make
@@ -49,7 +49,7 @@ service:
       protocol: TCP
       port: 80
       # Target port is going to be the same for every port
-  type: LoadBalancer
+  type: ClusterIP
   loadBalancerSourceRanges: []
   # optionally set cluster IP if you want to set a static IP
   clusterIP:
@@ -91,24 +91,24 @@ terminationGracePeriodSeconds: 600
 # configuration.
 authentication:
   anonymous_access:
-    enabled: true
+    enabled: false
   # This configuration allows to add API keys to Weaviate. This configuration allows only
   # plain text API Keys, if you want to store the API Keys in a Kubernetes secret you can
   # configure the same configuration with ENV Vars. Read the `env` section below on what
   # needs to be configured. If using ENV Vars over this make sure to comment out the whole
   # `apikey` section (as it is by default). ENV Vars has priority over this config.
   # apikey:
-  #   enabled: false
+  #   enabled: true
   #   # Any number of allowed API Keys as plain text
   #   allowed_keys:
-  #     - readOnly-plainText-API-Key
+  #     - placeholder
   #     - admin-plainText-API-Key
   #   # You can either set a single user for all the listed Allowed API keys OR
   #   # one user per API Key, i.e. length(apikey.allowed_keys) == length(apikey.users) OR
   #   # length(apikey.users) == 1
   #   # NOTE: Make sure the lister Users are added to the Authorization as well.
-  #   users:
-  #     - api-key-user-readOnly
+    users:
+      - rss3
   #     - api-key-user-admin
   oidc:
     enabled: false
@@ -119,9 +119,9 @@ authentication:
 
 authorization:
   admin_list:
-    enabled: false
-    # users:
-    # - admin_user1
+    enabled: true
+    users:
+    - rss3
     # - admin_user2
     # - api-key-user-admin
     # read_only_users:
@@ -170,20 +170,21 @@ env:
   # so comment them out to avoid any future changes.
   # Enables API key authentication. If it is set to 'false' the AUTHENTICATION_APIKEY_ALLOWED_KEYS
   # and AUTHENTICATION_APIKEY_USERS will not have any effect.
-  # AUTHENTICATION_APIKEY_ENABLED: 'true'
+  AUTHENTICATION_APIKEY_ENABLED: 'true'
 
   # List one or more keys, separated by commas. Each key corresponds to a specific user identity below.
   # If you want to use a kubernetes secret for the API Keys comment out this Variable and use the one in `envSecrets` below
-  # AUTHENTICATION_APIKEY_ALLOWED_KEYS: 'jane-secret-key,ian-secret-key'  (plain text)
+  # AUTHENTICATION_APIKEY_ALLOWED_KEYS: 
 
   # List one or more user identities, separated by commas. You can have only one User for all the keys or one user per key.
   # The User/s can be a simple name or an email, no matter if it exists or not.
   # NOTE: Make sure to add the users to the authorization above overwise they will not be allowed to interact with Weaviate.
-  # AUTHENTICATION_APIKEY_USERS: 'jane@doe.com,ian-smith'
+  AUTHENTICATION_APIKEY_USERS: 'rss3'
+  AUTHENTICATION_ANONYMOUS_ACCESS_ENABLED: 'false'
 
 envSecrets:
   # create a Kubernetes secret with AUTHENTICATION_APIKEY_ALLOWED_KEYS key and its respective value
-  # AUTHENTICATION_APIKEY_ALLOWED_KEYS: name-of-the-k8s-secret-containing-the-comma-separated-api-keys
+  AUTHENTICATION_APIKEY_ALLOWED_KEYS: weaviate-api-keys
 
 # Configure backup providers
 backups:
