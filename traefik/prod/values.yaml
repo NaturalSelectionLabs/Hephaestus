@@ -7,7 +7,7 @@ service:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s2.small
 deployment:
   kind: Deployment
-  replicas: 3
+  replicas: 5
 ingressRoute:
   dashboard:
     enabled: true
@@ -24,6 +24,7 @@ logs:
     format: "json"
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
+  - "--entryPoints.websecure.forwardedHeaders.insecure"
   - "--metrics.prometheus.buckets=0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
   - "--providers.kubernetescrd.allowexternalnameservices=true"
   - "--tracing.jaeger=true"
@@ -37,7 +38,7 @@ resources:
     memory: "400Mi"
   limits:
     cpu: "500m"
-    memory: "800Mi"
+    memory: "1000Mi"
 instanceLabelOverride: traefik
 
 autoscaling:
