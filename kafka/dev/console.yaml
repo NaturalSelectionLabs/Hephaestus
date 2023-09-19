@@ -55,7 +55,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`kafka-dev.kindjeff.com`)
+    match: Host(`kafka.dev.nsl.xyz`)
     services:
     - name: kafka-console
       port: 8080

@@ -6,9 +6,10 @@ metadata:
 spec:
   entryPoints:
   - web
+  - websecure
   routes:
   - kind: Rule
-    match: Host(`mq.kindjeff.com`) && PathPrefix(`/`)
+    match: Host(`mq.prod.nsl.xyz`) && PathPrefix(`/`)
     services:
     - name: rabbitmq
       port: 15672

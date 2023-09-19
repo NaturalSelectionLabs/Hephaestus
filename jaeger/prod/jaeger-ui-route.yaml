@@ -6,8 +6,9 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
-    - match: Host(`jaeger.kindjeff.com`)
+    - match: Host(`jaeger.prod.nsl.xyz`)
       kind: Rule
       services:
         - name: jaeger-query
