@@ -7,7 +7,7 @@ spec:
   version: 8.3.2
   count: 1
   config:
-    server.publicBaseUrl: "https://es.kindjeff.com"
+    server.publicBaseUrl: "https://es.prod.nsl.xyz"
   elasticsearchRef:
     name: "elasticsearch"
   http:

@@ -6,8 +6,9 @@ metadata:
 spec:
   entryPoints:
     - web
+    - websecure
   routes:
-    - match: Host(`vault.kindjeff.com`)
+    - match: Host(`vault.prod.nsl.xyz`)
       kind: Rule
       services:
         - name: vault-ui

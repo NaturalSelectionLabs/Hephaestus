@@ -8,7 +8,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`vault-dev.kindjeff.com`)
+    - match: Host(`vault.dev.nsl.xyz`)
       kind: Rule
       services:
         - name: vault-ui
