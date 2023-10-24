@@ -149,7 +149,6 @@ resource "argocd_application_set" "cert_manager" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "cert-manager/{{cluster}}"
-          plugin {}
         }
 
         destination {
