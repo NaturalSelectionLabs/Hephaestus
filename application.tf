@@ -95,3 +95,61 @@ resource "argocd_application_set" "traefik_mesh" {
     }
   }
 }
+
+resource "argocd_application_set" "cert_manager" {
+  metadata {
+    name = "cert-manager"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "cert-manager-{{cluster}}"
+      }
+
+      spec {
+        source {
+          helm {
+            release_name = "cert-manager"
+            value_files = [
+              "$values/cert-manager/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = "https://charts.jetstack.io"
+          target_revision = "1.11.0"
+          chart           = "cert-manager"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        source {
+          repo_url = var.repo_url
+          target_revision = "HEAD"
+          path = "cert-manager/{{cluster}}"
+          kustomize {}
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "default"
+        }
+      }
+    }
+  }
+}
