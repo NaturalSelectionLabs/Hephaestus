@@ -146,7 +146,7 @@ resource "argocd_application_set" "cert_manager" {
 
         destination {
           server    = "{{url}}"
-          namespace = "default"
+          namespace = "guardian"
         }
       }
     }
