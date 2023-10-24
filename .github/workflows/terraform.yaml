@@ -1,0 +1,37 @@
+name: Terraform
+on:
+  push:
+    branches:
+      - "*"
+  pull_request:
+    types:
+      - opened
+
+env:
+  TF_VAR_ARGOCD_PASSWORD: ${{ secrets.TF_VAR_ARGOCD_PASSWORD }}
+  ALICLOUD_ACCESS_KEY: ${{ secrets.ACCESS_KEY_ID }}
+  ALICLOUD_SECRET_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
+
+jobs:
+  terraform:
+    name: "Terraform"
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - uses: hashicorp/setup-terraform@v2
+
+      - name: Init
+        run: terraform init
+
+      - name: Plan
+        id: plan
+        run: terraform plan
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve -input=false
