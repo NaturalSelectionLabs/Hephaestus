@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`account.nsl.xyz`) && PathPrefix(`/`)
+      match: Host(`account.nsl.xyz`)
       services:
         - name: keycloak-http
           port: 80
