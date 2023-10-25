@@ -59,6 +59,9 @@ resource "argocd_application" "keycloak" {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "keycloak/prod"
+      plugin {
+        name = "avp"
+      }
     }
 
     destination {
