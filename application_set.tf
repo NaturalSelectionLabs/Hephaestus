@@ -159,3 +159,63 @@ resource "argocd_application_set" "cert_manager" {
     }
   }
 }
+
+resource "argocd_application_set" "victoria_metrics" {
+  metadata {
+    name = "victoriametrics"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "victoriametrics-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        source {
+          helm {
+            release_name = "victoriametrics"
+            value_files = [
+              "$values/victoriametrics/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = argocd_repository.victoria_metrics.repo
+          target_revision = "0.x.x"
+          chart           = "victoria-metrics-k8s-stack"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "victoriametrics/{{cluster}}"
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+      }
+    }
+  }
+}
