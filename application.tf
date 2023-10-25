@@ -4,6 +4,7 @@ resource "argocd_application" "grafana" {
     namespace = "guardian"
   }
   spec {
+    project = argocd_project.guardian.metadata.name
     source {
       helm {
         release_name = "grafana"
