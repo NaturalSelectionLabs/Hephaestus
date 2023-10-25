@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: apisix-dashboard
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`apisix-dashboard.dev.nsl.xyz`)
+      kind: Rule
+      services:
+        - name: apisix-dashboard
+          port: 80

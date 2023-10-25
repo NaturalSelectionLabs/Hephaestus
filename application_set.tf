@@ -275,11 +275,11 @@ resource "argocd_application_set" "apisix" {
           ref             = "values"
         }
 
-        #        source {
-        #          repo_url        = var.repo_url
-        #          target_revision = "HEAD"
-        #          path            = "apisix/{{cluster}}"
-        #        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "apisix/{{cluster}}"
+        }
 
         destination {
           server    = "{{url}}"
