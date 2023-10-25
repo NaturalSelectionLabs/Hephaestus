@@ -23,6 +23,7 @@ resource "argocd_application_set" "traefik" {
       }
 
       spec {
+        project = argocd_project.guardian.metadata[0].name
         source {
           helm {
             release_name = "traefik"
@@ -74,6 +75,7 @@ resource "argocd_application_set" "traefik_mesh" {
       }
 
       spec {
+        project = argocd_project.guardian.metadata[0].name
         source {
           helm {
             release_name = "traefik-mesh"
@@ -128,6 +130,7 @@ resource "argocd_application_set" "cert_manager" {
       }
 
       spec {
+        project = argocd_project.guardian.metadata[0].name
         source {
           helm {
             release_name = "cert-manager"
@@ -188,6 +191,7 @@ resource "argocd_application_set" "victoria_metrics" {
       }
 
       spec {
+        project = argocd_project.guardian.metadata[0].name
         source {
           helm {
             release_name = "victoriametrics"
