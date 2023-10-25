@@ -40,11 +40,19 @@ resource "argocd_application" "keycloak" {
     source {
       helm {
         release_name = "keycloak"
-        values = file("keycloak/prod/values.yaml")
+        value_files = [
+          "$values/keycloak/prod/values.yaml"
+        ]
       }
       repo_url        = "https://codecentric.github.io/helm-charts"
       target_revision = "18.x.x"
       chart           = "keycloak"
+    }
+
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      ref             = "values"
     }
 
     source {
