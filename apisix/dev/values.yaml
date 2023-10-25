@@ -3,3 +3,5 @@ etcd:
   persistence:
     storageClass: alicloud-disk-essd
     size: 20Gi
+  nodeSelector:
+    node.csi.alibabacloud.com/disktype.cloud_essd: available
