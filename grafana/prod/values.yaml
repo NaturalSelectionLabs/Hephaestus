@@ -13,11 +13,6 @@ tolerations:
     operator: "Equal"
     value: "internal"
     effect: "NoSchedule"
-persistence:
-  type: pvc
-  enabled: false
-  storageClassName: alicloud-disk-ssd
-  size: 20Gi
 admin:
   existingSecret: "grafana-secrets"
   userKey: admin-user
