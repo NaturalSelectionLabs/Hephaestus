@@ -3,6 +3,8 @@ keycloak:
   persistence:
     deployPostgres: false
 
+replicas: 2
+
 extraEnv: |
   - name: JAVA_OPTS
     value: >-

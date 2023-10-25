@@ -1,7 +1,7 @@
 resource "argocd_project" "guardian" {
   metadata {
     name = "guardian"
-    namespace = "argocd"
+    namespace = "guardian"
   }
 
   spec {
