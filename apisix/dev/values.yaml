@@ -1,3 +1,5 @@
-persistence:
-  storageClass: alicloud-disk-essd
-  size: 20Gi
+etcd:
+  replicaCount: 1
+  persistence:
+    storageClass: alicloud-disk-essd
+    size: 20Gi
