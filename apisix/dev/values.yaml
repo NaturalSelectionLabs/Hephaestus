@@ -1,0 +1,3 @@
+persistence:
+  storageClass: alicloud-disk-essd
+  size: 20Gi
