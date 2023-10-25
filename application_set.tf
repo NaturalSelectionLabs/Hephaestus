@@ -158,6 +158,10 @@ resource "argocd_application_set" "cert_manager" {
           server    = "{{url}}"
           namespace = "guardian"
         }
+
+        sync_policy {
+          sync_options = ["ServerSideApply=true"]
+        }
       }
     }
   }
