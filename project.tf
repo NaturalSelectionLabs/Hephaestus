@@ -8,6 +8,11 @@ resource "argocd_project" "guardian" {
     source_namespaces = ["default", "guardian"]
     source_repos = ["*"]
 
+    cluster_resource_whitelist {
+      group = "*"
+      kind = "*"
+    }
+
     destination {
       server = argocd_cluster.prod.server
       namespace = "*"
