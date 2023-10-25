@@ -1,0 +1,14 @@
+global:
+  storageClass: alicloud-disk-essd
+shards: 1
+replicaCount: 1
+persistence:
+  size: 100Gi
+zookeeper:
+  persistence:
+    size: 100Gi
+service:
+  type: LoadBalancer
+  annotations:
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: clickhouse
