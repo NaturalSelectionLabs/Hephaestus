@@ -60,7 +60,7 @@ resource "argocd_application" "keycloak" {
       target_revision = "HEAD"
       path            = "keycloak/prod"
       plugin {
-        name = "avp"
+        name = "avp-kustomize"
       }
     }
 
