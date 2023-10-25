@@ -228,3 +228,65 @@ resource "argocd_application_set" "victoria_metrics" {
     }
   }
 }
+
+resource "argocd_application_set" "apisix" {
+  metadata {
+    name = "apisix"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          #          {
+          #            cluster = argocd_cluster.prod.name
+          #            url     = argocd_cluster.prod.server
+          #          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "apisix-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          helm {
+            release_name = "apisix"
+            value_files = [
+              "$values/apisix/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = "https://charts.apiseven.com"
+          target_revision = "1.7.x"
+          chart           = "apisix"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        #        source {
+        #          repo_url        = var.repo_url
+        #          target_revision = "HEAD"
+        #          path            = "apisix/{{cluster}}"
+        #        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}
