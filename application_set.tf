@@ -159,9 +159,6 @@ resource "argocd_application_set" "cert_manager" {
           namespace = "guardian"
         }
 
-        sync_policy {
-          sync_options = ["ServerSideApply=true"]
-        }
       }
     }
   }
@@ -222,6 +219,10 @@ resource "argocd_application_set" "victoria_metrics" {
         destination {
           server    = "{{url}}"
           namespace = "guardian"
+        }
+
+        sync_policy {
+          sync_options = ["ServerSideApply=true"]
         }
       }
     }
