@@ -102,68 +102,6 @@ resource "argocd_application_set" "traefik_mesh" {
   }
 }
 
-resource "argocd_application_set" "cert_manager" {
-  metadata {
-    name = "cert-manager"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "cert-manager-{{cluster}}"
-        labels = {
-          cluster = "{{cluster}}"
-        }
-      }
-
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "cert-manager"
-            value_files = [
-              "$values/cert-manager/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://charts.jetstack.io"
-          target_revision = "1.11.0"
-          chart           = "cert-manager"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
-
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "cert-manager/{{cluster}}"
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "guardian"
-        }
-
-      }
-    }
-  }
-}
-
 resource "argocd_application_set" "victoria_metrics" {
   metadata {
     name = "victoriametrics"
@@ -366,9 +304,179 @@ resource "argocd_application_set" "apisix" {
          }
         }
 
-        ignore_difference {
-          kind = "Secret"
-          jq_path_expressions = [".data.jwt-token.pem"]
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}
+
+resource "argocd_application_set" "cert_manager" {
+  metadata {
+    name = "cert-manager"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "cert-manager-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          helm {
+            release_name = "cert-manager"
+            value_files = [
+              "$values/cert-manager/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = "https://charts.jetstack.io"
+          target_revision = "1.11.0"
+          chart           = "cert-manager"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "cert-manager/{{cluster}}"
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}
+
+resource "argocd_application_set" "consul" {
+  metadata {
+    name = "consul"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+#          {
+#            cluster = argocd_cluster.prod.name
+#            url     = argocd_cluster.prod.server
+#          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "consul-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          helm {
+            release_name = "consul"
+            value_files = [
+              "$values/consul/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = argocd_repository.hashicorp.repo
+          target_revision = "1.x.x"
+          chart           = "consul"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "consul/{{cluster}}"
+          kustomize {
+            common_annotations = {
+              "app.kubernetes.io/instance" = "consul"
+            }
+          }
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}
+
+resource "argocd_application_set" "crdb" {
+  metadata {
+    name = "crdb"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+                    {
+                      cluster = argocd_cluster.prod.name
+                      url     = argocd_cluster.prod.server
+                    }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "crdb-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "crdb/{{cluster}}"
         }
 
         destination {

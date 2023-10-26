@@ -5,10 +5,10 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
-    - web
+    - websecure
   routes:
-    - match: Host(`consul.rss3.dev`)
-      kind: Rule
+    - kind: Rule
+      match: Host(`consul.dev.nsl.xyz`)
       services:
         - name: consul-ui
           port: 80
