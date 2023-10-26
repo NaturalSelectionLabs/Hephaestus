@@ -228,8 +228,8 @@ resource "argocd_application_set" "actions_runner_controller" {
         }
 
         ignore_difference {
-          group = "admissionregistration.k8s.io"
-          kind = "*"
+          group               = "admissionregistration.k8s.io"
+          kind                = "*"
           jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
         }
 
@@ -297,11 +297,11 @@ resource "argocd_application_set" "apisix" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "apisix/{{cluster}}"
-         kustomize {
-           common_annotations = {
-             "app.kubernetes.io/instance" = "apisix"
-           }
-         }
+          kustomize {
+            common_annotations = {
+              "app.kubernetes.io/instance" = "apisix"
+            }
+          }
         }
 
         destination {
@@ -388,10 +388,10 @@ resource "argocd_application_set" "consul" {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
           },
-#          {
-#            cluster = argocd_cluster.prod.name
-#            url     = argocd_cluster.prod.server
-#          }
+          #          {
+          #            cluster = argocd_cluster.prod.name
+          #            url     = argocd_cluster.prod.server
+          #          }
         ]
       }
     }
@@ -455,10 +455,10 @@ resource "argocd_application_set" "crdb" {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
           },
-                    {
-                      cluster = argocd_cluster.prod.name
-                      url     = argocd_cluster.prod.server
-                    }
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
         ]
       }
     }
