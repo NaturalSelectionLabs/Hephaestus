@@ -229,6 +229,68 @@ resource "argocd_application_set" "victoria_metrics" {
   }
 }
 
+resource "argocd_application_set" "actions_runner_controller" {
+  metadata {
+    name = "actions-runner-controller"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+                    {
+                      cluster = argocd_cluster.prod.name
+                      url     = argocd_cluster.prod.server
+                    }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "actions-runner-controller-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          helm {
+            release_name = "actions-runner-controller"
+            value_files = [
+              "$values/actions-runner-controller/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = "https://actions-runner-controller.github.io/actions-runner-controller"
+          target_revision = "0.x.x"
+          chart           = "actions-runner-controller"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+#        source {
+#          repo_url        = var.repo_url
+#          target_revision = "HEAD"
+#          path            = "apisix/{{cluster}}"
+#        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}
+
 resource "argocd_application_set" "apisix" {
   metadata {
     name = "apisix"
