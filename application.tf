@@ -12,7 +12,7 @@ resource "argocd_application" "grafana" {
           "$values/grafana/prod/values.yaml"
         ]
       }
-      repo_url        = "https://grafana.github.io/helm-charts"
+      repo_url        = argocd_repository.grafana.repo
       target_revision = "6.61.x"
       chart           = "grafana"
     }
@@ -29,6 +29,47 @@ resource "argocd_application" "grafana" {
       path            = "grafana/prod"
       plugin {
         name = "avp-kustomize"
+      }
+    }
+
+    destination {
+      server    = argocd_cluster.prod.server
+      namespace = "guardian"
+    }
+  }
+}
+
+resource "argocd_application" "grafana" {
+  metadata {
+    name      = "grafana"
+    namespace = "guardian"
+  }
+  spec {
+    project = argocd_project.guardian.metadata[0].name
+    source {
+      helm {
+        release_name = "grafana"
+        value_files = [
+          "$values/loki/prod/values.yaml"
+        ]
+      }
+      repo_url        = argocd_repository.grafana.repo
+      target_revision = "2.8.x"
+      chart           = "grafana"
+    }
+
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      ref             = "values"
+    }
+
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "loki/prod"
+      directory {
+        exclude = "values.yaml"
       }
     }
 

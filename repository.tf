@@ -15,3 +15,9 @@ resource "argocd_repository" "bitnami" {
   type = "helm"
   name = "bitnami"
 }
+
+resource "argocd_repository" "grafana" {
+  repo = "https://grafana.github.io/helm-charts"
+  type = "helm"
+  name = "grafana"
+}
