@@ -41,14 +41,14 @@ resource "argocd_application" "grafana" {
 
 resource "argocd_application" "loki" {
   metadata {
-    name      = "grafana"
+    name      = "loki"
     namespace = "guardian"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
     source {
       helm {
-        release_name = "grafana"
+        release_name = "loki"
         value_files = [
           "$values/loki/prod/values.yaml"
         ]
