@@ -39,7 +39,7 @@ resource "argocd_application" "grafana" {
   }
 }
 
-resource "argocd_application" "grafana" {
+resource "argocd_application" "loki" {
   metadata {
     name      = "grafana"
     namespace = "guardian"
