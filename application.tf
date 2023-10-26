@@ -55,7 +55,7 @@ resource "argocd_application" "loki" {
       }
       repo_url        = argocd_repository.grafana.repo
       target_revision = "2.8.x"
-      chart           = "grafana"
+      chart           = "loki"
     }
 
     source {
