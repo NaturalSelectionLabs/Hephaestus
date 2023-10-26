@@ -1,0 +1,15 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kafka-console
+  namespace: guardian
+spec:
+  entryPoints:
+    - web
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`kafka.prod.nsl.xyz`)
+      services:
+        - name: kafka-console
+          port: 8080

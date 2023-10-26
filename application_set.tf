@@ -500,10 +500,12 @@ resource "argocd_application_set" "kafka" {
           {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
+            version = "20.x.x"
           },
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
+            version = "23.x.x"
           }
         ]
       }
@@ -526,7 +528,7 @@ resource "argocd_application_set" "kafka" {
             ]
           }
           repo_url        = argocd_repository.bitnami.repo
-          target_revision = "23.x.x"
+          target_revision = "{{version}}"
           chart           = "kafka"
         }
         source {
