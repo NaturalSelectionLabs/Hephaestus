@@ -19,7 +19,7 @@ admin:
   passwordKey: admin-password
 namespaceOverride: "guardian"
 envFromSecrets:
-  - name: grafana-google-auth
+  - name: grafana-ext-config
 grafana.ini:
   server:
     domain: grafana.nsl.xyz

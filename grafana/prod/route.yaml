@@ -5,10 +5,10 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
-  - web
+    - websecure
   routes:
-  - kind: Rule
-    match: Host(`a.new.domain`) && PathPrefix(`/`)
-    services:
-    - name: grafana
-      port: 80
+    - kind: Rule
+      match: Host(`grafana.nsl.xyz`)
+      services:
+        - name: grafana
+          port: 80

@@ -23,6 +23,15 @@ resource "argocd_application" "grafana" {
       ref             = "values"
     }
 
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "grafana/prod"
+      plugin {
+        name = "avp-kustomize"
+      }
+    }
+
     destination {
       server    = argocd_cluster.prod.server
       namespace = "guardian"
