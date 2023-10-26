@@ -292,7 +292,7 @@ resource "argocd_application_set" "actions_runner_controller" {
         ignore_difference {
           group = "admissionregistration.k8s.io"
           kind = "*"
-          jq_path_expressions = [".webhooks[].clientConfig.clientConfig"]
+          jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
         }
 
         destination {
@@ -364,6 +364,11 @@ resource "argocd_application_set" "apisix" {
              "app.kubernetes.io/instance" = "apisix"
            }
          }
+        }
+
+        ignore_difference {
+          kind = "Secret"
+          jq_path_expressions = [".data.jwt-token.pem"]
         }
 
         destination {
