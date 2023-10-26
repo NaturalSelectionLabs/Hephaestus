@@ -214,8 +214,10 @@ resource "argocd_application_set" "victoria_metrics" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "victoriametrics/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
+          kustomize {
+            common_annotations = {
+              "app.kubernetes.io/instance" = "victoriametrics"
+            }
           }
         }
 
@@ -285,6 +287,11 @@ resource "argocd_application_set" "actions_runner_controller" {
           plugin {
             name = "avp-kustomize"
           }
+          kustomize {
+            common_annotations = {
+              "app.kubernetes.io/instance" = "actions-runner-controller"
+            }
+          }
         }
 
         destination {
@@ -351,9 +358,11 @@ resource "argocd_application_set" "apisix" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "apisix/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-          }
+         kustomize {
+           common_annotations = {
+             "app.kubernetes.io/instance" = "apisix"
+           }
+         }
         }
 
         destination {
