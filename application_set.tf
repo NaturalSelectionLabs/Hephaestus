@@ -287,11 +287,6 @@ resource "argocd_application_set" "actions_runner_controller" {
           plugin {
             name = "avp-kustomize"
           }
-          kustomize {
-            common_annotations = {
-              "app.kubernetes.io/instance" = "actions-runner-controller"
-            }
-          }
         }
 
         destination {
