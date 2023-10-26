@@ -289,6 +289,12 @@ resource "argocd_application_set" "actions_runner_controller" {
           }
         }
 
+        ignore_difference {
+          group = "admissionregistration.k8s.io"
+          kind = "*"
+          jq_path_expressions = [".webhooks[].clientConfig.clientConfig"]
+        }
+
         destination {
           server    = "{{url}}"
           namespace = "guardian"
