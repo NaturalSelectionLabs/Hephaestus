@@ -1,5 +1,5 @@
 variable "ARGOCD_PASSWORD" {
-  type    = string
+  type = string
 }
 
 variable "repo_url" {

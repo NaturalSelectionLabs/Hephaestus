@@ -1,25 +1,25 @@
 resource "argocd_project" "guardian" {
   metadata {
-    name = "guardian"
+    name      = "guardian"
     namespace = "guardian"
   }
 
   spec {
     source_namespaces = ["default", "guardian"]
-    source_repos = ["*"]
+    source_repos      = ["*"]
 
     cluster_resource_whitelist {
       group = "*"
-      kind = "*"
+      kind  = "*"
     }
 
     destination {
-      server = argocd_cluster.prod.server
+      server    = argocd_cluster.prod.server
       namespace = "*"
     }
 
     destination {
-      server = argocd_cluster.dev.server
+      server    = argocd_cluster.dev.server
       namespace = "*"
     }
 

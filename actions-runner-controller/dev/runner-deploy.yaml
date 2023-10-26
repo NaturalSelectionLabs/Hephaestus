@@ -1,0 +1,17 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: dev-runner
+  namespace: default
+spec:
+  replicas: 1
+  template:
+    spec:
+      dockerdWithinRunnerContainer: true
+      group: Dev
+      image: summerwind/actions-runner-dind
+      organization: Naturalselectionlabs
+      resources:
+        requests:
+          cpu: '2'
+          memory: 4Gi

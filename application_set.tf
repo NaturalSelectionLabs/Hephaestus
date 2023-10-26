@@ -241,10 +241,10 @@ resource "argocd_application_set" "actions_runner_controller" {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
           },
-                    {
-                      cluster = argocd_cluster.prod.name
-                      url     = argocd_cluster.prod.server
-                    }
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
         ]
       }
     }
@@ -275,15 +275,19 @@ resource "argocd_application_set" "actions_runner_controller" {
           ref             = "values"
         }
 
-#        source {
-#          repo_url        = var.repo_url
-#          target_revision = "HEAD"
-#          path            = "apisix/{{cluster}}"
-#        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "actions-runner-controller/{{cluster}}"
+        }
 
         destination {
           server    = "{{url}}"
           namespace = "guardian"
+        }
+
+        sync_policy {
+          sync_options = ["ServerSideApply=true"]
         }
 
       }
