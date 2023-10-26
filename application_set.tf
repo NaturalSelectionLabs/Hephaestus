@@ -488,3 +488,70 @@ resource "argocd_application_set" "crdb" {
     }
   }
 }
+
+resource "argocd_application_set" "kafka" {
+  metadata {
+    name = "kafka"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "kafka-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          helm {
+            release_name = "kafka"
+            value_files = [
+              "$values/kafka/{{cluster}}/values.yaml"
+            ]
+          }
+          repo_url        = argocd_repository.bitnami.repo
+          target_revision = "23.x.x"
+          chart           = "kafka"
+        }
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          ref             = "values"
+        }
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "kafka/{{cluster}}"
+          kustomize {
+            common_annotations = {
+              "app.kubernetes.io/instance" = "kafka"
+            }
+          }
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+
+      }
+    }
+  }
+}

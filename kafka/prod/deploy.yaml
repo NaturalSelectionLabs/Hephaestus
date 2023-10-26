@@ -1,0 +1,14 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kafka-console
+  namespace: guardian
+spec:
+  template:
+    spec:
+      containers:
+        - name: kafka-console
+          image: docker.redpanda.com/redpandadata/console:latest
+          env:
+            - name: KAFKA_BROKERS
+              value: 192.168.0.7:9094,192.168.0.8:9094,192.168.0.9:9094

@@ -9,3 +9,9 @@ resource "argocd_repository" "hashicorp" {
   type = "helm"
   name = "hashicorp"
 }
+
+resource "argocd_repository" "bitnami" {
+  repo = "https://charts.bitnami.com/bitnami"
+  type = "helm"
+  name = "bitnami"
+}

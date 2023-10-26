@@ -1,0 +1,25 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: kafka-console
+  namespace: guardian
+  labels:
+    k8s-app: kafka-console
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      k8s-app: kafka-console
+  template:
+    metadata:
+      name: kafka-console
+      labels:
+        k8s-app: kafka-console
+    spec:
+      containers:
+        - name: kafka-console
+          image: docker.redpanda.com/redpandadata/console:latest
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
