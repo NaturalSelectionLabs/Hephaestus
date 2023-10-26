@@ -11,8 +11,8 @@ spec:
   - kind: Rule
     match: Host(`crdb.prod.nsl.xyz`)
     services:
-    - name: cockroachdb-public
-      port: 8080
+    - name: cockroachdb-lb-internal
+      port: 443
       scheme: https
       serversTransport: cockroachdb
 ---
