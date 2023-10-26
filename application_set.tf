@@ -214,6 +214,9 @@ resource "argocd_application_set" "victoria_metrics" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "victoriametrics/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+          }
         }
 
         destination {
@@ -279,6 +282,9 @@ resource "argocd_application_set" "actions_runner_controller" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "actions-runner-controller/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+          }
         }
 
         destination {
@@ -345,6 +351,9 @@ resource "argocd_application_set" "apisix" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "apisix/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+          }
         }
 
         destination {
