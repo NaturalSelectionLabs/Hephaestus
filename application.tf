@@ -68,8 +68,10 @@ resource "argocd_application" "loki" {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "loki/prod"
-      directory {
-        exclude = "values.yaml"
+      kustomize {
+        common_labels = {
+          release = "loki"
+        }
       }
     }
 
