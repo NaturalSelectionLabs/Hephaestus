@@ -109,8 +109,10 @@ resource "argocd_application" "jaeger" {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "jaeger/prod"
-      plugin {
-        name = "avp-kustomize"
+      kustomize {
+        common_annotations = {
+          "app.kubernetes.io/instance" = "jaeger"
+        }
       }
     }
 
