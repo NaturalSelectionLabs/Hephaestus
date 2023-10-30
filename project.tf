@@ -35,7 +35,7 @@ resource "argocd_project" "namespaced" {
 
   metadata {
     name      = each.value
-    namespace = each.value
+    namespace = "guardian"
   }
 
   spec {
