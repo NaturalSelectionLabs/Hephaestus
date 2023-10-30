@@ -274,7 +274,7 @@ configs:
             command:
               - sh
               - "-c"
-              - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+              - "find . -name '*.yaml' | grep ."
 #              - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
         generate:
           command:
@@ -289,7 +289,7 @@ configs:
             command:
               - sh
               - "-c"
-              - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+              - "find . -name '*.yaml' | grep ."
         generate:
           command:
             - argocd-vault-plugin
@@ -310,7 +310,7 @@ configs:
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: ''
+    policy.default: 'role:readonly'
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])

@@ -150,6 +150,13 @@ server:
   ha:
     enabled: false
 
+  service:
+    type: LoadBalancer
+    annotations:
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: "vault-dev"
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
+
 # Vault UI
 ui:
   # True if you want to create a Service entry for the Vault UI.
