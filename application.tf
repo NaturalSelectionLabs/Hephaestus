@@ -89,23 +89,26 @@ resource "argocd_application" "keycloak" {
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
-    source {
-      helm {
-        release_name = "keycloak"
-        value_files = [
-          "$values/keycloak/prod/values.yaml"
-        ]
-      }
-      repo_url        = "https://codecentric.github.io/helm-charts"
-      target_revision = "18.x.x"
-      chart           = "keycloak"
-    }
+#    source {
+#      helm {
+#        release_name = "keycloak"
+#        value_files = [
+#          "$values/keycloak/prod/values.yaml"
+#        ]
+#      }
+#      repo_url        = "https://codecentric.github.io/helm-charts"
+#      target_revision = "18.x.x"
+#      chart           = "keycloak"
+#    }
 
-    source {
-      repo_url        = var.repo_url
-      target_revision = "HEAD"
-      ref             = "values"
-    }
+#    source {
+#      repo_url        = var.repo_url
+#      target_revision = "HEAD"
+#      ref             = "values"
+#      plugin {
+#        name = "default"
+#      }
+#    }
 
     source {
       repo_url        = var.repo_url
@@ -113,6 +116,22 @@ resource "argocd_application" "keycloak" {
       path            = "keycloak/prod"
       plugin {
         name = "avp-kustomize"
+        env {
+          name = "APP_REPO"
+          value = "Hephaestus"
+        }
+#        env {
+#          name = "IMAGE_NAME"
+#          value = "a"
+#        }
+#        env {
+#          name = "IMAGE_TAG"
+#          value = "c"
+#        }
+        env {
+          name = "AVP_SECRET"
+          value = "avp-prod"
+        }
       }
     }
 

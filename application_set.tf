@@ -216,6 +216,9 @@ resource "argocd_application_set" "actions_runner_controller" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           ref             = "values"
+          plugin {
+            name = "default"
+          }
         }
 
         source {
@@ -224,6 +227,14 @@ resource "argocd_application_set" "actions_runner_controller" {
           path            = "actions-runner-controller/{{cluster}}"
           plugin {
             name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "avp-{{cluster}}"
+            }
           }
         }
 

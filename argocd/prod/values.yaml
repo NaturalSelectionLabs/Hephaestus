@@ -42,104 +42,11 @@ repoServer:
 
   extraContainers:
     # argocd-vault-plugin with plain YAML
-    - name: avp
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.8.4
-      env:
-        - name: AVP_SECRET
-          value: guardian:avp-prod
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-
-        # Register plugins into sidecar
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: avp.yaml
-          name: cmp-plugin
-
-        # Important: Mount tools into $PATH
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
-    - name: avp-helm
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.8.4
-      env:
-        - name: AVP_SECRET
-          value: guardian:avp-prod
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: avp-helm.yaml
-          name: cmp-plugin
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
-    - name: avp-helm-args
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.8.4
-      env:
-        - name: AVP_SECRET
-          value: guardian:avp-prod
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: avp-helm-args.yaml
-          name: cmp-plugin
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
-    - name: avp-helm-values
-      command: [/var/run/argocd/argocd-cmp-server]
-      image: quay.io/argoproj/argocd:v2.8.4
-      env:
-        - name: AVP_SECRET
-          value: guardian:avp-prod
-      securityContext:
-        runAsNonRoot: true
-        runAsUser: 999
-      volumeMounts:
-        - mountPath: /var/run/argocd
-          name: var-files
-        - mountPath: /home/argocd/cmp-server/plugins
-          name: plugins
-        - mountPath: /tmp
-          name: tmp
-        - mountPath: /home/argocd/cmp-server/config/plugin.yaml
-          subPath: avp-helm-values.yaml
-          name: cmp-plugin
-        - name: custom-tools
-          subPath: argocd-vault-plugin
-          mountPath: /usr/local/bin/argocd-vault-plugin
-
     - name: avp-kustomize
-      command: [/var/run/argocd/argocd-cmp-server]
+      command:
+      - /var/run/argocd/argocd-cmp-server
+      - --loglevel
+      - debug
       image: quay.io/argoproj/argocd:v2.8.4
       env:
         - name: AVP_SECRET
@@ -160,7 +67,6 @@ repoServer:
         - name: custom-tools
           subPath: argocd-vault-plugin
           mountPath: /usr/local/bin/argocd-vault-plugin
-
   volumes:
     - configMap:
         name: argocd-cmp-cm
@@ -178,9 +84,9 @@ configs:
     dex.config: |
       connectors:
       # GitHub example
-        - type: github
-          id: github
-          name: GitHub
+        - type: oidc
+          id: keycloak
+          name: NSL
           config:
             issuer: https://account.nsl.xyz/auth/realms/google
             clientID: argocd
@@ -221,52 +127,6 @@ configs:
   cmp:
     create: true
     plugins:
-      avp-helm:
-        allowConcurrency: true
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
-        generate:
-          command:
-            - bash
-            - "-c"
-            - helm template $ARGOCD_APP_NAME --include-crds . | argocd-vault-plugin generate -s ${AVP_SECRET} -
-        lockRepo: false
-      avp-helm-args:
-        allowConcurrency: true
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
-        generate:
-          command:
-            - bash
-            - "-c"
-            - |
-              helm template $ARGOCD_APP_NAME --include-crds -n $ARGOCD_APP_NAMESPACE ${ARGOCD_ENV_HELM_ARGS} . |
-              argocd-vault-plugin generate -s ${AVP_SECRET} -
-        lockRepo: false
-      avp-helm-values:
-        allowConcurrency: true
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name 'Chart.yaml' && find . -name 'values.yaml'"
-        generate:
-          command:
-            - bash
-            - "-c"
-            - |
-              helm template "$ARGOCD_APP_NAME" -f <(echo "$ARGOCD_ENV_HELM_VALUES") . |
-              argocd-vault-plugin generate -s ${AVP_SECRET} -
-        lockRepo: false
       avp-kustomize:
         allowConcurrency: true
         discover:
@@ -274,31 +134,13 @@ configs:
             command:
               - sh
               - "-c"
-              - "find . -name '*.yaml' | grep ."
-#              - "find . -name '*.yaml' | xargs -I {} grep \"<path\\|avp\\.kubernetes\\.io\" {} | grep ."
+              - "find . -name kustomization.yaml"
         generate:
           command:
             - sh
             - "-c"
-            - kustomize build . | argocd-vault-plugin generate -s ${AVP_SECRET} -
+            - "(kustomize edit set annotation github.com/url:${APP_REPO} || kustomize edit set image ${IMAGE_NAME}:${IMAGE_TAG} ) && kustomize build --enable-helm . | argocd-vault-plugin -s ${AVP_SECRET} generate -"
         lockRepo: false
-      avp:
-        allowConcurrency: true
-        discover:
-          find:
-            command:
-              - sh
-              - "-c"
-              - "find . -name '*.yaml' | grep ."
-        generate:
-          command:
-            - argocd-vault-plugin
-            - generate
-            - "."
-            - "-s"
-            - "${AVP_SECRET}"
-        lockRepo: false
-
   rbac:
     # -- Create the argocd-rbac-cm configmap with ([Argo CD RBAC policy]) definitions.
     # If false, it is expected the configmap will be created by something else.
