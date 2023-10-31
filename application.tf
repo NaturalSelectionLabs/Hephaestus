@@ -102,7 +102,7 @@ resource "argocd_application" "keycloak" {
         }
         env {
           name = "AVP_SECRET"
-          value = "avp-prod"
+          value = "guardian:avp-prod"
         }
       }
     }
