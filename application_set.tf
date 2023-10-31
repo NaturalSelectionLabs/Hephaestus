@@ -202,26 +202,6 @@ resource "argocd_application_set" "actions_runner_controller" {
       spec {
         project = argocd_project.guardian.metadata[0].name
         source {
-          helm {
-            release_name = "actions-runner-controller"
-            value_files = [
-              "$values/actions-runner-controller/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://actions-runner-controller.github.io/actions-runner-controller"
-          target_revision = "0.x.x"
-          chart           = "actions-runner-controller"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-          plugin {
-            name = "default"
-          }
-        }
-
-        source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "actions-runner-controller/{{cluster}}"

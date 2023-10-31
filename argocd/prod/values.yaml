@@ -139,7 +139,7 @@ configs:
           command:
             - sh
             - "-c"
-            - "(kustomize edit set annotation github.com/url:${APP_REPO} || kustomize edit set image ${IMAGE_NAME}:${IMAGE_TAG} ) && kustomize build --enable-helm . | argocd-vault-plugin -s ${AVP_SECRET} generate -"
+            - "kustomize edit set annotation \"github.com/url:${ARGOCD_ENV_APP_REPO}\"; kustomize edit set image ${ARGOCD_ENV_IMAGE_NAME}:${ARGOCD_ENV_IMAGE_TAG}; kustomize build --enable-helm . | argocd-vault-plugin -s ${AVP_SECRET} generate -"
         lockRepo: false
   rbac:
     # -- Create the argocd-rbac-cm configmap with ([Argo CD RBAC policy]) definitions.

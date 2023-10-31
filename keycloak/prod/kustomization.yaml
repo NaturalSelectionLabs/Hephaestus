@@ -5,8 +5,12 @@ resources:
 - secret.yaml
 
 helmCharts:
-  - name: keycloak
-    valuesFile: values.yaml
-    releaseName: keycloak
-    version: 18.x.x
-    repo: https://codecentric.github.io/helm-charts
+- name: keycloak
+  releaseName: keycloak
+  repo: https://codecentric.github.io/helm-charts
+  valuesFile: values.yaml
+  version: 18.x.x
+images:
+- {}
+commonAnnotations:
+  github.com/url: ""
