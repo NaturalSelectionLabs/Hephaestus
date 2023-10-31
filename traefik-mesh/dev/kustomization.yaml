@@ -7,3 +7,4 @@ helmCharts:
     repo: https://helm.traefik.io/traefik
     valuesFile: values.yaml
     version: 4.x.x
+    namespace: default
