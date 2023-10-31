@@ -213,7 +213,7 @@ resource "argocd_application_set" "actions_runner_controller" {
             }
             env {
               name = "AVP_SECRET"
-              value = "avp-{{cluster}}"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
@@ -325,27 +325,23 @@ resource "argocd_application_set" "cert_manager" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "cert-manager"
-            value_files = [
-              "$values/cert-manager/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://charts.jetstack.io"
-          target_revision = "1.11.0"
-          chart           = "cert-manager"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
+
 
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "cert-manager/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name  = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name  = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
         }
 
         destination {
