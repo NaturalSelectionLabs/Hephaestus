@@ -281,7 +281,7 @@ resource "argocd_application_set" "apisix" {
             }
             env {
               name = "AVP_SECRET"
-              value = "avp-{{cluster}}"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
