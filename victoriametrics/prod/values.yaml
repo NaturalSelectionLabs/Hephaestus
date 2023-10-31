@@ -152,6 +152,10 @@ grafana:
 prometheus-node-exporter:
   enabled: true
 
+  resources:
+    requests:
+      cpu: 0.02
+      memory: 64Mi
   ## all values for prometheus-node-exporter helm chart can be specified here
   podLabels:
     ## Add the 'node-exporter' label to be used by serviceMonitor to match standard common usage in rules and grafana dashboards

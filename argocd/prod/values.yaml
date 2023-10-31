@@ -7,10 +7,24 @@ externalRedis:
 controller:
   replicas: 1
 server:
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 256Mi
+    limits:
+      cpu: 0.5
+      memory: 256Mi
   autoscaling:
     enabled: true
     minReplicas: 2
 repoServer:
+  resources:
+    requests:
+      cpu: 0.1
+      memory: 512Mi
+    limits:
+      cpu: 0.5
+      memory: 512Mi
   autoscaling:
     enabled: true
     minReplicas: 2
@@ -51,6 +65,13 @@ repoServer:
       env:
         - name: AVP_SECRET
           value: guardian:avp-prod
+      resources:
+        requests:
+          cpu: 0.1
+          memory: 128Mi
+        limits:
+          cpu: 0.1
+          memory: 128Mi
       securityContext:
         runAsNonRoot: true
         runAsUser: 999

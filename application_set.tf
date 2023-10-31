@@ -150,6 +150,14 @@ resource "argocd_application_set" "victoria_metrics" {
           }
         }
 
+        ignore_difference {
+          group = "*"
+          kind = "Service"
+          jq_path_expressions = [
+            ".spec.ports[].nodePort"
+          ]
+        }
+
         destination {
           server    = "{{url}}"
           namespace = "guardian"
