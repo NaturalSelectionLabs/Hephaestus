@@ -3,3 +3,10 @@ kind: Kustomization
 resources:
   - ../base
   - runner-deploy.yaml
+
+helmCharts:
+  - name: actions-runner-controller
+    releaseName: actions-runner-controller
+    repo: https://actions-runner-controller.github.io/actions-runner-controller
+    valuesFile: values.yaml
+    version: 0.x.x
