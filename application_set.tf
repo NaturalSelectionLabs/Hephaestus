@@ -420,10 +420,10 @@ resource "argocd_application_set" "crdb" {
     generator {
       list {
         elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
+#          {
+#            cluster = argocd_cluster.dev.name
+#            url     = argocd_cluster.dev.server
+#          },
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
