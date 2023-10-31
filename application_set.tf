@@ -374,30 +374,20 @@ resource "argocd_application_set" "consul" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "consul"
-            value_files = [
-              "$values/consul/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = argocd_repository.hashicorp.repo
-          target_revision = "1.x.x"
-          chart           = "consul"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
 
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "consul/{{cluster}}"
-          kustomize {
-            common_annotations = {
-              "app.kubernetes.io/instance" = "consul"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
