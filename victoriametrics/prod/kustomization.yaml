@@ -2,3 +2,10 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - additional-scrape-configs.yaml
+
+helmCharts:
+  - name: victoria-metrics-k8s-stack
+    releaseName: victoriametrics
+    repo: https://victoriametrics.github.io/helm-charts/
+    valuesFile: values.yaml
+    version: 0.x.x

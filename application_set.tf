@@ -78,20 +78,20 @@ resource "argocd_application_set" "traefik_mesh" {
       spec {
         project = argocd_project.guardian.metadata[0].name
         source {
-          helm {
-            release_name = "traefik-mesh"
-            value_files = [
-              "$values/traefik-mesh/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://helm.traefik.io/traefik"
-          target_revision = "4.x.x"
-          chart           = "traefik-mesh"
-        }
-        source {
-          repo_url        = var.repo_url
+          repo_url = var.repo_url
           target_revision = "HEAD"
-          ref             = "values"
+          path = "traefik-mesh/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
         }
 
         destination {
@@ -132,30 +132,20 @@ resource "argocd_application_set" "victoria_metrics" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "victoriametrics"
-            value_files = [
-              "$values/victoriametrics/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = argocd_repository.victoria_metrics.repo
-          target_revision = "0.x.x"
-          chart           = "victoria-metrics-k8s-stack"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
 
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "victoriametrics/{{cluster}}"
-          kustomize {
-            common_annotations = {
-              "app.kubernetes.io/instance" = "victoriametrics"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
