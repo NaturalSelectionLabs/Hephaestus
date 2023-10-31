@@ -53,14 +53,6 @@ resource "argocd_application" "loki" {
       }
     }
 
-    ignore_difference {
-      group = "*"
-      kind = "Service"
-      jq_path_expressions = [
-        ".spec.ports[].nodePort"
-      ]
-    }
-
     destination {
       server    = argocd_cluster.prod.server
       namespace = "guardian"

@@ -515,6 +515,14 @@ resource "argocd_application_set" "kafka" {
           }
         }
 
+        ignore_difference {
+          group = "*"
+          kind = "Service"
+          jq_path_expressions = [
+            ".spec.ports[].nodePort"
+          ]
+        }
+
         destination {
           server    = "{{url}}"
           namespace = "guardian"
