@@ -6,29 +6,19 @@ resource "argocd_application" "grafana" {
   spec {
     project = argocd_project.guardian.metadata[0].name
     source {
-      helm {
-        release_name = "grafana"
-        value_files = [
-          "$values/grafana/prod/values.yaml"
-        ]
-      }
-      repo_url        = argocd_repository.grafana.repo
-      target_revision = "6.61.x"
-      chart           = "grafana"
-    }
-
-    source {
-      repo_url        = var.repo_url
-      target_revision = "HEAD"
-      ref             = "values"
-    }
-
-    source {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "grafana/prod"
       plugin {
         name = "avp-kustomize"
+        env {
+          name = "APP_REPO"
+          value = "NaturalSelectionLabs/Hephaestus"
+        }
+        env {
+          name = "AVP_SECRET"
+          value = "guardian:avp-prod"
+        }
       }
     }
 
@@ -47,30 +37,18 @@ resource "argocd_application" "loki" {
   spec {
     project = argocd_project.guardian.metadata[0].name
     source {
-      helm {
-        release_name = "loki"
-        value_files = [
-          "$values/loki/prod/values.yaml"
-        ]
-      }
-      repo_url        = argocd_repository.grafana.repo
-      target_revision = "2.8.x"
-      chart           = "loki-stack"
-    }
-
-    source {
-      repo_url        = var.repo_url
-      target_revision = "HEAD"
-      ref             = "values"
-    }
-
-    source {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "loki/prod"
-      kustomize {
-        common_labels = {
-          release = "loki"
+      plugin {
+        name = "avp-kustomize"
+        env {
+          name = "APP_REPO"
+          value = "NaturalSelectionLabs/Hephaestus"
+        }
+        env {
+          name = "AVP_SECRET"
+          value = "guardian:avp-prod"
         }
       }
     }
