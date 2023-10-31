@@ -46,8 +46,6 @@ apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
   name: httpbin
-  annotations:
-    traefik-route-validate.incubator4.com/validate: 'false'
 spec:
   entryPoints:
     - web

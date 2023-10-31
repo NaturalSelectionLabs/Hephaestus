@@ -6,3 +6,10 @@ resources:
 
 patches:
   - path: deploy.yaml
+
+helmCharts:
+  - name: kafka
+    releaseName: kafka
+    repo: https://charts.bitnami.com/bitnami
+    valuesFile: values.yaml
+    version: 23.x.x

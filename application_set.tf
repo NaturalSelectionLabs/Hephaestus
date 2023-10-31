@@ -24,21 +24,22 @@ resource "argocd_application_set" "traefik" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "traefik"
-            value_files = [
-              "$values/traefik/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://helm.traefik.io/traefik"
-          target_revision = "22.x.x"
-          chart           = "traefik"
-        }
+
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          ref             = "values"
+          path            = "traefik/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
         }
 
         destination {
@@ -478,12 +479,10 @@ resource "argocd_application_set" "kafka" {
           {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
-            version = "20.x.x"
           },
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
-            version = "23.x.x"
           }
         ]
       }
@@ -498,30 +497,20 @@ resource "argocd_application_set" "kafka" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "kafka"
-            value_files = [
-              "$values/kafka/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = argocd_repository.bitnami.repo
-          target_revision = "{{version}}"
-          chart           = "kafka"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
 
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "kafka/{{cluster}}"
-          kustomize {
-            common_annotations = {
-              "app.kubernetes.io/instance" = "kafka"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
