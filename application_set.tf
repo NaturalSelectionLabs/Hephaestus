@@ -267,30 +267,21 @@ resource "argocd_application_set" "apisix" {
 
       spec {
         project = argocd_project.guardian.metadata[0].name
-        source {
-          helm {
-            release_name = "apisix"
-            value_files = [
-              "$values/apisix/{{cluster}}/values.yaml"
-            ]
-          }
-          repo_url        = "https://charts.apiseven.com"
-          target_revision = "1.7.x"
-          chart           = "apisix"
-        }
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          ref             = "values"
-        }
+
 
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "apisix/{{cluster}}"
-          kustomize {
-            common_annotations = {
-              "app.kubernetes.io/instance" = "apisix"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "avp-{{cluster}}"
             }
           }
         }
