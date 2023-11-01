@@ -1,3 +1,8 @@
+global:
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: "metrics"
+    prometheus.io/scrape: "true"
 redis:
   # -- Enable redis
   enabled: false
@@ -65,13 +70,6 @@ repoServer:
       env:
         - name: AVP_SECRET
           value: guardian:avp-prod
-      resources:
-        requests:
-          cpu: 0.1
-          memory: 128Mi
-        limits:
-          cpu: 0.1
-          memory: 128Mi
       securityContext:
         runAsNonRoot: true
         runAsUser: 999
@@ -183,8 +181,29 @@ configs:
       p, role:org-admin, repositories, *, *, allow
       p, role:org-admin, logs, get, *, allow
       p, role:org-admin, exec, create, */*, allow
+      p, role:network, applications, *, network/*, allow
+      p, role:network, logs, *, network/*, allow
+      p, role:network, exec, *, network/*, allow
+      p, role:pregod, applications, *, pregod/*, allow
+      p, role:pregod, logs, *, pregod/*, allow
+      p, role:pregod, exec, *, pregod/*, allow
+      p, role:copilot, applications, *, copilot/*, allow
+      p, role:copilot, logs, *, copilot/*, allow
+      p, role:copilot, exec, *, copilot/*, allow
+      p, role:ai, applications, *, ai/*, allow
+      p, role:ai, logs, *, ai/*, allow
+      p, role:ai, exec, *, ai/*, allow
+      p, role:crossbell, applications, *, crossbell/*, allow
+      p, role:crossbell, logs, *, crossbell/*, allow
+      p, role:crossbell, exec, *, crossbell/*, allow
       g, admin, role:org-admin
       g, devops, role:org-admin
+      g, network, role:pregod
+      g, network, role:network
+      g, aiop, role:pregod
+      g, aiop, role:copilot
+      g, aiop, role:ai
+      g, crossbell, role:crossbell
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
