@@ -185,7 +185,10 @@ kube-state-metrics:
   ## all values for kube-state-metrics helm chart can be specified here
   image:
     tag: "v2.8.0"
-
+  resources:
+    requests:
+      cpu: 0.02
+      memory: 128Mi
   # spec for VMServiceScrape crd
   # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
   vmServiceScrape:

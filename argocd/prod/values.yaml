@@ -137,7 +137,9 @@ configs:
     #     - openid
     #     - profile
     #     - email
-
+    resource.customizations.ignoreDifferences.apps_Deployment: |
+      jqPathExpressions:
+      - .spec.template.spec.initContainers[].resources
   params:
     server.insecure: true
 
