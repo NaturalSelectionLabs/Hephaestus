@@ -15,3 +15,5 @@ gateway:
     certCAFilename: tls.crt
 dashboard:
   enabled: true
+ingress-controller:
+  enabled: true
