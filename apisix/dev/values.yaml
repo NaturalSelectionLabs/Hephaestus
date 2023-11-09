@@ -3,6 +3,9 @@ etcd:
   persistence:
     storageClass: alicloud-disk-ssd
     size: 20Gi
+  auth:
+    token:
+      type: simple
 gateway:
   type: LoadBalancer
   annotations:
