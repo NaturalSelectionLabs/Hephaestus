@@ -4,6 +4,7 @@ resources:
   - route.yaml
   - cert.yaml
   - tls.yaml
+  - github.com/apache/apisix-ingress-controller/samples/deploy/crd
 
 helmCharts:
   - name: apisix
