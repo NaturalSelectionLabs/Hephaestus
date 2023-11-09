@@ -12,21 +12,3 @@ spec:
       services:
         - name: apisix-dashboard
           port: 80
----
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
-metadata:
-  name: apisix-wildcard
-  namespace: guardian
-spec:
-  entryPoints:
-    - web
-    - websecure
-  routes:
-    - match: Host(`*.dev.nsl.ooo`)
-      kind: Rule
-      services:
-        - name: apisix-gateway
-          port: 80
-  tls:
-    secretName: apisix-default-cert

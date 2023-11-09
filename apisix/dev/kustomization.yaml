@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - route.yaml
   - cert.yaml
+  - tls.yaml
 
 helmCharts:
   - name: apisix
