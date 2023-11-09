@@ -1,4 +1,5 @@
 etcd:
+  replicaCount: 1
   persistence:
     storageClass: alicloud-disk-ssd
     size: 20Gi
@@ -18,4 +19,4 @@ ingress-controller:
   enabled: true
   config:
     apisix:
-      serviceNamespace: guardian
+      serviceNamespace: guardianz
