@@ -19,4 +19,4 @@ ingress-controller:
   enabled: true
   config:
     apisix:
-      serviceNamespace: guardianz
+      serviceNamespace: guardian
