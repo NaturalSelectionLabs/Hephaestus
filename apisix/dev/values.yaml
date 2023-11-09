@@ -12,5 +12,6 @@ gateway:
   tls:
     enabled: true
     existingCASecret: apisix-default-cert
+    certCAFilename: tls.crt
 dashboard:
   enabled: true
