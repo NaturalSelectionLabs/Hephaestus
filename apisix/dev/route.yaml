@@ -12,3 +12,18 @@ spec:
       services:
         - name: apisix-dashboard
           port: 80
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: apisix-admin
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`apisix-admin.dev.nsl.xyz`)
+      kind: Rule
+      services:
+        - name: apisix-admin
+          port: 9180
