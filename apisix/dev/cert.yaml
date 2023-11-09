@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: apisix-default-cert
+  namespace: guardian
+spec:
+  dnsNames:
+    - '*.dev.nsl.ooo'
+  issuerRef:
+    kind: ClusterIssuer
+    name: cloudflare
+  secretName: apisix-default-cert

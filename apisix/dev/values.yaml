@@ -9,5 +9,8 @@ gateway:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: internet
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
+  tls:
+    enabled: true
+    existingCASecret: apisix-default-cert
 dashboard:
   enabled: true
