@@ -16,4 +16,4 @@ spec:
   selector:
     app: loki
     release: loki
-  type: ClusterIP
+  type: LoadBalancer
