@@ -520,3 +520,59 @@ resource "argocd_application_set" "kafka" {
     }
   }
 }
+
+resource "argocd_application_set" "loki" {
+  metadata {
+    name      = "loki"
+    namespace = "guardian"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "loki-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "loki/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+      }
+    }
+
+  }
+}
