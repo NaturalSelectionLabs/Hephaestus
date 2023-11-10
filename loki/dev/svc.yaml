@@ -1,15 +1,19 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: logstash-loki
+  name: loki-internal
   namespace: guardian
+  annotations:
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: "loki-dev"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
 spec:
   ports:
-    - name: http
+    - name: http-metrics
       protocol: TCP
-      port: 5044
-      targetPort: 5044
+      port: 3100
+      targetPort: http-metrics
   selector:
-    app: logstash-loki
-  clusterIP: None
+    app: loki
+    release: loki
   type: ClusterIP
