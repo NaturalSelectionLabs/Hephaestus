@@ -93,10 +93,10 @@ vmsingle:
     resources:
       requests:
         cpu: "500m"
-        memory: "2500Mi"
+        memory: "4Gi"
       limits:
         cpu: "1200m"
-        memory: "4000Mi"
+        memory: "8Gi"
 
 alertmanager:
   enabled: false
