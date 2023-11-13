@@ -1,7 +1,7 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: dev-runner
+  name: prod-runner
   namespace: default
 spec:
   replicas: 1
