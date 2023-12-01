@@ -13,3 +13,21 @@ spec:
       services:
         - name: kafka-console
           port: 8080
+    - kind: Rule
+      match: Host(`explorer.rss3.io`) && PathPrefix(`/backend`)
+      middlewares:
+        - name: rm-prefix-explorer
+      services:
+        - name: kafka-console
+          port: 8080
+
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: Middleware
+metadata:
+  name: rm-prefix-explorer
+spec:
+  stripPrefix:
+    prefixes:
+      - /backend
+
