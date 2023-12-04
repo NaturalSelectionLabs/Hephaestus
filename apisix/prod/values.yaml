@@ -24,6 +24,10 @@ etcd:
   auth:
     token:
       type: simple
+  podAnnotations:
+    prometheus.io/path: /metrics
+    prometheus.io/port: '2379'
+    prometheus.io/scrape: 'true'
 gateway:
   type: LoadBalancer
   annotations:
