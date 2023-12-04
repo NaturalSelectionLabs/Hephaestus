@@ -1,4 +1,5 @@
 apisix:
+  replicaCount: 3
   resources:
     limits:
       cpu: 100m
@@ -11,10 +12,10 @@ apisix:
     prometheus.io/port: '9091'
     prometheus.io/scrape: 'true'
 etcd:
-  replicaCount: 1
+  replicaCount: 3
   persistence:
-    storageClass: alicloud-disk-ssd
-    size: 20Gi
+    storageClass: alicloud-disk-essd
+    size: 100Gi
   auth:
     token:
       type: simple
@@ -24,10 +25,12 @@ gateway:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: internet
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
-  tls:
-    enabled: true
-    existingCASecret: apisix-default-cert
-    certCAFilename: tls.crt
+    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: apisix-prod
+admin:
+  credentials:
+    secretName: apisix-key
+    secretAdminKey: ADMIN_KEY
+    secretViewerKey: VIEWER_KEY
 dashboard:
   enabled: true
 ingress-controller:
