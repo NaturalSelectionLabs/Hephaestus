@@ -11,6 +11,11 @@ apisix:
     prometheus.io/path: /apisix/prometheus/metrics
     prometheus.io/port: '9091'
     prometheus.io/scrape: 'true'
+pluginAttrs:
+  prometheus:
+    export_addr:
+      ip: 0.0.0.0
+      port: 9091
 etcd:
   replicaCount: 3
   persistence:
