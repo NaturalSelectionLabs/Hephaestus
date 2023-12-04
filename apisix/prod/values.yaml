@@ -33,6 +33,11 @@ admin:
     secretViewerKey: VIEWER_KEY
 dashboard:
   enabled: true
+  config:
+    authentication:
+      users:
+        - username: admin
+          password: <path:kv/data/guardian/apisix-dashboard#ADMIN_PASSWORD>
 ingress-controller:
   enabled: true
   config:
