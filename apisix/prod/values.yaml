@@ -5,8 +5,8 @@ apisix:
       cpu: 100m
       memory: 128Mi
     requests:
-      cpu: 100m
-      memory: 128Mi
+      cpu: 500m
+      memory: 512Mi
   podAnnotations:
     prometheus.io/path: /apisix/prometheus/metrics
     prometheus.io/port: '9091'
