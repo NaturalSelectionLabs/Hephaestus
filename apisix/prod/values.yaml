@@ -1,9 +1,10 @@
 apisix:
+  replicaCount: 3
   resources:
-    limits:
+    requests:
       cpu: 100m
       memory: 128Mi
-    requests:
+    limits:
       cpu: 500m
       memory: 512Mi
   podAnnotations:
