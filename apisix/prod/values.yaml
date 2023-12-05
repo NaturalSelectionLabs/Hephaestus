@@ -56,3 +56,4 @@ ingress-controller:
   config:
     apisix:
       serviceNamespace: guardian
+      adminKey: <path:kv/data/guardian/apisix-key#ADMIN_KEY>
