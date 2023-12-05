@@ -290,6 +290,13 @@ resource "argocd_application_set" "apisix" {
           namespace = "guardian"
         }
 
+        ignore_difference {
+          group = "*"
+          kind = "CustomResourceDefinition"
+          jq_path_expressions = [
+            ".spec.versions[].additionalPrinterColumns[].priority"
+          ]
+        }
       }
     }
   }
