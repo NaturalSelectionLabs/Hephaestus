@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - route.yaml
   - secret.yaml
+  - cert.yaml
+  - tls.yaml
   - github.com/apache/apisix-ingress-controller/samples/deploy/crd
 
 helmCharts:

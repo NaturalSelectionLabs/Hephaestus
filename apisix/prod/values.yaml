@@ -35,6 +35,10 @@ gateway:
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s1.small
     service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: apisix-prod
+  tls:
+    enabled: true
+    existingCASecret: apisix-default-cert
+    certCAFilename: tls.crt
 admin:
   credentials:
     secretName: apisix-key
