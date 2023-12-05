@@ -4,7 +4,7 @@ metadata:
   name: dev-runner
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   template:
     spec:
       dockerdWithinRunnerContainer: true

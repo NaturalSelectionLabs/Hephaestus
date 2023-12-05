@@ -4,10 +4,10 @@ metadata:
   name: prod-runner
   namespace: default
 spec:
-  replicas: 1
+  replicas: 2
   template:
     spec:
-#      dockerdWithinRunnerContainer: true
+      dockerdWithinRunnerContainer: true
       group: Prod
       image: summerwind/actions-runner-dind
       organization: Naturalselectionlabs
