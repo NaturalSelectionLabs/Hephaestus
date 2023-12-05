@@ -5,7 +5,7 @@ metadata:
   namespace: guardian
 spec:
   hosts:
-    - "*.dev.nsl.ooo"
+    - "*.staging.nsl.ooo"
     - "*.prod.nsl.ooo"
   secret:
     name: apisix-default-cert
