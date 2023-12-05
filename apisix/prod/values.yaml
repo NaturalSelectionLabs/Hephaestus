@@ -41,9 +41,8 @@ gateway:
     certCAFilename: tls.crt
 admin:
   credentials:
-    secretName: apisix-key
-    secretAdminKey: ADMIN_KEY
-    secretViewerKey: VIEWER_KEY
+    admin: <path:kv/data/guardian/apisix-key#ADMIN_KEY>
+    viewer: <path:kv/data/guardian/apisix-key#VIEWER_KEY>
 dashboard:
   enabled: true
   config:
