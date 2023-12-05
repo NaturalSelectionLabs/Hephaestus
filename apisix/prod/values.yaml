@@ -1,5 +1,4 @@
 apisix:
-  replicaCount: 3
   resources:
     limits:
       cpu: 100m
@@ -16,7 +15,6 @@ autoscaling:
   minReplicas: 3
   maxReplicas: 15
   targetCPUUtilizationPercentage: 200
-  targetMemoryUtilizationPercentage: 200
 pluginAttrs:
   prometheus:
     export_addr:
