@@ -140,7 +140,7 @@ logstash:
             hosts => "elasticsearch-es-internal-http.elastic-system:9200"
             index => "%{[index]}-%{+YYYY.MM.dd}"
             user => "elastic"
-            password => ""
+            password => "<path:kv/data/guardian/loki#ELASTIC_PASSWORD>"
           }
         } else {
           loki {
