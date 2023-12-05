@@ -11,6 +11,12 @@ apisix:
     prometheus.io/path: /apisix/prometheus/metrics
     prometheus.io/port: '9091'
     prometheus.io/scrape: 'true'
+autoscaling:
+  enabled: true
+  minReplicas: 3
+  maxReplicas: 15
+  targetCPUUtilizationPercentage: 200
+  targetMemoryUtilizationPercentage: 200
 pluginAttrs:
   prometheus:
     export_addr:
