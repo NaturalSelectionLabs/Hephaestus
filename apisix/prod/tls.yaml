@@ -1,11 +1,22 @@
 apiVersion: apisix.apache.org/v2
 kind: ApisixTls
 metadata:
-  name: apisix-tls
+  name: apisix-staging-tls
   namespace: guardian
 spec:
   hosts:
     - "*.staging.nsl.ooo"
+  secret:
+    name: apisix-default-cert
+    namespace: guardian
+---
+apiVersion: apisix.apache.org/v2
+kind: ApisixTls
+metadata:
+  name: apisix-prod-tls
+  namespace: guardian
+spec:
+  hosts:
     - "*.prod.nsl.ooo"
   secret:
     name: apisix-default-cert
