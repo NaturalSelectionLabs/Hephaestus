@@ -5,7 +5,7 @@ keycloak:
 
 podAnnotations:
   prometheus.io/path: /metrics
-  prometheus.io/port: http
+  prometheus.io/port: http-management
   prometheus.io/scrape: 'true'
 
 extraEnv:   |
