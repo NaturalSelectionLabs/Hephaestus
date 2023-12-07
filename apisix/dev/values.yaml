@@ -11,6 +11,8 @@ apisix:
     prometheus.io/path: /apisix/prometheus/metrics
     prometheus.io/port: '9091'
     prometheus.io/scrape: 'true'
+log:
+  accessLogFormatEscape: json
 pluginAttrs:
   prometheus:
     export_addr:
