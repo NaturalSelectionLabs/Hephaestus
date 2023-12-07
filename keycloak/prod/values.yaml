@@ -3,7 +3,12 @@ keycloak:
   persistence:
     deployPostgres: false
 
-extraEnv: |
+podAnnotations:
+  prometheus.io/path: /metrics
+  prometheus.io/port: http
+  prometheus.io/scrape: 'true'
+
+extraEnv:   |
   - name: JAVA_OPTS
     value: >-
       -XX:+UseContainerSupport
@@ -17,6 +22,8 @@ extraEnv: |
     value: edge
   - name: KC_HOSTNAME_URL
     value: https://account.nsl.xyz
+  - name: KC_METRICS_ENABLED
+    value: "true"
   - name: DB_VENDOR
     value: postgres
   - name: DB_ADDR
