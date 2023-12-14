@@ -1,0 +1,25 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: cockroachdb
+  namespace: default
+spec:
+  entryPoints:
+  - web
+  - websecure
+  routes:
+  - kind: Rule
+    match: Host(`crdb.dev.nsl.xyz`)
+    services:
+    - name: cockroachdb-lb-internal
+      port: 443
+      scheme: https
+      serversTransport: cockroachdb
+---
+apiVersion: traefik.io/v1alpha1
+kind: ServersTransport
+metadata:
+  name: cockroachdb
+  namespace: default
+spec:
+  insecureSkipVerify: true
