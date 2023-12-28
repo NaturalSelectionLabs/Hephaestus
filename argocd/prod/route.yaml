@@ -5,10 +5,11 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
+    - web
     - websecure
   routes:
     - kind: Rule
-      match: Host(`argocd.nsl.xyz`) || Host(`argocd.prod.nsl.xyz`)
+      match: Host(`argocd.naturalselectionlabs.com`)
       services:
         - name: argo-cd-argocd-server
           port: 80

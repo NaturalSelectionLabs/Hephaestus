@@ -44,7 +44,7 @@ resource "argocd_application_set" "traefik" {
 
         destination {
           server    = "{{url}}"
-          namespace = "default"
+          namespace = "guardian"
         }
       }
     }
@@ -96,7 +96,7 @@ resource "argocd_application_set" "traefik_mesh" {
 
         destination {
           server    = "{{url}}"
-          namespace = "default"
+          namespace = "guardian"
         }
       }
     }

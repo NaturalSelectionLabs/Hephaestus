@@ -7,8 +7,8 @@ redis:
   # -- Enable redis
   enabled: false
 externalRedis:
-  host: r-7gonnosmuqli7wp7bv.redis.rds.aliyuncs.com
-  existingSecret: argocd-redis
+  host: 10.1.40.3
+#  existingSecret: argocd-redis
 controller:
   replicas: 1
 server:
@@ -18,7 +18,7 @@ server:
       memory: 256Mi
     limits:
       cpu: 0.5
-      memory: 256Mi
+      memory: 512Mi
   autoscaling:
     enabled: true
     minReplicas: 2
