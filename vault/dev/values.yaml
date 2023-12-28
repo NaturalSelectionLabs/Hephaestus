@@ -34,22 +34,20 @@ injector:
       cpu: 350m
 
 server:
-  # If true, or "-" with global.enabled true, Vault server will be installed.
-  # See vault.mode in _helpers.tpl for implementation details.
-  enabled: "-"
+  extraEnvironmentVars:
+    GOOGLE_REGION: us-central1
+    GOOGLE_PROJECT: naturalselectionlabs
+    GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-creds/credentials.json
+  volumes:
+    - name: userconfig-kms-creds
+      secret:
+        defaultMode: 420
+        secretName: vault-kms-creds
 
-  # Resource requests, limits, etc. for the server cluster placement. This
-  # should map directly to the value of the resources field for a PodSpec.
-  # By default no direct resource request is made.
-
-  # Configure the logging verbosity for the Vault server.
-  # Supported log levels include: trace, debug, info, warn, error
-  logLevel: "info"
-
-  # Configure the logging format for the Vault server.
-  # Supported log formats include: standard, json
-  logFormat: "standard"
-
+  volumeMounts:
+    - mountPath: /vault/userconfig/kms-creds
+      name: userconfig-kms-creds
+      readOnly: true
   resources:
     requests:
       memory: 256Mi
@@ -117,7 +115,7 @@ server:
     mountPath: "/vault/data"
     # Name of the storage class to use.  If null it will use the
     # configured default Storage Class.
-    storageClass: alicloud-disk-essd
+    storageClass: standard
     # Access Mode of the storage device being used for the PVC
     accessMode: ReadWriteOnce
     # Annotations to apply to the PVC
@@ -149,13 +147,34 @@ server:
   # different HA backend.
   ha:
     enabled: false
+  standalone:
+    config: |
+      ui = true
+
+      listener "tcp" {
+        tls_disable = 1
+        address = "[::]:8200"
+        cluster_address = "[::]:8201"
+      }
+      storage "file" {
+        path = "/vault/data"
+      }
+
+      seal "gcpckms" {
+         project     = "naturalselectionlabs"
+         region      = "us-central-1"
+         key_ring    = "vault-dev"
+         crypto_key  = "vault-dev"
+      }
+
 
   service:
     type: LoadBalancer
     annotations:
-      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: "vault-dev"
-      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
-      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
+      networking.gke.io/load-balancer-type: "Internal"
+#      cloud.google.com/l4-rbs: "enabled"
+      networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
 
 # Vault UI
 ui:

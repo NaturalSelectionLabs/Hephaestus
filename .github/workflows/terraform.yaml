@@ -8,10 +8,10 @@ on:
       - opened
 
 env:
+  TF_VAR_ARGOCD_SERVER: "argocd.naturalselectionlabs.com:443"
   TF_VAR_ARGOCD_PASSWORD: ${{ secrets.TF_VAR_ARGOCD_PASSWORD }}
   TF_VAR_PAT: ${{ secrets.TF_VAR_PAT }}
-  ALICLOUD_ACCESS_KEY: ${{ secrets.ACCESS_KEY_ID }}
-  ALICLOUD_SECRET_KEY: ${{ secrets.ACCESS_KEY_SECRET }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
 
 jobs:
   terraform:

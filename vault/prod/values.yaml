@@ -33,31 +33,30 @@ injector:
       memory: 512Mi
       cpu: 350m
 
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
-
-  nodeSelector:
-    rss3.io/usage: internal
+#  tolerations:
+#    - key: "rss3.io/usage"
+#      operator: "Equal"
+#      value: "internal"
+#      effect: "NoSchedule"
+#
+#  nodeSelector:
+#    rss3.io/usage: internal
 
 server:
-  # If true, or "-" with global.enabled true, Vault server will be installed.
-  # See vault.mode in _helpers.tpl for implementation details.
-  enabled: "-"
+  extraEnvironmentVars:
+    GOOGLE_REGION: us-central1
+    GOOGLE_PROJECT: naturalselectionlabs
+    GOOGLE_APPLICATION_CREDENTIALS: /vault/userconfig/kms-creds/credentials.json
+  volumes:
+    - name: userconfig-kms-creds
+      secret:
+        defaultMode: 420
+        secretName: vault-kms-creds
 
-  # Resource requests, limits, etc. for the server cluster placement. This
-  # should map directly to the value of the resources field for a PodSpec.
-  # By default no direct resource request is made.
-
-  # Configure the logging verbosity for the Vault server.
-  # Supported log levels include: trace, debug, info, warn, error
-  logLevel: "info"
-
-  # Configure the logging format for the Vault server.
-  # Supported log formats include: standard, json
-  logFormat: "standard"
+  volumeMounts:
+    - mountPath: /vault/userconfig/kms-creds
+      name: userconfig-kms-creds
+      readOnly: true
 
   resources:
     requests:
@@ -118,14 +117,14 @@ server:
   # Used to set the sleep time during the preStop step
   preStopSleepSeconds: 5
 
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
-
-  nodeSelector:
-    rss3.io/usage: internal
+#  tolerations:
+#    - key: "rss3.io/usage"
+#      operator: "Equal"
+#      value: "internal"
+#      effect: "NoSchedule"
+#
+#  nodeSelector:
+#    rss3.io/usage: internal
 
   dataStorage:
     enabled: true
@@ -135,7 +134,7 @@ server:
     mountPath: "/vault/data"
     # Name of the storage class to use.  If null it will use the
     # configured default Storage Class.
-    storageClass: alicloud-disk-essd
+    storageClass: standard
     # Access Mode of the storage device being used for the PVC
     accessMode: ReadWriteOnce
     # Annotations to apply to the PVC
@@ -166,7 +165,39 @@ server:
   # Helm project by default.  It is possible to manually configure Vault to use a
   # different HA backend.
   ha:
-    enabled: false
+    enabled: true
+    replicas: 3
+
+    raft:
+      enabled: true
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        storage "raft" {
+          path = "/vault/data"
+          retry_join {
+            leader_api_addr = "http://vault-0.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-1.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-2.vault-internal:8200"
+          }
+        }
+        
+        seal "gcpckms" {
+           project     = "naturalselectionlabs"
+           region      = "us-central-1"
+           key_ring    = "vault-prod"
+           crypto_key  = "vault-prod"
+        }
 
 # Vault UI
 ui:

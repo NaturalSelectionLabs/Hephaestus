@@ -2,9 +2,10 @@ service:
   enabled: true
   type: LoadBalancer
   annotations:
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: internet
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-instance-charge-type: PayBySpec
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: slb.s2.small
+#    networking.gke.io/load-balancer-type: "Internal"
+    cloud.google.com/l4-rbs: "enabled"
+    networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
 deployment:
   kind: Deployment
   replicas: 5
