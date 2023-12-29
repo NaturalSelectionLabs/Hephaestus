@@ -5,8 +5,7 @@ resources: []
 
 helmCharts:
   - name: cockroachdb
-    releaseName: crdb
+    releaseName: cockroachdb
     repo: https://charts.cockroachdb.com/
     valuesFile: values.yaml
     version: 11.x.x
-    includeCRDs: true
