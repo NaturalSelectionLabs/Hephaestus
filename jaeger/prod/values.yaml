@@ -14,7 +14,7 @@ storage:
 cassandra:
   persistence:
     enabled: true
-    storageClass: "alicloud-disk-essd"
+    storageClass: "standard"
     size: 400Gi
   nodeSelector:
     rss3.io/usage: internal

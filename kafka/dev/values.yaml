@@ -1,5 +1,5 @@
 global:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "standard"
 
 heapOpts: -Xmx1024m -Xms1024m
 deleteTopicEnable: false
