@@ -1,0 +1,22 @@
+tls:
+  enabled: true
+  certs:
+    certManager: true
+
+storage:
+  persistentVolume:
+    storageClass: premium-rwo
+
+statefulset:
+  resources:
+    requests:
+      # This is intentionally low to make it work on local k3d clusters.
+      cpu: 500m
+      memory: 2Gi
+    limits:
+      cpu: 2
+      memory: 8Gi
+  podAntiAffinity:
+    # The topologyKey to be used.
+    # Can be used to spread across different nodes, AZs, regions etc.
+    topologyKey: kubernetes.io/hostname

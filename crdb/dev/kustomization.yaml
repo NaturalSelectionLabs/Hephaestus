@@ -1,6 +1,12 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - https://raw.githubusercontent.com/cockroachdb/cockroach-operator/master/install/crds.yaml
-  - https://raw.githubusercontent.com/cockroachdb/cockroach-operator/master/install/operator.yaml
+resources: []
+
+helmCharts:
+  - name: cockroachdb
+    releaseName: crdb
+    repo: https://charts.cockroachdb.com/
+    valuesFile: values.yaml
+    version: 11.x.x
+    includeCRDs: true
