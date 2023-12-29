@@ -1,23 +1,33 @@
 resource "argocd_cluster" "dev" {
   server = "https://${data.google_container_cluster.us_central1_dev.endpoint}"
-  name = "dev"
+  name   = "dev"
 
   config {
-    bearer_token = data.google_client_config.default.access_token
+    exec_provider_config {
+      command     = "argocd-k8s-auth"
+      args        = ["gcp"]
+      api_version = "client.authentication.k8s.io/v1beta1"
+    }
     tls_client_config {
-      ca_data = base64decode(data.google_container_cluster.us_central1_dev.master_auth[0].cluster_ca_certificate)
+      insecure = false
+      ca_data  = base64decode(data.google_container_cluster.us_central1_dev.master_auth[0].cluster_ca_certificate)
     }
   }
 }
 
 resource "argocd_cluster" "prod" {
   server = "https://${data.google_container_cluster.us_central1_prod.endpoint}"
-  name = "prod"
+  name   = "prod"
 
   config {
-    bearer_token = data.google_client_config.default.access_token
+    exec_provider_config {
+      command     = "argocd-k8s-auth"
+      args        = ["gcp"]
+      api_version = "client.authentication.k8s.io/v1beta1"
+    }
     tls_client_config {
-      ca_data = base64decode(data.google_container_cluster.us_central1_prod.master_auth[0].cluster_ca_certificate)
+      insecure = false
+      ca_data  = base64decode(data.google_container_cluster.us_central1_prod.master_auth[0].cluster_ca_certificate)
     }
   }
 }

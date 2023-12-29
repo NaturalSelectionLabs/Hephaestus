@@ -1,12 +1,12 @@
 data "google_client_config" "default" {}
 
 data "google_container_cluster" "us_central1_dev" {
-  name = "us-central1-dev"
+  name     = "us-central1-dev"
   location = "us-central1"
 }
 
 data "google_container_cluster" "us_central1_prod" {
-  name = "us-central1-prod"
+  name     = "us-central1-prod"
   location = "us-central1"
 }
 

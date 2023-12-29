@@ -11,6 +11,9 @@ externalRedis:
 #  existingSecret: argocd-redis
 controller:
   replicas: 1
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
 server:
   resources:
     requests:
