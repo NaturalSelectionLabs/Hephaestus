@@ -31,7 +31,7 @@ kraft:
   enabled: false
 
 persistence:
-  storageClass: "alicloud-disk-ssd"
+  storageClass: "standard"
   size: 100Gi
 
 rbac:
@@ -46,7 +46,7 @@ zookeeper:
   replicaCount: 1
   persistence:
     enabled: true
-    storageClass: "alicloud-disk-ssd"
+    storageClass: "standard"
     accessModes:
       - ReadWriteOnce
     size: 100Gi
