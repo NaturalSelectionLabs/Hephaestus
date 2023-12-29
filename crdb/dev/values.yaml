@@ -15,7 +15,7 @@ init:
   provisioning:
     enabled: true
     users:
-     - name: <path:kv/data/guardian/cockroachdb#ADMIN_USERNAME>
+     - name: roach
        password: <path:kv/data/guardian/cockroachdb#ADMIN_PASSWORD>
        # https://www.cockroachlabs.com/docs/stable/create-user.html#parameters
        options: [admin]
