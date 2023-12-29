@@ -1,5 +1,5 @@
 global:
-  storageClass: alicloud-disk-essd
+  storageClass: standard
 shards: 1
 replicaCount: 1
 persistence:

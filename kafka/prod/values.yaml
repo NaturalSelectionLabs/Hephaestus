@@ -1,5 +1,5 @@
 global:
-  storageClass: "alicloud-disk-essd"
+  storageClass: "standard"
 
 heapOpts: -Xmx1024m -Xms1024m
 numPartitions: 3
@@ -50,7 +50,7 @@ externalAccess:
     extraPorts: []
 
 persistence:
-  storageClass: "alicloud-disk-essd"
+  storageClass: "standard"
   size: 100Gi # actually it's 400GiB but we can upgrade sts's pvc config
 
 rbac:
@@ -68,7 +68,7 @@ zookeeper:
   replicaCount: 3
   persistence:
     enabled: true
-    storageClass: "alicloud-disk-essd"
+    storageClass: "standard"
     accessModes:
       - ReadWriteOnce
     size: 100Gi

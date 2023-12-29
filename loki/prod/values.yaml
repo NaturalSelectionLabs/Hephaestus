@@ -12,7 +12,7 @@ loki:
     accessModes:
     - ReadWriteOnce
     size: 200Gi
-    storageClassName: "alicloud-disk-essd"
+    storageClassName: "standard"
   config:
     compactor:
       retention_enabled: true
