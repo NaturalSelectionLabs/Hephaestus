@@ -25,6 +25,9 @@ server:
   autoscaling:
     enabled: true
     minReplicas: 2
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
 repoServer:
   resources:
     requests:
@@ -61,7 +64,9 @@ repoServer:
       volumeMounts:
         - mountPath: /custom-tools
           name: custom-tools
-
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
   extraContainers:
     # argocd-vault-plugin with plain YAML
     - name: avp-kustomize
@@ -97,7 +102,9 @@ repoServer:
       emptyDir: {}
 applicationSet:
   replicas: 2
-
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
 configs:
   # General Argo CD configuration
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml

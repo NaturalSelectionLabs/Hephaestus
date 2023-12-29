@@ -9,6 +9,17 @@ storage:
   persistentVolume:
     storageClass: premium-rwo
 
+conf:
+  cluster-name: us-central1-dev
+init:
+  provisioning:
+    enabled: true
+    users:
+     - name: <path:kv/data/guardian/cockroachdb#ADMIN_USERNAME>
+       password: <path:kv/data/guardian/cockroachdb#ADMIN_PASSWORD>
+       # https://www.cockroachlabs.com/docs/stable/create-user.html#parameters
+       options: [admin]
+
 statefulset:
   resources:
     requests:
