@@ -466,7 +466,7 @@ resource "argocd_application_set" "crdb" {
 
         destination {
           server    = "{{url}}"
-          namespace = "default"
+          namespace = "guardian"
         }
 
       }
