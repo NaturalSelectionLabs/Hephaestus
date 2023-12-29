@@ -13,6 +13,10 @@ resource "argocd_cluster" "dev" {
       ca_data  = base64decode(data.google_container_cluster.us_central1_dev.master_auth[0].cluster_ca_certificate)
     }
   }
+
+  lifecycle {
+    ignore_changes = ["config"]
+  }
 }
 
 resource "argocd_cluster" "prod" {
@@ -30,4 +34,12 @@ resource "argocd_cluster" "prod" {
       ca_data  = base64decode(data.google_container_cluster.us_central1_prod.master_auth[0].cluster_ca_certificate)
     }
   }
+
+  lifecycle {
+    ignore_changes = ["config"]
+  }
+}
+
+output "ca" {
+  value = data.google_container_cluster.us_central1_prod.master_auth[0].cluster_ca_certificate
 }

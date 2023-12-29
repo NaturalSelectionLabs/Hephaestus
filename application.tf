@@ -76,11 +76,11 @@ resource "argocd_application" "jaeger" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }

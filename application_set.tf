@@ -32,11 +32,11 @@ resource "argocd_application_set" "traefik" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -78,17 +78,17 @@ resource "argocd_application_set" "traefik_mesh" {
       spec {
         project = argocd_project.guardian.metadata[0].name
         source {
-          repo_url = var.repo_url
+          repo_url        = var.repo_url
           target_revision = "HEAD"
-          path = "traefik-mesh/{{cluster}}"
+          path            = "traefik-mesh/{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -140,11 +140,11 @@ resource "argocd_application_set" "victoria_metrics" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -152,7 +152,7 @@ resource "argocd_application_set" "victoria_metrics" {
 
         ignore_difference {
           group = "*"
-          kind = "Service"
+          kind  = "Service"
           jq_path_expressions = [
             ".spec.ports[].nodePort"
           ]
@@ -207,11 +207,11 @@ resource "argocd_application_set" "actions_runner_controller" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -275,11 +275,11 @@ resource "argocd_application_set" "apisix" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -292,7 +292,7 @@ resource "argocd_application_set" "apisix" {
 
         ignore_difference {
           group = "*"
-          kind = "CustomResourceDefinition"
+          kind  = "CustomResourceDefinition"
           jq_path_expressions = [
             ".spec.versions[].additionalPrinterColumns[].priority"
           ]
@@ -451,6 +451,17 @@ resource "argocd_application_set" "crdb" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "crdb/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name  = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name  = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
         }
 
         destination {
@@ -500,11 +511,11 @@ resource "argocd_application_set" "kafka" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
@@ -512,7 +523,7 @@ resource "argocd_application_set" "kafka" {
 
         ignore_difference {
           group = "*"
-          kind = "Service"
+          kind  = "Service"
           jq_path_expressions = [
             ".spec.ports[].nodePort"
           ]
@@ -564,11 +575,11 @@ resource "argocd_application_set" "loki" {
           plugin {
             name = "avp-kustomize"
             env {
-              name = "APP_REPO"
+              name  = "APP_REPO"
               value = "NaturalSelectionLabs/Hephaestus"
             }
             env {
-              name = "AVP_SECRET"
+              name  = "AVP_SECRET"
               value = "guardian:avp-{{cluster}}"
             }
           }
