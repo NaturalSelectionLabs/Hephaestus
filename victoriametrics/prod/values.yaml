@@ -123,8 +123,10 @@ vmagent:
       tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
-      cluster: prod
-      region: us-east-1
+      cluster: dev
+      region: us-central1
+      provider: gcp
+      zone: us-central1-a
     extraArgs:
       promscrape.streamParse: "true"
     additionalScrapeConfigs:

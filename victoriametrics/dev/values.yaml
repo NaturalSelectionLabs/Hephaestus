@@ -74,7 +74,7 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
-      storageClassName: alicloud-disk-ssd
+      storageClassName: standard
       accessModes:
         - ReadWriteOnce
       resources:
@@ -104,7 +104,9 @@ vmagent:
     scrapeInterval: 25s
     externalLabels:
       cluster: dev
-      region: us-east-1
+      region: us-central1
+      provider: gcp
+      zone: us-central1-a
     extraArgs:
       promscrape.streamParse: "true"
     additionalScrapeConfigs:
