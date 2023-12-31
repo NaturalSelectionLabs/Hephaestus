@@ -27,8 +27,8 @@ grafana.ini:
     serve_from_sub_path: false
   database:
     type: postgres
-    host: pgm-7go76ijtdor158l6195200.pg.rds.aliyuncs.com
-    user: grafana
+    host: 10.147.0.8
+    user: postgres
     name: grafana
   auth.generic_oauth:
     enabled: true
