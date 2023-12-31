@@ -27,7 +27,7 @@ extraEnv:   |
   - name: DB_VENDOR
     value: postgres
   - name: DB_ADDR
-    value: pgm-7go76ijtdor158l6195200.pg.rds.aliyuncs.com
+    value: "10.147.0.8"
   - name: DB_PORT
     value: "5432"
   - name: DB_DATABASE
