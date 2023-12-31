@@ -8,12 +8,7 @@ spec:
     - web
     - websecure
   routes:
-    - match: Host(`vault.dev.nsl.xyz`)
-      kind: Rule
-      services:
-        - name: vault-ui
-          port: 8200
-    - match: Host(`vault.rss3.dev`)
+    - match: Host(`vault.dev.naturalselectionlabs.com`)
       kind: Rule
       services:
         - name: vault-ui
