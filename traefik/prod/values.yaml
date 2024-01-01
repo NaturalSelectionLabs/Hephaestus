@@ -12,12 +12,10 @@ deployment:
 ingressRoute:
   dashboard:
     enabled: true
-    matchRule: Host(`traefik.prod.nsl.xyz`)
+    matchRule: Host(`traefik.prod.naturalselectionlabs.com`)
     entryPoints: ["websecure"]
     middlewares:
       - name: traefik-forward-auth
-    tls:
-      secretName: traefik-cert
 logs:
   access:
     enabled: true
