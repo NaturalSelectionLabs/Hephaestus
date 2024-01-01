@@ -33,16 +33,16 @@ spec:
               value: "true"
             - name: PROVIDERS_OIDC_ISSUER_URL
               value: https://account.nsl.xyz/auth/realms/google
-            - name: PROVIDERS_GOOGLE_CLIENT_ID
+            - name: PROVIDERS_OIDC_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: traefik-forward-auth-secrets
-                  key: traefik-forward-auth-google-client-id
-            - name: PROVIDERS_GOOGLE_CLIENT_SECRET
+                  key: traefik-forward-auth-oidc-client-id
+            - name: PROVIDERS_OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: traefik-forward-auth-secrets
-                  key: traefik-forward-auth-google-client-secret
+                  key: traefik-forward-auth-oidc-client-secret
             - name: SECRET
               valueFrom:
                 secretKeyRef:
