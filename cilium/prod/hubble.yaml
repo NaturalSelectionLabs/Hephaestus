@@ -2,7 +2,6 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: hubble-ui
-  namespace: hubble-ui
 ---
 kind: ClusterRole
 apiVersion: rbac.authorization.k8s.io/v1
@@ -62,13 +61,12 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: hubble-ui
-    namespace: hubble-ui
+    namespace: kube-system
 ---
 apiVersion: v1
 kind: ConfigMap
 metadata:
   name: hubble-ui-nginx
-  namespace: hubble-ui
 data:
   nginx.conf: |
     server {
@@ -109,11 +107,10 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: hubble-ui
-  namespace: hubble-ui
-labels:
-  k8s-app: hubble-ui
-  app.kubernetes.io/name: hubble-ui
-  app.kubernetes.io/part-of: cilium
+  labels:
+    k8s-app: hubble-ui
+    app.kubernetes.io/name: hubble-ui
+    app.kubernetes.io/part-of: cilium
 spec:
   replicas: 1
   selector:
@@ -212,7 +209,6 @@ kind: Service
 apiVersion: v1
 metadata:
   name: hubble-ui
-  namespace: hubble-ui
   labels:
     k8s-app: hubble-ui
     app.kubernetes.io/name: hubble-ui
