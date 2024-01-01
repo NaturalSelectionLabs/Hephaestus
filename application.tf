@@ -55,7 +55,7 @@ resource "argocd_application" "cilium" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "cilium"
+      namespace = "kube-system"
     }
   }
 }
