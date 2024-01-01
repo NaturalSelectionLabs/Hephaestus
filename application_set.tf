@@ -50,58 +50,58 @@ resource "argocd_application_set" "traefik" {
     }
   }
 }
-
-resource "argocd_application_set" "traefik_mesh" {
-  metadata {
-    name = "traefik-mesh"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "traefik-mesh-{{cluster}}"
-      }
-
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "traefik-mesh/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
-            }
-          }
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "guardian"
-        }
-      }
-    }
-  }
-}
+#
+#resource "argocd_application_set" "traefik_mesh" {
+#  metadata {
+#    name = "traefik-mesh"
+#  }
+#  spec {
+#    generator {
+#      list {
+#        elements = [
+#          {
+#            cluster = argocd_cluster.dev.name
+#            url     = argocd_cluster.dev.server
+#          },
+#          {
+#            cluster = argocd_cluster.prod.name
+#            url     = argocd_cluster.prod.server
+#          }
+#        ]
+#      }
+#    }
+#    template {
+#      metadata {
+#        name = "traefik-mesh-{{cluster}}"
+#      }
+#
+#      spec {
+#        project = argocd_project.guardian.metadata[0].name
+#        source {
+#          repo_url        = var.repo_url
+#          target_revision = "HEAD"
+#          path            = "traefik-mesh/{{cluster}}"
+#          plugin {
+#            name = "avp-kustomize"
+#            env {
+#              name  = "APP_REPO"
+#              value = "NaturalSelectionLabs/Hephaestus"
+#            }
+#            env {
+#              name  = "AVP_SECRET"
+#              value = "guardian:avp-{{cluster}}"
+#            }
+#          }
+#        }
+#
+#        destination {
+#          server    = "{{url}}"
+#          namespace = "guardian"
+#        }
+#      }
+#    }
+#  }
+#}
 
 resource "argocd_application_set" "victoria_metrics" {
   metadata {
