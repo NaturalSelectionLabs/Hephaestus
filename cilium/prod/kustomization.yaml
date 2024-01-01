@@ -3,5 +3,6 @@ kind: Kustomization
 
 resources:
   - hubble.yaml
+  - route.yaml
 
 namespace: kube-system
