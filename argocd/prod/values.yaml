@@ -38,8 +38,8 @@ repoServer:
       memory: 1Gi
   autoscaling:
     enabled: true
-    minReplicas: 3
-    maxReplicas: 7
+    minReplicas: 5
+    maxReplicas: 10
   rbac:
     - verbs:
         - get
