@@ -36,7 +36,7 @@ loki:
       retention_period: 168h
 
 promtail:
-  enabled: false
+  enabled: true
 
 fluent-bit:
   enabled: false
@@ -47,112 +47,112 @@ grafana:
 prometheus:
   enabled: false
 
-filebeat:
-  enabled: true
-  tolerations:
-    - operator: "Exists"
-  filebeatConfig:
-    filebeat.yml: |
-      logging.level: warning
-      filebeat.inputs:
-      - type: container
-        format: cri
-        tail_files: true
-        paths:
-          - /var/log/containers/*.log
-        processors:
-        - add_kubernetes_metadata:
-            when:
-              not:
-                regexp:
-                  message: "^\\[DATABEAT\\].*"
-            host: ${NODE_NAME}
-            matchers:
-            - logs_path:
-                logs_path: "/var/log/containers/"
-        - add_tags:
-            when:
-              regexp:
-                message: "^\\[DATABEAT\\].*"
-            tags: [databeat]
-      output.logstash:
-        hosts: ["logstash-loki.guardian:5044"]
-  resources:
-    requests:
-      cpu: 100m
-      memory: 300Mi
-    limits:
-      cpu: 2000m
-      memory: 2000Mi
-
-logstash:
-  enabled: true
-  replicas: 3
-  fullnameOverride: logstash-loki
-  nodeSelector:
-    rss3.io/usage: internal
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
-  image: grafana/logstash-output-loki
-  imageTag: "2.6.1-amd64"
-  logstashConfig:
-    logstash.yml: |
-      http.host: "0.0.0.0"
-  logstashPipeline:
-    logstash.conf: |
-      input {
-        beats {
-          port => 5044
-        }
-      }
-      filter {
-        if [kubernetes] {
-          mutate {
-            add_field => {
-              "container_name" => "%{[kubernetes][container][name]}"
-              "namespace" => "%{[kubernetes][namespace]}"
-              "pod" => "%{[kubernetes][pod][name]}"
-            }
-            replace => { "host" => "%{[kubernetes][node][name]}"}
-          }
-        }
-
-        if "databeat" in [tags] {
-          dissect {
-            mapping => {
-              "message" => "[DATABEAT]%{msg}"
-            }
-          }
-          json {
-            source => "msg"
-          }
-          mutate {
-            remove_field => ["msg", "message"]
-          }
-        }
-      }
-      output {
-        if ("databeat" in [tags]) {
-          elasticsearch {
-            hosts => "elasticsearch-es-internal-http.elastic-system:9200"
-            index => "%{[index]}-%{+YYYY.MM.dd}"
-            user => "elastic"
-            password => "<path:kv/data/guardian/loki#ELASTIC_PASSWORD>"
-          }
-        } else {
-          loki {
-            url => "http://loki:3100/loki/api/v1/push"
-          }
-        }
-        # stdout { codec => rubydebug }
-      }
-  resources:
-    limits:
-      cpu: 4000m
-      memory: 6000Mi
-    requests:
-      cpu: 1200m
-      memory: 2000Mi
+#filebeat:
+#  enabled: true
+#  tolerations:
+#    - operator: "Exists"
+#  filebeatConfig:
+#    filebeat.yml: |
+#      logging.level: warning
+#      filebeat.inputs:
+#      - type: container
+#        format: cri
+#        tail_files: true
+#        paths:
+#          - /var/log/containers/*.log
+#        processors:
+#        - add_kubernetes_metadata:
+#            when:
+#              not:
+#                regexp:
+#                  message: "^\\[DATABEAT\\].*"
+#            host: ${NODE_NAME}
+#            matchers:
+#            - logs_path:
+#                logs_path: "/var/log/containers/"
+#        - add_tags:
+#            when:
+#              regexp:
+#                message: "^\\[DATABEAT\\].*"
+#            tags: [databeat]
+#      output.logstash:
+#        hosts: ["logstash-loki.guardian:5044"]
+#  resources:
+#    requests:
+#      cpu: 100m
+#      memory: 300Mi
+#    limits:
+#      cpu: 2000m
+#      memory: 2000Mi
+#
+#logstash:
+#  enabled: true
+#  replicas: 3
+#  fullnameOverride: logstash-loki
+#  nodeSelector:
+#    rss3.io/usage: internal
+#  tolerations:
+#    - key: "rss3.io/usage"
+#      operator: "Equal"
+#      value: "internal"
+#      effect: "NoSchedule"
+#  image: grafana/logstash-output-loki
+#  imageTag: "2.6.1-amd64"
+#  logstashConfig:
+#    logstash.yml: |
+#      http.host: "0.0.0.0"
+#  logstashPipeline:
+#    logstash.conf: |
+#      input {
+#        beats {
+#          port => 5044
+#        }
+#      }
+#      filter {
+#        if [kubernetes] {
+#          mutate {
+#            add_field => {
+#              "container_name" => "%{[kubernetes][container][name]}"
+#              "namespace" => "%{[kubernetes][namespace]}"
+#              "pod" => "%{[kubernetes][pod][name]}"
+#            }
+#            replace => { "host" => "%{[kubernetes][node][name]}"}
+#          }
+#        }
+#
+#        if "databeat" in [tags] {
+#          dissect {
+#            mapping => {
+#              "message" => "[DATABEAT]%{msg}"
+#            }
+#          }
+#          json {
+#            source => "msg"
+#          }
+#          mutate {
+#            remove_field => ["msg", "message"]
+#          }
+#        }
+#      }
+#      output {
+#        if ("databeat" in [tags]) {
+#          elasticsearch {
+#            hosts => "elasticsearch-es-internal-http.elastic-system:9200"
+#            index => "%{[index]}-%{+YYYY.MM.dd}"
+#            user => "elastic"
+#            password => "<path:kv/data/guardian/loki#ELASTIC_PASSWORD>"
+#          }
+#        } else {
+#          loki {
+#            url => "http://loki:3100/loki/api/v1/push"
+#          }
+#        }
+#        # stdout { codec => rubydebug }
+#      }
+#  resources:
+#    limits:
+#      cpu: 4000m
+#      memory: 6000Mi
+#    requests:
+#      cpu: 1200m
+#      memory: 2000Mi
