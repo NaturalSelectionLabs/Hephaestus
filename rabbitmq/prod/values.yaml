@@ -15,7 +15,7 @@ auth:
   ## e.g:
   ## existingPasswordSecret: name-of-existing-secret
   ##
-  existingPasswordSecret: "rabbitmq"
+  existingPasswordSecret: "rabbitmq-password"
 
 clustering:
   enabled: true

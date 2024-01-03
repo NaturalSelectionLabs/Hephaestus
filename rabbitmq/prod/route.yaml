@@ -5,11 +5,10 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
-  - web
-  - websecure
+    - websecure
   routes:
-  - kind: Rule
-    match: Host(`mq.prod.nsl.xyz`) && PathPrefix(`/`)
-    services:
-    - name: rabbitmq
-      port: 15672
+    - kind: Rule
+      match: Host(`mq.prod.naturalselectionlabs.com`)
+      services:
+      - name: rabbitmq
+        port: 15672
