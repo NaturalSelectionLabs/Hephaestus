@@ -21,7 +21,7 @@ pluginAttrs:
 etcd:
   replicaCount: 1
   persistence:
-    storageClass: alicloud-disk-ssd
+    storageClass: standard
     size: 20Gi
   auth:
     token:

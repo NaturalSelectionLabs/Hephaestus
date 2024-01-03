@@ -117,7 +117,7 @@ configs:
   # General Argo CD configuration
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
   cm:
-    url: "https://argocd.nsl.xyz"
+    url: "https://argocd.naturalselectionlabs.com"
     dex.config: |
       connectors:
       # GitHub example
@@ -128,7 +128,7 @@ configs:
             issuer: https://account.nsl.xyz/auth/realms/google
             clientID: argocd
             clientSecret: $oidc.keycloak.clientSecret
-            redirectURI: https://argocd.nsl.xyz/dex/callback
+            redirectURI: https://argocd.naturalselectionlabs.com/dex/callback
             scopes:
               - openid
               - profile
