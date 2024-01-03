@@ -10,3 +10,4 @@ helmCharts:
     repo: https://actions-runner-controller.github.io/actions-runner-controller
     valuesFile: values.yaml
     version: 0.x.x
+    includeCRDs: true

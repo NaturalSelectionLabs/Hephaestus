@@ -13,3 +13,4 @@ helmCharts:
     repo: https://charts.apiseven.com
     valuesFile: values.yaml
     version: 1.7.x
+    includeCRDs: true
