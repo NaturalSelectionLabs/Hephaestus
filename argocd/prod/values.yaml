@@ -31,14 +31,15 @@ server:
 repoServer:
   resources:
     requests:
-      cpu: 0.1
-      memory: 512Mi
-    limits:
       cpu: 0.5
       memory: 512Mi
+    limits:
+      cpu: 1
+      memory: 1Gi
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 3
+    maxReplicas: 7
   rbac:
     - verbs:
         - get
@@ -75,6 +76,13 @@ repoServer:
       - --loglevel
       - debug
       image: quay.io/argoproj/argocd:v2.8.4
+      resources:
+        requests:
+          cpu: 0.1
+          memory: 128Mi
+        limits:
+          cpu: 0.2
+          memory: 256Mi
       env:
         - name: AVP_SECRET
           value: guardian:avp-prod
@@ -152,6 +160,7 @@ configs:
       - .spec.template.spec.initContainers[].resources
   params:
     server.insecure: true
+    reposerver.enable.git.submodule: false
 
   # ConfigMap for Config Management Plugins
   # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/config-management-plugins/

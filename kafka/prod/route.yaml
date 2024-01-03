@@ -5,11 +5,10 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
     - kind: Rule
-      match: Host(`kafka.prod.nsl.xyz`)
+      match: Host(`kafka.prod.naturalselectionlabs.com`)
       services:
         - name: kafka-console
           port: 8080

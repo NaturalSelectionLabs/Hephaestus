@@ -5,10 +5,9 @@ metadata:
   namespace: guardian
 spec:
   entryPoints:
-    - web
     - websecure
   routes:
-    - match: Host(`jaeger.prod.nsl.xyz`)
+    - match: Host(`jaeger.prod.naturalselectionlabs.com`)
       kind: Rule
       services:
         - name: jaeger-query
