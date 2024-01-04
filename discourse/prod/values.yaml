@@ -6,6 +6,7 @@ persistence:
   storageClass: "standard-rwm"
   accessModes:
     - ReadWriteMany
+host: forum.rss3.io
 auth:
   email: contact@rss3.io
   username: admin
