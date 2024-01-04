@@ -1,0 +1,17 @@
+postgresql:
+  enabled: false
+redis:
+  enabled: false
+externalDatabase:
+  host: 10.147.0.8
+  user: postgres
+  database: discourse
+  create: false
+  existingSecret: "discourse-database"
+  existingSecretPasswordKey: "password"
+externalRedis:
+  host: 10.147.1.11
+  port: 6379
+  password: ""
+  existingSecret: ""
+  existingSecretPasswordKey: "redis-password"
