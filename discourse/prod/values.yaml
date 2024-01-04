@@ -6,6 +6,10 @@ persistence:
   storageClass: "standard-rwm"
   accessModes:
     - ReadWriteMany
+auth:
+  email: contact@rss3.io
+  username: admin
+  existingSecret: ""
 externalDatabase:
   host: 10.147.0.8
   user: postgres
