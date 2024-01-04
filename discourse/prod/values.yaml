@@ -2,6 +2,10 @@ postgresql:
   enabled: false
 redis:
   enabled: false
+persistence:
+  storageClass: "standard-rwm"
+  accessModes:
+    - ReadWriteMany
 externalDatabase:
   host: 10.147.0.8
   user: postgres
