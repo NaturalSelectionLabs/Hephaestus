@@ -11,6 +11,14 @@ auth:
   email: contact@rss3.io
   username: admin
   existingSecret: "discourse"
+smtp:
+  enabled: true
+  host: "smtp.gmail.com"
+  port: "465"
+  user: "forum@rss3.io"
+  protocol: "ssl"
+  auth: "plain"
+  existingSecret: "discourse"
 externalDatabase:
   host: 10.147.0.8
   user: postgres
