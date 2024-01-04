@@ -11,3 +11,4 @@ helmCharts:
     repo: https://charts.bitnami.com/bitnami
     valuesFile: values.yaml
     version: 12.x.x
+    namespace: default
