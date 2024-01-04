@@ -9,17 +9,17 @@ persistence:
 auth:
   email: contact@rss3.io
   username: admin
-  existingSecret: ""
+  existingSecret: "discourse"
 externalDatabase:
   host: 10.147.0.8
   user: postgres
   database: discourse
   create: false
   existingSecret: "discourse"
-  existingSecretPasswordKey: "password"
+  existingSecretPasswordKey: "postgres-password"
+  existingSecretPostgresPasswordKey: "postgres-password"
 externalRedis:
   host: 10.147.1.11
   port: 6379
-  password: ""
   existingSecret: "discourse"
   existingSecretPasswordKey: "redis-password"
