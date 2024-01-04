@@ -7,11 +7,11 @@ externalDatabase:
   user: postgres
   database: discourse
   create: false
-  existingSecret: "discourse-database"
+  existingSecret: "discourse"
   existingSecretPasswordKey: "password"
 externalRedis:
   host: 10.147.1.11
   port: 6379
   password: ""
-  existingSecret: ""
+  existingSecret: "discourse"
   existingSecretPasswordKey: "redis-password"
