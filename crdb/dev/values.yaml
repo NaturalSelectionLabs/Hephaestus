@@ -8,7 +8,17 @@ tls:
 storage:
   persistentVolume:
     storageClass: premium-rwo
-
+service:
+  public:
+    type: LoadBalancer
+    # Additional labels to apply to this Service.
+    labels:
+      app.kubernetes.io/component: cockroachdb
+    # Additional annotations to apply to this Service.
+    annotations:
+      networking.gke.io/internal-load-balancer-allow-global-access: 'true'
+      networking.gke.io/internal-load-balancer-subnet: dev-loadbalancer
+      networking.gke.io/load-balancer-type: Internal
 conf:
   cluster-name: us-central1-dev
   locality: provider=gcp,country=us,region=us-central1,datacenter=us-central1a
