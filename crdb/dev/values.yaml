@@ -11,6 +11,7 @@ storage:
 
 conf:
   cluster-name: us-central1-dev
+  locality: provider=gcp,country=us,region=us-central1,datacenter=us-west-1a
 init:
   provisioning:
     enabled: true
