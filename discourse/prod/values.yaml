@@ -12,6 +12,10 @@ discourse:
     requests:
       cpu: 2
       memory: 4Gi
+  livenessProbe:
+    initialDelaySeconds: 60
+  readinessProbe:
+    initialDelaySeconds: 60
 replicaCount: 3
 postgresql:
   enabled: false
