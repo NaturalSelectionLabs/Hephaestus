@@ -1,3 +1,5 @@
+discourse:
+  skipInstall: true
 postgresql:
   enabled: false
 redis:
@@ -14,9 +16,9 @@ auth:
 smtp:
   enabled: true
   host: "smtp.gmail.com"
-  port: "465"
+  port: "587"
   user: "forum@rss3.io"
-  protocol: "ssl"
+  protocol: "tls"
   auth: "plain"
   existingSecret: "discourse"
 externalDatabase:
