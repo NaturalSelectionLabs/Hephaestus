@@ -47,6 +47,13 @@ collector:
       port: 14250
     http:
       port: 14268
+    otlp:
+      grpc:
+        name: otlp-grpc
+        port: 4317
+      http:
+        name: otlp-http
+        port: 4318
   resources:
     limits:
       cpu: 1200m
