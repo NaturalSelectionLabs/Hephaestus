@@ -1,6 +1,8 @@
 name: Terraform
 on:
   push:
+    paths:
+      - "*.tf"
     branches:
       - "*"
   pull_request:
