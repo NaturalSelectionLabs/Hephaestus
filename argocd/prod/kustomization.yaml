@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - route.yaml
   - github.com/argoproj-labs/argocd-image-updater/manifests/base?ref=master
+  - secret.yaml
 
 helmCharts:
   - name: argo-cd
