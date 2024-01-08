@@ -1,5 +1,12 @@
 discourse:
   skipInstall: true
+  resources:
+    limits:
+      cpu: 4
+      memory: 8Gi
+    requests:
+      cpu: 2
+      memory: 4Gi
 replicaCount: 3
 postgresql:
   enabled: false

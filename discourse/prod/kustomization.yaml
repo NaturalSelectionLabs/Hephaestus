@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
   - route.yaml
   - secret.yaml
+  - hpa.yaml
 
 helmCharts:
   - name: discourse
