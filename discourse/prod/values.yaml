@@ -10,7 +10,7 @@ persistence:
     - ReadWriteMany
 host: forum.rss3.io
 auth:
-  email: contact@rss3.io
+  email: forum@rss3.io
   username: admin
   existingSecret: "discourse"
 smtp:
