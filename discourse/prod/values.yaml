@@ -15,9 +15,9 @@ discourse:
       cpu: 2
       memory: 4Gi
   livenessProbe:
-    initialDelaySeconds: 60
+    initialDelaySeconds: 180
   readinessProbe:
-    initialDelaySeconds: 60
+    initialDelaySeconds: 180
 replicaCount: 3
 tolerations:
   - key: "kubernetes.io/arch"
