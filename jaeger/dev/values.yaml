@@ -1,0 +1,67 @@
+provisionDataStore:
+  cassandra: true
+
+storage:
+  type: cassandra
+  cassandra:
+    host: cassandra
+    port: 9042
+    user: user
+    password: password
+    usePassword: true
+    keyspace: jaeger_v1_test
+
+cassandra:
+  persistence:
+    enabled: true
+    storageClass: "standard"
+    size: 40Gi
+
+agent:
+  enabled: true
+  resources:
+    limits:
+      cpu: 500m
+      memory: 512Mi
+    requests:
+      cpu: 256m
+      memory: 128Mi
+
+collector:
+  enabled: true
+  replicaCount: 1
+  autoscaling:
+    enabled: false
+  service:
+    type: ClusterIP
+    grpc:
+      port: 14250
+    http:
+      port: 14268
+    otlp:
+      grpc:
+        name: otlp-grpc
+        port: 4317
+      http:
+        name: otlp-http
+        port: 4318
+  resources:
+    limits:
+      cpu: 1200m
+      memory: 1200Mi
+    requests:
+      cpu: 500m
+      memory: 1200Mi
+
+query:
+  enabled: true
+  agentSidecar:
+    enabled: false
+  replicaCount: 1
+  resources:
+    limits:
+      cpu: 600m
+      memory: 2048Mi
+    requests:
+       cpu: 256m
+       memory: 128Mi
