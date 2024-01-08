@@ -31,6 +31,7 @@ resource "argocd_project" "namespaced" {
     "network",
     "pregod",
     "tureco",
+    "diygod"
   ])
 
   metadata {

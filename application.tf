@@ -1,3 +1,29 @@
+resource "argocd_application" "argocd" {
+  metadata {
+    name      = "argocd"
+    namespace = "guardian"
+  }
+  spec {
+    project = argocd_project.guardian.metadata[0].name
+
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "argocd/prod"
+      kustomize {
+        common_annotations = {
+          "github.com/url" = "NaturalSelectionLabs/Hephaestus"
+        }
+      }
+    }
+
+    destination {
+      server    = argocd_cluster.prod.server
+      namespace = "guardian"
+    }
+  }
+}
+
 resource "argocd_application" "grafana" {
   metadata {
     name      = "grafana"
