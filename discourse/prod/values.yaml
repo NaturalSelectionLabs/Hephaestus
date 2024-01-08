@@ -1,5 +1,7 @@
 discourse:
-  skipInstall: true
+#  skipInstall: true
+  plugins:
+    - https://github.com/discourse/discourse-openid-connect
   extraEnvVars:
     - name: SKIP_POST_DEPLOYMENT_MIGRATIONS
       value: "true"
