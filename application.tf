@@ -13,11 +13,11 @@ resource "argocd_application" "argocd" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -44,11 +44,11 @@ resource "argocd_application" "grafana" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -75,11 +75,11 @@ resource "argocd_application" "cilium" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -107,11 +107,11 @@ resource "argocd_application" "keycloak" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -139,11 +139,11 @@ resource "argocd_application" "rabbitmq" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -170,11 +170,11 @@ resource "argocd_application" "discourse" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }
@@ -202,11 +202,11 @@ resource "argocd_application" "ipfs" {
       plugin {
         name = "avp-kustomize"
         env {
-          name = "APP_REPO"
+          name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
         env {
-          name = "AVP_SECRET"
+          name  = "AVP_SECRET"
           value = "guardian:avp-prod"
         }
       }

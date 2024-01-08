@@ -1,5 +1,7 @@
 global:
   storageClass: standard
+shards: 1
+replicaCount: 1
 persistence:
   size: 100Gi
 zookeeper:
