@@ -19,6 +19,13 @@ spec:
         prometheus.io/port: api
         prometheus.io/path: /debug/metrics/prometheus
     spec:
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            - topologyKey: kubernetes.io/hostname
+              labelSelector:
+                matchLabels:
+                  app: ipfs
       securityContext:
         fsGroup: 1000
         runAsUser: 1000
