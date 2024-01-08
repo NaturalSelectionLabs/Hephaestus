@@ -47,12 +47,12 @@ spec:
           resources: {}
           volumeMounts:
             - mountPath: /data/ipfs
-              name: ipfs-data
+              name: data
   volumeClaimTemplates:
     - apiVersion: v1
       kind: PersistentVolumeClaim
       metadata:
-        name: ipfs-data
+        name: data
       spec:
         accessModes:
           - ReadWriteOnce
