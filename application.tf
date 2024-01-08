@@ -10,9 +10,15 @@ resource "argocd_application" "argocd" {
       repo_url        = var.repo_url
       target_revision = "HEAD"
       path            = "argocd/prod"
-      kustomize {
-        common_annotations = {
-          "github.com/url" = "NaturalSelectionLabs/Hephaestus"
+      plugin {
+        name = "avp-kustomize"
+        env {
+          name = "APP_REPO"
+          value = "NaturalSelectionLabs/Hephaestus"
+        }
+        env {
+          name = "AVP_SECRET"
+          value = "guardian:avp-prod"
         }
       }
     }
