@@ -1,8 +1,8 @@
 discourse:
 #  skipInstall: true
-  plugins:
-    - https://github.com/discourse/discourse-openid-connect
-    - https://github.com/discourse/discourse-oauth2-basic
+#  plugins:
+#    - https://github.com/discourse/discourse-openid-connect
+#    - https://github.com/discourse/discourse-oauth2-basic
 #  args:
 #    - --skip-bundle-assets
   extraEnvVars:
