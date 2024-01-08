@@ -1,0 +1,62 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: ipfs
+  labels:
+    app: ipfs
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ipfs
+  serviceName: ipfs
+  template:
+    metadata:
+      labels:
+        app: ipfs
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: api
+        prometheus.io/path: /debug/metrics/prometheus
+    spec:
+      securityContext:
+        fsGroup: 1000
+        runAsUser: 1000
+      containers:
+        - name: ipfs
+          image: ipfs/kubo:v0.25.0
+          livenessProbe:
+            httpGet:
+              path: /debug/metrics/prometheus
+              port: api
+            initialDelaySeconds: 15
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /debug/metrics/prometheus
+              port: api
+            initialDelaySeconds: 15
+            periodSeconds: 3
+          ports:
+            - containerPort: 5001
+              name: api
+            - containerPort: 8080
+              name: gateway
+            - containerPort: 4001
+              name: swarm
+          resources: {}
+          volumeMounts:
+            - mountPath: /data/ipfs
+              name: ipfs-data
+  volumeClaimTemplates:
+    - apiVersion: v1
+      kind: PersistentVolumeClaim
+      metadata:
+        name: ipfs-data
+      spec:
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 200Gi
+        storageClassName: standard
