@@ -2,7 +2,7 @@ apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
   name: dev-runner
-  namespace: default
+  namespace: guardian
 spec:
   replicas: 2
   template:

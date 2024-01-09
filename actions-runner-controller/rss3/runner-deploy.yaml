@@ -1,16 +1,19 @@
 apiVersion: actions.summerwind.dev/v1alpha1
 kind: RunnerDeployment
 metadata:
-  name: prod-runner
+  name: rss3-runner
   namespace: guardian
 spec:
-  replicas: 2
+  replicas: 1
   template:
     spec:
+      githubAPICredentialsFrom:
+        secretRef:
+          name: action-runner-controller-rss3
       dockerdWithinRunnerContainer: true
       group: Prod
       image: summerwind/actions-runner-dind
-      organization: Naturalselectionlabs
+      organization: RSS3-Network
       resources:
         requests:
           cpu: '4'
