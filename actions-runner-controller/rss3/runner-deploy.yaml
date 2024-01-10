@@ -13,6 +13,7 @@ spec:
       dockerdWithinRunnerContainer: true
       group: Default
       serviceAccountName: argocd-application-controller
+      automountServiceAccountToken: true
       labels:
         - rss3
         - rss3-network
