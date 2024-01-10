@@ -14,6 +14,13 @@ spec:
       group: Default
       serviceAccountName: argocd-application-controller
       automountServiceAccountToken: true
+      env:
+        - name: KUBERNETES_SERVICE_PORT_HTTPS
+          value: '443'
+        - name: KUBERNETES_SERVICE_PORT
+          value: '443'
+        - name: KUBERNETES_SERVICE_HOST
+          value: 10.1.24.1
       labels:
         - rss3
         - rss3-network
