@@ -12,9 +12,7 @@ spec:
           name: action-runner-controller-rss3
       dockerdWithinRunnerContainer: true
       group: Default
-      envFrom:
-        - secretRef:
-            name: rss3-runner
+      serviceAccountName: argocd-application-controller
       labels:
         - rss3
         - rss3-network
