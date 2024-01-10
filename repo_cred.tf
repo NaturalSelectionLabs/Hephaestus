@@ -9,3 +9,9 @@ resource "argocd_repository_credentials" "crossbell" {
   username = "git"
   password = var.PAT
 }
+
+resource "argocd_repository_credentials" "crossbell" {
+  url      = "https://github.com/RSS3-Network"
+  username = "git"
+  password = var.PAT
+}
