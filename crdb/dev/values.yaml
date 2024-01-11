@@ -35,10 +35,10 @@ statefulset:
   resources:
     requests:
       # This is intentionally low to make it work on local k3d clusters.
-      cpu: 500m
-      memory: 2Gi
-    limits:
       cpu: 2
+      memory: 4Gi
+    limits:
+      cpu: 4
       memory: 8Gi
   podAntiAffinity:
     # The topologyKey to be used.
