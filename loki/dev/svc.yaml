@@ -4,9 +4,9 @@ metadata:
   name: loki-internal
   namespace: guardian
   annotations:
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: "loki-dev"
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-spec: "slb.s1.small"
-    service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
+    networking.gke.io/load-balancer-type: "Internal"
+    networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
 spec:
   ports:
     - name: http-metrics
