@@ -4,6 +4,11 @@ tls:
     selfSigner:
       enabled: false
     certManager: true
+    certManagerIssuer:
+      clientCertDuration: 672h0m0s
+      clientCertExpiryWindow: 48h0m0s
+      nodeCertDuration: 8760h0m0s
+      nodeCertExpiryWindow: 168h0m0s
 
 storage:
   persistentVolume:
