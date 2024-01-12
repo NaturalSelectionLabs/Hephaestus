@@ -96,35 +96,35 @@ stringData:
       - role: pod
         namespaces: {}
         # follow_redirects: true
-      - job_name: cockroachdb-aliyun
-        honor_timestamps: true
-        honor_labels: false
-        scrape_interval: 30s
-        scheme: https
-        metrics_path: /_status/vars
-        tls_config:
-          insecure_skip_verify: true
-        static_configs:
-          - targets:
-              - roach0.aliyun.index.ai:8080
-              - roach1.aliyun.index.ai:8080
-              - roach2.aliyun.index.ai:8080
-              - roach3.aliyun.index.ai:8080
-              - roach4.aliyun.index.ai:8080
-              - roach5.aliyun.index.ai:8080
-      - job_name: cockroachdb-gcp
-        honor_timestamps: true
-        honor_labels: false
-        scrape_interval: 30s
-        scheme: https
-        metrics_path: /_status/vars
-        tls_config:
-          insecure_skip_verify: true
-        static_configs:
-          - targets:
-              - roach0.gcp.index.ai:8080
-              - roach1.gcp.index.ai:8080
-              - roach2.gcp.index.ai:8080
-              - roach3.gcp.index.ai:8080
-              - roach4.gcp.index.ai:8080
-              - roach5.gcp.index.ai:8080
+    - job_name: cockroachdb-aliyun
+      honor_timestamps: true
+      honor_labels: false
+      scrape_interval: 30s
+      scheme: https
+      metrics_path: /_status/vars
+      tls_config:
+        insecure_skip_verify: true
+      static_configs:
+        - targets:
+            - roach0.aliyun.index.ai:8080
+            - roach1.aliyun.index.ai:8080
+            - roach2.aliyun.index.ai:8080
+            - roach3.aliyun.index.ai:8080
+            - roach4.aliyun.index.ai:8080
+            - roach5.aliyun.index.ai:8080
+    - job_name: cockroachdb-gcp
+      honor_timestamps: true
+      honor_labels: false
+      scrape_interval: 30s
+      scheme: https
+      metrics_path: /_status/vars
+      tls_config:
+        insecure_skip_verify: true
+      static_configs:
+        - targets:
+            - roach0.gcp.index.ai:8080
+            - roach1.gcp.index.ai:8080
+            - roach2.gcp.index.ai:8080
+            - roach3.gcp.index.ai:8080
+            - roach4.gcp.index.ai:8080
+            - roach5.gcp.index.ai:8080
