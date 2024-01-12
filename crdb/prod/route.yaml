@@ -10,7 +10,7 @@ spec:
     - kind: Rule
       match: Host(`crdb.prod.naturalselectionlabs.com`) || Host(`crdb.prod.nsl.xyz`)
       services:
-        - name: cockroachdb
+        - name: cockroachdb-self
           port: 8080
           scheme: https
           serversTransport: cockroachdb
