@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shlink
+  labels:
+    app: shlink
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shlink
+  template:
+    metadata:
+      name: shlink
+      labels:
+        app: shlink
+    spec:
+      containers:
+        - name: shlink
+          image: shlinkio/shlink:stable
+          imagePullPolicy: IfNotPresent
+          envFrom:
+            - secretRef:
+                name: shlink
+      restartPolicy: Always
