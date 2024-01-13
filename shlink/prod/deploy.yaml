@@ -22,4 +22,8 @@ spec:
           envFrom:
             - secretRef:
                 name: shlink
+          ports:
+            - containerPort: 8080
+              name: http
+              protocol: TCP
       restartPolicy: Always

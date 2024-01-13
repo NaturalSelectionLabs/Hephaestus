@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - deploy.yaml
   - secrets.yaml
+  - svc.yaml
