@@ -5,3 +5,4 @@ resources:
   - deploy.yaml
   - secrets.yaml
   - svc.yaml
+  - route.yaml

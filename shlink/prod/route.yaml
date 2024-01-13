@@ -1,14 +1,13 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: rabbitmq
-  namespace: guardian
+  name: shlink
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`mq.prod.naturalselectionlabs.com`)
+      match: Host(`shlink.rss3.io`)
       services:
-      - name: rabbitmq
-        port: 15672
+      - name: shlink
+        port: 80
