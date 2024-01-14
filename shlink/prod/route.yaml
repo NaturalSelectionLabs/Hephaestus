@@ -7,7 +7,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`shlink.rss3.io`)
+      match: Host(`link.rss3.io`)
       services:
-      - name: shlink
-        port: 80
+        - name: shlink
+          port: 80
