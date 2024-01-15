@@ -9,6 +9,10 @@ agent:
           url = "http://vmsingle-victoriametrics.guardian.svc:8429/api/v1/write"
         }
       }
+      prometheus.scrape "gcp" {
+        targets    = prometheus.exporter.gcp.targets
+        forward_to = [prometheus.remote_write.vmsingle.receiver]
+      }
       prometheus.exporter.gcp "google" {
         project_ids = [
           "naturalselectionlabs",
