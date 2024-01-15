@@ -18,3 +18,6 @@ agent:
           "autoscaler.googleapis.com/"
         ]
       }
+
+controller:
+  type: 'deployment'

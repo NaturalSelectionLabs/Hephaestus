@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: grafana-agent
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`grafana-agent.prod.naturalselectionlabs.com`)
+      services:
+        - name: grafana-agent
+          port: 80
