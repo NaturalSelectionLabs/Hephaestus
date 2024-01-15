@@ -1,3 +1,6 @@
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: grafana-agent@naturalselectionlabs.iam.gserviceaccount.com
 agent:
   configMap:
     content: |
