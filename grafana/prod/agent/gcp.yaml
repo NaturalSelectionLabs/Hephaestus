@@ -2,13 +2,17 @@ apiVersion: monitoring.grafana.com/v1alpha1
 kind: Integration
 metadata:
   name: gcp-exporter
+  labels:
+    agent: grafana-agent
 spec:
-  name: gcp_exporter
+  name: gcp
   type:
     allNodes: false
     unique: true
   config:
-    enable: true
+    autoscrape:
+      enable: true
+      metrics_instance: grafana/grafana-agent-metrics
     project_ids:
       - naturalselectionlabs
       - rss3-409706
