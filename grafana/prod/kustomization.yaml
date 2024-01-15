@@ -11,8 +11,7 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     valuesFile: values.yaml
     version: 6.57.3
-  - name: grafana-agent-operator
-    releaseName: grafana-agent-operator
+  - name: grafana-agent
+    releaseName: grafana-agent
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
-    includeCRDs: true
