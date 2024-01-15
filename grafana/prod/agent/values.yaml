@@ -2,6 +2,8 @@ serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: grafana-agent@naturalselectionlabs.iam.gserviceaccount.com
 agent:
+  clustering:
+    enabled: true
   configMap:
     content: |
       prometheus.remote_write "vmsingle" {
