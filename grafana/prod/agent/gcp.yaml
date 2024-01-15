@@ -1,0 +1,24 @@
+apiVersion: monitoring.grafana.com/v1alpha1
+kind: Integration
+metadata:
+  name: gcp-exporter
+spec:
+  name: gcp_exporter
+  type:
+    allNodes: false
+    unique: true
+  config:
+    enable: true
+    project_ids:
+      - naturalselectionlabs
+      - rss3-409706
+      - crossbell-409411
+    gcp_client_timeout: 15s
+    metrics_prefixes:
+      - compute.googleapis.com/
+      - storage.googleapis.com/
+      - redis.googleapis.com/
+      - cloudsql.googleapis.com/
+      - networking.googleapis.com/
+      - loadbalancing.googleapis.com/
+      - autoscaler.googleapis.com/
