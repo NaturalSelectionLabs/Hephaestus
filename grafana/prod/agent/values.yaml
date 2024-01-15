@@ -10,7 +10,7 @@ agent:
         }
       }
       prometheus.scrape "gcp" {
-        targets    = prometheus.exporter.gcp.targets
+        targets    = prometheus.exporter.gcp.google.targets
         forward_to = [prometheus.remote_write.vmsingle.receiver]
       }
       prometheus.exporter.gcp "google" {
@@ -33,3 +33,4 @@ agent:
 
 controller:
   type: 'deployment'
+  replicas: 5
