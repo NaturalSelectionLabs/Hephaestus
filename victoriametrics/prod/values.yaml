@@ -149,6 +149,9 @@ vmagent:
 
 grafana:
   enabled: false
+  ingress:
+    hosts:
+      - grafana.nsl.xyz
 
 # prometheus-node-exporter dependency chart configuration. For possible values refer to https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:
