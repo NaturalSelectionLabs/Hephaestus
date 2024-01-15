@@ -99,10 +99,10 @@ vmsingle:
         memory: "8Gi"
 
 alertmanager:
-  enabled: false
+  enabled: true
 
 vmalert:
-  enabled: false
+  enabled: true
 
 vmagent:
   enabled: true
@@ -123,7 +123,7 @@ vmagent:
       tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
-      cluster: dev
+      cluster: prod
       region: us-central1
       provider: gcp
       zone: us-central1-a
