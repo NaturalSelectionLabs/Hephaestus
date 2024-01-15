@@ -1,15 +1,12 @@
-kind: Service
 apiVersion: v1
+kind: Service
 metadata:
-  name: logstash-loki
-  namespace: guardian
+  name: metabase
 spec:
   ports:
     - name: http
       protocol: TCP
-      port: 5044
-      targetPort: 5044
+      port: 3000
+      targetPort: 3000
   selector:
-    app: logstash-loki
-  clusterIP: None
-  type: ClusterIP
+    app: metabase
