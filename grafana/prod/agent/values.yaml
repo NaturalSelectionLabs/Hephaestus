@@ -1,0 +1,20 @@
+agent:
+  configMap:
+    content: |
+      prometheus.exporter.gcp "google" {
+        project_ids = [
+          "naturalselectionlabs",
+          "crossbell-409411",
+          "rss3-409706"
+        ]
+        
+        metrics_prefixes = [
+          "compute.googleapis.com/",
+          "storage.googleapis.com/",
+          "redis.googleapis.com/",
+          "cloudsql.googleapis.com/",
+          "networking.googleapis.com/",
+          "loadbalancing.googleapis.com/",
+          "autoscaler.googleapis.com/"
+        ]
+      }
