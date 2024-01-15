@@ -5,7 +5,7 @@ agent:
         project_ids = [
           "naturalselectionlabs",
           "crossbell-409411",
-          "rss3-409706"
+          "rss3-409706",
         ]
         
         metrics_prefixes = [
@@ -15,7 +15,7 @@ agent:
           "cloudsql.googleapis.com/",
           "networking.googleapis.com/",
           "loadbalancing.googleapis.com/",
-          "autoscaler.googleapis.com/"
+          "autoscaler.googleapis.com/",
         ]
       }
 
