@@ -4,9 +4,21 @@ prometheus.remote_write "vmsingle" {
   }
 }
 
+prometheus.scrape "agent" {
+  targets    = prometheus.exporter.agent.agent.targets
+  forward_to = [prometheus.remote_write.vmsingle.receiver]
+}
+
 prometheus.scrape "gcp" {
   targets    = concat(prometheus.exporter.gcp.nsl.targets,prometheus.exporter.gcp.rss3.targets,prometheus.exporter.gcp.csb.targets)
   forward_to = [prometheus.remote_write.vmsingle.receiver]
+}
+
+prometheus.exporter.agent "agent" {
+}
+
+prometheus.exporter.kafka "kafka" {
+    kafka_uris = ["kafka-0.kafka-headless:9200","kafka-1.kafka-headless:9200","kafka-2.kafka-headless:9200"]
 }
 
 prometheus.exporter.gcp "nsl" {
