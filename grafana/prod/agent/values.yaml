@@ -5,33 +5,9 @@ agent:
   clustering:
     enabled: true
   configMap:
-    content: |
-      prometheus.remote_write "vmsingle" {
-        endpoint {
-          url = "http://vmsingle-victoriametrics.guardian.svc:8429/api/v1/write"
-        }
-      }
-      prometheus.scrape "gcp" {
-        targets    = prometheus.exporter.gcp.google.targets
-        forward_to = [prometheus.remote_write.vmsingle.receiver]
-      }
-      prometheus.exporter.gcp "google" {
-        project_ids = [
-          "naturalselectionlabs",
-          "crossbell-409411",
-          "rss3-409706",
-        ]
-        
-        metrics_prefixes = [
-          "compute.googleapis.com/",
-          "storage.googleapis.com/",
-          "redis.googleapis.com/",
-          "cloudsql.googleapis.com/",
-          "networking.googleapis.com/",
-          "loadbalancing.googleapis.com/",
-          "autoscaler.googleapis.com/",
-        ]
-      }
+    create: false
+    name: grafana-agent
+    key: config.river
 
 controller:
   type: 'deployment'

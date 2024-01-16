@@ -1,0 +1,45 @@
+prometheus.remote_write "vmsingle" {
+  endpoint {
+    url = "http://vmsingle-victoriametrics.guardian.svc:8429/api/v1/write"
+  }
+}
+
+prometheus.scrape "gcp" {
+  targets    = concat(prometheus.exporter.gcp.nsl.targets,prometheus.exporter.gcp.rss3.targets,prometheus.exporter.gcp.csb.targets)
+  forward_to = [prometheus.remote_write.vmsingle.receiver]
+}
+
+prometheus.exporter.gcp "nsl" {
+  project_ids = [
+    "naturalselectionlabs",
+  ]
+  metrics_prefixes = [
+    "compute.googleapis.com/",
+    "storage.googleapis.com/",
+    "redis.googleapis.com/",
+    "cloudsql.googleapis.com/",
+    "networking.googleapis.com/",
+    "loadbalancing.googleapis.com/",
+    "autoscaler.googleapis.com/",
+  ]
+}
+
+prometheus.exporter.gcp "rss3" {
+  project_ids = ["rss3-409706"]
+  metrics_prefixes = [
+    "compute.googleapis.com/",
+    "storage.googleapis.com/",
+    "redis.googleapis.com/",
+    "cloudsql.googleapis.com/",
+  ]
+}
+
+prometheus.exporter.gcp "csb" {
+  project_ids = ["crossbell-409411"]
+  metrics_prefixes = [
+    "compute.googleapis.com/",
+    "storage.googleapis.com/",
+    "redis.googleapis.com/",
+    "cloudsql.googleapis.com/",
+  ]
+}
