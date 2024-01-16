@@ -19,6 +19,7 @@ prometheus.exporter.agent "agent" {
 
 prometheus.exporter.kafka "kafka" {
     kafka_uris = ["kafka-0.kafka-headless:9092","kafka-1.kafka-headless:9092","kafka-2.kafka-headless:9092"]
+    instance = "kafka"
 }
 
 prometheus.exporter.gcp "nsl" {
