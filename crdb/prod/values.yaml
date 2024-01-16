@@ -12,6 +12,13 @@ storage:
 
 conf:
   cluster-name: us-central1-prod
+  join:
+    - roach0.aliyun.index.ai:26258
+    - roach1.aliyun.index.ai:26258
+    - roach2.aliyun.index.ai:26258
+    - roach3.aliyun.index.ai:26258
+    - roach4.aliyun.index.ai:26258
+    - roach5.aliyun.index.ai:26258
 
 statefulset:
   replicas: 6
