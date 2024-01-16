@@ -16,8 +16,6 @@ cassandra:
     enabled: true
     storageClass: "standard"
     size: 40Gi
-  config:
-    cluster_size: 1
 
 agent:
   enabled: true
