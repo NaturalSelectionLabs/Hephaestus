@@ -14,12 +14,24 @@ prometheus.scrape "gcp" {
   forward_to = [prometheus.remote_write.vmsingle.receiver]
 }
 
+prometheus.scrape "kafka" {
+  targets    = concat(prometheus.exporter.kafka.kafka0.targets,prometheus.exporter.kafka.kafka1.targets,prometheus.exporter.kafka.kafka2.targets)
+  forward_to = [prometheus.remote_write.vmsingle.receiver]
+}
+
 prometheus.exporter.agent "agent" {
 }
 
-prometheus.exporter.kafka "kafka" {
-    kafka_uris = ["kafka-0.kafka-headless:9092","kafka-1.kafka-headless:9092","kafka-2.kafka-headless:9092"]
-    instance = "kafka"
+prometheus.exporter.kafka "kafka0" {
+    kafka_uris = ["kafka-0.kafka-headless:9092"]
+}
+
+prometheus.exporter.kafka "kafka1" {
+    kafka_uris = ["kafka-1.kafka-headless:9092"]
+}
+
+prometheus.exporter.kafka "kafka2" {
+    kafka_uris = ["kafka-2.kafka-headless:9092"]
 }
 
 prometheus.exporter.gcp "nsl" {
