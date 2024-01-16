@@ -11,3 +11,17 @@ helmCharts:
     repo: https://charts.cockroachdb.com/
     valuesFile: values.yaml
     version: 11.x.x
+
+patches:
+  - patch: |-
+      - op: add
+        path: "/spec/dnsNames/-"
+        value:
+          '*.aliyun.index.ai'
+      - op: add
+        path: "/spec/dnsNames/-"
+        value:
+          '*.gcp.index.ai'
+    target:
+      kind: Certificate
+      name: cockroachdb-node
