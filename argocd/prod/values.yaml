@@ -120,6 +120,7 @@ configs:
     url: "https://argocd.naturalselectionlabs.com"
     accounts.github: apiKey
     exec.enabled: "true"
+    statusbadge.enabled: "true"
     dex.config: |
       connectors:
       # GitHub example
