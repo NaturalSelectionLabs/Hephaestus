@@ -33,10 +33,10 @@ statefulset:
     requests:
       # This is intentionally low to make it work on local k3d clusters.
       cpu: 32
-      memory: 110Gi
+      memory: 100Gi
     limits:
       cpu: 32
-      memory: 110Gi
+      memory: 100Gi
   podAntiAffinity:
     # The topologyKey to be used.
     # Can be used to spread across different nodes, AZs, regions etc.
