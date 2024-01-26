@@ -4,6 +4,12 @@ tls:
     selfSigner:
       enabled: false
     certManager: true
+    certManagerIssuer:
+      clientCertDuration: 672h0m0s
+      clientCertExpiryWindow: 48h0m0s
+      nodeCertDuration: 8760h0m0s
+      nodeCertExpiryWindow: 168h0m0s
+
 
 storage:
   persistentVolume:
@@ -11,7 +17,8 @@ storage:
     size: 10Ti
 
 conf:
-  cluster-name: us-central1-prod
+#  cluster-name: us-central1-prod
+  locality: region=us-central1
   join:
     - roach0.aliyun.index.ai:26258
     - roach1.aliyun.index.ai:26258
