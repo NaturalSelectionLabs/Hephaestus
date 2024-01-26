@@ -128,3 +128,5 @@ stringData:
             - roach3.gcp.index.ai:8080
             - roach4.gcp.index.ai:8080
             - roach5.gcp.index.ai:8080
+            - roach6.gcp.index.ai:8080
+            - roach7.gcp.index.ai:8080
