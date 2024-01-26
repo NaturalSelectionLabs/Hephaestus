@@ -122,11 +122,11 @@ stringData:
         insecure_skip_verify: true
       static_configs:
         - targets:
-            - roach0.gcp.index.ai:8080
-            - roach1.gcp.index.ai:8080
-            - roach2.gcp.index.ai:8080
-            - roach3.gcp.index.ai:8080
-            - roach4.gcp.index.ai:8080
-            - roach5.gcp.index.ai:8080
-            - roach6.gcp.index.ai:8080
-            - roach7.gcp.index.ai:8080
+            - cockroachdb-0.gcp.index.ai:8080
+            - cockroachdb-1.gcp.index.ai:8080
+            - cockroachdb-2.gcp.index.ai:8080
+            - cockroachdb-3.gcp.index.ai:8080
+            - cockroachdb-4.gcp.index.ai:8080
+            - cockroachdb-5.gcp.index.ai:8080
+            - cockroachdb-6.gcp.index.ai:8080
+            - cockroachdb-7.gcp.index.ai:8080
