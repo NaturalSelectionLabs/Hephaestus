@@ -61,6 +61,11 @@ additionalVictoriaMetricsMap:
 #       - record: my_record
 #         expr: 100 * my_record
 
+victoria-metrics-operator:
+  operator:
+    # -- By default, operator converts prometheus-operator objects.
+    disable_prometheus_converter: false
+
 # -- Configures vmsingle params
 vmsingle:
   annotations:
