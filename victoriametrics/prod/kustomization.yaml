@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - additional-scrape-configs.yaml
   - svc.yaml
-  - https://raw.githubusercontent.com/prometheus-operator/prometheus-operator/main/example/prometheus-operator-crd/monitoring.coreos.com_prometheusrules.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
@@ -12,3 +11,7 @@ helmCharts:
     valuesFile: values.yaml
     version: 0.x.x
     includeCRDs: true
+  - name: prometheus-operator-crds
+    releaseName: prometheus
+    repo: https://prometheus-community.github.io/helm-charts
+    version: x.x.x
