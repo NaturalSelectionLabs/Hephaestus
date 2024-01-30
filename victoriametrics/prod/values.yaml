@@ -65,7 +65,8 @@ victoria-metrics-operator:
   operator:
     # -- By default, operator converts prometheus-operator objects.
     disable_prometheus_converter: false
-    prometheus_converter_add_argocd_ignore_annotations: true
+#    prometheus_converter_add_argocd_ignore_annotations: true
+    enable_converter_ownership: true
 
 # -- Configures vmsingle params
 vmsingle:
