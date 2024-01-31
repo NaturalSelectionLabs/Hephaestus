@@ -6,3 +6,5 @@ helmCharts:
     releaseName: cloudflare-exporter
     repo: https://lablabs.github.io/cloudflare-exporter/
     version: x.x.x
+    valuesInline:
+      secretRef: cloudflare-exporter
