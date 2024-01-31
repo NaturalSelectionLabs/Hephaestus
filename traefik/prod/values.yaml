@@ -70,3 +70,8 @@ tolerations:
     operator: "Equal"
     value: "arm64"
     effect: "NoSchedule"
+
+providers:
+  kubernetesIngress:
+    publishedService:
+      enabled: true

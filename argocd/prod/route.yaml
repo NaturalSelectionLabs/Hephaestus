@@ -10,7 +10,15 @@ spec:
   routes:
     - kind: Rule
       match: Host(`argocd.naturalselectionlabs.com`)
+      priority: 10
       services:
         - name: argo-cd-argocd-server
           port: 80
           scheme: http
+    - kind: Rule
+      match: Host(`argocd.naturalselectionlabs.com`) && Headers(`Content-Type`, `application/grpc`)
+      priority: 11
+      services:
+        - name: argocd-server
+          port: 80
+          scheme: h2c
