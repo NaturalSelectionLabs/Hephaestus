@@ -11,3 +11,5 @@ helmCharts:
     version: x.x.x
     valuesInline:
       secretRef: cloudflare-exporter
+      serviceMonitor:
+        enabled: true
