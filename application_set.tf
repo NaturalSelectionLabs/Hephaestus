@@ -685,7 +685,7 @@ resource "argocd_application_set" "exporter" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "exporter/{{cluster}}"
+          path            = "exporters/{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {
