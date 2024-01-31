@@ -11,5 +11,6 @@ helmCharts:
     version: x.x.x
     valuesInline:
       secretRef: cloudflare-exporter
-      serviceMonitor:
-        enabled: true
+      podAnnotations:
+        prometheus.io/port: http
+        prometheus.io/scrape: 'true'
