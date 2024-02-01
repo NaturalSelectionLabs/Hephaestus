@@ -1,0 +1,16 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: rss3-runner
+  namespace: guardian
+spec:
+  template:
+    spec:
+      tolerations:
+        - key: "kubernetes.io/arch"
+          operator: "Equal"
+          value: "arm64"
+          effect: "NoSchedule"
+      nodeSelector:
+        kubernetes.io/arch: arm64
+
