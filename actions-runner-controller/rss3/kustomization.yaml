@@ -4,3 +4,4 @@ resources:
   - secret.yaml
   - runner-deploy.yaml
   - env.yaml
+  - hra.yaml
