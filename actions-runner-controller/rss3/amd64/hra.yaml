@@ -13,7 +13,7 @@ spec:
     kind: RunnerDeployment
     # # In case the scale target is RunnerSet:
     # kind: RunnerSet
-    name: rss3-runner
+    name: rss3-runner-amd64
   minReplicas: 2
   maxReplicas: 5
   metrics:

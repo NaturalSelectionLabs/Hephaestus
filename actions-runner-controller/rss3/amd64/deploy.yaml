@@ -6,15 +6,8 @@ metadata:
 spec:
   template:
     spec:
-      tolerations:
-        - key: "kubernetes.io/arch"
-          operator: "Equal"
-          value: "arm64"
-          effect: "NoSchedule"
-      nodeSelector:
-        kubernetes.io/arch: arm64
       labels:
         - rss3
         - rss3-network
         - rss3-io
-        - arm64
+        - amd64
