@@ -11,7 +11,7 @@ spec:
     # # In case the scale target is RunnerSet:
     # kind: RunnerSet
     name: rss3-runner
-  minReplicas: 1
+  minReplicas: 2
   maxReplicas: 5
   metrics:
     - type: PercentageRunnersBusy
