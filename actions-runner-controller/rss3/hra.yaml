@@ -3,6 +3,9 @@ kind: HorizontalRunnerAutoscaler
 metadata:
   name: rss3-runner-autoscaler
 spec:
+  githubAPICredentialsFrom:
+    secretRef:
+      name: action-runner-controller-rss3
   # Runners in the targeted RunnerDeployment won't be scaled down
   # for 5 minutes instead of the default 10 minutes now
   scaleDownDelaySecondsAfterScaleOut: 300
