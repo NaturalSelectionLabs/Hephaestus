@@ -17,4 +17,5 @@ spec:
         - rss3
         - rss3-network
         - rss3-io
+        - linux/arm64
         - arm64
