@@ -708,3 +708,60 @@ resource "argocd_application_set" "exporter" {
 
   }
 }
+
+resource "argocd_application_set" "alert" {
+  metadata {
+    name      = "alert"
+    namespace = "guardian"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          #          {
+          #            cluster = argocd_cluster.dev.name
+          #            url     = argocd_cluster.dev.server
+          #          },
+          {
+            cluster = argocd_cluster.prod.name
+            url     = argocd_cluster.prod.server
+          }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "alert-{{cluster}}"
+        labels = {
+          cluster = "{{cluster}}"
+        }
+      }
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = "https://github.com/NaturalSelectionLabs/Infrasture-Alert"
+          target_revision = "HEAD"
+          path            = "{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name  = "APP_REPO"
+              value = "NaturalSelectionLabs/Infrasture-Alert"
+            }
+            env {
+              name  = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+      }
+    }
+
+  }
+}
