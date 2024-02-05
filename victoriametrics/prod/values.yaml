@@ -110,6 +110,7 @@ alertmanager:
   spec:
     configSecret: "vm-alertmanager-config"
     replicaCount: 2
+    externalURL: https://alertmanager.prod.naturalselectionlabs.com
 
 vmalert:
   enabled: true
