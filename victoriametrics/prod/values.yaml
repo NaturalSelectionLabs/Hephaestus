@@ -114,7 +114,10 @@ alertmanager:
 
 vmalert:
   enabled: true
-
+  spec:
+    extraArgs:
+      "--external.url": https://grafana.nsl.xyz
+      "--external.alert.source": explore?orgId=1&left={"datasource":"vm-prod-gke","queries":[{"expr":{{$$expr|jsonEscape|queryEscape}},"refId":"A"}],"range":{"from":"now-1h","to":"now"}}"
 vmagent:
   enabled: true
   annotations:
