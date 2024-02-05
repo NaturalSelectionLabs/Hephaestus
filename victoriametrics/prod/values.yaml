@@ -109,6 +109,7 @@ alertmanager:
   enabled: true
   spec:
     configSecret: "vm-alertmanager-config"
+    replicaCount: 2
 
 vmalert:
   enabled: true
