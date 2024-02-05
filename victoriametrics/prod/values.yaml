@@ -116,8 +116,9 @@ vmalert:
   enabled: true
   spec:
     extraArgs:
-      "--external.url": https://grafana.nsl.xyz
-      "--external.alert.source": explore?orgId=1&left={"datasource":"vm-prod-gke","queries":[{"expr":{{$$expr|jsonEscape|queryEscape}},"refId":"A"}],"range":{"from":"now-1h","to":"now"}}"
+      "-external.url": https://grafana.nsl.xyz
+      "-external.alert.source": |
+        explore%3ForgId%3D1%26left%3D%5B%22now-1h%22%2C%22now%22%2C%22vm-prod-gke%22%2C%7B%22expr%22%3A+%22%7B%7B%24expr%7CquotesEscape%7CpathEscape%7D%7D%22%7D%2C%7B%22mode%22%3A%22Metrics%22%7D%2C%7B%22ui%22%3A%5Btrue%2Ctrue%2Ctrue%2C%22none%22%5D%7D%5D
 vmagent:
   enabled: true
   annotations:
