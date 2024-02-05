@@ -28,6 +28,7 @@ controller:
           annotations:
             summary: ArgoCD service not synced (instance {{ $labels.instance }})
             description: "Service {{ $labels.name }} run by argo is currently not in sync.\n"
+            link_text: "App :argo:"
             link_url: "https://argocd.naturalselectionlabs.com/applications/{{ $labels.name }}"
         - alert: ArgocdServiceUnhealthy
           expr: argocd_app_info{health_status!="Healthy"} != 0
@@ -37,6 +38,7 @@ controller:
           annotations:
             summary: ArgoCD service unhealthy (instance {{ $labels.instance }})
             description: "Service {{ $labels.name }} run by argo is currently not healthy.\n"
+            link_text: "App :argo:"
             link_url: "https://argocd.naturalselectionlabs.com/applications/{{ $labels.name }}"
 server:
   resources:
