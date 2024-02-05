@@ -740,14 +740,14 @@ resource "argocd_application_set" "alert" {
         project = argocd_project.guardian.metadata[0].name
 
         source {
-          repo_url        = "https://github.com/NaturalSelectionLabs/Infrasture-Alert"
+          repo_url        = "https://github.com/NaturalSelectionLabs/Infrastructure-Alert"
           target_revision = "HEAD"
           path            = "{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {
               name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Infrasture-Alert"
+              value = "NaturalSelectionLabs/Infrastructure-Alert"
             }
             env {
               name  = "AVP_SECRET"
