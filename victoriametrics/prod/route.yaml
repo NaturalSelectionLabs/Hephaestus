@@ -12,3 +12,5 @@ spec:
       services:
         - name: vmalertmanager-victoriametrics
           port: 9093
+      middlewares:
+        - name: traefik-forward-auth
