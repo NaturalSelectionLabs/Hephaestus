@@ -107,6 +107,8 @@ vmsingle:
 
 alertmanager:
   enabled: true
+  spec:
+    configSecret: "vm-alertmanager-config"
 
 vmalert:
   enabled: true
