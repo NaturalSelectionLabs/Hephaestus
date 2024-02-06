@@ -1,5 +1,7 @@
 loki:
   enabled: true
+  podAnnotations:
+    prometheus.io/port: "3100"
   nodeSelector:
     rss3.io/usage: internal
   tolerations:

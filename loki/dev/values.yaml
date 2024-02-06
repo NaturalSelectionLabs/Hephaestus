@@ -1,5 +1,7 @@
 loki:
   enabled: true
+  podAnnotations:
+    prometheus.io/port: "3100"
   persistence:
     enabled: true
     accessModes:
