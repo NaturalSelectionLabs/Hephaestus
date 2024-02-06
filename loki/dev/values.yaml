@@ -18,13 +18,13 @@ loki:
           object_store: gcs
           schema: v11
           index:
-            prefix: us_central1_prod_loki_index_
+            prefix: loki_index_
             period: 168h
     storage_config:
       boltdb:
         directory: /data/loki/index
       gcs:
-        bucket_name: nsl-loki
+        bucket_name: nsl-loki-uscentral1-dev
     server:
       grpc_server_max_recv_msg_size: 104857600
     limits_config:
