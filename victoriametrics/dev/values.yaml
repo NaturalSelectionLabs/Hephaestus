@@ -30,6 +30,7 @@ defaultRules:
     node: true
     vmagent: true
     vmsingle: true
+    vmcluster: false
     vmhealth: true
     alertmanager: true
 
