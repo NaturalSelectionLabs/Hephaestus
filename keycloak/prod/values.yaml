@@ -1,9 +1,8 @@
 ## Keycloak Configuration
 keycloak:
-  replicas: 3
   persistence:
     deployPostgres: false
-
+replicas: 3
 extraEnv:   |
   - name: JAVA_OPTS
     value: >-
