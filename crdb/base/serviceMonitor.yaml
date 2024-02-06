@@ -10,7 +10,18 @@ spec:
       port: http
       scheme: https
       tlsConfig:
-        insecureSkipVerify: false
+        insecureSkipVerify: true
+        ca:
+          secret:
+            key: ca.crt
+            name: cockroachdb-node
+        cert:
+          secret:
+            key: tls.crt
+            name: cockroachdb-node
+        keySecret:
+          key: tls.key
+          name: cockroachdb-node
   namespaceSelector:
     matchNames:
       - guardian
