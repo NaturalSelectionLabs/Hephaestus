@@ -1,0 +1,16 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: vmalertmanager
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`alertmanager.dev.naturalselectionlabs.com`)
+      services:
+        - name: vmalertmanager-victoriametrics
+          port: 9093
+      middlewares:
+        - name: traefik-forward-auth

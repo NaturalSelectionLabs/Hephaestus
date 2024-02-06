@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - additional-scrape-configs.yaml
   - svc.yaml
+  - route.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
