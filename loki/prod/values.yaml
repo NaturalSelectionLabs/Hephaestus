@@ -49,6 +49,9 @@ loki:
       iam.gke.io/gcp-service-account: loki-sa@naturalselectionlabs.iam.gserviceaccount.com
 promtail:
   enabled: true
+  tolerations:
+    - operator: Exists
+      effect: NoSchedule
 
 fluent-bit:
   enabled: false
