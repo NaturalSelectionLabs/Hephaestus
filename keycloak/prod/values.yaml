@@ -33,7 +33,7 @@ extraEnv:   |
   - name: DB_PASSWORD_FILE
     value: /secrets/db-creds/password
   - name: JGROUPS_DISCOVERY_PROTOCOL
-      value: kubernetes.KUBE_PING
+    value: kubernetes.KUBE_PING
   - name: JGROUPS_DISCOVERY_PROPERTIES
     value: dump_requests=true,port_range=0,namespace=guardian
 
