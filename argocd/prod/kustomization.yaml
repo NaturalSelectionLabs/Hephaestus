@@ -4,6 +4,7 @@ resources:
   - route.yaml
   - github.com/argoproj-labs/argocd-image-updater/manifests/base?ref=master
   - secret.yaml
+  - serviceMonitor.yaml
 
 helmCharts:
   - name: argo-cd
