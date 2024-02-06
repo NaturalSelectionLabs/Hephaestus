@@ -60,3 +60,16 @@ resources:
 
 serviceMonitor:
   enabled: true
+
+
+rbac:
+  create: true
+  rules:
+  # RBAC rules for KUBE_PING
+    - apiGroups:
+        - ""
+      resources:
+        - pods
+      verbs:
+        - get
+        - list
