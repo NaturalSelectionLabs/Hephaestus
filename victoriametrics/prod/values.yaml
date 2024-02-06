@@ -156,11 +156,11 @@ vmagent:
         effect: "NoSchedule"
     resources:
       requests:
-        cpu: "100m"
-        memory: "263Mi"
+        cpu: 0.5
+        memory: 512Mi
       limits:
-        cpu: "300m"
-        memory: "800Mi"
+        cpu: 1
+        memory: 1Gi
 
 grafana:
   enabled: false
