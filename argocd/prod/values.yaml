@@ -1,8 +1,4 @@
-global:
-  podAnnotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: "metrics"
-    prometheus.io/scrape: "true"
+global: {}
 redis:
   # -- Enable redis
   enabled: false
@@ -15,8 +11,9 @@ controller:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
   metrics:
-    # -- Deploy metrics service
     enabled: true
+    serviceMonitor:
+      enabled: true
     rules:
       enabled: true
       spec:
@@ -41,6 +38,10 @@ controller:
             link_text: "App :argo:"
             link_url: "https://argocd.naturalselectionlabs.com/applications/{{ $labels.name }}"
 server:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   resources:
     requests:
       cpu: 0.1
@@ -55,6 +56,10 @@ server:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
 repoServer:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   resources:
     requests:
       cpu: 0.5
@@ -135,10 +140,19 @@ repoServer:
     - name: custom-tools
       emptyDir: {}
 applicationSet:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
   replicas: 2
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
+dex:
+  metrics:
+    enabled: true
+    serviceMonitor:
+      enabled: true
 configs:
   # General Argo CD configuration
   ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
