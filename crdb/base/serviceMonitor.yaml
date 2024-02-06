@@ -1,0 +1,21 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cockroachdb
+  namespace: guardian
+spec:
+  endpoints:
+    - interval: 10s
+      path: /_status/vars
+      port: http
+      scheme: https
+      tlsConfig:
+        insecureSkipVerify: false
+  namespaceSelector:
+    matchNames:
+      - guardian
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: cockroachdb
+      app.kubernetes.io/instance: cockroachdb
+      app.kubernetes.io/name: cockroachdb

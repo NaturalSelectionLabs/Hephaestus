@@ -49,7 +49,3 @@ statefulset:
     # The topologyKey to be used.
     # Can be used to spread across different nodes, AZs, regions etc.
     topologyKey: kubernetes.io/hostname
-
-serviceMonitor:
-  enabled: true
-  namespaced: true

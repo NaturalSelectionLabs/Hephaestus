@@ -48,7 +48,3 @@ statefulset:
       operator: "Equal"
       value: "crdb"
       effect: "NoSchedule"
-
-serviceMonitor:
-  enabled: true
-  namespaced: true
