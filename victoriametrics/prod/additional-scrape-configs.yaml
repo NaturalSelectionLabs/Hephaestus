@@ -20,6 +20,11 @@ stringData:
       scheme: http
       metrics_path: /metrics
       relabel_configs:
+      - action: keep_if_equal
+        source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_port, __meta_kubernetes_pod_container_port_number ]
+      - action: drop
+        source_labels: [ __meta_kubernetes_pod_container_init ]
+        regex: 'true'
       - regex: 'true'
         action: keep
         source_labels:
