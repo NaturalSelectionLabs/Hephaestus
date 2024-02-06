@@ -12,3 +12,4 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     valuesFile: values.yaml
     version: x.x.x
+    namespace: guardian
