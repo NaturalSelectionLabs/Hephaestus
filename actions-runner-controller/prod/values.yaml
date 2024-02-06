@@ -8,3 +8,6 @@ tolerations:
 
 authSecret:
   name: "action-runner-controller-manager"
+metrics:
+  serviceMonitor:
+    enable: true
