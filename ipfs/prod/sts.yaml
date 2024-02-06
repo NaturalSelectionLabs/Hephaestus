@@ -16,7 +16,7 @@ spec:
         app: ipfs
       annotations:
         prometheus.io/scrape: "true"
-        prometheus.io/port: api
+        prometheus.io/port: "5001"
         prometheus.io/path: /debug/metrics/prometheus
     spec:
       affinity:
