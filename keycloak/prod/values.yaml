@@ -3,11 +3,6 @@ keycloak:
   persistence:
     deployPostgres: false
 
-podAnnotations:
-  prometheus.io/path: /metrics
-  prometheus.io/port: http-management
-  prometheus.io/scrape: 'true'
-
 extraEnv:   |
   - name: JAVA_OPTS
     value: >-
@@ -58,3 +53,6 @@ resources:
   requests:
     cpu: "500m"
     memory: 1024Mi
+
+serviceMonitor:
+  enabled: true
