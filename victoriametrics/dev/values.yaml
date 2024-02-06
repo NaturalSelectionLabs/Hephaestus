@@ -225,91 +225,12 @@ kubeApiServer:
         component: apiserver
         provider: kubernetes
 
-# -- Disable kube controller manager for GKE managed kubernetes
+# -- Disable kubeControllerManager/coreDNS/kubeEtcd/kubeScheduler for GKE managed kubernetes
 kubeControllerManager:
   enabled: false
-
-# -- Component scraping coreDns. Use either this or kubeDns
 coreDns:
-  enabled: true
-  service:
-    enabled: true
-    port: 9153
-    targetPort: 9153
-    selector:
-      k8s-app: kube-dns
-
-  # spec for VMServiceScrape crd
-  # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
-  spec:
-    endpoints:
-      - port: http-metrics
-        bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-
-## Component scraping etcd
-##
+  enabled: false
 kubeEtcd:
-  enabled: true
-
-  ## If your etcd is not deployed as a pod, specify IPs it can be found on
-  ##
-  endpoints: []
-  # - 10.141.4.22
-  # - 10.141.4.23
-  # - 10.141.4.24
-
-  ## Etcd service. If using kubeEtcd.endpoints only the port and targetPort are used
-  ##
-  service:
-    enabled: true
-    port: 2379
-    targetPort: 2379
-    # selector:
-    #   component: etcd
-
-  # spec for VMServiceScrape crd
-  # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
-  spec:
-    jobLabel: jobLabel
-    endpoints:
-      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-        # bearerTokenSecret:
-        #   key: ""
-        port: http-metrics
-        scheme: https
-        tlsConfig:
-          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-
-## Component scraping kube scheduler
-##
+  enabled: false
 kubeScheduler:
-  enabled: true
-
-  ## If your kube scheduler is not deployed as a pod, specify IPs it can be found on
-  ##
-  endpoints: []
-  # - 10.141.4.22
-  # - 10.141.4.23
-  # - 10.141.4.24
-
-  ## If using kubeScheduler.endpoints only the port and targetPort are used
-  ##
-  service:
-    enabled: true
-    port: 10251
-    targetPort: 10251
-    # selector:
-    #   component: kube-scheduler
-
-  # spec for VMServiceScrape crd
-  # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
-  spec:
-    jobLabel: jobLabel
-    endpoints:
-      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-        # bearerTokenSecret:
-        #   key: ""
-        port: http-metrics
-        scheme: https
-        tlsConfig:
-          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
+  enabled: false
