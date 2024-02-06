@@ -11,3 +11,7 @@ helmCharts:
     valuesFile: values.yaml
     version: 0.x.x
     includeCRDs: true
+  - name: prometheus-operator-crds
+    releaseName: prometheus
+    repo: https://prometheus-community.github.io/helm-charts
+    version: x.x.x
