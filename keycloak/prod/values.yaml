@@ -35,6 +35,8 @@ extraEnv:   |
     value: kubernetes.KUBE_PING
   - name: JGROUPS_DISCOVERY_PROPERTIES
     value: dump_requests=true,port_range=0,namespace=guardian
+  - name: KEYCLOAK_STATISTICS
+    value: all
 
 extraVolumeMounts: |
   - name: db-creds
