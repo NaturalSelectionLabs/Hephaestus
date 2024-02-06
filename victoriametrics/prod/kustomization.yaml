@@ -16,3 +16,13 @@ helmCharts:
     releaseName: prometheus
     repo: https://prometheus-community.github.io/helm-charts
     version: x.x.x
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/extraArgs/external.alert.source
+        value: |
+          explore?orgId=1&left={"datasource":"vm-prod-gke","queries":[{"expr":{{$expr|jsonEscape|queryEscape}},"refId":"A"}],"range":{"from":"now-1h","to":"now"}}
+    target:
+      kind: VMAlert
+      name: victoriametrics

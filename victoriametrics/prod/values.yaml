@@ -116,6 +116,8 @@ vmalert:
   enabled: true
   spec:
     replicaCount: 3
+    extraArgs:
+      external.url: https://grafana.nsl.xyz
 vmagent:
   enabled: true
   annotations:
