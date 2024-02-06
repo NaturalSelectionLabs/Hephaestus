@@ -52,3 +52,4 @@ statefulset:
 
 serviceMonitor:
   enabled: true
+  namespaced: true
