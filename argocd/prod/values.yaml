@@ -62,15 +62,15 @@ repoServer:
       enabled: true
   resources:
     requests:
-      cpu: 0.5
-      memory: 512Mi
-    limits:
       cpu: 1
       memory: 1Gi
+    limits:
+      cpu: 2
+      memory: 2Gi
   autoscaling:
     enabled: true
-    minReplicas: 5
-    maxReplicas: 10
+    minReplicas: 3
+    maxReplicas: 7
   rbac:
     - verbs:
         - get
@@ -109,11 +109,11 @@ repoServer:
       image: quay.io/argoproj/argocd:v2.8.4
       resources:
         requests:
-          cpu: 0.5
-          memory: 256Mi
-        limits:
           cpu: 1
           memory: 512Mi
+        limits:
+          cpu: 2
+          memory: 1Gi
       env:
         - name: AVP_SECRET
           value: guardian:avp-prod
