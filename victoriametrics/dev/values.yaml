@@ -225,39 +225,9 @@ kubeApiServer:
         component: apiserver
         provider: kubernetes
 
-# -- Component scraping the kube controller manager
+# -- Disable kube controller manager for GKE managed kubernetes
 kubeControllerManager:
-  enabled: true
-
-  ## If your kube controller manager is not deployed as a pod, specify IPs it can be found on
-  ##
-  endpoints: []
-  # - 10.141.4.22
-  # - 10.141.4.23
-  # - 10.141.4.24
-
-  ## If using kubeControllerManager.endpoints only the port and targetPort are used
-  ##
-  service:
-    enabled: true
-    port: 10257
-    targetPort: 10257
-    # selector:
-    #   component: kube-controller-manager
-
-  # spec for VMServiceScrape crd
-  # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
-  spec:
-    jobLabel: jobLabel
-    endpoints:
-      - bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
-        # bearerTokenSecret:
-        #   key: ""
-        port: http-metrics
-        scheme: https
-        tlsConfig:
-          caFile: /var/run/secrets/kubernetes.io/serviceaccount/ca.crt
-          serverName: kubernetes
+  enabled: false
 
 # -- Component scraping coreDns. Use either this or kubeDns
 coreDns:
