@@ -3,15 +3,14 @@ kind: Kustomization
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-  - additional-scrape-configs.yaml
   - svc.yaml
   - route.yaml
-  - file_sd_configs.yaml
 
 configMapGenerator:
   - name: file-sd-configs
     files:
       - blackbox-targets.yaml
+secretGenerator:
   - name: additional-scrape-configs
     files:
       - prometheus-additional.yaml
