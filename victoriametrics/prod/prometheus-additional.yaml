@@ -1,0 +1,165 @@
+- job_name: 'crossbell-faucet'
+  metrics_path: /metrics
+  params:
+    module: [http_2xx]
+  scheme: "https"
+  static_configs:
+    - targets:
+        - faucet.crossbell.io
+- job_name: kubernetes-pods
+  honor_timestamps: true
+  honor_labels: false
+  scrape_interval: 30s
+  scheme: http
+  metrics_path: /metrics
+  relabel_configs:
+    - action: keep_if_equal
+      source_labels: [ __meta_kubernetes_pod_annotation_prometheus_io_port, __meta_kubernetes_pod_container_port_number ]
+    - action: drop
+      source_labels: [ __meta_kubernetes_pod_container_init ]
+      regex: 'true'
+    - regex: 'true'
+      action: keep
+      source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_scrape
+      replacement: $1
+      separator: ;
+    - regex: Running
+      action: keep
+      source_labels:
+        - __meta_kubernetes_pod_phase
+      replacement: $1
+      separator: ;
+    - regex: '10254'
+      action: drop
+      source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+      replacement: $1
+      separator: ;
+    - regex: '9153'
+      action: drop
+      source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+      replacement: $1
+      separator: ;
+    - regex: (.+)
+      action: replace
+      source_labels:
+        - __meta_kubernetes_pod_annotation_prometheus_io_path
+      replacement: $1
+      separator: ;
+      target_label: __metrics_path__
+    - regex: (.+)
+      action: replace
+      source_labels:
+        - __meta_kubernetes_pod_label_targetId
+      replacement: $1
+      separator: ;
+      target_label: arms_instance_id
+    - regex: (.+)
+      action: replace
+      source_labels:
+        - __meta_kubernetes_pod_label_uid
+      replacement: $1
+      separator: ;
+      target_label: arms_instance_name
+    - regex: ([^:]+)(?::\d+)?;(\d+)
+      action: replace
+      source_labels:
+        - __address__
+        - __meta_kubernetes_pod_annotation_prometheus_io_port
+      replacement: $1:$2
+      separator: ;
+      target_label: __address__
+    - regex: __meta_kubernetes_pod_label_(.+)
+      action: labelmap
+      replacement: $1
+      separator: ;
+    - regex: (.*)
+      action: replace
+      source_labels:
+        - __meta_kubernetes_namespace
+      replacement: $1
+      separator: ;
+      target_label: namespace
+    - regex: (.*)
+      action: replace
+      source_labels:
+        - __meta_kubernetes_pod_name
+      replacement: $1
+      separator: ;
+      target_label: pod
+  scrape_timeout: 30s
+  kubernetes_sd_configs:
+    - role: pod
+      namespaces: {}
+      # follow_redirects: true
+- job_name: cockroachdb-aliyun
+  honor_timestamps: true
+  honor_labels: false
+  scrape_interval: 30s
+  scheme: https
+  metrics_path: /_status/vars
+  tls_config:
+    insecure_skip_verify: true
+  static_configs:
+    - targets:
+        - roach0.aliyun.index.ai:8080
+        - roach1.aliyun.index.ai:8080
+        - roach2.aliyun.index.ai:8080
+        - roach3.aliyun.index.ai:8080
+        - roach4.aliyun.index.ai:8080
+        - roach5.aliyun.index.ai:8080
+- job_name: cockroachdb-gcp
+  honor_timestamps: true
+  honor_labels: false
+  scrape_interval: 30s
+  scheme: https
+  metrics_path: /_status/vars
+  tls_config:
+    insecure_skip_verify: true
+  static_configs:
+    - targets:
+        - cockroachdb-0.gcp.index.ai:8080
+        - cockroachdb-1.gcp.index.ai:8080
+        - cockroachdb-2.gcp.index.ai:8080
+        - cockroachdb-3.gcp.index.ai:8080
+        - cockroachdb-4.gcp.index.ai:8080
+        - cockroachdb-5.gcp.index.ai:8080
+        - cockroachdb-6.gcp.index.ai:8080
+        - cockroachdb-7.gcp.index.ai:8080
+- job_name: blackbox
+  scrape_interval: 30s
+  scrape_timeout: 30s
+  scheme: "https"
+  metrics_path: /blackbox_exporter
+  file_sd_configs:
+    - files:
+        - /etc/prometheus/file-sd-configs/blackbox-targets.yaml
+  relabel_configs:
+    # adds "module" label in the final labelset
+    - source_labels: [__address__]
+      regex: '.*:_:(.*):_:.*:_:.*:_:.*'
+      target_label: module
+    # adds "geohash" label in the final labelset
+    - source_labels: [__address__]
+      regex: '.*:_:.*:_:.*:_:(.*):_:.*'
+      target_label: geohash
+    # rewrites "instance" label with corresponding URL
+    - source_labels: [__address__]
+      regex: '.*:_:.*:_:.*:_:.*:_:(.*)'
+      target_label: instance
+    # rewrites "job" label with corresponding location name
+    - source_labels: [__address__]
+      regex: '.*:_:.*:_:(.*):_:.*:_:.*'
+      target_label: job
+    # passes "module" parameter to Blackbox exporter
+    - source_labels: [module]
+      target_label: __param_module
+    # passes "target" parameter to Blackbox exporter
+    - source_labels: [instance]
+      target_label: __param_target
+    # the Blackbox exporter's real hostname:port
+    - source_labels: [__address__]
+      regex: '(.*):_:.*:_:.*:_:.*:_:.*'
+      target_label: __address__

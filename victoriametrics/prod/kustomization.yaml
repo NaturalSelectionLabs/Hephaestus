@@ -1,10 +1,20 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
 resources:
   - additional-scrape-configs.yaml
   - svc.yaml
   - route.yaml
   - file_sd_configs.yaml
+
+configMapGenerator:
+  - name: file-sd-configs
+    files:
+      - blackbox-targets.yaml
+  - name: additional-scrape-configs
+    files:
+      - prometheus-additional.yaml
 
 helmCharts:
   - name: victoria-metrics-k8s-stack
