@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: file_sd_configs
+data:
+  blackbox-targets.yml: |
+    - targets:
+        
+        # Belgium Blackbox exporter
+        - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:http://prometheus.io
+        - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://prometheus.io
+        - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:http://example.com:8080
+        
+        # South Carolina Blackbox exporter
+        - us-east1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:SouthCarolina:_:djyydm129zkud:_:http://prometheus.io
+        - us-east1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:SouthCarolina:_:djyydm129zkud:_:https://prometheus.io
+        - us-east1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:SouthCarolina:_:djyydm129zkud:_:http://example.com:8080
+            
+        # Lowa Blackbox exporter
+        - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:http://prometheus.io
+        - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://prometheus.io
+        - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:http://example.com:8080

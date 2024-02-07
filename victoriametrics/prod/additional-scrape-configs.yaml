@@ -135,3 +135,38 @@ stringData:
             - cockroachdb-5.gcp.index.ai:8080
             - cockroachdb-6.gcp.index.ai:8080
             - cockroachdb-7.gcp.index.ai:8080
+    - job_name: blackbox
+      scrape_interval: 30s
+      scrape_timeout: 30s
+      scheme: "https"
+      metrics_path: /blackbox_exporter
+      file_sd_configs:
+        - files:
+            - /etc/prometheus/file_sd_configs/blackbox-targets.yml
+      relabel_configs:
+        # adds "module" label in the final labelset
+        - source_labels: [__address__]
+          regex: '.*:_:(.*):_:.*:_:.*:_:.*'
+          target_label: module
+        # adds "geohash" label in the final labelset
+        - source_labels: [__address__]
+          regex: '.*:_:.*:_:.*:_:(.*):_:.*'
+          target_label: geohash
+        # rewrites "instance" label with corresponding URL
+        - source_labels: [__address__]
+          regex: '.*:_:.*:_:.*:_:.*:_:(.*)'
+          target_label: instance
+        # rewrites "job" label with corresponding location name
+        - source_labels: [__address__]
+          regex: '.*:_:.*:_:(.*):_:.*:_:.*'
+          target_label: job
+        # passes "module" parameter to Blackbox exporter
+        - source_labels: [module]
+          target_label: __param_module
+        # passes "target" parameter to Blackbox exporter
+        - source_labels: [instance]
+          target_label: __param_target
+        # the Blackbox exporter's real hostname:port
+        - source_labels: [__address__]
+          regex: '(.*):_:.*:_:.*:_:.*:_:.*'
+          target_label: __address__
