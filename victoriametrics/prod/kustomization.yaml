@@ -5,11 +5,8 @@ generatorOptions:
 resources:
   - svc.yaml
   - route.yaml
+  - file-sd-configs
 
-configMapGenerator:
-  - name: file-sd-configs
-    files:
-      - blackbox-targets.yaml
 secretGenerator:
   - name: additional-scrape-configs
     files:
