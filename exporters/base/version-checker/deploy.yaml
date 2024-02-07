@@ -26,7 +26,9 @@ spec:
           ports:
             - containerPort: 8080
           name: version-checker
-          command: ["version-checker"]
+          command:
+            - "version-checker"
+            - "-a"
           livenessProbe:
             httpGet:
               path: /readyz
