@@ -1,0 +1,14 @@
+- targets:
+    # Lowa Blackbox exporter
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://rss3.io
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://crossbell.io
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://faucet.crossbell.io
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://indexer.crossbell.io/v1/characters/30
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://rpc.crossbell.io
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://scan.crossbell.io/api?module=block&action=eth_block_number
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://xlog.app
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://opsync.crossbell.io/healthcheck
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://ipfs-relay.crossbell.io/
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://testnet.rss3.io/data/accounts/vitalik.eth/activities?limit=1&tag=social
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://rpc.testnet.rss3.io/
+    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://scan.testnet.rss3.io/api?module=block&action=eth_block_number

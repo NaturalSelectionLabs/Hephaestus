@@ -1,0 +1,14 @@
+- targets:
+    # Belgium Blackbox exporter
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://rss3.io
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://crossbell.io
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://faucet.crossbell.io
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://indexer.crossbell.io/v1/characters/30
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://rpc.crossbell.io
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://scan.crossbell.io/api?module=block&action=eth_block_number
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://xlog.app
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://opsync.crossbell.io/healthcheck
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://ipfs-relay.crossbell.io/
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://testnet.rss3.io/data/accounts/vitalik.eth/activities?limit=1&tag=social
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://rpc.testnet.rss3.io/
+    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://scan.testnet.rss3.io/api?module=block&action=eth_block_number
