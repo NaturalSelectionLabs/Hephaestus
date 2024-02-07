@@ -138,12 +138,12 @@ vmagent:
       tag: v1.87.1
     scrapeInterval: 25s
     volumes:
-      - name: file_sd_configs
+      - name: file-sd-configs
         configMap:
-          name: file_sd_configs
+          name: file-sd-configs
     volumeMounts:
-      - mountPath: /etc/prometheus/file_sd_configs
-        name: file_sd_configs
+      - mountPath: /etc/prometheus/file-sd-configs
+        name: file-sd-configs
     externalLabels:
       cluster: prod
       region: us-central1

@@ -142,7 +142,7 @@ stringData:
       metrics_path: /blackbox_exporter
       file_sd_configs:
         - files:
-            - /etc/prometheus/file_sd_configs/blackbox-targets.yml
+            - /etc/prometheus/file-sd-configs/blackbox-targets.yml
       relabel_configs:
         # adds "module" label in the final labelset
         - source_labels: [__address__]
