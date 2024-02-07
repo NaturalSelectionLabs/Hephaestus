@@ -12,8 +12,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe failed (instance {{ $labels.instance }})
-            description: "Probe failed\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox probe failed from {{ $labels.jon }} (instance {{ $labels.instance }})
+            description: "Probe failed\n"
 
         - alert: BlackboxConfigurationReloadFailure
           expr: 'blackbox_exporter_config_last_reload_successful != 1'
@@ -30,8 +30,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox slow probe (instance {{ $labels.instance }})
-            description: "Blackbox probe took more than 1s to complete\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox slow probe from {{ $labels.jon }} (instance {{ $labels.instance }})
+            description: "Blackbox probe took more than 1s to complete\n"
 
         - alert: BlackboxProbeHttpFailure
           expr: 'probe_http_status_code <= 199 OR probe_http_status_code >= 400'
@@ -39,8 +39,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe HTTP failure (instance {{ $labels.instance }})
-            description: "HTTP status code is not 200-399\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox probe HTTP failure from {{ $labels.jon }} (instance {{ $labels.instance }})
+            description: "HTTP status code is not 200-399\n "
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '3 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 20'
@@ -49,7 +49,7 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})
-            description: "SSL certificate expires in less than 20 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            description: "SSL certificate expires in less than 20 days\n"
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '0 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 3'
@@ -58,7 +58,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})
-            description: "SSL certificate expires in less than 3 days\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            description: "SSL certificate expires in less than 3 days\n"
 
         - alert: BlackboxSslCertificateExpired
           expr: 'round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 0'
@@ -67,7 +67,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox SSL certificate expired (instance {{ $labels.instance }})
-            description: "SSL certificate has expired already\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            description: "SSL certificate has expired already\n"
 
         - alert: BlackboxProbeSlowHttp
           expr: 'avg_over_time(probe_http_duration_seconds[1m]) > 1'
@@ -75,8 +75,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow HTTP (instance {{ $labels.instance }})
-            description: "HTTP request took more than 1s\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox probe slow HTTP from {{ $labels.jon }} (instance {{ $labels.instance }})
+            description: "HTTP request took more than 1s\n"
 
         - alert: BlackboxProbeSlowPing
           expr: 'avg_over_time(probe_icmp_duration_seconds[1m]) > 1'
@@ -84,5 +84,5 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow ping (instance {{ $labels.instance }})
-            description: "Blackbox ping took more than 1s\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox probe slow ping from {{ $labels.jon }} (instance {{ $labels.instance }})
+            description: "Blackbox ping took more than 1s\n"
