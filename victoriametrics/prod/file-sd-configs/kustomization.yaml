@@ -10,3 +10,6 @@ configMapGenerator:
       - us-central1.yaml
       - us-east1.yaml
 #      - us-west1.yaml
+
+resources:
+  - rule.yaml
