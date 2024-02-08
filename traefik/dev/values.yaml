@@ -26,16 +26,25 @@ logs:
 additionalArguments:
   - "--entryPoints.websecure.forwardedHeaders.insecure"
   - "--entryPoints.web.forwardedHeaders.insecure"
-  - "--providers.kubernetescrd.allowexternalnameservices=true"
-  - "--metrics.prometheus.addEntryPointsLabels=false" # web,metrics,etc
 instanceLabelOverride: traefik
 
 providers:
   kubernetesIngress:
     publishedService:
       enabled: true
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
+    allowExternalNameServices: true
 
 metrics:
   prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
     service:
       enabled: true
+  openTelemetry:
+    address: jaeger-collector:4318
