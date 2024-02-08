@@ -12,7 +12,12 @@ spec:
           - service
           regex: ^([^-]+)-.*$
           replacement: ${1}
-          targetLabel: namespace
+          targetLabel: target_namespace
+        - sourceLabels:
+          - service
+          regex: "^[^-]+-(.*)-[^@]+@.*$"
+          replacement: ${1}
+          targetLabel: target_service
   selector:
     matchLabels:
       app.kubernetes.io/component: metrics
