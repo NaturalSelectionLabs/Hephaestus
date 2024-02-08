@@ -12,8 +12,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe failed from {{ $labels.job }} (instance {{ $labels.instance }})
-            description: "Probe failed\n"
+            summary: Blackbox probe failed
+            description: "Probe failed from {{ $labels.job }} (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxConfigurationReloadFailure
           expr: 'blackbox_exporter_config_last_reload_successful != 1'
@@ -21,8 +21,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox configuration reload failure (instance {{ $labels.instance }})
-            description: "Blackbox configuration reload failure\n  VALUE = {{ $value }}\n  LABELS = {{ $labels }}"
+            summary: Blackbox configuration reload failure
+            description: "Blackbox configuration reload failure from {{ $labels.job }} (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxSlowProbe
           expr: 'avg_over_time(probe_duration_seconds[1m]) > 1'
@@ -30,8 +30,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox slow probe from {{ $labels.job }} (instance {{ $labels.instance }})
-            description: "Blackbox probe took more than 1s to complete\n"
+            summary: Blackbox slow probe
+            description: "Blackbox probe took more than 1s to complete from {{ $labels.job }} (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxProbeHttpFailure
           expr: 'probe_http_status_code <= 199 OR probe_http_status_code >= 400'
@@ -39,8 +39,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe HTTP failure from {{ $labels.job }} (instance {{ $labels.instance }})
-            description: "HTTP status code is not 200-399\n "
+            summary: Blackbox probe HTTP failure
+            description: "HTTP status code is not 200-399 from {{ $labels.job }} (instance {{ $labels.instance }})\n "
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '3 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 20'
@@ -48,8 +48,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})
-            description: "SSL certificate expires in less than 20 days\n"
+            summary: Blackbox SSL certificate will expire soon
+            description: "SSL certificate expires in less than 20 days (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '0 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 3'
@@ -57,8 +57,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox SSL certificate will expire soon (instance {{ $labels.instance }})
-            description: "SSL certificate expires in less than 3 days\n"
+            summary: Blackbox SSL certificate will expire soon
+            description: "SSL certificate expires in less than 3 days (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxSslCertificateExpired
           expr: 'round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 0'
@@ -66,8 +66,8 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox SSL certificate expired (instance {{ $labels.instance }})
-            description: "SSL certificate has expired already\n"
+            summary: Blackbox SSL certificate expired
+            description: "SSL certificate has expired already (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxProbeSlowHttp
           expr: 'avg_over_time(probe_http_duration_seconds[1m]) > 1'
@@ -75,8 +75,8 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow HTTP from {{ $labels.job }} (instance {{ $labels.instance }})
-            description: "HTTP request took more than 1s\n"
+            summary: Blackbox probe slow HTTP
+            description: "HTTP request took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
 
         - alert: BlackboxProbeSlowPing
           expr: 'avg_over_time(probe_icmp_duration_seconds[1m]) > 1'
@@ -84,5 +84,5 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow ping from {{ $labels.job }} (instance {{ $labels.instance }})
-            description: "Blackbox ping took more than 1s\n"
+            summary: Blackbox probe slow ping
+            description: "Blackbox ping took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
