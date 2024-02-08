@@ -12,7 +12,7 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe failed from {{ $labels.jon }} (instance {{ $labels.instance }})
+            summary: Blackbox probe failed from {{ $labels.job }} (instance {{ $labels.instance }})
             description: "Probe failed\n"
 
         - alert: BlackboxConfigurationReloadFailure
@@ -30,7 +30,7 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox slow probe from {{ $labels.jon }} (instance {{ $labels.instance }})
+            summary: Blackbox slow probe from {{ $labels.job }} (instance {{ $labels.instance }})
             description: "Blackbox probe took more than 1s to complete\n"
 
         - alert: BlackboxProbeHttpFailure
@@ -39,7 +39,7 @@ spec:
           labels:
             severity: critical
           annotations:
-            summary: Blackbox probe HTTP failure from {{ $labels.jon }} (instance {{ $labels.instance }})
+            summary: Blackbox probe HTTP failure from {{ $labels.job }} (instance {{ $labels.instance }})
             description: "HTTP status code is not 200-399\n "
 
         - alert: BlackboxSslCertificateWillExpireSoon
@@ -75,7 +75,7 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow HTTP from {{ $labels.jon }} (instance {{ $labels.instance }})
+            summary: Blackbox probe slow HTTP from {{ $labels.job }} (instance {{ $labels.instance }})
             description: "HTTP request took more than 1s\n"
 
         - alert: BlackboxProbeSlowPing
@@ -84,5 +84,5 @@ spec:
           labels:
             severity: warning
           annotations:
-            summary: Blackbox probe slow ping from {{ $labels.jon }} (instance {{ $labels.instance }})
+            summary: Blackbox probe slow ping from {{ $labels.job }} (instance {{ $labels.instance }})
             description: "Blackbox ping took more than 1s\n"
