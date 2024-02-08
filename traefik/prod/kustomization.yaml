@@ -9,5 +9,5 @@ helmCharts:
     releaseName: traefik
     repo: https://helm.traefik.io/traefik
     valuesFile: values.yaml
-    version: 22.x.x
+    version: 26.x.x
     includeCRDs: true
