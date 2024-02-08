@@ -34,3 +34,8 @@ providers:
   kubernetesIngress:
     publishedService:
       enabled: true
+
+metrics:
+  prometheus:
+    service:
+      enabled: true
