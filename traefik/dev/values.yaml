@@ -46,5 +46,10 @@ metrics:
     buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
     service:
       enabled: true
-  openTelemetry:
-    address: jaeger-collector:4318
+#  openTelemetry:
+#    address: jaeger-collector:4318
+tracing:
+  jaeger:
+    samplingServerURL: http://jaeger-agent.guardian:5778/sampling
+    localAgentHostPort: jaeger-agent.guardian:6831
+    disableAttemptReconnecting: false
