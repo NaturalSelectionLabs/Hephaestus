@@ -14,6 +14,7 @@ spec:
           annotations:
             summary: Blackbox probe failed
             description: "Probe failed from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxConfigurationReloadFailure
           expr: 'blackbox_exporter_config_last_reload_successful != 1'
@@ -23,6 +24,7 @@ spec:
           annotations:
             summary: Blackbox configuration reload failure
             description: "Blackbox configuration reload failure from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSlowProbe
           expr: 'avg_over_time(probe_duration_seconds[1m]) > 1'
@@ -32,6 +34,7 @@ spec:
           annotations:
             summary: Blackbox slow probe
             description: "Blackbox probe took more than 1s to complete from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeHttpFailure
           expr: 'probe_http_status_code <= 199 OR probe_http_status_code >= 400'
@@ -41,6 +44,7 @@ spec:
           annotations:
             summary: Blackbox probe HTTP failure
             description: "HTTP status code is not 200-399 from {{ $labels.job }} (instance {{ $labels.instance }})\n "
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '3 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 20'
@@ -50,6 +54,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate will expire soon
             description: "SSL certificate expires in less than 20 days (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateWillExpireSoon
           expr: '0 <= round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 3'
@@ -59,6 +64,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate will expire soon
             description: "SSL certificate expires in less than 3 days (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateExpired
           expr: 'round((last_over_time(probe_ssl_earliest_cert_expiry[10m]) - time()) / 86400, 0.1) < 0'
@@ -68,6 +74,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate expired
             description: "SSL certificate has expired already (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowHttp
           expr: 'avg_over_time(probe_http_duration_seconds[1m]) > 1'
@@ -77,6 +84,7 @@ spec:
           annotations:
             summary: Blackbox probe slow HTTP
             description: "HTTP request took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowPing
           expr: 'avg_over_time(probe_icmp_duration_seconds[1m]) > 1'
@@ -86,3 +94,4 @@ spec:
           annotations:
             summary: Blackbox probe slow ping
             description: "Blackbox ping took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
