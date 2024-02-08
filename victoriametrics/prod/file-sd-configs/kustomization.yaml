@@ -9,7 +9,8 @@ configMapGenerator:
       - europe-west1.yaml
       - us-central1.yaml
       - us-east1.yaml
-#      - us-west1.yaml
+      - us-west1.yaml
+      - asia-east2.yaml
 
 resources:
   - rule.yaml

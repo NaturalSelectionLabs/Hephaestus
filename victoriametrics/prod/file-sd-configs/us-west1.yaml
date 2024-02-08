@@ -1,12 +1,14 @@
 - targets:
-    # Belgium Blackbox exporter
-    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://rss3.io
-    - europe-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Belgium:_:u0gvph1m9bbqh:_:https://crossbell.io
-
-    # South Carolina Blackbox exporter
-    - us-east1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:SouthCarolina:_:djyydm129zkud:_:https://rss3.io
-    - us-east1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:SouthCarolina:_:djyydm129zkud:_:https://crossbell.io
-
-    # Lowa Blackbox exporter
-    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://rss3.io
-    - us-central1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Lowa:_:9zmw5c8kz5tx9:_:https://crossbell.io
+      # Belgium Blackbox exporter
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://rss3.io
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://crossbell.io
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://faucet.crossbell.io
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://indexer.crossbell.io/v1/characters/30
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://rpc.crossbell.io
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://scan.crossbell.io/api?module=block&action=eth_block_number
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://xlog.app
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://opsync.crossbell.io/healthcheck
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://ipfs-relay.crossbell.io/
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://testnet.rss3.io/data/accounts/vitalik.eth/activities?limit=1&tag=social
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://rpc.testnet.rss3.io/
+      - us-west1-naturalselectionlabs.cloudfunctions.net:443:_:http_2xx:_:Oregon:_:9rcf53ky2vxs5:_:https://scan.testnet.rss3.io/api?module=block&action=eth_block_number
