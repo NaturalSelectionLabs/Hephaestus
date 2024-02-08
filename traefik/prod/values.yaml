@@ -24,13 +24,6 @@ logs:
 additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
   - "--entryPoints.websecure.forwardedHeaders.insecure"
-  - "--metrics.prometheus.buckets=0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
-  - "--providers.kubernetescrd.allowexternalnameservices=true"
-  - "--tracing.jaeger=true"
-  - "--tracing.jaeger.samplingServerURL=http://jaeger-agent.guardian:5778/sampling"
-  - "--tracing.jaeger.localAgentHostPort=jaeger-agent.guardian:6831"
-  - "--tracing.jaeger.disableAttemptReconnecting=false"
-  - "--metrics.prometheus.addEntryPointsLabels=false" # web,metrics,etc
 resources:
   requests:
     cpu: "100m"
@@ -75,3 +68,24 @@ providers:
   kubernetesIngress:
     publishedService:
       enabled: true
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
+    allowExternalNameServices: true
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
+    service:
+      enabled: true
+#  openTelemetry:
+#    address: jaeger-collector:4318
+tracing:
+  jaeger:
+    samplingServerURL: http://jaeger-agent.guardian:5778/sampling
+    localAgentHostPort: jaeger-agent.guardian:6831
+    disableAttemptReconnecting: false
