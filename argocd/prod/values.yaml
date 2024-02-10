@@ -201,6 +201,8 @@ configs:
     resource.customizations.ignoreDifferences.apps_Deployment: |
       jqPathExpressions:
       - .spec.template.spec.initContainers[].resources
+      managedFieldsManagers:
+      - kube-controller-manager
   params:
     server.insecure: true
     reposerver.enable.git.submodule: false
