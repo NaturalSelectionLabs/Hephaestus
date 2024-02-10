@@ -37,6 +37,7 @@ init:
        options: [admin]
 
 statefulset:
+  replicas: 5
   resources:
     requests:
       # This is intentionally low to make it work on local k3d clusters.
