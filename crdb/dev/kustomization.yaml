@@ -12,25 +12,25 @@ helmCharts:
     valuesFile: values.yaml
     version: 11.x.x
 
-patches:
-  - patch: |-
-      - op: add
-        path: "/spec/dnsNames/-"
-        value:
-          '*.aliyun.nsl.ooo'
-      - op: add
-        path: "/spec/dnsNames/-"
-        value:
-          '*.gcp.nsl.ooo'
-    target:
-      kind: Certificate
-      name: cockroachdb-node
-  - patch: |-
-      - op: replace
-        path: "/spec/template/spec/containers/0/env/1"
-        value:
-          name: STATEFULSET_FQDN
-          value: gcp.nsl.ooo
-    target:
-      kind: StatefulSet
-      name: cockroachdb
+#patches:
+#  - patch: |-
+#      - op: add
+#        path: "/spec/dnsNames/-"
+#        value:
+#          '*.aliyun.nsl.ooo'
+#      - op: add
+#        path: "/spec/dnsNames/-"
+#        value:
+#          '*.gcp.nsl.ooo'
+#    target:
+#      kind: Certificate
+#      name: cockroachdb-node
+#  - patch: |-
+#      - op: replace
+#        path: "/spec/template/spec/containers/0/env/1"
+#        value:
+#          name: STATEFULSET_FQDN
+#          value: gcp.nsl.ooo
+#    target:
+#      kind: StatefulSet
+#      name: cockroachdb
