@@ -51,6 +51,25 @@ metrics:
       jobLabel: traefik
       interval: 30s
       honorLabels: true
+      metricRelabelings:
+        - sourceLabels:
+            - service
+          regex: ^([^-]+)-.*$
+          replacement: ${1}
+          targetLabel: target_namespace
+        - sourceLabels:
+            - service
+          regex: ^[^-]+-(.*)-[^@]+@.*$
+          replacement: ${1}
+          targetLabel: target_service
+
+        - sourceLabels:
+            - __meta_kubernetes_pod_node_name
+          separator: ;
+          regex: ^(.*)$
+          targetLabel: nodename
+          replacement: $1
+          action: replace
 #  openTelemetry:
 #    address: jaeger-collector:4318
 tracing:
