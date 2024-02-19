@@ -46,6 +46,11 @@ metrics:
     buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
     service:
       enabled: true
+    disableAPICheck: true
+    serviceMonitor:
+      jobLabel: traefik
+      interval: 30s
+      honorLabels: true
 #  openTelemetry:
 #    address: jaeger-collector:4318
 tracing:
