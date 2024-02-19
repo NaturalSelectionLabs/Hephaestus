@@ -2,7 +2,7 @@ service:
   enabled: true
   type: LoadBalancer
   annotations:
-    cloud.google.com/l4-rbs: "enabled"
+#    cloud.google.com/l4-rbs: "enabled"
     networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
     networking.gke.io/internal-load-balancer-allow-global-access: "true"
 deployment:
