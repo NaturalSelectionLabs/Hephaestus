@@ -62,7 +62,6 @@ metrics:
           regex: ^[^-]+-(.*)-[^@]+@.*$
           replacement: ${1}
           targetLabel: target_service
-
         - sourceLabels:
             - __meta_kubernetes_pod_node_name
           separator: ;

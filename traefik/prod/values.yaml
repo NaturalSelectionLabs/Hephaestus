@@ -82,6 +82,29 @@ metrics:
     buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
     service:
       enabled: true
+    disableAPICheck: true
+    serviceMonitor:
+      jobLabel: traefik
+      interval: 30s
+      honorLabels: true
+      metricRelabelings:
+        - sourceLabels:
+            - service
+          regex: ^([^-]+)-.+-.*$
+          replacement: ${1}
+          targetLabel: target_namespace
+        - sourceLabels:
+            - service
+          regex: ^[^-]+-(.*)-[^@]+@.*$
+          replacement: ${1}
+          targetLabel: target_service
+        - sourceLabels:
+            - __meta_kubernetes_pod_node_name
+          separator: ;
+          regex: ^(.*)$
+          targetLabel: nodename
+          replacement: $1
+          action: replace
 #  openTelemetry:
 #    address: jaeger-collector:4318
 tracing:
