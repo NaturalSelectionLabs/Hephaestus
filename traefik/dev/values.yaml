@@ -54,7 +54,7 @@ metrics:
       metricRelabelings:
         - sourceLabels:
             - service
-          regex: ^([^-]+)-.*$
+          regex: ^([^-]+)-.+-.*$
           replacement: ${1}
           targetLabel: target_namespace
         - sourceLabels:
