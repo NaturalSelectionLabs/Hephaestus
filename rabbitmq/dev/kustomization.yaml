@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - route.yaml
-#  - secrets.yaml
+  - secrets.yaml
 
 helmCharts:
   - name: rabbitmq
