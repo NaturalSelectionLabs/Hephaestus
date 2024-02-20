@@ -1,0 +1,14 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: rabbitmq
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - kind: Rule
+      match: Host(`mq.dev.naturalselectionlabs.com`)
+      services:
+      - name: rabbitmq
+        port: 15672
