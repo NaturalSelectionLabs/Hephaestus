@@ -808,7 +808,7 @@ resource "argocd_application_set" "rabbitmq" {
             }
             env {
               name  = "AVP_SECRET"
-              value = "guardian:avp-prod"
+              value = "guardian:avp-{{cluster}}"
             }
           }
         }
