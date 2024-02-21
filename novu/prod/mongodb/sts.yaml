@@ -1,5 +1,5 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: novu-mongodb
   labels:
@@ -10,13 +10,12 @@ metadata:
     app.kubernetes.io/component: mongodb
 spec:
   replicas: 1
-  strategy:
-    type: RollingUpdate
   selector:
     matchLabels:
       app.kubernetes.io/name: mongodb
       app.kubernetes.io/instance: novu
       app.kubernetes.io/component: mongodb
+  serviceName: novu-mongodb
   template:
     metadata:
       labels:
@@ -26,10 +25,8 @@ spec:
         app.kubernetes.io/managed-by: Helm
         app.kubernetes.io/component: mongodb
     spec:
-
       serviceAccountName: novu-mongodb
       affinity:
-
         podAntiAffinity:
           preferredDuringSchedulingIgnoredDuringExecution:
             - podAffinityTerm:
@@ -40,10 +37,8 @@ spec:
                     app.kubernetes.io/component: mongodb
                 topologyKey: kubernetes.io/hostname
               weight: 1
-
       securityContext:
         fsGroup: 1001
-        sysctls: []
 
       containers:
         - name: mongodb
@@ -128,3 +123,21 @@ spec:
         - name: datadir
           persistentVolumeClaim:
             claimName: novu-mongodb
+  volumeClaimTemplates:
+    - kind: PersistentVolumeClaim
+      apiVersion: v1
+      metadata:
+        name: novu-mongodb
+        labels:
+          app.kubernetes.io/name: mongodb
+          helm.sh/chart: mongodb-13.15.3
+          app.kubernetes.io/instance: novu
+          app.kubernetes.io/managed-by: Helm
+          app.kubernetes.io/component: mongodb
+      spec:
+        accessModes:
+          - "ReadWriteOnce"
+        resources:
+          requests:
+            storage: "20Gi"
+        storageClassName: standard

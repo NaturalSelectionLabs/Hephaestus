@@ -6,3 +6,4 @@ resources:
   - service.yaml
   - url.yaml
   - serviceaccount.yaml
+  - sts.yaml
