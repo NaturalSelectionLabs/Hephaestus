@@ -1,5 +1,5 @@
 global:
-  storageClass: standard
+  storageClass: standard-rwo
 architecture: replicaset
 replicaCount: 3
 persistence:
