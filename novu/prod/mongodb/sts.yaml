@@ -120,14 +120,11 @@ spec:
           configMap:
             name: novu-mongodb-common-scripts
             defaultMode: 0550
-        - name: datadir
-          persistentVolumeClaim:
-            claimName: novu-mongodb
   volumeClaimTemplates:
     - kind: PersistentVolumeClaim
       apiVersion: v1
       metadata:
-        name: data
+        name: datadir
         labels:
           app.kubernetes.io/name: mongodb
           helm.sh/chart: mongodb-13.15.3
