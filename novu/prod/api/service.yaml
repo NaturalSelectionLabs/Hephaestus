@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: novu-api
+  labels:
+    app.kubernetes.io/name: novu
+    helm.sh/chart: novu-0.1.6
+    app.kubernetes.io/instance: novu
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: novu-api
+spec:
+  type: "ClusterIP"
+  ports:
+    - name: http
+      port: 3000
+      protocol: TCP
+  selector:
+    app.kubernetes.io/name: novu
+    app.kubernetes.io/instance: novu
+    app.kubernetes.io/component: novu-api

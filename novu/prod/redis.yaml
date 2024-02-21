@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: novu-externalredis
+  labels:
+    app.kubernetes.io/name: novu
+    helm.sh/chart: novu-0.1.6
+    app.kubernetes.io/instance: novu
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/component: backend
+  annotations:
+    avp.kubernetes.io/path: "kv/data/guardian/novu"
+type: Opaque
+data:
+  redis-password: "<redis-password>"
+  redis-host: "10.147.1.59"
