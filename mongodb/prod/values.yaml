@@ -2,6 +2,8 @@ global:
   storageClass: standard
 architecture: replicaset
 replicaCount: 3
+persistence:
+  size: 100Gi
 auth:
   rootUser: root
   usernames: ["novu_user"]
