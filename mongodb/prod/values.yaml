@@ -9,3 +9,10 @@ auth:
   usernames: ["novu_user"]
   databases: ["novu_db"]
   existingSecret: mongodb
+externalAccess:
+  enabled: true
+  service:
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
