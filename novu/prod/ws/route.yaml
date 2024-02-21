@@ -1,13 +1,13 @@
 apiVersion: traefik.containo.us/v1alpha1
 kind: IngressRoute
 metadata:
-  name: novu-web
+  name: novu-ws
 spec:
   entryPoints:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`novu.naturalselectionlabs.com`)
+      match: Host(`ws.novu.naturalselectionlabs.com`)
       services:
-        - name: novu-web
-          port: 4200
+        - name: novu-ws
+          port: 3002

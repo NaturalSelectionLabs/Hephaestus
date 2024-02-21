@@ -47,13 +47,13 @@ spec:
             - name: NODE_ENV
               value: "production"
             - name: API_ROOT_URL
-              value : "https://novu-api.crossbell.io"
+              value : "https://api.novu.naturalselectionlabs.com"
             - name: DISABLE_USER_REGISTRATION
               value : "false"
             - name: PORT
               value : "3000"
             - name: FRONT_BASE_URL
-              value : "https://novu.crossbell.io"
+              value : "https://novu.naturalselectionlabs.com"
             - name: MONGO_MIN_POOL_SIZE
               value : "10"
             - name: MONGO_MAX_POOL_SIZE

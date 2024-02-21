@@ -49,11 +49,11 @@ spec:
             - name: REACT_APP_DOCKER_HOSTED_ENV
               value : "true"
             - name: API_ROOT_URL
-              value : https://novu-api.crossbell.io
+              value : https://api.novu.naturalselectionlabs.com
             - name: REACT_APP_API_URL
-              value : https://novu-api.crossbell.io
+              value : https://api.novu.naturalselectionlabs.com
             - name: REACT_APP_WS_URL
-              value : https://novu-ws.crossbell.io
+              value : https://ws.novu.naturalselectionlabs.com
           resources:
             limits: {}
             requests: {}
