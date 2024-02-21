@@ -11,6 +11,6 @@ metadata:
   annotations:
     avp.kubernetes.io/path: "kv/data/guardian/novu"
 type: Opaque
-data:
+stringData:
   redis-password: "<redis-password>"
   redis-host: "10.147.1.59"
