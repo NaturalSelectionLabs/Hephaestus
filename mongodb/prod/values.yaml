@@ -2,3 +2,8 @@ global:
   storageClass: standard
 architecture: replicaset
 replicaCount: 3
+auth:
+  rootUser: root
+  usernames: ["novu_user"]
+  databases: ["novu_db"]
+  existingSecret: mongodb
