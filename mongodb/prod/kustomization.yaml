@@ -3,9 +3,8 @@ kind: Kustomization
 resources: []
 
 helmCharts:
-  - name: community-operator
-    releaseName: community-operator
-    repo: https://mongodb.github.io/helm-charts
+  - name: mongodb
+    releaseName: mongodb
+    repo: https://charts.bitnami.com/bitnami
     valuesFile: values.yaml
     version: x.x.x
-    includeCRDs: true

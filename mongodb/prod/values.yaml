@@ -1,0 +1,4 @@
+global:
+  storageClass: standard
+architecture: replicaset
+replicaCount: 3
