@@ -12,5 +12,10 @@ spec:
     app.kubernetes.io/component: mongodb
     app.kubernetes.io/instance: mongodb
     app.kubernetes.io/name: mongodb
+  ports:
+    - name: mongodb
+      port: 27017
+      protocol: TCP
+      targetPort: mongodb
   type: LoadBalancer
 
