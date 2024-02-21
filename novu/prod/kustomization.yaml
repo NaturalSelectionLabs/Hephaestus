@@ -5,6 +5,7 @@ resources:
   - web
   - worker
   - ws
+  - mongodb
   - redis.yaml
   - s3.yaml
   - secret.yaml
