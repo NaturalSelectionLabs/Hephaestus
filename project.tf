@@ -30,7 +30,7 @@ resource "argocd_project" "namespaced" {
     "crossbell",
     "network",
     "pregod",
-    "tureco",
+    "search",
     "diygod"
   ])
 
