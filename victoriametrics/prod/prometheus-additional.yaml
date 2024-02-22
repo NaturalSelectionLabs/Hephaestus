@@ -178,7 +178,7 @@
       target_label: instance
     - target_label: __address__
       replacement: blackbox_exporter:9115
-    - source_labels:  [endpoint__url]
+    - source_labels: [__endpoint__url]
       target_label: __address__
-    - source_labels: [endpoint__name]
+    - source_labels: [__endpoint__name]
       target_label: job
