@@ -27,13 +27,13 @@ spec:
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSlowProbe
-          expr: 'avg_over_time(probe_duration_seconds[1m]) > 1'
+          expr: 'avg_over_time(probe_duration_seconds[1m]) > 2'
           for: 1m
           labels:
             severity: warning
           annotations:
             summary: Blackbox slow probe
-            description: "Blackbox probe took more than 1s to complete from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Blackbox probe took more than 2s to complete from {{ $labels.job }} (instance {{ $labels.instance }})\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeHttpFailure
@@ -77,21 +77,21 @@ spec:
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowHttp
-          expr: 'avg_over_time(probe_http_duration_seconds[1m]) > 1'
+          expr: 'avg_over_time(probe_http_duration_seconds[1m]) > 2'
           for: 1m
           labels:
             severity: warning
           annotations:
             summary: Blackbox probe slow HTTP
-            description: "HTTP request took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "HTTP request took more than 2s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowPing
-          expr: 'avg_over_time(probe_icmp_duration_seconds[1m]) > 1'
+          expr: 'avg_over_time(probe_icmp_duration_seconds[1m]) > 2'
           for: 1m
           labels:
             severity: warning
           annotations:
             summary: Blackbox probe slow ping
-            description: "Blackbox ping took more than 1s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Blackbox ping took more than 2s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
