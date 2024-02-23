@@ -502,7 +502,7 @@ resource "argocd_application_set" "crdb-csb" {
       }
 
       spec {
-        project = argocd_project.guardian.metadata[0].name
+        project = "crossbell"
 
         source {
           repo_url        = var.repo_url
