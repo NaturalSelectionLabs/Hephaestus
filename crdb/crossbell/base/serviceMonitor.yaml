@@ -1,0 +1,31 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: cockroachdb
+spec:
+  endpoints:
+    - interval: 10s
+      path: /_status/vars
+      port: http
+      scheme: https
+      tlsConfig:
+        insecureSkipVerify: true
+        ca:
+          secret:
+            key: ca.crt
+            name: cockroachdb-node
+        cert:
+          secret:
+            key: tls.crt
+            name: cockroachdb-node
+        keySecret:
+          key: tls.key
+          name: cockroachdb-node
+  namespaceSelector:
+    matchNames:
+      - crossbell
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: cockroachdb
+      app.kubernetes.io/instance: cockroachdb
+      app.kubernetes.io/name: cockroachdb

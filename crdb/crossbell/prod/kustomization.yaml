@@ -1,0 +1,13 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - ../base
+#  - route.yaml
+
+helmCharts:
+  - name: cockroachdb
+    releaseName: cockroachdb
+    repo: https://charts.cockroachdb.com/
+    valuesFile: values.yaml
+    version: x.x.x
