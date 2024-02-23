@@ -15,7 +15,17 @@ storage:
   persistentVolume:
     storageClass: premium-rwo
     size: 100Gi
-
+service:
+  public:
+    type: LoadBalancer
+    # Additional labels to apply to this Service.
+    labels:
+      app.kubernetes.io/component: cockroachdb
+    # Additional annotations to apply to this Service.
+    annotations:
+      networking.gke.io/internal-load-balancer-allow-global-access: 'true'
+      networking.gke.io/internal-load-balancer-subnet: prod-loadbalancer
+      networking.gke.io/load-balancer-type: Internal
 conf:
   cluster-name: crossbell-prod
   locality: region=us-central1
