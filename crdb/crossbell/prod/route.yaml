@@ -7,7 +7,7 @@ spec:
   - websecure
   routes:
   - kind: Rule
-    match: Host(`crdb.prod.crossbell.io`)
+    match: Host(`crdb-csb.prod.naturalselectionlabs.com`)
     services:
     - name: cockroachdb
       port: 8080
