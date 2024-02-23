@@ -13,3 +13,4 @@ helmCharts:
     repo: https://charts.cockroachdb.com/
     valuesFile: values.yaml
     version: x.x.x
+    namespace: crossbell
