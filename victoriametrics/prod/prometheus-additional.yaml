@@ -182,3 +182,5 @@
       target_label: __address__
     - source_labels: [__endpoint__name]
       target_label: job
+    - source_labels: [ __endpoint__geohash]
+      target_label: geohash
