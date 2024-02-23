@@ -5,7 +5,7 @@ namespace: crossbell
 
 resources:
   - ../base
-#  - route.yaml
+  - route.yaml
 
 helmCharts:
   - name: cockroachdb
