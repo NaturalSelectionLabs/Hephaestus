@@ -112,6 +112,14 @@ alertmanager:
     configSecret: "vm-alertmanager-config"
     replicaCount: 2
     externalURL: https://alertmanager.prod.naturalselectionlabs.com
+  templateFiles:
+    status.tmpl: |-
+      {{ define "status.title" -}}
+      [{{ .Status | toUpper -}}
+       {{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}
+      ] {{ template "__alert_severity_prefix_title" . }} {{ .CommonAnnotations.instance }}
+      {{- end }}
+  # template_2.tmpl: ""
 
 vmalert:
   enabled: true
