@@ -117,7 +117,7 @@ alertmanager:
       {{ define "status.title" -}}
       [{{ .Status | toUpper -}}
        {{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}
-      ] {{ template "__alert_severity_prefix_title" . }} {{ .CommonAnnotations.instance }}
+      ] {{ template "__alert_severity_prefix_title" . }} {{ .Labels.instance }}
       {{- end }}
   # template_2.tmpl: ""
 
