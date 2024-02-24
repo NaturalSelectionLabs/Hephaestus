@@ -28,6 +28,14 @@ additionalArguments:
   - "--entryPoints.web.forwardedHeaders.insecure"
 instanceLabelOverride: traefik
 
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+        topologyKey: kubernetes.io/hostname
+
 providers:
   kubernetesIngress:
     publishedService:
