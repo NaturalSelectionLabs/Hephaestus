@@ -13,7 +13,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox probe failed
-            description: "Probe failed from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Probe failed from {{ $labels.job }}\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxConfigurationReloadFailure
@@ -23,7 +23,7 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox configuration reload failure
-            description: "Blackbox configuration reload failure from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Blackbox configuration reload failure from {{ $labels.job }}\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSlowProbe
@@ -33,7 +33,7 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox slow probe
-            description: "Blackbox probe took more than 2s to complete from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Blackbox probe took more than 2s to complete from {{ $labels.job }}\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeHttpFailure
@@ -43,7 +43,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox probe HTTP failure
-            description: "HTTP status code is not 200-399 from {{ $labels.job }} (instance {{ $labels.instance }})\n "
+            description: "HTTP status code is not 200-399 from {{ $labels.job }}\n "
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateWillExpireSoon
@@ -53,7 +53,7 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox SSL certificate will expire soon
-            description: "SSL certificate expires in less than 20 days (instance {{ $labels.instance }})\n"
+            description: "SSL certificate expires in less than 20 days\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateWillExpireSoon
@@ -63,7 +63,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox SSL certificate will expire soon
-            description: "SSL certificate expires in less than 3 days (instance {{ $labels.instance }})\n"
+            description: "SSL certificate expires in less than 3 days\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxSslCertificateExpired
@@ -73,7 +73,7 @@ spec:
             severity: critical
           annotations:
             summary: Blackbox SSL certificate expired
-            description: "SSL certificate has expired already (instance {{ $labels.instance }})\n"
+            description: "SSL certificate has expired already\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowHttp
@@ -83,7 +83,7 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox probe slow HTTP
-            description: "HTTP request took more than 2s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "HTTP request took more than 2s from {{ $labels.job }}\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
 
         - alert: BlackboxProbeSlowPing
@@ -93,5 +93,5 @@ spec:
             severity: warning
           annotations:
             summary: Blackbox probe slow ping
-            description: "Blackbox ping took more than 2s from {{ $labels.job }} (instance {{ $labels.instance }})\n"
+            description: "Blackbox ping took more than 2s from {{ $labels.job }}\n"
             dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
