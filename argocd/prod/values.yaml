@@ -161,6 +161,7 @@ configs:
     accounts.github: apiKey
     exec.enabled: "true"
     statusbadge.enabled: "true"
+    controller.sharding.algorithm: round-robin
     dex.config: |
       connectors:
       # GitHub example
