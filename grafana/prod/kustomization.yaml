@@ -4,7 +4,7 @@ resources:
   - alert-svc.yaml
   - secret.yaml
   - route.yaml
-  - agent
+#  - agent
 helmCharts:
   - name: grafana
     releaseName: grafana
