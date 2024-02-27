@@ -3,7 +3,6 @@ kind: Kustomization
 generatorOptions:
   disableNameSuffixHash: true
 resources:
-  - additional-scrape-configs.yaml
   - svc.yaml
   - route.yaml
 secretGenerator:
