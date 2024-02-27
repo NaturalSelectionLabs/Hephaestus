@@ -24,3 +24,21 @@ serviceAccount:
   create: true
   annotations:
     iam.gke.io/gcp-service-account: stackdriver-exporter@naturalselectionlabs.iam.gserviceaccount.com
+
+serviceMonitor:
+  enabled: true
+  namespace: guardian
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor
+  additionalLabels: {}
+  # How long until a scrape request times out.
+  scrapeTimeout: '10s'
+  # fallback to the prometheus default unless specified
+  interval: 10s
+  # Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+  honorLabels: true
+  # Whether Prometheus should use the timestamps of the metrics exposed by stackdriver-exporter
+  honorTimestamps: true
+  # MetricRelabelConfigs to apply to samples before ingestion https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+  metricRelabelings: []
+  # RelabelConfigs to apply to samples before scraping. https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+  relabelings: []
