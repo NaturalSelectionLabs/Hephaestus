@@ -112,6 +112,10 @@ vmagent:
   # spec for VMAgent crd
   # https://docs.victoriametrics.com/operator/blob/master/docs/api.MD#vmagentspec
   spec:
+    podMetadata:
+      annotations:
+        vault.hashicorp.com/agent-inject: "true"
+        vault.hashicorp.com/role: "vmagent"
     selectAllByDefault: true
     image:
       tag: v1.87.1
