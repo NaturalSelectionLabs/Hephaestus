@@ -9,11 +9,6 @@ helmCharts:
     version: x.x.x
     valuesFile: values.yaml
   - name: prometheus-stackdriver-exporter
-    releaseName: nsl-network
-    repo: https://prometheus-community.github.io/helm-charts
-    version: x.x.x
-    valuesFile: network.yaml
-  - name: prometheus-stackdriver-exporter
     releaseName: nsl-middleware
     repo: https://prometheus-community.github.io/helm-charts
     version: x.x.x
