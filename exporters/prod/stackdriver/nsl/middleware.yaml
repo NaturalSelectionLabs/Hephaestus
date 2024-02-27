@@ -1,0 +1,41 @@
+replicaCount: 2
+resources:
+    requests:
+      cpu: 100m
+      memory: 256Mi
+    limits:
+      cpu: 500m
+      memory: 512Mi
+
+stackdriver:
+  # The Google Project ID to gather metrics for
+  projectId: "naturalselectionlabs"
+  metrics:
+    # The prefixes to gather metrics for, we default to just CPU metrics.
+    typePrefixes: "redis.googleapis.com/,cloudsql.googleapis.com/,autoscaler.googleapis.com/"
+    # The filters to refine the metrics query by using Filter objects that Google provides.
+    # Filter objects: project, group.id, resource.type, resource.labels.[KEY], metric.type, metric.labels.[KEY]
+    # https://cloud.google.com/monitoring/api/v3/filters
+    filters: []
+    # - 'pubsub.googleapis.com/subscription:resource.labels.subscription_id=monitoring.regex.full_match("us-west4.*my-team.*")'
+    # The frequency to request
+serviceAccount:
+  name: prometheus-stackdriver-exporter
+
+serviceMonitor:
+  enabled: true
+  namespace: guardian
+  # additionalLabels is the set of additional labels to add to the ServiceMonitor
+  additionalLabels: {}
+  # How long until a scrape request times out.
+  scrapeTimeout: '15s'
+  # fallback to the prometheus default unless specified
+  interval: 15s
+  # Defaults to what's used if you follow CoreOS [Prometheus Install Instructions](https://github.com/helm/charts/tree/master/stable/prometheus-operator#tldr)
+  honorLabels: true
+  # Whether Prometheus should use the timestamps of the metrics exposed by stackdriver-exporter
+  honorTimestamps: true
+  # MetricRelabelConfigs to apply to samples before ingestion https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+  metricRelabelings: []
+  # RelabelConfigs to apply to samples before scraping. https://github.com/prometheus-operator/prometheus-operator/blob/master/Documentation/api.md#relabelconfig
+  relabelings: []
