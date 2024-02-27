@@ -1,11 +1,11 @@
 replicaCount: 3
 resources:
-   requests:
-     cpu: 100m
-     memory: 128Mi
-   limits:
-     cpu: 100m
-   memory: 128Mi
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
 
 stackdriver:
   # The Google Project ID to gather metrics for
