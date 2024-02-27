@@ -1,11 +1,13 @@
-- job_name: 'crossbell-faucet'
-  metrics_path: /metrics
+- job_name: vault
+  metrics_path: /v1/sys/metrics
   params:
-    module: [http_2xx]
-  scheme: "https"
+    format: ['prometheus']
+  scrape_timeout: 30s
+  scheme: http
+  authorization:
+    credentials_file: /vault/secrets/token
   static_configs:
-    - targets:
-        - faucet.crossbell.io
+    - targets: ['vault.guardian.svc:8200']
 - job_name: kubernetes-pods
   honor_timestamps: true
   honor_labels: false
