@@ -152,6 +152,7 @@ vmagent:
       zone: us-central1-a
     extraArgs:
       promscrape.streamParse: "true"
+      promscrape.maxScrapeSize: "67108864"
       promscrape.kubernetesSDCheckInterval: 60s
     additionalScrapeConfigs:
       key: prometheus-additional.yaml
