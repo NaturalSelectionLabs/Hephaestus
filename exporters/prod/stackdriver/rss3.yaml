@@ -1,18 +1,18 @@
 replicaCount: 2
 resources:
-    requests:
-      cpu: 100m
-      memory: 128Mi
-    limits:
-      cpu: 100m
-      memory: 128Mi
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 100m
+    memory: 128Mi
 
 stackdriver:
   # The Google Project ID to gather metrics for
-  projectId: "naturalselectionlabs"
+  projectId: "rss3-409706"
   metrics:
     # The prefixes to gather metrics for, we default to just CPU metrics.
-    typePrefixes: "compute.googleapis.com/,storage.googleapis.com/,redis.googleapis.com/,cloudsql.googleapis.com/,networking.googleapis.com/,loadbalancing.googleapis.com/,autoscaler.googleapis.com/"
+    typePrefixes: "compute.googleapis.com/,storage.googleapis.com/,redis.googleapis.com/,cloudsql.googleapis.com/"
     # The filters to refine the metrics query by using Filter objects that Google provides.
     # Filter objects: project, group.id, resource.type, resource.labels.[KEY], metric.type, metric.labels.[KEY]
     # https://cloud.google.com/monitoring/api/v3/filters

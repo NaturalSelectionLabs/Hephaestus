@@ -1,5 +1,8 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
+resources:
+  - sa.yaml
+
 
 helmCharts:
   - name: prometheus-stackdriver-exporter
@@ -7,3 +10,13 @@ helmCharts:
     repo: https://prometheus-community.github.io/helm-charts
     version: x.x.x
     valuesFile: values.yaml
+  - name: prometheus-stackdriver-exporter
+    releaseName: crossbell
+    repo: https://prometheus-community.github.io/helm-charts
+    version: x.x.x
+    valuesFile: csb.yaml
+  - name: prometheus-stackdriver-exporter
+    releaseName: rss3
+    repo: https://prometheus-community.github.io/helm-charts
+    version: x.x.x
+    valuesFile: rss3.yaml
