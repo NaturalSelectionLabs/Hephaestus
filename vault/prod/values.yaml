@@ -198,6 +198,11 @@ server:
            key_ring    = "vault-prod"
            crypto_key  = "vault-prod"
         }
+      
+        telemetry {
+          prometheus_retention_time = "30s"
+          disable_hostname = true
+        }
 
 # Vault UI
 ui:
