@@ -186,3 +186,7 @@
       target_label: job
     - source_labels: [ __endpoint__geohash]
       target_label: geohash
+    - source_labels: [ __endpoint__latitude]
+      target_label: latitude
+    - source_labels: [ __endpoint__longitude]
+      target_label: longitude
