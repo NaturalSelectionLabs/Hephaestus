@@ -6,3 +6,4 @@ helmCharts:
     releaseName: prometheus-stackdriver-exporter
     repo: https://prometheus-community.github.io/helm-charts
     version: x.x.x
+    valuesFile: values.yaml
