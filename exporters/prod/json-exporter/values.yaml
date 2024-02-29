@@ -14,6 +14,8 @@ configuration:
         metrics:
           - name: raw
             path: "{ . }"
+        headers:
+          Content-Type: application/json
         body:
           content: |
             {"jsonrpc":"2.0","method":"eth_getBalance","params":["{{ .address }}","latest"],"id":0}
