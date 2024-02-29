@@ -6,3 +6,11 @@ resources:
     limits:
       cpu: 500m
       memory: 512Mi
+
+configuration:
+  structuredConfig:
+    modules:
+      balance:
+        metrics:
+          - name: raw
+            path: "{ . }"
