@@ -12,8 +12,8 @@ configuration:
     modules:
       balance:
         metrics:
-          - name: raw
-            path: "{ . }"
+          - name: result
+            path: "{ .result }"
         headers:
           Content-Type: application/json
         body:
