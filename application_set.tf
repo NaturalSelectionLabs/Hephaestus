@@ -740,7 +740,7 @@ resource "argocd_application_set" "exporter" {
         project = argocd_project.guardian.metadata[0].name
 
         source {
-          repo_url        = var.repo_url
+          repo_url        = "https://github.com/NaturalSelectionLabs/Cluster-Exporter"
           target_revision = "HEAD"
           path            = "exporters/{{cluster}}"
           plugin {
