@@ -12,7 +12,7 @@ spec:
       match: Host(`argocd.naturalselectionlabs.com`)
       priority: 10
       services:
-        - name: argo-cd-argocd-server
+        - name: argocd-server
           port: 80
           scheme: http
     - kind: Rule
