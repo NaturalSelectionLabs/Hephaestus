@@ -163,7 +163,6 @@ configs:
     exec.enabled: "true"
     statusbadge.enabled: "true"
     controller.kubectl.parallelism.limit: "10"
-    controller.sharding.algorithm: round-robin
     dex.config: |
       connectors:
       # GitHub example
