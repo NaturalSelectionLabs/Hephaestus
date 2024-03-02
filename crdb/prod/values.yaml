@@ -20,12 +20,14 @@ conf:
 #  cluster-name: us-central1-prod
   locality: region=us-central1
   join:
-    - roach0.aliyun.index.ai:26258
-    - roach1.aliyun.index.ai:26258
-    - roach2.aliyun.index.ai:26258
-    - roach3.aliyun.index.ai:26258
-    - roach4.aliyun.index.ai:26258
-    - roach5.aliyun.index.ai:26258
+    - cockroachdb-0.gcp.nsl.xyz:26258
+    - cockroachdb-1.gcp.nsl.xyz:26258
+    - cockroachdb-2.gcp.nsl.xyz:26258
+    - cockroachdb-3.gcp.nsl.xyz:26258
+    - cockroachdb-4.gcp.nsl.xyz:26258
+    - cockroachdb-5.gcp.nsl.xyz:26258
+    - cockroachdb-6.gcp.nsl.xyz:26258
+    - cockroachdb-7.gcp.nsl.xyz:26258
 
 statefulset:
   replicas: 8
