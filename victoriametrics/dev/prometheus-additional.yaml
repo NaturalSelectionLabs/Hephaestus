@@ -7,7 +7,7 @@
   authorization:
     credentials_file: /vault/secrets/token
   static_configs:
-    - targets: ['vault-ui.guardian.svc:8200']
+    - targets: ['vault.guardian.svc:8200']
 - job_name: kubernetes-pods
   honor_timestamps: true
   honor_labels: false

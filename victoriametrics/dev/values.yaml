@@ -117,6 +117,7 @@ vmagent:
         vault.hashicorp.com/agent-inject: "true"
         vault.hashicorp.com/role: "vmagent"
         vault.hashicorp.com/agent-inject-token: "true"
+        vault.hashicorp.com/agent-run-as-same-user: "true"
     selectAllByDefault: true
     image:
       tag: v1.87.1
