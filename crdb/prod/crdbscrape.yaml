@@ -1,0 +1,28 @@
+apiVersion: operator.victoriametrics.com/v1beta1
+kind: VMStaticScrape
+metadata:
+  name: cockroachdb-aliyun
+spec:
+  jobName: cockroachdb-aliyun
+  targetEndpoints:
+    - targets:
+        - roach0.aliyun.nsl.xyz:8080
+        - roach1.aliyun.nsl.xyz:8080
+        - roach2.aliyun.nsl.xyz:8080
+        - roach3.aliyun.nsl.xyz:8080
+        - roach4.aliyun.nsl.xyz:8080
+        - roach5.aliyun.nsl.xyz:8080
+      path: /_status/vars
+      scheme: https
+      tlsConfig:
+        ca:
+          secret:
+            key: ca.crt
+            name: cockroachdb-node
+        cert:
+          secret:
+            key: tls.cert
+            name: cockroachdb-node
+        keySecret:
+          key: tks.key
+          name: cockroachdb-node

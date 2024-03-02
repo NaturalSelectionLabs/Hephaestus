@@ -10,7 +10,7 @@ spec:
     - kind: Rule
       match: Host(`crdb.prod.naturalselectionlabs.com`) || Host(`crdb.prod.nsl.xyz`)
       services:
-        - name: cockroachdb-self
+        - name: cockroachdb-public
           port: 8080
           scheme: https
           serversTransport: cockroachdb
@@ -21,4 +21,9 @@ metadata:
   name: cockroachdb
   namespace: guardian
 spec:
-  insecureSkipVerify: true
+  serverName: cockroachdb-public
+  certificatesSecrets:
+    - cockroachdb-node
+  rootCAsSecrets:
+    - cockroach-ca
+
