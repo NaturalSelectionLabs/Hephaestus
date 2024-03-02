@@ -6,7 +6,7 @@ metadata:
     app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-application-controller
     app.kubernetes.io/part-of: argocd
-  name: argo-cd-argocd-application-controller
+  name: argocd-application-controller
   namespace: guardian
 spec:
   endpoints:
@@ -19,7 +19,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: application-controller
-      app.kubernetes.io/instance: argo-cd
+      app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-metrics
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -27,11 +27,10 @@ kind: ServiceMonitor
 metadata:
   labels:
     app.kubernetes.io/component: applicationset-controller
-    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-applicationset-controller
     app.kubernetes.io/part-of: argocd
-    helm.sh/chart: argo-cd-5.53.14
-  name: argo-cd-argocd-applicationset-controller
+  name: argocd-applicationset-controller
   namespace: guardian
 spec:
   endpoints:
@@ -44,7 +43,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: applicationset-controller
-      app.kubernetes.io/instance: argo-cd
+      app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-metrics
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -52,10 +51,10 @@ kind: ServiceMonitor
 metadata:
   labels:
     app.kubernetes.io/component: repo-server
-    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-repo-server
     app.kubernetes.io/part-of: argocd
-  name: argo-cd-argocd-repo-server
+  name: argocd-repo-server
   namespace: guardian
 spec:
   endpoints:
@@ -68,7 +67,7 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: repo-server
-      app.kubernetes.io/instance: argo-cd
+      app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-repo-server-metrics
 ---
 apiVersion: monitoring.coreos.com/v1
@@ -76,10 +75,10 @@ kind: ServiceMonitor
 metadata:
   labels:
     app.kubernetes.io/component: server
-    app.kubernetes.io/instance: argo-cd
+    app.kubernetes.io/instance: argocd
     app.kubernetes.io/name: argocd-server
     app.kubernetes.io/part-of: argocd
-  name: argo-cd-argocd-server
+  name: argocd-server
   namespace: guardian
 spec:
   endpoints:
@@ -92,5 +91,5 @@ spec:
   selector:
     matchLabels:
       app.kubernetes.io/component: server
-      app.kubernetes.io/instance: argo-cd
+      app.kubernetes.io/instance: argocd
       app.kubernetes.io/name: argocd-server-metrics
