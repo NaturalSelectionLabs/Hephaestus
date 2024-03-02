@@ -96,40 +96,6 @@
     - role: pod
       namespaces: {}
       # follow_redirects: true
-- job_name: cockroachdb-aliyun
-  honor_timestamps: true
-  honor_labels: false
-  scrape_interval: 30s
-  scheme: https
-  metrics_path: /_status/vars
-  tls_config:
-    insecure_skip_verify: true
-  static_configs:
-    - targets:
-        - roach0.aliyun.index.ai:8080
-        - roach1.aliyun.index.ai:8080
-        - roach2.aliyun.index.ai:8080
-        - roach3.aliyun.index.ai:8080
-        - roach4.aliyun.index.ai:8080
-        - roach5.aliyun.index.ai:8080
-- job_name: cockroachdb-gcp
-  honor_timestamps: true
-  honor_labels: false
-  scrape_interval: 30s
-  scheme: https
-  metrics_path: /_status/vars
-  tls_config:
-    insecure_skip_verify: true
-  static_configs:
-    - targets:
-        - cockroachdb-0.gcp.index.ai:8080
-        - cockroachdb-1.gcp.index.ai:8080
-        - cockroachdb-2.gcp.index.ai:8080
-        - cockroachdb-3.gcp.index.ai:8080
-        - cockroachdb-4.gcp.index.ai:8080
-        - cockroachdb-5.gcp.index.ai:8080
-        - cockroachdb-6.gcp.index.ai:8080
-        - cockroachdb-7.gcp.index.ai:8080
 #- job_name: blackbox
 #  scrape_interval: 30s
 #  scrape_timeout: 30s
