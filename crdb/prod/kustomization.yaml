@@ -17,11 +17,11 @@ patches:
       - op: add
         path: "/spec/dnsNames/-"
         value:
-          '*.aliyun.index.ai'
+          '*.aliyun.nsl.xyz'
       - op: add
         path: "/spec/dnsNames/-"
         value:
-          '*.gcp.index.ai'
+          '*.gcp.nsl.xyz'
     target:
       kind: Certificate
       name: cockroachdb-node
@@ -30,7 +30,7 @@ patches:
         path: "/spec/template/spec/containers/0/env/1"
         value:
           name: STATEFULSET_FQDN
-          value: gcp.index.ai
+          value: gcp.nsl.xyz
     target:
       kind: StatefulSet
       name: cockroachdb
