@@ -30,7 +30,7 @@ conf:
     - cockroachdb-7.gcp.nsl.xyz:26258
 
 statefulset:
-  replicas: 8
+  replicas: 9
   resources:
     requests:
       # This is intentionally low to make it work on local k3d clusters.
