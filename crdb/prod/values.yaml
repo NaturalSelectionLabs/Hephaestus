@@ -19,15 +19,6 @@ storage:
 conf:
 #  cluster-name: us-central1-prod
   locality: region=us-central1
-  join:
-    - cockroachdb-0.gcp.nsl.xyz:26258
-    - cockroachdb-1.gcp.nsl.xyz:26258
-    - cockroachdb-2.gcp.nsl.xyz:26258
-    - cockroachdb-3.gcp.nsl.xyz:26258
-    - cockroachdb-4.gcp.nsl.xyz:26258
-    - cockroachdb-5.gcp.nsl.xyz:26258
-    - cockroachdb-6.gcp.nsl.xyz:26258
-    - cockroachdb-7.gcp.nsl.xyz:26258
 
 statefulset:
   replicas: 9

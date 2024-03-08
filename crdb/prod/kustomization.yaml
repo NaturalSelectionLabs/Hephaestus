@@ -26,12 +26,3 @@ patches:
     target:
       kind: Certificate
       name: cockroachdb-node
-  - patch: |-
-      - op: replace
-        path: "/spec/template/spec/containers/0/env/1"
-        value:
-          name: STATEFULSET_FQDN
-          value: gcp.nsl.xyz
-    target:
-      kind: StatefulSet
-      name: cockroachdb
