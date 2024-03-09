@@ -10,7 +10,7 @@ helmCharts:
     releaseName: cockroachdb
     repo: https://charts.cockroachdb.com/
     valuesFile: values.yaml
-    version: 11.2.3
+    version: x.x.x
 
 patches:
   - patch: |-
