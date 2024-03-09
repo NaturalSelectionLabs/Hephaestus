@@ -17,7 +17,7 @@ storage:
     size: 10Ti
 
 conf:
-#  cluster-name: us-central1-prod
+  cluster-name: us-central1-prod
   locality: region=us-central1
 
 statefulset:
