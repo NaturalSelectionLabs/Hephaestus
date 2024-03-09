@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
   - ../base
   - route.yaml
-  - crdbscrape.yaml
 
 helmCharts:
   - name: cockroachdb
