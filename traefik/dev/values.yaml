@@ -44,23 +44,7 @@ providers:
     enabled: true
     allowCrossNamespace: true
     allowExternalNameServices: true
-  file:
-    enabled: true
-    # -- Allows Traefik to automatically watch for file changes
-    watch: false
-    # -- File content (YAML format, go template supported) (see https://doc.traefik.io/traefik/providers/file/)
-    content: |
-      http:
-        routers:
-          graph:
-            rule: "Host(`graph.testnet.rss3.io`)"
-            service: "graph"
-        services:
-          graph:
-            loadBalancer:
-              servers:
-              - url: "http://10.0.0.41:8000/"
-    #       rule: Path(`/foo`)
+
 metrics:
   prometheus:
     entryPoint: metrics
