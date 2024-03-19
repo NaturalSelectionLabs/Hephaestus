@@ -53,3 +53,7 @@ statefulset:
       operator: "Equal"
       value: "crdb"
       effect: "NoSchedule"
+
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: cockroachdb@naturalselectionlabs.iam.gserviceaccount.com

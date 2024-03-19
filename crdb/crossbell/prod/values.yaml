@@ -44,7 +44,9 @@ statefulset:
     # The topologyKey to be used.
     # Can be used to spread across different nodes, AZs, regions etc.
     topologyKey: kubernetes.io/hostname
-
+  serviceAccount:
+    annotations:
+      iam.gke.io/gcp-service-account: cockroachdb@naturalselectionlabs.iam.gserviceaccount.com
 init:
   provisioning:
     enabled: true
