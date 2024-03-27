@@ -15,9 +15,10 @@ spec:
     app: ipfs
   ports:
     - port: 5001
-      targetPort: api
+      targetPort: 5001
       protocol: TCP
       name: api
     - port: 8080
-      targetPort: gateway
+      targetPort: 8080
+      protocol: TCP
       name: gateway
