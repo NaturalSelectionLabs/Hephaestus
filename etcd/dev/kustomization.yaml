@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources: []
+
+helmCharts:
+  - name: etcd
+    releaseName: etcd
+    repo: https://charts.bitnami.com/bitnami
+    valuesFile: values.yaml
+    version: x.x.x

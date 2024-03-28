@@ -879,9 +879,9 @@ resource "argocd_application_set" "rabbitmq" {
   }
 }
 
-resource "argocd_application_set" "graph" {
+resource "argocd_application_set" "etcd" {
   metadata {
-    name      = "graph"
+    name      = "etcd"
     namespace = "guardian"
   }
   spec {
@@ -901,7 +901,7 @@ resource "argocd_application_set" "graph" {
     }
     template {
       metadata {
-        name = "graph-{{cluster}}"
+        name = "etcd-{{cluster}}"
         labels = {
           cluster = "{{cluster}}"
         }
@@ -912,7 +912,7 @@ resource "argocd_application_set" "graph" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "graph/{{cluster}}"
+          path            = "etcd/{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {
