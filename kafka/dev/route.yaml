@@ -9,7 +9,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`kafka.dev.nsl.xyz`)
+      match: Host(`kafka.dev.naturalselectionlabs.com`)
       services:
         - name: kafka-console
           port: 8080
