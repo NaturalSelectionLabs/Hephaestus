@@ -178,6 +178,7 @@ server:
   standalone:
     config: |
       ui = true
+      plugin_directory = "/usr/local/libexec/vault/"
 
       listener "tcp" {
         tls_disable = 1
