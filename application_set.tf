@@ -237,71 +237,6 @@ resource "argocd_application_set" "actions_runner_controller" {
   }
 }
 
-#resource "argocd_application_set" "apisix" {
-#  metadata {
-#    name = "apisix"
-#  }
-#  spec {
-#    generator {
-#      list {
-#        elements = [
-#          {
-#            cluster = argocd_cluster.dev.name
-#            url     = argocd_cluster.dev.server
-#          },
-#          {
-#            cluster = argocd_cluster.prod.name
-#            url     = argocd_cluster.prod.server
-#          }
-#        ]
-#      }
-#    }
-#    template {
-#      metadata {
-#        name = "apisix-{{cluster}}"
-#        labels = {
-#          cluster = "{{cluster}}"
-#        }
-#      }
-#
-#      spec {
-#        project = argocd_project.guardian.metadata[0].name
-#
-#
-#        source {
-#          repo_url        = var.repo_url
-#          target_revision = "HEAD"
-#          path            = "apisix/{{cluster}}"
-#          plugin {
-#            name = "avp-kustomize"
-#            env {
-#              name  = "APP_REPO"
-#              value = "NaturalSelectionLabs/Hephaestus"
-#            }
-#            env {
-#              name  = "AVP_SECRET"
-#              value = "guardian:avp-{{cluster}}"
-#            }
-#          }
-#        }
-#
-#        destination {
-#          server    = "{{url}}"
-#          namespace = "guardian"
-#        }
-#
-#        ignore_difference {
-#          group = "*"
-#          kind  = "CustomResourceDefinition"
-#          jq_path_expressions = [
-#            ".spec.versions[].additionalPrinterColumns[].priority"
-#          ]
-#        }
-#      }
-#    }
-#  }
-#}
-
 resource "argocd_application_set" "cert_manager" {
   metadata {
     name = "cert-manager"
@@ -482,10 +417,10 @@ resource "argocd_application_set" "crdb-csb" {
     generator {
       list {
         elements = [
-#          {
-#            cluster = argocd_cluster.dev.name
-#            url     = argocd_cluster.dev.server
-#          },
+          #          {
+          #            cluster = argocd_cluster.dev.name
+          #            url     = argocd_cluster.dev.server
+          #          },
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
@@ -892,10 +827,10 @@ resource "argocd_application_set" "etcd" {
             cluster = argocd_cluster.dev.name
             url     = argocd_cluster.dev.server
           },
-#          {
-#            cluster = argocd_cluster.prod.name
-#            url     = argocd_cluster.prod.server
-#          }
+          #          {
+          #            cluster = argocd_cluster.prod.name
+          #            url     = argocd_cluster.prod.server
+          #          }
         ]
       }
     }
