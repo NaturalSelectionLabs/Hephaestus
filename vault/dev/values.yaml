@@ -43,10 +43,38 @@ server:
       secret:
         defaultMode: 420
         secretName: vault-kms-creds
-
+    - name: plugins
+      emptyDir: {}
+  extraInitContainers:
+     # This example installs a plugin pulled from github into the /usr/local/libexec/vault/oauthapp folder,
+     # which is defined in the volumes value.
+     - name: github-auth
+       image: "alpine"
+       command: [sh, -c]
+       env:
+         - name: REPO
+           value: "https://github.com/martinbaillie/vault-plugin-secrets-github"
+         - name: VERSION
+           value: "v2.1.0"
+         - name: OS
+           value: "linux"
+          # arch is from pod node
+         - name: ARCH
+           value: "amd64"
+       args:
+         - cd /tmp &&
+           wget $REPO/releases/download/$VERSION/vault-plugin-secrets-github-$OS-$ARCH -O vault-plugin-secrets-github &&
+           mv vault-plugin-secrets-github /usr/local/libexec/vault/github &&
+           chmod +x /usr/local/libexec/vault/github
+       volumeMounts:
+       - name: plugins
+         mountPath: /usr/local/libexec/vault
   volumeMounts:
     - mountPath: /vault/userconfig/kms-creds
       name: userconfig-kms-creds
+      readOnly: true
+    - mountPath: /usr/local/libexec/vault
+      name: plugins
       readOnly: true
   resources:
     requests:
