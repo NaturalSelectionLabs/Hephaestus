@@ -39,6 +39,12 @@ resource "argocd_application_set" "vault" {
           }
         }
 
+        ignore_difference {
+          group               = "admissionregistration.k8s.io"
+          kind                = "*"
+          jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
+        }
+
         destination {
           server    = "{{url}}"
           namespace = "guardian"
