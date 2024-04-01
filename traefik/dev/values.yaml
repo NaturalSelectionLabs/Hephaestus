@@ -84,3 +84,9 @@ tracing:
     samplingServerURL: http://jaeger-agent.guardian:5778/sampling
     localAgentHostPort: jaeger-agent.guardian:6831
     disableAttemptReconnecting: false
+
+experimental:
+  plugins:
+    gatewayflowcontroller:
+      moduleName: "github.com/RSS3-Network/gatewayflowcontroller"
+      version: "v0.0.5"
