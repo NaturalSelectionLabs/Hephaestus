@@ -85,12 +85,12 @@ vmsingle:
     replicaCount: 1
     extraArgs: {}
     storage:
-      storageClassName: standard
+      storageClassName: premium-rwo
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 200Gi
+          storage: 1Ti
     nodeSelector:
       rss3.io/usage: internal
     tolerations:
