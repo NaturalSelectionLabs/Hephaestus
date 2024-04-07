@@ -5,6 +5,8 @@ persistence:
 auth:
   token:
     type: simple
+  rbac:
+    existingSecret: etcd
 podAnnotations:
   prometheus.io/path: /metrics
   prometheus.io/port: '2379'
