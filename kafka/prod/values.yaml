@@ -45,8 +45,10 @@ externalAccess:
     publishNotReadyAddresses: false
     labels: {}
     annotations:
-      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: intranet
-      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-name: kafka-external
+      networking.gke.io/load-balancer-type: "Internal"
+        #      cloud.google.com/l4-rbs: "enabled"
+      networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
     extraPorts: []
 
 persistence:
