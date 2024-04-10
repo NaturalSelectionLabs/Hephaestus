@@ -13,6 +13,7 @@ tls:
 storage:
   persistentVolume:
     storageClass: premium-rwo
+    size: 200Gi
 service:
   public:
     type: LoadBalancer
