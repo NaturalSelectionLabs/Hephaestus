@@ -7,6 +7,12 @@ loki:
       admin: nsl-loki-uscentral1-dev
     gcs:
       bucket_name: nsl-loki-uscentral1-dev
+  structuredConfig:
+    storage_config:
+      boltdb:
+        directory: /data/loki/index
+      gcs:
+        bucket_name: nsl-loki-uscentral1-dev
 #  config:
 #    compactor:
 #      retention_enabled: true
