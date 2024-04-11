@@ -8,6 +8,10 @@ helmCharts:
     releaseName: promtail
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
+    valuesInline:
+      tolerations:
+        - operator: Exists
+          effect: NoSchedule
   - name: loki
     releaseName: loki
     repo: https://grafana.github.io/helm-charts
