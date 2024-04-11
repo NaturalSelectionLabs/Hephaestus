@@ -50,11 +50,7 @@ serviceAccount:
     iam.gke.io/gcp-service-account: loki-sa@naturalselectionlabs.iam.gserviceaccount.com
 deploymentMode: SingleBinary
 singleBinary:
-  autoscaling:
-    enabled: true
-    minReplicas: 3
-    maxReplicas: 5
-    targetCPUUtilizationPercentage: 100
+  replicas: 3
   persistence:
     enabled: false
   extraVolumes:
