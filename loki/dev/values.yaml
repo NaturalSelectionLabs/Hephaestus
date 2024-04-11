@@ -1,4 +1,5 @@
 loki:
+  auth_enabled: false
   storage:
     type: gcs
     bucketNames:
@@ -113,6 +114,13 @@ chunksCache:
 memberlist:
   service:
     publishNotReadyAddresses: true
+gateway:
+  service:
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
 backend:
   replicas: 0
 read:
