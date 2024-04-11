@@ -68,6 +68,8 @@ loki:
   commonConfig:
     replication_factor: 1
   rulerConfig:
+    alertmanager_url: http://vmalertmanager-victoriametrics-0.vmalertmanager-victoriametrics.guardian.svc:9093
+    enable_alertmanager_v2: true
     ring:
       kvstore:
         store: inmemory
