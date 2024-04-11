@@ -13,7 +13,6 @@ loki:
         active_index_directory: /var/loki/index
         cache_location: /var/loki/cache
         cache_ttl: 168h
-        shared_store: gcs
       gcs:
         bucket_name: nsl-loki-uscentral1-dev
 #  config:
