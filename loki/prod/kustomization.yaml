@@ -1,11 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-resources:
-  - svc.yaml
+#resources:
+#  - route.yaml
 
 helmCharts:
-  - name: loki-stack
+  - name: promtail
+    releaseName: promtail
+    repo: https://grafana.github.io/helm-charts
+    version: x.x.x
+  - name: loki
     releaseName: loki
     repo: https://grafana.github.io/helm-charts
+    version: x.x.x
     valuesFile: values.yaml
-    version: 2.8.x
