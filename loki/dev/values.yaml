@@ -39,6 +39,17 @@ loki:
     table_manager:
       retention_deletes_enabled: true
       retention_period: 168h
+    ruler:
+      storage:
+        type: gcs
+        gcs:
+          bucket_name: nsl-loki-uscentral1-dev
+      rule_path: /tmp/scratch
+      alertmanager_url: http://alertmanager.svc.namespace:9093
+      ring:
+        kvstore:
+          store: inmemory
+      enable_api: true
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: loki-sa@naturalselectionlabs.iam.gserviceaccount.com
