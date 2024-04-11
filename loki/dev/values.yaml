@@ -9,10 +9,10 @@ loki:
       bucket_name: nsl-loki-uscentral1-dev
   structuredConfig:
     storage_config:
-      boltdb_shipper:
+      tsdb_shipper:
         active_index_directory: /var/loki/index
-        cache_location: /var/loki/cache
-        cache_ttl: 168h
+        cache_location: /var/loki/index_cache
+        cache_ttl: 24h
       gcs:
         bucket_name: nsl-loki-uscentral1-dev
 #  config:
@@ -65,12 +65,12 @@ loki:
     replication_factor: 1
   schemaConfig:
     configs:
-      - from: 2024-04-01
+      - from: 2020-07-01
         store: tsdb
-        object_store: s3
+        object_store: gcs
         schema: v13
         index:
-          prefix: loki_index_
+          prefix: index_
           period: 24h
   ingester:
     chunk_encoding: snappy
