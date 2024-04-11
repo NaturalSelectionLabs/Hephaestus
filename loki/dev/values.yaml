@@ -8,6 +8,9 @@ loki:
       admin: nsl-loki-uscentral1-dev
     gcs:
       bucket_name: nsl-loki-uscentral1-dev
+  server:
+    grpc_server_max_recv_msg_size: 16777216
+    grpc_server_max_send_msg_size: 16777216
   limits_config:
     ingestion_rate_mb: 1024
     ingestion_burst_size_mb: 1024
