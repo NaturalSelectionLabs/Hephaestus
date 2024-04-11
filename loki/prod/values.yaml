@@ -73,6 +73,14 @@ singleBinary:
     # Keep a little bit lower than memory limits
     - name: GOMEMLIMIT
       value: 3750MiB
+    - name: JAEGER_AGENT_HOST
+      value: jaeger-agent.guardian.svc.cluster.local
+    - name: JAEGER_AGENT_PORT
+      value: "6831"
+    - name: JAEGER_SAMPLER_TYPE
+      value: const
+    - name: JAEGER_SAMPLER_PARAM
+      value: "1"
 
 chunksCache:
   # default is 500MB, with limited memory keep this smaller
