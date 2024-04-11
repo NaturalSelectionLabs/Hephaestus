@@ -11,6 +11,7 @@ loki:
   limits_config:
     ingestion_rate_mb: 1024
     ingestion_burst_size_mb: 1024
+    max_concurrent_tail_requests: 100
   structuredConfig:
     storage_config:
       tsdb_shipper:
