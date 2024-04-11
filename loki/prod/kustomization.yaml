@@ -9,6 +9,8 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
     valuesInline:
+      serviceMonitor:
+        enabled: true
       tolerations:
         - operator: Exists
           effect: NoSchedule
