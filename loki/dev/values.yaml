@@ -64,6 +64,11 @@ loki:
 #      enable_api: true
   commonConfig:
     replication_factor: 1
+  rulerConfig:
+    ring:
+      kvstore:
+        store: inmemory
+    enable_api: true
   schemaConfig:
     configs:
       - from: 2020-07-01
