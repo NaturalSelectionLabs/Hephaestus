@@ -28,6 +28,8 @@ loki:
     replication_factor: 1
   rulerConfig:
     alertmanager_url: http://vmalertmanager-victoriametrics.guardian.svc:9093
+    external_url: https://grafana.nsl.xyz
+    datasource_uid: ZlCkcssnz
     enable_alertmanager_v2: true
     ring:
       kvstore:
