@@ -16,6 +16,13 @@ cassandra:
     enabled: true
     storageClass: "standard"
     size: 400Gi
+  resources:
+     requests:
+       memory: 8Gi
+       cpu: 4
+     limits:
+       memory: 8Gi
+       cpu: 4
   nodeSelector:
     rss3.io/usage: internal
   tolerations:
@@ -73,7 +80,7 @@ query:
   enabled: true
   agentSidecar:
     enabled: false
-  replicaCount: 1
+  replicaCount: 2
   resources:
     limits:
       cpu: 600m
