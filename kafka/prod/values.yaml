@@ -55,6 +55,11 @@ persistence:
   storageClass: "standard"
   size: 100Gi # actually it's 400GiB but we can upgrade sts's pvc config
 
+livenessProbe:
+  initialDelaySeconds: 300
+readinessProbe:
+  initialDelaySeconds: 60
+
 rbac:
   create: true
 
