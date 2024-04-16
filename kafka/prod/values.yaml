@@ -1,7 +1,7 @@
 global:
   storageClass: "standard"
 
-heapOpts: -Xmx1024m -Xms1024m
+heapOpts: -Xmx4096m -Xms4096m
 numPartitions: 3
 logRetentionBytes: "30000000000"
 deleteTopicEnable: true
@@ -15,11 +15,11 @@ containerPorts:
   external: 9094
 resources:
  limits:
-   cpu: 1200m
-   memory: 8000Mi
+   cpu: '8'
+   memory: 8Gi
  requests:
-   cpu: 100m
-   memory: 1024Mi
+   cpu: '4'
+   memory: 4Gi
 nodeSelector: {}
 tolerations: []
 updateStrategy:
