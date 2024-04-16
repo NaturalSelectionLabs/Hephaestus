@@ -52,8 +52,8 @@ externalAccess:
     extraPorts: []
 
 persistence:
-  storageClass: "standard"
-  size: 100Gi # actually it's 400GiB but we can upgrade sts's pvc config
+  storageClass: "premium-rwo"
+  size: 500Gi # actually it's 400GiB but we can upgrade sts's pvc config
 
 livenessProbe:
   initialDelaySeconds: 300
@@ -75,7 +75,7 @@ zookeeper:
   replicaCount: 3
   persistence:
     enabled: true
-    storageClass: "standard"
+    storageClass: "premium-rwo"
     accessModes:
       - ReadWriteOnce
-    size: 100Gi
+    size: 20Gi
