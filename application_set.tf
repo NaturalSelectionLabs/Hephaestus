@@ -351,121 +351,6 @@ resource "argocd_application_set" "cert_manager" {
 #    }
 #  }
 #}
-
-resource "argocd_application_set" "crdb" {
-  metadata {
-    name = "crdb"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "crdb-{{cluster}}"
-        labels = {
-          cluster = "{{cluster}}"
-        }
-      }
-
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "crdb/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
-            }
-          }
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "guardian"
-        }
-
-      }
-    }
-  }
-}
-
-resource "argocd_application_set" "crdb-csb" {
-  metadata {
-    name = "crdb-csb"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          #          {
-          #            cluster = argocd_cluster.dev.name
-          #            url     = argocd_cluster.dev.server
-          #          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "crdb-csb-{{cluster}}"
-        labels = {
-          cluster = "{{cluster}}"
-        }
-      }
-
-      spec {
-        project = "crossbell"
-
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "crdb/crossbell/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
-            }
-          }
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "crossbell"
-        }
-
-      }
-    }
-  }
-}
-
 resource "argocd_application_set" "kafka" {
   metadata {
     name = "kafka"
@@ -879,10 +764,10 @@ resource "argocd_application_set" "keda" {
     generator {
       list {
         elements = [
-#          {
-#            cluster = argocd_cluster.dev.name
-#            url     = argocd_cluster.dev.server
-#          },
+          #          {
+          #            cluster = argocd_cluster.dev.name
+          #            url     = argocd_cluster.dev.server
+          #          },
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
@@ -902,6 +787,59 @@ resource "argocd_application_set" "keda" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "keda/{{cluster}}"
+          plugin {
+            name = "avp-kustomize"
+            env {
+              name  = "APP_REPO"
+              value = "NaturalSelectionLabs/Hephaestus"
+            }
+            env {
+              name  = "AVP_SECRET"
+              value = "guardian:avp-{{cluster}}"
+            }
+          }
+        }
+
+        destination {
+          server    = "{{url}}"
+          namespace = "guardian"
+        }
+      }
+    }
+  }
+}
+
+resource "argocd_application_set" "pyroscope" {
+  metadata {
+    name = "pyroscope"
+  }
+  spec {
+    generator {
+      list {
+        elements = [
+          {
+            cluster = argocd_cluster.dev.name
+            url     = argocd_cluster.dev.server
+          }
+          #           {
+          #             cluster = argocd_cluster.prod.name
+          #             url     = argocd_cluster.prod.server
+          #           }
+        ]
+      }
+    }
+    template {
+      metadata {
+        name = "pyroscope-{{cluster}}"
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "pyroscope/{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {
