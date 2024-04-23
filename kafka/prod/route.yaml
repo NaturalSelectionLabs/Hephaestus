@@ -12,10 +12,34 @@ spec:
       services:
         - name: kafka-console
           port: 8080
+---
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: kafka-console-api
+  namespace: guardian
+spec:
+  entryPoints:
+    - websecure
+  routes:
     - kind: Rule
       match: Host(`api.explorer.rss3.io`)
       services:
         - name: kafka-console
           port: 8080
-
+  tls:
+    secretName: kafka-explore-cert
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: kafka-explore-cert
+  namespace: guardian
+spec:
+  dnsNames:
+    - api.explorer.rss3.io
+  issuerRef:
+    kind: ClusterIssuer
+    name: cloudflare
+  secretName: kafka-explore-cert
 
