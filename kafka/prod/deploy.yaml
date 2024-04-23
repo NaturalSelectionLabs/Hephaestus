@@ -4,6 +4,7 @@ metadata:
   name: kafka-console
   namespace: guardian
 spec:
+  replicas: 3
   template:
     spec:
       containers:
@@ -11,4 +12,4 @@ spec:
           image: docker.redpanda.com/redpandadata/console:latest
           env:
             - name: KAFKA_BROKERS
-              value: 10.1.32.35:9094,10.1.32.36:9094,0.1.32.37:9094
+              value: 10.1.32.35:9094,10.1.32.36:9094,10.1.32.37:9094
