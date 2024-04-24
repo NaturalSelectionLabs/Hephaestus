@@ -10,11 +10,6 @@ spec:
     spec:
       containers:
         - name: kafka-console
-          image: docker.redpanda.com/redpandadata/console:latest
           env:
             - name: KAFKA_BROKERS
               value: kafka-headless.guardian:9092
-          imagePullPolicy: Always
-      restartPolicy: Always
-      terminationGracePeriodSeconds: 30
-      dnsPolicy: ClusterFirst

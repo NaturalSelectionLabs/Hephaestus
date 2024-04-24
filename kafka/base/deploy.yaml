@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: kafka-console
-          image: docker.redpanda.com/redpandadata/console:latest
+          image: docker.redpanda.com/redpandadata/console:v2.3.10
           imagePullPolicy: Always
           ports:
             - containerPort: 8080
