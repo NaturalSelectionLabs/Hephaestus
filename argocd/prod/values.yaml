@@ -1,4 +1,5 @@
-global: {}
+global:
+  domain: argocd.naturalselectionlabs.com
 redis:
   # -- Enable redis
   enabled: false
