@@ -6,6 +6,10 @@ resources:
   - secret.yaml
   - serviceMonitor.yaml
 
+images:
+  - name: quay.io/argoprojlabs/argocd-image-updater
+    newTag: v0.13.1
+
 helmCharts:
   - name: argo-cd
     releaseName: argocd
