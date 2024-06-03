@@ -284,3 +284,9 @@ configs:
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
     scopes: "[groups]"
+
+  styles: |
+    img.sidebar__logo__character {
+       width: 60px !important;
+       content: url("https://avatars.githubusercontent.com/u/152575164?s=200&v=4") !important;
+    }
