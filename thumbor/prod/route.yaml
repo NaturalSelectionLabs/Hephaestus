@@ -3,9 +3,13 @@ kind: IngressRoute
 metadata:
   name: thumbor
 spec:
+  entryPoints:
+    - websecure
   routes:
     - kind: Rule
       match: Host(`thumbor.follow.is`)
       services:
         - name: thumbor
-          port: 8000
+          port: 8888
+  tls:
+    secretName: thumbor-cert
