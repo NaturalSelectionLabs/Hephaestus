@@ -1,0 +1,3 @@
+replicaCount: 3
+image:
+  tag: "7-py-3.10"

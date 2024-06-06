@@ -10,6 +10,6 @@ spec:
       match: Host(`thumbor.follow.is`)
       services:
         - name: thumbor
-          port: 8888
+          port: 80
   tls:
     secretName: thumbor-cert

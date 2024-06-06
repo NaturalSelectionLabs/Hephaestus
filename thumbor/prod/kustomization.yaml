@@ -9,8 +9,5 @@ helmCharts:
     releaseName: thumbor
     repo: https://thumbor.github.io/helm
     valuesFile: values.yaml
-    valuesInline:
-      image:
-        tag: "7-py-3.10"
     version: x.x.x
     includeCRDs: true
