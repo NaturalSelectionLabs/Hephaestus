@@ -1,0 +1,9 @@
+apiVersion: traefik.io/v1alpha1
+kind: IngressRoute
+spec:
+  routes:
+    - kind: Rule
+      match: Host(`thumbor.follow.is`)
+      services:
+        - name: thumbor
+          port: 8000
