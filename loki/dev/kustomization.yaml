@@ -15,7 +15,7 @@ helmCharts:
   - name: promtail
     releaseName: promtail
     repo: https://grafana.github.io/helm-charts
-    version: x.x.x
+    version: 6.15.x
     valuesInline:
       serviceMonitor:
         enabled: true
