@@ -42,6 +42,10 @@ resource "argocd_application" "argocd-image-updater" {
           name  = "APP_REPO"
           value = "NaturalSelectionLabs/Hephaestus"
         }
+        env {
+          name  = "AVP_SECRET"
+          value = "guardian:avp-prod"
+        }
       }
     }
 
