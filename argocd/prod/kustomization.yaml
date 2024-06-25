@@ -4,7 +4,7 @@ resources:
   - route.yaml
   - github.com/argoproj-labs/argocd-image-updater/manifests/base?ref=master
   - secret.yaml
-  - serviceMonitor.yaml
+#  - serviceMonitor.yaml
 
 images:
   - name: quay.io/argoprojlabs/argocd-image-updater
@@ -17,3 +17,5 @@ helmCharts:
     valuesFile: values.yaml
     version: 7.x.x
     namespace: guardian
+    apiVersions:
+      - monitoring.coreos.com/v1
