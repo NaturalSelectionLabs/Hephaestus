@@ -1,18 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-  - github.com/argoproj-labs/argocd-image-updater/manifests/base?ref=master
+#  - github.com/argoproj-labs/argocd-image-updater/manifests/base?ref=master
   - secret.yaml
 
-images:
-  - name: quay.io/argoprojlabs/argocd-image-updater
-    newTag: v0.13.1
+#images:
+#  - name: quay.io/argoprojlabs/argocd-image-updater
+#    newTag: v0.13.1
 
-#helmCharts:
-#  - name: argocd-image-updater
-#    releaseName: argocd-image-updater
-#    repo: https://argoproj.github.io/argo-helm
-#    version: x.x.x
-#    namespace: guardian
-#    apiVersions:
-#      - monitoring.coreos.com/v1
+helmCharts:
+  - name: argocd-image-updater
+    releaseName: argocd-image-updater
+    repo: https://argoproj.github.io/argo-helm
+    version: x.x.x
+    namespace: guardian
+    apiVersions:
+      - monitoring.coreos.com/v1

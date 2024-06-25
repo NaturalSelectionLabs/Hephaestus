@@ -12,7 +12,7 @@ resource "argocd_application" "argocd" {
       path            = "argocd/prod"
       kustomize {
         common_annotations = {
-          "github.com/url" = var.repo_url
+          "github.com/url" = "NaturalSelectionLabs/Hephaestus"
         }
       }
     }
