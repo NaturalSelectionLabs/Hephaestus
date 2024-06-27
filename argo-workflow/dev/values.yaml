@@ -1,0 +1,16 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+    ingressClassName: traefik
+
+    # -- List of ingress hosts
+    ## Hostnames must be provided if Ingress is enabled.
+    ## Secrets must be manually created in the namespace
+    hosts:
+      - argo-workflows.dev.naturalselectionlabs.com
+    tls:
+      - secretName: argoworkflows-tls
+        hosts:
+          - argo-workflows.dev.naturalselectionlabs.com
