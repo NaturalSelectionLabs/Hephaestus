@@ -47,5 +47,5 @@ server:
       - "openid"
       - "profile"
       - "email"
-      - "groups"
+      - "roles"
 
