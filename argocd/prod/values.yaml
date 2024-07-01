@@ -268,6 +268,9 @@ configs:
       p, role:ai, applications, *, ai/*, allow
       p, role:ai, logs, *, ai/*, allow
       p, role:ai, exec, *, ai/*, allow
+      p, role:follow, applications, *, follow/*, allow
+      p, role:follow, logs, *, follow/*, allow
+      p, role:follow, exec, *, follow/*, allow
       p, role:crossbell, applications, *, crossbell/*, allow
       p, role:crossbell, logs, *, crossbell/*, allow
       p, role:crossbell, exec, *, crossbell/*, allow
@@ -284,6 +287,7 @@ configs:
       g, aiop, role:ai
       g, crossbell, role:crossbell
       g, diygod, role:diygod
+      g, follow, role:follow
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
