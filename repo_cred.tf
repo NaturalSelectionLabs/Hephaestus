@@ -15,3 +15,9 @@ resource "argocd_repository_credentials" "rss3" {
   username = "git"
   password = var.PAT
 }
+
+resource "argocd_repository_credentials" "rss-next" {
+  url = "https://github.com/RSSNext"
+  username = "git"
+  password = var.PAT
+}
