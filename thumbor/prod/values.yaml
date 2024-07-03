@@ -1,3 +1,10 @@
 replicaCount: 3
 image:
   tag: "7-py-3.10"
+
+thumbor_config: |
+  HTTP_LOADER_FORWARD_HEADERS_WHITELIST = ["Referer"]
+  AUTO_WEBP = True
+  HTTP_LOADER_CONNECT_TIMEOUT = 10
+  HTTP_LOADER_REQUEST_TIMEOUT = 30
+  RESULT_STORAGE_STORES_UNSAFE = True
