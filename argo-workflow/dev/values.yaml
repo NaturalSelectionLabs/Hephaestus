@@ -45,4 +45,7 @@ server:
       - "profile"
       - "email"
       - "roles"
-
+controller:
+  workflowNamespaces:
+    - default
+    - guardian
