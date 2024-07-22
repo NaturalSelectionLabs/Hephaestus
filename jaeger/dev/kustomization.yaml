@@ -9,3 +9,4 @@ helmCharts:
     repo: https://jaegertracing.github.io/helm-charts
     valuesFile: values.yaml
     version: 0.71.x
+    namespace: guardian

@@ -5,6 +5,8 @@ resources:
   - ../rss3
   - runner-deploy.yaml
 
+namespace: guardian
+
 helmCharts:
   - name: actions-runner-controller
     releaseName: actions-runner-controller
@@ -12,3 +14,4 @@ helmCharts:
     valuesFile: values.yaml
     version: 0.x.x
     includeCRDs: true
+    namespace: guardian

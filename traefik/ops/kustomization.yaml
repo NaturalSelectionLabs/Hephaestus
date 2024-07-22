@@ -6,6 +6,7 @@ resources:
 helmCharts:
   - name: traefik
     releaseName: traefik
+    namespace: guardian
     repo: https://helm.traefik.io/traefik
     valuesFile: values.yaml
     version: x.x.x

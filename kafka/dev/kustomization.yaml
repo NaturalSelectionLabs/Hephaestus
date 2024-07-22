@@ -13,3 +13,4 @@ helmCharts:
     repo: https://charts.bitnami.com/bitnami
     valuesFile: values.yaml
     version: 20.x.x
+    namespace: guardian

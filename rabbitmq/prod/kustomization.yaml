@@ -8,6 +8,7 @@ resources:
 helmCharts:
   - name: rabbitmq
     releaseName: rabbitmq
+    namespace: guardian
     repo: https://charts.bitnami.com/bitnami
     valuesFile: values.yaml
     version: 11.x.x

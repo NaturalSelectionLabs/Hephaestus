@@ -15,12 +15,14 @@ secretGenerator:
 helmCharts:
   - name: victoria-metrics-k8s-stack
     releaseName: victoriametrics
+    namespace: guardian
     repo: https://victoriametrics.github.io/helm-charts/
     valuesFile: values.yaml
     version: 0.x.x
     includeCRDs: true
   - name: prometheus-operator-crds
     releaseName: prometheus
+    namespace: guardian
     repo: https://prometheus-community.github.io/helm-charts
     version: x.x.x
 

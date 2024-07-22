@@ -6,6 +6,7 @@ resources:
 helmCharts:
   - name: promtail
     releaseName: promtail
+    namespace: guardian
     repo: https://grafana.github.io/helm-charts
     version: 6.15.x
     valuesInline:
@@ -16,6 +17,7 @@ helmCharts:
           effect: NoSchedule
   - name: loki
     releaseName: loki
+    namespace: guardian
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
     valuesFile: values.yaml
