@@ -124,6 +124,7 @@ resource "argocd_application_set" "victoria_metrics" {
 resource "argocd_application_set" "actions_runner_controller" {
   metadata {
     name = "actions-runner-controller"
+    namespace = "argo"
   }
   spec {
     generator {

@@ -5,7 +5,7 @@ resource "argocd_project" "guardian" {
   }
 
   spec {
-    source_namespaces = ["default", "guardian", "kube-system"]
+    source_namespaces = ["*"]
     source_repos      = ["*"]
 
     cluster_resource_whitelist {
