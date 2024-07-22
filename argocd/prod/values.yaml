@@ -53,8 +53,8 @@ server:
   ingress:
     # -- Enable an ingress resource for the Argo CD server
     enabled: true
+    ingressClassName: "nginx"
     annotations:
-      kubernetes.io/ingress.class: gce
       cert-manager.io/cluster-issuer: "cloudflare"
     tls: true
   ingressGrpc:
