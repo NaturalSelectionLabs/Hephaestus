@@ -64,6 +64,8 @@ providers:
     enabled: true
     allowCrossNamespace: true
     allowExternalNameServices: true
+  kubernetesGateway:
+    enabled: false
 
 metrics:
   prometheus:
