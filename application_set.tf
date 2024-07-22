@@ -48,58 +48,6 @@ resource "argocd_application_set" "traefik" {
     }
   }
 }
-#
-#resource "argocd_application_set" "traefik_mesh" {
-#  metadata {
-#    name = "traefik-mesh"
-#  }
-#  spec {
-#    generator {
-#      list {
-#        elements = [
-#          {
-#            cluster = argocd_cluster.dev.name
-#            url     = argocd_cluster.dev.server
-#          },
-#          {
-#            cluster = argocd_cluster.prod.name
-#            url     = argocd_cluster.prod.server
-#          }
-#        ]
-#      }
-#    }
-#    template {
-#      metadata {
-#        name = "traefik-mesh-{{cluster}}"
-#      }
-#
-#      spec {
-#        project = argocd_project.guardian.metadata[0].name
-#        source {
-#          repo_url        = var.repo_url
-#          target_revision = "HEAD"
-#          path            = "traefik-mesh/{{cluster}}"
-#          plugin {
-#            name = "avp-kustomize"
-#            env {
-#              name  = "APP_REPO"
-#              value = "NaturalSelectionLabs/Hephaestus"
-#            }
-#            env {
-#              name  = "AVP_SECRET"
-#              value = "guardian:avp-{{cluster}}"
-#            }
-#          }
-#        }
-#
-#        destination {
-#          server    = "{{url}}"
-#          namespace = "guardian"
-#        }
-#      }
-#    }
-#  }
-#}
 
 resource "argocd_application_set" "victoria_metrics" {
   metadata {
@@ -295,62 +243,6 @@ resource "argocd_application_set" "cert_manager" {
   }
 }
 
-#resource "argocd_application_set" "consul" {
-#  metadata {
-#    name = "consul"
-#  }
-#  spec {
-#    generator {
-#      list {
-#        elements = [
-#          {
-#            cluster = argocd_cluster.dev.name
-#            url     = argocd_cluster.dev.server
-#          },
-#          #          {
-#          #            cluster = argocd_cluster.prod.name
-#          #            url     = argocd_cluster.prod.server
-#          #          }
-#        ]
-#      }
-#    }
-#    template {
-#      metadata {
-#        name = "consul-{{cluster}}"
-#        labels = {
-#          cluster = "{{cluster}}"
-#        }
-#      }
-#
-#      spec {
-#        project = argocd_project.guardian.metadata[0].name
-#
-#        source {
-#          repo_url        = var.repo_url
-#          target_revision = "HEAD"
-#          path            = "consul/{{cluster}}"
-#          plugin {
-#            name = "avp-kustomize"
-#            env {
-#              name = "APP_REPO"
-#              value = "NaturalSelectionLabs/Hephaestus"
-#            }
-#            env {
-#              name = "AVP_SECRET"
-#              value = "guardian:avp-{{cluster}}"
-#            }
-#          }
-#        }
-#
-#        destination {
-#          server    = "{{url}}"
-#          namespace = "guardian"
-#        }
-#
-#      }
-#    }
-#  }
-#}
 resource "argocd_application_set" "kafka" {
   metadata {
     name = "kafka"
@@ -418,8 +310,7 @@ resource "argocd_application_set" "kafka" {
 
 resource "argocd_application_set" "loki" {
   metadata {
-    name      = "loki"
-    namespace = "guardian"
+    name = "loki"
   }
   spec {
     generator {
@@ -474,8 +365,7 @@ resource "argocd_application_set" "loki" {
 
 resource "argocd_application_set" "jaeger" {
   metadata {
-    name      = "jaeger"
-    namespace = "guardian"
+    name = "jaeger"
   }
   spec {
     generator {
@@ -531,8 +421,7 @@ resource "argocd_application_set" "jaeger" {
 
 resource "argocd_application_set" "exporter" {
   metadata {
-    name      = "exporter"
-    namespace = "guardian"
+    name = "exporter"
   }
   spec {
     generator {
@@ -588,8 +477,7 @@ resource "argocd_application_set" "exporter" {
 
 resource "argocd_application_set" "alert" {
   metadata {
-    name      = "alert"
-    namespace = "guardian"
+    name = "alert"
   }
   spec {
     generator {
@@ -645,8 +533,7 @@ resource "argocd_application_set" "alert" {
 
 resource "argocd_application_set" "rabbitmq" {
   metadata {
-    name      = "rabbitmq"
-    namespace = "guardian"
+    name = "rabbitmq"
   }
   spec {
     generator {
@@ -701,8 +588,7 @@ resource "argocd_application_set" "rabbitmq" {
 
 resource "argocd_application_set" "etcd" {
   metadata {
-    name      = "etcd"
-    namespace = "guardian"
+    name = "etcd"
   }
   spec {
     generator {
@@ -733,60 +619,6 @@ resource "argocd_application_set" "etcd" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "etcd/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
-            }
-          }
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "guardian"
-        }
-      }
-    }
-  }
-}
-
-
-resource "argocd_application_set" "keda" {
-  metadata {
-    name = "keda"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          #          {
-          #            cluster = argocd_cluster.dev.name
-          #            url     = argocd_cluster.dev.server
-          #          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "keda-{{cluster}}"
-      }
-
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "keda/{{cluster}}"
           plugin {
             name = "avp-kustomize"
             env {

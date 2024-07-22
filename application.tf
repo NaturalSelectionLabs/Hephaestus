@@ -27,7 +27,7 @@ resource "argocd_application" "argocd" {
 resource "argocd_application" "argocd-image-updater" {
   metadata {
     name      = "argocd-image-updater"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -51,7 +51,7 @@ resource "argocd_application" "argocd-image-updater" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      namespace = "argo"
     }
   }
 }
@@ -59,7 +59,7 @@ resource "argocd_application" "argocd-image-updater" {
 resource "argocd_application" "grafana" {
   metadata {
     name      = "grafana"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -82,38 +82,7 @@ resource "argocd_application" "grafana" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
-    }
-  }
-}
-
-resource "argocd_application" "cilium" {
-  metadata {
-    name      = "cilium"
-    namespace = "guardian"
-  }
-  spec {
-    project = argocd_project.guardian.metadata[0].name
-    source {
-      repo_url        = var.repo_url
-      target_revision = "HEAD"
-      path            = "cilium/prod"
-      plugin {
-        name = "avp-kustomize"
-        env {
-          name  = "APP_REPO"
-          value = "NaturalSelectionLabs/Hephaestus"
-        }
-        env {
-          name  = "AVP_SECRET"
-          value = "guardian:avp-prod"
-        }
-      }
-    }
-
-    destination {
-      server    = argocd_cluster.prod.server
-      namespace = "kube-system"
+      namespace = "argo"
     }
   }
 }
@@ -121,7 +90,7 @@ resource "argocd_application" "cilium" {
 resource "argocd_application" "keycloak" {
   metadata {
     name      = "keycloak"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -145,7 +114,7 @@ resource "argocd_application" "keycloak" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      namespace = "argo"
     }
   }
 }
@@ -153,7 +122,7 @@ resource "argocd_application" "keycloak" {
 resource "argocd_application" "discourse" {
   metadata {
     name      = "discourse"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -184,7 +153,7 @@ resource "argocd_application" "discourse" {
 resource "argocd_application" "ipfs" {
   metadata {
     name      = "ipfs"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -208,7 +177,7 @@ resource "argocd_application" "ipfs" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      namespace = "argo"
     }
   }
 }
@@ -216,7 +185,7 @@ resource "argocd_application" "ipfs" {
 resource "argocd_application" "shlink" {
   metadata {
     name      = "shlink"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -247,7 +216,7 @@ resource "argocd_application" "shlink" {
 resource "argocd_application" "metabase" {
   metadata {
     name      = "metabase"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -271,7 +240,7 @@ resource "argocd_application" "metabase" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      namespace = "argo"
     }
   }
 }
@@ -279,7 +248,7 @@ resource "argocd_application" "metabase" {
 resource "argocd_application" "novu" {
   metadata {
     name      = "novu"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -303,7 +272,7 @@ resource "argocd_application" "novu" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      namespace = "argo"
     }
   }
 }
