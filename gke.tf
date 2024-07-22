@@ -10,6 +10,11 @@ data "google_container_cluster" "us_central1_prod" {
   location = "us-central1"
 }
 
+data "google_container_cluster" "us_central1_ops" {
+  name     = "us-central1-ops"
+  location = "us-central1"
+}
+
 provider "kubernetes" {
   alias                  = "us-central1-dev"
   host                   = "https://${data.google_container_cluster.us_central1_dev.endpoint}"
