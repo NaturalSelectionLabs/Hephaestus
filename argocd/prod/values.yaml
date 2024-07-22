@@ -43,6 +43,9 @@ server:
     enabled: true
     serviceMonitor:
       enabled: true
+  ingress:
+    # -- Enable an ingress resource for the Argo CD server
+    enabled: true
   resources:
     requests:
       cpu: 0.1
