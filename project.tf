@@ -13,11 +13,7 @@ resource "argocd_project" "guardian" {
       kind  = "*"
     }
     destination {
-      server    = argocd_cluster.prod.server
-      namespace = "*"
-    }
-    destination {
-      server    = argocd_cluster.dev.server
+      server    = "*"
       namespace = "*"
     }
   }
