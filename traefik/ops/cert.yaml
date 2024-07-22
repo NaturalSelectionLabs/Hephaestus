@@ -1,0 +1,12 @@
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: traefik-default-cert
+  namespace: guardian
+spec:
+  dnsNames:
+    - '*.naturalselectionlabs.com'
+  issuerRef:
+    kind: ClusterIssuer
+    name: cloudflare
+  secretName: traefik-default-cert

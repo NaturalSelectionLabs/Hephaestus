@@ -15,6 +15,10 @@ ingressRoute:
     entryPoints: ["websecure"]
 #    middlewares:
 #      - name: traefik-forward-auth
+tlsStore:
+  default:
+    defaultCertificate:
+      secretName: traefik-default-cert
 logs:
   access:
     enabled: true
