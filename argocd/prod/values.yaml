@@ -233,7 +233,9 @@ configs:
   params:
     server.insecure: true
     reposerver.enable.git.submodule: false
-
+  secret:
+    # -- Create the argocd-secret
+    createSecret: false
   # ConfigMap for Config Management Plugins
   # Ref: https://argo-cd.readthedocs.io/en/stable/operator-manual/config-management-plugins/
   cmp:
