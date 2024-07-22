@@ -50,6 +50,11 @@ server:
       kubernetes.io/ingress.class: gce
       cert-manager.io/cluster-issuer: "cloudflare"
     tls: true
+  ingressGrpc:
+    # -- Enable an ingress resource for the Argo CD server for dedicated [gRPC-ingress]
+    enabled: true
+    # -- Additional ingress annotations for dedicated [gRPC-ingress]
+    annotations: {}
   resources:
     requests:
       cpu: 0.5
