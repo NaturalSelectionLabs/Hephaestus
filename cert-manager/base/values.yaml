@@ -3,3 +3,6 @@ prometheus:
   servicemonitor:
     enabled: true
 installCRDs: true
+global:
+  leaderElection:
+    namespace: guardian
