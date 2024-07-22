@@ -9,3 +9,4 @@ helmCharts:
     repo: https://helm.releases.hashicorp.com
     valuesFile: values.yaml
     version: x.x.x
+    namespace: guardian

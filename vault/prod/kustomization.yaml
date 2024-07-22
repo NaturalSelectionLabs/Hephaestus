@@ -9,3 +9,15 @@ helmCharts:
     repo: https://helm.releases.hashicorp.com
     valuesFile: values.yaml
     version: x.x.x
+    namespace: guardian
+
+# Patch Service vault-active from type ClusterIP to LoadBalancer
+patches:
+  - target:
+      version: v1
+      kind: Service
+      name: vault-active
+    patch: |-
+      - op: replace
+        path: /spec/type
+        value: LoadBalancer

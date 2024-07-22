@@ -234,6 +234,15 @@ server:
         
         service_registration "kubernetes" {}
 
+
+  service:
+    active:
+      type: LoadBalancer
+      annotations:
+        networking.gke.io/load-balancer-type: "Internal"
+        #      cloud.google.com/l4-rbs: "enabled"
+        networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+        networking.gke.io/internal-load-balancer-allow-global-access: "true"
 # Vault UI
 ui:
   # True if you want to create a Service entry for the Vault UI.
