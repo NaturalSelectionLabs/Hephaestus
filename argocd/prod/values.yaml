@@ -8,6 +8,13 @@ externalRedis:
 #  existingSecret: argocd-redis
 controller:
   replicas: 2
+  resources:
+    requests:
+      cpu: 2
+      memory: 2Gi
+    limits:
+      cpu: 2
+      memory: 2Gi
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
