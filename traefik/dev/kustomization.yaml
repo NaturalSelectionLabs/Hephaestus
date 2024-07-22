@@ -10,5 +10,5 @@ helmCharts:
     namespace: guardian
     repo: https://helm.traefik.io/traefik
     valuesFile: values.yaml
-    version: 26.x.x
+    version: 27.x.x
     includeCRDs: true
