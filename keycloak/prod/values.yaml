@@ -19,6 +19,8 @@ extraEnv:   |
     value: https://account.naturalselectionlabs.com
   - name: KC_METRICS_ENABLED
     value: "true"
+  - name: KC_CACHE_STACK
+    value: "kubernetes"
   - name: DB_VENDOR
     value: postgres
   - name: DB_ADDR
@@ -32,9 +34,9 @@ extraEnv:   |
   - name: DB_PASSWORD_FILE
     value: /secrets/db-creds/password
   - name: JGROUPS_DISCOVERY_PROTOCOL
-    value: kubernetes.KUBE_PING
+    value: dns.DNS_PING
   - name: JGROUPS_DISCOVERY_PROPERTIES
-    value: dump_requests=true,port_range=0,namespace=guardian
+    value: dns_query=keycloak-headless.guardian.svc.cluster.local
   - name: KEYCLOAK_STATISTICS
     value: all
 
