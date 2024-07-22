@@ -94,6 +94,11 @@ repoServer:
       resources:
         - secrets
         - configmaps
+  clusterRoleRules:
+    # -- Enable custom rules for the Repo server's Cluster Role resource
+    enabled: true
+    # -- List of custom rules for the Repo server's Cluster Role resource
+    rules: []
   initContainers:
     - name: download-tools
       image: registry.access.redhat.com/ubi8
