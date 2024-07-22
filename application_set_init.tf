@@ -1,6 +1,7 @@
 resource "argocd_application_set" "vault" {
   metadata {
-    name = "vault"
+    name      = "vault"
+    namespace = "argo"
   }
   spec {
     generator {

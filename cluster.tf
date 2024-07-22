@@ -15,7 +15,7 @@ resource "argocd_cluster" "dev" {
   }
 
   lifecycle {
-    ignore_changes = [config]
+    ignore_changes = [config,metadata]
   }
 }
 
@@ -36,7 +36,7 @@ resource "argocd_cluster" "prod" {
   }
 
   lifecycle {
-    ignore_changes = [config]
+    ignore_changes = [config,metadata]
   }
 }
 
@@ -56,4 +56,7 @@ resource "argocd_cluster" "ops" {
     }
   }
 
+  lifecycle {
+    ignore_changes = [config,metadata]
+  }
 }
