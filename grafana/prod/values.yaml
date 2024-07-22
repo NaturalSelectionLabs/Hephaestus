@@ -35,6 +35,8 @@ grafana.ini:
     host: 10.147.0.8
     user: postgres
     name: grafana
+  auth:
+    oauth_allow_insecure_email_lookup: true
   auth.generic_oauth:
     enabled: true
     name: Natural Selection Labs
