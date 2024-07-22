@@ -1,7 +1,7 @@
 resource "argocd_project" "guardian" {
   metadata {
     name      = "guardian"
-    namespace = "guardian"
+    namespace = "argo"
   }
 
   spec {
@@ -33,7 +33,7 @@ resource "argocd_project" "namespaced" {
 
   metadata {
     name      = each.value
-    namespace = "guardian"
+    namespace = "argo"
   }
 
   spec {
