@@ -3,11 +3,9 @@ kind: Kustomization
 resources:
   - alert-svc.yaml
   - secret.yaml
-  - route.yaml
-#  - agent
 helmCharts:
   - name: grafana
     releaseName: grafana
     repo: https://grafana.github.io/helm-charts
     valuesFile: values.yaml
-    version: 6.57.3
+    version: x.x.x

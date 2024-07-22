@@ -1,6 +1,0 @@
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: apisix-dashboard-schema
-data:
-  schema.json: |

@@ -81,8 +81,8 @@ resource "argocd_application" "grafana" {
     }
 
     destination {
-      server    = argocd_cluster.prod.server
-      namespace = "argo"
+      name = "ops"
+      namespace = "guardian"
     }
   }
 }
@@ -113,8 +113,8 @@ resource "argocd_application" "keycloak" {
     }
 
     destination {
-      server    = argocd_cluster.prod.server
-      namespace = "argo"
+      name     = "ops"
+      namespace = "guardian"
     }
   }
 }

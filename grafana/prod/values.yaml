@@ -1,18 +1,23 @@
 resources:
   limits:
-    cpu: 500m
+    cpu: 1
     memory: 1Gi
   requests:
-    cpu: 100m
-    memory: 512Mi
+    cpu: 1
+    memory: 1i
 replicas: 3
-nodeSelector:
-  rss3.io/usage: internal
-tolerations:
-  - key: "rss3.io/usage"
-    operator: "Equal"
-    value: "internal"
-    effect: "NoSchedule"
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+  hosts:
+    - grafana.naturalselectionlabs.com
+  tls:
+    - secretName: grafana-tls
+      hosts:
+        - grafana.naturalselectionlabs.com
 admin:
   existingSecret: "grafana-secrets"
   userKey: admin-user
@@ -22,7 +27,7 @@ envFromSecrets:
   - name: grafana-ext-config
 grafana.ini:
   server:
-    domain: grafana.nsl.xyz
+    domain: grafana.naturalselectionlabs.com
     root_url: "https://%(domain)s"
     serve_from_sub_path: false
   database:
@@ -41,7 +46,7 @@ grafana.ini:
     auth_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/auth
     token_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/token
     api_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/userinfo
-    signout_redirect_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2grafana.nsl.xyz%2Flogin
+    signout_redirect_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2grafana.naturalselectionlabs.com%2Flogin
     role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
   unified_alerting:
     enabled: true
