@@ -150,38 +150,6 @@ resource "argocd_application" "discourse" {
   }
 }
 
-resource "argocd_application" "ipfs" {
-  metadata {
-    name      = "ipfs"
-    namespace = "argo"
-  }
-  spec {
-    project = argocd_project.guardian.metadata[0].name
-
-    source {
-      repo_url        = var.repo_url
-      target_revision = "HEAD"
-      path            = "ipfs/prod"
-      plugin {
-        name = "avp-kustomize"
-        env {
-          name  = "APP_REPO"
-          value = "NaturalSelectionLabs/Hephaestus"
-        }
-        env {
-          name  = "AVP_SECRET"
-          value = "guardian:avp-prod"
-        }
-      }
-    }
-
-    destination {
-      server    = argocd_cluster.prod.server
-      namespace = "argo"
-    }
-  }
-}
-
 resource "argocd_application" "shlink" {
   metadata {
     name      = "shlink"
@@ -240,7 +208,7 @@ resource "argocd_application" "metabase" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "argo"
+      namespace = "guardian"
     }
   }
 }
@@ -272,7 +240,7 @@ resource "argocd_application" "novu" {
 
     destination {
       server    = argocd_cluster.prod.server
-      namespace = "argo"
+      namespace = "guardian"
     }
   }
 }
