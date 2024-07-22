@@ -118,6 +118,10 @@ resource "argocd_application_set" "victoria_metrics" {
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
+          },
+          {
+            cluster = argocd_cluster.ops.name
+            url     = argocd_cluster.ops.server
           }
         ]
       }
