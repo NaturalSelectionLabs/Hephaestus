@@ -1,7 +1,7 @@
 resource "argocd_application" "argocd" {
   metadata {
     name      = "argocd"
-    namespace = "guardian"
+    namespace = "argo"
   }
   spec {
     project = argocd_project.guardian.metadata[0].name
@@ -18,8 +18,8 @@ resource "argocd_application" "argocd" {
     }
 
     destination {
-      server    = argocd_cluster.prod.server
-      namespace = "guardian"
+      name      = "ops"
+      namespace = "argo"
     }
   }
 }

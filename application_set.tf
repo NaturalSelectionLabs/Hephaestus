@@ -254,6 +254,10 @@ resource "argocd_application_set" "cert_manager" {
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
+          },
+          {
+            cluster = argocd_cluster.ops.name
+            url     = argocd_cluster.ops.server
           }
         ]
       }

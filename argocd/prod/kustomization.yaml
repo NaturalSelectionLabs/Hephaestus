@@ -9,6 +9,5 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     valuesFile: values.yaml
     version: 7.x.x
-    namespace: guardian
     apiVersions:
       - monitoring.coreos.com/v1
