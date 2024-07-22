@@ -87,15 +87,9 @@ resource "argocd_application_set" "victoria_metrics" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "victoriametrics/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
             }
           }
         }
@@ -155,15 +149,9 @@ resource "argocd_application_set" "actions_runner_controller" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "actions-runner-controller/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
             }
           }
         }
