@@ -3,4 +3,4 @@ kind: Kustomization
 resources:
   - default.yaml
   - guardian.yaml
-  - kube-system.yaml
+#  - kube-system.yaml

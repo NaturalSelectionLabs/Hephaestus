@@ -13,6 +13,10 @@ resource "argocd_application_set" "traefik" {
           {
             cluster = argocd_cluster.prod.name
             url     = argocd_cluster.prod.server
+          },
+          {
+            cluster = argocd_cluster.ops.name
+            url     = argocd_cluster.ops.server
           }
         ]
       }
@@ -29,15 +33,9 @@ resource "argocd_application_set" "traefik" {
           repo_url        = var.repo_url
           target_revision = "HEAD"
           path            = "traefik/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
             }
           }
         }
