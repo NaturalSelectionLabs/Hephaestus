@@ -46,8 +46,10 @@ server:
   ingress:
     # -- Enable an ingress resource for the Argo CD server
     enabled: true
+    ingressClassName: traefik
     annotations:
-      kubernetes.io/ingress.class: gce
+      cert-manager.io/cluster-issuer: "cloudflare"
+    tls: true
   resources:
     requests:
       cpu: 0.1
