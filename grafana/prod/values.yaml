@@ -4,7 +4,7 @@ resources:
     memory: 1Gi
   requests:
     cpu: 1
-    memory: 1i
+    memory: 1Gi
 replicas: 3
 ingress:
   enabled: true
@@ -43,10 +43,10 @@ grafana.ini:
     email_attribute_path: email
     login_attribute_path: username
     name_attribute_path: full_name
-    auth_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/auth
-    token_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/token
-    api_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/userinfo
-    signout_redirect_url: https://account.nsl.xyz/auth/realms/google/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2grafana.naturalselectionlabs.com%2Flogin
+    auth_url: https://account.naturalselectionlabs.com/auth/realms/google/protocol/openid-connect/auth
+    token_url: https://account.naturalselectionlabs.com/auth/realms/google/protocol/openid-connect/token
+    api_url: https://account.naturalselectionlabs.com/auth/realms/google/protocol/openid-connect/userinfo
+    signout_redirect_url: https://account.naturalselectionlabs.com/auth/realms/google/protocol/openid-connect/logout?redirect_uri=https%3A%2F%2grafana.naturalselectionlabs.com%2Flogin
     role_attribute_path: contains(roles[*], 'admin') && 'Admin' || contains(roles[*], 'editor') && 'Editor' || 'Viewer'
   unified_alerting:
     enabled: true
