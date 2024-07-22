@@ -5,6 +5,7 @@ resources:
 helmCharts:
   - name: pyroscope
     releaseName: pyroscope
+    namespace: guardian
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
     valuesFile: values.yaml
