@@ -16,7 +16,7 @@ server:
     - sso
   sso:
     enabled: true
-    issuer: https://account.nsl.xyz/auth/realms/google
+    issuer: https://account.naturalselectionlabs.com/auth/realms/google
     clientId:
       # -- Name of secret to retrieve the app OIDC client ID
       name: argo-workflow-sso

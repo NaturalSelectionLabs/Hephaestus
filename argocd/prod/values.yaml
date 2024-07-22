@@ -198,7 +198,7 @@ configs:
           id: keycloak
           name: NSL
           config:
-            issuer: https://account.nsl.xyz/auth/realms/google
+            issuer: https://account.naturalselectionlabs.com/auth/realms/google
             clientID: argocd
             clientSecret: $oidc.keycloak.clientSecret
             redirectURI: https://argocd.naturalselectionlabs.com/dex/callback
@@ -214,7 +214,7 @@ configs:
     # OIDC configuration as an alternative to dex (optional).
 #    oidc.config: |
 #      name: Keycloak
-#      issuer: https://account.nsl.xyz/auth/realms/google
+#      issuer: https://account.naturalselectionlabs.com/auth/realms/google
 #      clientID: argocd
 #      clientSecret: $oidc.keycloak.clientSecret
 #      requestedScopes: ["email"]

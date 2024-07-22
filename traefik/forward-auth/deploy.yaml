@@ -32,7 +32,7 @@ spec:
             - name: INSECURE_COOKIE
               value: "true"
             - name: PROVIDERS_OIDC_ISSUER_URL
-              value: https://account.nsl.xyz/auth/realms/google
+              value: https://account.naturalselectionlabs.com/auth/realms/google
             - name: PROVIDERS_OIDC_CLIENT_ID
               valueFrom:
                 secretKeyRef:
