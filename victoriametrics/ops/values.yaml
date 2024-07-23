@@ -99,16 +99,17 @@ vmsingle:
 
   ingress:
     enabled: true
-    ingressClassName: traefik
+#    ingressClassName: traefik
     annotations:
-      cert-manager.io/cluster-issuer: "cloudflare"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      kubernetes.io/ingress.class: gce-internal
+#      cert-manager.io/cluster-issuer: "cloudflare"
+#      traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hosts:
-      - vmsingle.naturalselectionlabs.com
-    tls:
-      - secretName: vmsingle-tls
-        hosts:
-          - vmsingle.naturalselectionlabs.com
+      - vmsingle-internal.naturalselectionlabs.com
+#    tls:
+#      - secretName: vmsingle-tls
+#        hosts:
+#          - vmsingle.naturalselectionlabs.com
 
 
 alertmanager:
