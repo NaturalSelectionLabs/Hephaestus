@@ -150,8 +150,8 @@ vmcluster:
                 storage: 200Gi
       resources:
         requests:
-          cpu: "0.5"
-          memory: "1Gi"
+          cpu: "2"
+          memory: "4Gi"
     vminsert:
       image:
         tag: v1.101.0-cluster
