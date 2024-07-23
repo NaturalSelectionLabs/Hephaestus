@@ -97,6 +97,20 @@ vmsingle:
         cpu: "4"
         memory: "8Gi"
 
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hosts:
+      - vmsingle.naturalselectionlabs.com
+    tls:
+      - secretName: vmsingle-tls
+        hosts:
+          - vmsingle.naturalselectionlabs.com
+
+
 alertmanager:
   enabled: true
   spec:
