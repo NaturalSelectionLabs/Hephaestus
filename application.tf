@@ -81,7 +81,7 @@ resource "argocd_application" "grafana" {
     }
 
     destination {
-      name = "ops"
+      name      = "ops"
       namespace = "guardian"
     }
   }
@@ -113,7 +113,7 @@ resource "argocd_application" "keycloak" {
     }
 
     destination {
-      name     = "ops"
+      name      = "ops"
       namespace = "guardian"
     }
   }
@@ -240,6 +240,38 @@ resource "argocd_application" "novu" {
 
     destination {
       server    = argocd_cluster.prod.server
+      namespace = "guardian"
+    }
+  }
+}
+
+resource "argocd_application" "traefik-forward-auth" {
+  metadata {
+    name      = "traefik-forward-auth"
+    namespace = "argo"
+  }
+  spec {
+    project = argocd_project.guardian.metadata[0].name
+
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "traefik-forward-auth"
+      plugin {
+        name = "avp-kustomize"
+        env {
+          name  = "APP_REPO"
+          value = "NaturalSelectionLabs/Hephaestus"
+        }
+        env {
+          name  = "AVP_SECRET"
+          value = "guardian:avp-prod"
+        }
+      }
+    }
+
+    destination {
+      name      = "ops"
       namespace = "guardian"
     }
   }
