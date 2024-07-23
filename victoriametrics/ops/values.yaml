@@ -71,11 +71,7 @@ victoria-metrics-operator:
 
 # -- Configures vmsingle params
 vmsingle:
-  annotations:
-    prometheus.io/path: /metrics
-    prometheus.io/port: '8429'
-    prometheus.io/scrape: 'true'
-  enabled: true
+  enabled: false
   # spec for VMSingle crd
   # https://docs.victoriametrics.com/operator/api.html#vmsinglespec
   spec:
@@ -99,18 +95,123 @@ vmsingle:
 
   ingress:
     enabled: true
-#    ingressClassName: traefik
+    ingressClassName: traefik
     annotations:
-      kubernetes.io/ingress.class: gce-internal
-#      cert-manager.io/cluster-issuer: "cloudflare"
-#      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      cert-manager.io/cluster-issuer: "cloudflare"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
     hosts:
-      - vmsingle-internal.naturalselectionlabs.com
-#    tls:
-#      - secretName: vmsingle-tls
-#        hosts:
-#          - vmsingle.naturalselectionlabs.com
+      - vmsingle.naturalselectionlabs.com
+    tls:
+      - secretName: vmsingle-tls
+        hosts:
+          - vmsingle.naturalselectionlabs.com
 
+vmcluster:
+  enabled: true
+  annotations: {}
+  # spec for VMCluster crd
+  # https://docs.victoriametrics.com/operator/api.html#vmclusterspec
+  spec:
+    # -- Data retention period. Possible units character: h(ours), d(ays), w(eeks), y(ears), if no unit character specified - month. The minimum retention period is 24h. See these [docs](https://docs.victoriametrics.com/single-server-victoriametrics/#retention)
+    retentionPeriod: "1"
+    replicationFactor: 2
+    vmstorage:
+      image:
+        tag: v1.101.0-cluster
+      replicaCount: 2
+      storageDataPath: "/vm-data"
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: premium-rwo
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 1Ti
+      resources:
+        requests:
+          cpu: "2"
+          memory: "4Gi"
+    vmselect:
+      image:
+        tag: v1.101.0-cluster
+      replicaCount: 2
+      cacheMountPath: "/select-cache"
+      extraArgs: {}
+      storage:
+        volumeClaimTemplate:
+          spec:
+            storageClassName: premium-rwo
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: 200Gi
+      resources:
+        requests:
+          cpu: "0.5"
+          memory: "1Gi"
+    vminsert:
+      image:
+        tag: v1.101.0-cluster
+      replicaCount: 2
+      extraArgs: {}
+      resources:
+        requests:
+          cpu: "0.5"
+          memory: "1Gi"
+
+  ingress:
+    storage:
+      enabled: false
+    select:
+      enabled: true
+      ingressClassName: traefik
+      annotations:
+        cert-manager.io/cluster-issuer: "cloudflare"
+        traefik.ingress.kubernetes.io/router.entrypoints: websecure
+      hosts:
+        - vmselect.naturalselectionlabs.com
+      tls:
+        - secretName: vmselect-tls
+          hosts:
+            - vmselect.naturalselectionlabs.com
+    insert:
+      enabled: false
+      # For Kubernetes >= 1.18 you should specify the ingress-controller via the field ingressClassName
+      # See https://kubernetes.io/blog/2020/04/02/improvements-to-the-ingress-api-in-kubernetes-1.18/#specifying-the-class-of-an-ingress
+      # ingressClassName: nginx
+      # Values can be templated
+      annotations:
+        {}
+        # kubernetes.io/ingress.class: nginx
+      # kubernetes.io/tls-acme: "true"
+      labels: {}
+      path: /
+      # pathType is only for k8s > 1.19
+      pathType: Prefix
+
+      hosts:
+        - vminsert.domain.com
+      ## Extra paths to prepend to every host configuration. This is useful when working with annotation based services.
+      extraPaths: []
+      # - path: /*
+      #   backend:
+      #     serviceName: ssl-redirect
+      #     servicePort: use-annotation
+      ## Or for k8s > 1.19
+      # - path: /*
+      #   pathType: Prefix
+      #   backend:
+      #     service:
+      #       name: ssl-redirect
+      #       port:
+      #         name: service
+      tls: []
+      #  - secretName: vminsert-ingress-tls
+      #    hosts:
+      #      - vminsert.domain.com
 
 alertmanager:
   enabled: true
