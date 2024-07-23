@@ -7,7 +7,6 @@ externalRedis:
   host: 10.1.40.3
 #  existingSecret: argocd-redis
 controller:
-  dynamicClusterDistribution: true
   replicas: 3
   resources:
     requests:

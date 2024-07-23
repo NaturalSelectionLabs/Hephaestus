@@ -260,7 +260,7 @@ vmagent:
       tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
-      cluster: ops
+      cluster_name: us-central1-ops
       region: us-central1
       provider: gcp
       zone: us-central1-a
