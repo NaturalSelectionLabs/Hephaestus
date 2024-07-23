@@ -13,8 +13,8 @@ ingressRoute:
     enabled: true
     matchRule: Host(`traefik.naturalselectionlabs.com`)
     entryPoints: ["websecure"]
-#    middlewares:
-#      - name: traefik-forward-auth
+    middlewares:
+      - name: traefik-forward-auth
 tlsStore:
   default:
     defaultCertificate:

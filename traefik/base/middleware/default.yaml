@@ -5,6 +5,6 @@ metadata:
   namespace: default
 spec:
   forwardAuth:
-    address: http://traefik-forward-auth:4181
+    address: https://traefik-auth.naturalselectionlabs.com
     authResponseHeaders:
       - X-Forwarded-User

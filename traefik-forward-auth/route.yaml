@@ -1,0 +1,13 @@
+apiVersion: traefik.containo.us/v1alpha1
+kind: IngressRoute
+metadata:
+  name: pyroscope
+spec:
+  entryPoints:
+    - websecure
+  routes:
+    - match: Host(`traefik-auth.naturalselectionlabs.com`)
+      kind: Rule
+      services:
+        - name: traefik-forward-auth
+          port: auth-http
