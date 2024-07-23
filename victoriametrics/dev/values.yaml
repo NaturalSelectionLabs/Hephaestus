@@ -107,8 +107,7 @@ vmagent:
   # https://docs.victoriametrics.com/operator/api.html#vmagentremotewritespec
   # defined spec will be added to the remoteWrite configuration of VMAgent
   additionalRemoteWrites:
-    []
-    #- url: http://some-remote-write/api/v1/write
+    - url: http://vmselect.internal.naturalselectionlabs.com/insert/0/prometheus/api/v1/write
   # spec for VMAgent crd
   # https://docs.victoriametrics.com/operator/blob/master/docs/api.MD#vmagentspec
   spec:
