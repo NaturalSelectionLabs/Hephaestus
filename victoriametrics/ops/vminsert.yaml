@@ -1,0 +1,22 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vminsert-internal-lb
+  namespace: guardian
+  annotations:
+    cloud.google.com/neg: '{"ingress":true}'
+    networking.gke.io/load-balancer-type: "Internal"
+    networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+spec:
+  ports:
+    - name: http
+      protocol: TCP
+      port: 80
+      targetPort: 8480
+  selector:
+    app.kubernetes.io/component: monitoring
+    app.kubernetes.io/instance: victoriametrics
+    app.kubernetes.io/name: vminsert
+    managed-by: vm-operator
+  type: LoadBalancer
