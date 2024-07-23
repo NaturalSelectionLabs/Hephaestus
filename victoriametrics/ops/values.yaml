@@ -79,8 +79,6 @@ vmsingle:
   # spec for VMSingle crd
   # https://docs.victoriametrics.com/operator/api.html#vmsinglespec
   spec:
-    image:
-      tag: v1.87.1
     retentionPeriod: "180d"
     replicaCount: 1
     extraArgs: {}
@@ -91,17 +89,10 @@ vmsingle:
       resources:
         requests:
           storage: 1Ti
-    nodeSelector:
-      rss3.io/usage: internal
-    tolerations:
-      - key: "rss3.io/usage"
-        operator: "Equal"
-        value: "internal"
-        effect: "NoSchedule"
     resources:
       requests:
-        cpu: "2"
-        memory: "4Gi"
+        cpu: "4"
+        memory: "8Gi"
       limits:
         cpu: "4"
         memory: "8Gi"
@@ -111,7 +102,7 @@ alertmanager:
   spec:
     configSecret: "vm-alertmanager-config"
     replicaCount: 2
-    externalURL: https://alertmanager.prod.naturalselectionlabs.com
+    externalURL: https://alertmanager.naturalselectionlabs.com
   templateFiles:
     status.tmpl: |-
       {{ define "status.title" -}}
@@ -126,7 +117,7 @@ vmalert:
   spec:
     replicaCount: 3
     extraArgs:
-      external.url: https://grafana.nsl.xyz
+      external.url: https://grafana.naturalselectionlabs.com
 vmagent:
   enabled: true
   annotations:
@@ -164,17 +155,10 @@ vmagent:
     additionalScrapeConfigs:
       key: prometheus-additional.yaml
       name: additional-scrape-configs
-    nodeSelector:
-      rss3.io/usage: internal
-    tolerations:
-      - key: "rss3.io/usage"
-        operator: "Equal"
-        value: "internal"
-        effect: "NoSchedule"
     resources:
       requests:
-        cpu: '0.5'
-        memory: 512Mi
+        cpu: '1'
+        memory: 1Gi
       limits:
         cpu: '1'
         memory: 1Gi
@@ -183,7 +167,7 @@ grafana:
   enabled: false
   ingress:
     hosts:
-      - grafana.nsl.xyz
+      - grafana.naturalselectionlabs.com
 
 # prometheus-node-exporter dependency chart configuration. For possible values refer to https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:
@@ -231,15 +215,6 @@ kube-state-metrics:
   # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
   vmServiceScrape:
     spec: {}
-
-  #TODO: selector override for kube-state-metrics deployed separatelly
-  nodeSelector:
-    rss3.io/usage: internal
-  tolerations:
-    - key: "rss3.io/usage"
-      operator: "Equal"
-      value: "internal"
-      effect: "NoSchedule"
 
 
 #################################################
