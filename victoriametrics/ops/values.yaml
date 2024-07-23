@@ -171,7 +171,7 @@ grafana:
 
 # prometheus-node-exporter dependency chart configuration. For possible values refer to https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:
-  enabled: true
+  enabled: false
 
   resources:
     requests:
@@ -207,10 +207,14 @@ kube-state-metrics:
   ## all values for kube-state-metrics helm chart can be specified here
   image:
     tag: "v2.8.0"
+  nodeSelector:
+    cloud.google.com/compute-class: Performance
+    cloud.google.com/machine-family: c3
+    cloud.google.com/pod-isolation: 50m
   resources:
     requests:
-      cpu: 0.02
-      memory: 128Mi
+      cpu: 0.05
+      memory: 100Mi
   # spec for VMServiceScrape crd
   # https://docs.victoriametrics.com/operator/api.html#vmservicescrapespec
   vmServiceScrape:
