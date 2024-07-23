@@ -12,7 +12,6 @@ spec:
           name: action-runner-controller-rss3
       dockerdWithinRunnerContainer: true
       group: Default
-      serviceAccountName: argocd-application-controller
       automountServiceAccountToken: true
       envFrom:
         - secretRef:
