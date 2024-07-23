@@ -126,7 +126,7 @@ vmalert:
   spec:
     replicaCount: 3
     extraArgs:
-      external.url: https://grafana.nsl.xyz
+      external.url: https://grafana.naturalselectionlabs.com
 vmagent:
   enabled: true
   annotations:
@@ -182,7 +182,7 @@ grafana:
   enabled: false
   ingress:
     hosts:
-      - grafana.nsl.xyz
+      - grafana.naturalselectionlabs.com
 
 # prometheus-node-exporter dependency chart configuration. For possible values refer to https://github.com/prometheus-community/helm-charts/blob/main/charts/prometheus-node-exporter/values.yaml
 prometheus-node-exporter:

@@ -99,7 +99,7 @@ vmalert:
   enabled: true
   spec:
     extraArgs:
-      external.url: https://grafana.nsl.xyz
+      external.url: https://grafana.naturalselectionlabs.com
 
 vmagent:
   enabled: true

@@ -14,7 +14,7 @@ spec:
           annotations:
             summary: Blackbox probe failed
             description: "Probe failed from {{ $labels.job }}\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxConfigurationReloadFailure
@@ -25,7 +25,7 @@ spec:
           annotations:
             summary: Blackbox configuration reload failure
             description: "Blackbox configuration reload failure from {{ $labels.job }}\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxSlowProbe
@@ -36,7 +36,7 @@ spec:
           annotations:
             summary: Blackbox slow probe
             description: "Blackbox probe took more than 2s to complete from {{ $labels.job }}\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxProbeHttpFailure
@@ -47,7 +47,7 @@ spec:
           annotations:
             summary: Blackbox probe HTTP failure
             description: "HTTP status code is not 200-399 from {{ $labels.job }}\n "
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxSslCertificateWillExpireSoon
@@ -58,7 +58,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate will expire soon
             description: "SSL certificate expires in less than 20 days\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxSslCertificateWillExpireSoon
@@ -69,7 +69,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate will expire soon
             description: "SSL certificate expires in less than 3 days\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxSslCertificateExpired
@@ -80,7 +80,7 @@ spec:
           annotations:
             summary: Blackbox SSL certificate expired
             description: "SSL certificate has expired already\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxProbeSlowHttp
@@ -91,7 +91,7 @@ spec:
           annotations:
             summary: Blackbox probe slow HTTP
             description: "HTTP request took more than 2s from {{ $labels.job }}\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
 
         - alert: BlackboxProbeSlowPing
@@ -102,5 +102,5 @@ spec:
           annotations:
             summary: Blackbox probe slow ping
             description: "Blackbox ping took more than 2s from {{ $labels.job }}\n"
-            dashboard: https://grafana.nsl.xyz/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
+            dashboard: https://grafana.naturalselectionlabs.com/d/NEzutrbMk?var-instance={{ $labels.instance }}&var-job={{ $labels.job }}
             link_url: "{{ $labels.instance }}"
