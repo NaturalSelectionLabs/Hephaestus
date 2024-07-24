@@ -1,7 +1,7 @@
 global:
   enablePodSecurityPolicies: false
   name: consul
-#  datacenter: dc1
+  datacenter: us-central1-ops
 #  secretsBackend:
 #    vault:
 #      enabled: true
@@ -36,17 +36,3 @@ syncCatalog:
   #    cloud.google.com/pod-isolation: 50m
 connectInject:
   enabled: false
-ui:
-  ingress:
-    enabled: true
-    ingressClassName: "traefik"
-
-    hosts:
-      - host: consul.naturalselectionlabs.com
-    tls:
-      - hosts:
-          - consul.naturalselectionlabs.com
-        secretName: consul-tls
-    annotations: |
-      cert-manager.io/cluster-issuer: cloudflare
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
