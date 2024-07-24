@@ -1,0 +1,21 @@
+#global:
+#  name: consul
+#  datacenter: dc1
+#  secretsBackend:
+#    vault:
+#      enabled: true
+#      consulServerRole: "consul-server"
+#      manageSystemACLsRole: "consul-server-acl-init"
+#  enableConsulNamespaces: false
+#  acls:
+#    manageSystemACLs: true
+#    bootstrapToken:
+#      secretName: kv/consul-acl
+#      secretKey: token
+#server:
+#  storage: 20Gi
+#  storageClass: alicloud-disk-ssd
+syncCatalog:
+  enabled: true
+  toConsul: true
+  toK8S: false
