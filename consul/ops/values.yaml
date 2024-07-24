@@ -16,6 +16,7 @@ global:
 server:
   storage: 20Gi
   storageClass: premium-rwo
+  replicas: 3
   disruptionBudget:
     # Enables registering a PodDisruptionBudget for the server
     # cluster. If enabled, it only registers the budget so long as
@@ -35,3 +36,17 @@ syncCatalog:
   #    cloud.google.com/pod-isolation: 50m
 connectInject:
   enabled: false
+ui:
+  ingress:
+    enabled: true
+    ingressClassName: "traefik"
+
+    hosts:
+      - host: consul.naturalselectionlabs.com
+    tls:
+      - hosts:
+          - consul.naturalselectionlabs.com
+        secretName: consul-tls
+    annotations: |
+      cert-manager.io/cluster-issuer: cloudflare
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
