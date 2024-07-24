@@ -234,6 +234,19 @@ vmalert:
     replicaCount: 3
     extraArgs:
       external.url: https://grafana.naturalselectionlabs.com
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    hosts:
+      - vmalert.naturalselectionlabs.com
+    tls:
+      - secretName: vmalert-tls
+        hosts:
+          - vmalert.naturalselectionlabs.com
+
 vmagent:
   enabled: true
   annotations:
