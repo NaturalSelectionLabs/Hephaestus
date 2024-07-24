@@ -90,16 +90,16 @@ vmsingle:
           storage: 200Gi
 
 alertmanager:
-  enabled: true
+  enabled: false
   spec:
     configSecret: "vm-alertmanager-config"
     externalURL: https://alertmanager.prod.naturalselectionlabs.com
 
 vmalert:
-  enabled: true
-  spec:
-    extraArgs:
-      external.url: https://grafana.naturalselectionlabs.com
+  enabled: false
+#  spec:
+#    extraArgs:
+#      external.url: https://grafana.naturalselectionlabs.com
 
 vmagent:
   enabled: true
