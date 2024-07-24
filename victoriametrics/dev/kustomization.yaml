@@ -4,11 +4,13 @@ generatorOptions:
   disableNameSuffixHash: true
 resources:
   - svc.yaml
-  - route.yaml
 secretGenerator:
   - name: additional-scrape-configs
     files:
       - prometheus-additional.yaml
+  - name: vmalert-config
+    files:
+      - notifier.yaml
 helmCharts:
   - name: victoria-metrics-k8s-stack
     releaseName: victoriametrics

@@ -95,6 +95,14 @@ alertmanager:
 vmalert:
   enabled: true
   spec:
+    notifierConfigRef:
+      key: notifier.yaml
+      name: vmalert-config
+    externalLabels:
+      cluster_name: us-central1-dev
+      region: us-central1
+      provider: gcp
+      zone: us-central1-a
     extraArgs:
       external.url: https://grafana.naturalselectionlabs.com
 
