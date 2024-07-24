@@ -1,4 +1,5 @@
-#global:
+global:
+  enablePodSecurityPolicies: false
 #  name: consul
 #  datacenter: dc1
 #  secretsBackend:
