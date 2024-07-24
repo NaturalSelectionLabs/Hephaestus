@@ -20,3 +20,5 @@ syncCatalog:
   enabled: true
   toConsul: true
   toK8S: false
+connectInject:
+  enabled: false
