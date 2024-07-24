@@ -36,3 +36,14 @@ syncCatalog:
   #    cloud.google.com/pod-isolation: 50m
 connectInject:
   enabled: false
+ui:
+  service:
+    enabled: true
+
+    type: LoadBalancer
+    annotations: |
+      cloud.google.com/neg: '{"ingress":true}'
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
+
