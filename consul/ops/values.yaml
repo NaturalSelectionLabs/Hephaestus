@@ -1,6 +1,6 @@
 global:
   enablePodSecurityPolicies: false
-#  name: consul
+  name: consul
 #  datacenter: dc1
 #  secretsBackend:
 #    vault:
@@ -13,12 +13,25 @@ global:
 #    bootstrapToken:
 #      secretName: kv/consul-acl
 #      secretKey: token
-#server:
-#  storage: 20Gi
-#  storageClass: alicloud-disk-ssd
+server:
+  storage: 20Gi
+  storageClass: premium-rwo
+  disruptionBudget:
+    # Enables registering a PodDisruptionBudget for the server
+    # cluster. If enabled, it only registers the budget so long as
+    # the server cluster is enabled. To disable, set to `false`.
+    enabled: false
+  nodeSelector: |
+    cloud.google.com/compute-class: Performance
+    cloud.google.com/machine-family: c3
+#    cloud.google.com/pod-isolation: 50m
 syncCatalog:
   enabled: true
   toConsul: true
   toK8S: false
+  nodeSelector: |
+    cloud.google.com/compute-class: Performance
+    cloud.google.com/machine-family: c3
+  #    cloud.google.com/pod-isolation: 50m
 connectInject:
   enabled: false

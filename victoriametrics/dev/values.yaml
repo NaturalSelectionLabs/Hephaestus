@@ -76,10 +76,7 @@ vmsingle:
   # spec for VMSingle crd
   # https://docs.victoriametrics.com/operator/api.html#vmsinglespec
   spec:
-    image:
-      tag: v1.87.1
     retentionPeriod: "14d"
-    replicaCount: 1
     extraArgs: {}
     storage:
       storageClassName: standard
@@ -119,8 +116,6 @@ vmagent:
 #        vault.hashicorp.com/agent-run-as-user: "65534"
 #        vault.hashicorp.com/agent-run-as-group: "65534"
     selectAllByDefault: true
-    image:
-      tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
       cluster_name: us-central1-dev
@@ -171,9 +166,6 @@ prometheus-node-exporter:
 # kube-state-metrics dependency chart configuration. For possible values refer to https://github.com/kubernetes/kube-state-metrics/blob/master/charts/kube-state-metrics/values.yaml
 kube-state-metrics:
   enabled: true
-  ## all values for kube-state-metrics helm chart can be specified here
-  image:
-    tag: "v2.8.0"
   resources:
     requests:
       cpu: 0.02
