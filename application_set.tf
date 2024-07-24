@@ -475,25 +475,21 @@ resource "argocd_application_set" "alert" {
     name = "alert"
   }
   spec {
+    go_template = true
     generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
           }
-        ]
+        }
       }
     }
     template {
       metadata {
-        name = "alert-{{cluster}}"
+        name = "alert-{{.name}}"
         labels = {
-          cluster = "{{cluster}}"
+          cluster = "{{.name}}"
         }
       }
       spec {
@@ -502,7 +498,7 @@ resource "argocd_application_set" "alert" {
         source {
           repo_url        = "https://github.com/NaturalSelectionLabs/Infrastructure-Alert"
           target_revision = "HEAD"
-          path            = "{{cluster}}"
+          path            = "{{.name}}"
           plugin {
             name = "avp-kustomize"
             env {
@@ -511,13 +507,13 @@ resource "argocd_application_set" "alert" {
             }
             env {
               name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+              value = "guardian:avp-{{.name}}"
             }
           }
         }
 
         destination {
-          server    = "{{url}}"
+          name      = "{{.name}}"
           namespace = "guardian"
         }
       }
