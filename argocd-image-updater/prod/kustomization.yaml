@@ -13,7 +13,6 @@ helmCharts:
     releaseName: argocd-image-updater
     repo: https://argoproj.github.io/argo-helm
     version: x.x.x
-    namespace: guardian
     valuesFile: values.yaml
     apiVersions:
       - monitoring.coreos.com/v1
