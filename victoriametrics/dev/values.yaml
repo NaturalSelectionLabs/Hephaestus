@@ -96,10 +96,10 @@ alertmanager:
     externalURL: https://alertmanager.prod.naturalselectionlabs.com
 
 vmalert:
-  enabled: false
-#  spec:
-#    extraArgs:
-#      external.url: https://grafana.naturalselectionlabs.com
+  enabled: true
+  spec:
+    extraArgs:
+      external.url: https://grafana.naturalselectionlabs.com
 
 vmagent:
   enabled: true
