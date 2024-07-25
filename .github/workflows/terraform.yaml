@@ -6,8 +6,6 @@ on:
     branches:
       - "*"
   pull_request:
-    types:
-      - opened
 
 env:
   TF_VAR_ARGOCD_SERVER: "argocd.naturalselectionlabs.com:443"
