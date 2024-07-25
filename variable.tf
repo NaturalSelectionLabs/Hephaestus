@@ -15,3 +15,11 @@ variable "repo_url" {
 variable "PAT" {
   type = string
 }
+
+variable "GITHUB_APP_ID" {
+  type = string
+}
+
+variable "GITHUB_APP_PRIVATE_KEY_BASE64" {
+  type = string
+}
