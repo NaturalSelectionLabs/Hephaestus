@@ -85,6 +85,13 @@ singleBinary:
     - name: JAEGER_SAMPLER_PARAM
       value: "1"
 
+gateway:
+  service:
+    type: LoadBalancer
+    annotations:
+      networking.gke.io/load-balancer-type: "Internal"
+      networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
+      networking.gke.io/internal-load-balancer-allow-global-access: "true"
 chunksCache:
   # default is 500MB, with limited memory keep this smaller
   writebackSizeLimit: 10MB
