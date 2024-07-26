@@ -191,33 +191,32 @@ configs:
     controller.status.processors: "50"
     controller.operation.processors: "25"
     kustomize.buildOptions: --enable-helm
-#    dex.config: |
-#      connectors:
-#      # GitHub example
-#        - type: oidc
-#          id: keycloak
-#          name: NSL
-#          config:
-#            issuer: https://account.naturalselectionlabs.com/auth/realms/google
-#            clientID: argocd
-#            clientSecret: $oidc.keycloak.clientSecret
-#            redirectURI: https://argocd.naturalselectionlabs.com/dex/callback
-#            scopes:
-#              - "openid"
-#              - "profile"
-#              - "email"
-#              - "roles"
-#            insecureSkipEmailVerified: true
-#            insecureEnableGroups: true
-#            userIDKey: email
-#            userNameKey: email
+    dex.config: |
+      connectors:
+        - type: oidc
+          id: keycloak
+          name: NSL
+          config:
+            issuer: https://account.naturalselectionlabs.com/auth/realms/google
+            clientID: argocd
+            clientSecret: $oidc.keycloak.clientSecret
+            redirectURI: https://argocd.naturalselectionlabs.com/dex/callback
+            scopes:
+              - "openid"
+              - "profile"
+              - "email"
+              - "roles"
+            insecureSkipEmailVerified: true
+            insecureEnableGroups: true
+            userIDKey: email
+            userNameKey: email
     # OIDC configuration as an alternative to dex (optional).
-    oidc.config: |
-      name: nsl
-      issuer: https://account.naturalselectionlabs.com/auth/realms/google
-      clientID: argocd
-      clientSecret: $oidc.keycloak.clientSecret
-      requestedScopes: ["openid", "profile", "email", "roles"]
+#    oidc.config: |
+#      name: nsl
+#      issuer: https://account.naturalselectionlabs.com/auth/realms/google
+#      clientID: argocd
+#      clientSecret: $oidc.keycloak.clientSecret
+#      requestedScopes: ["openid", "profile", "email", "roles"]
     #   rootCA: |
     #     -----BEGIN CERTIFICATE-----
     #     ... encoded certificate data here ...
