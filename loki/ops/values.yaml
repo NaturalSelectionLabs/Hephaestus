@@ -93,10 +93,11 @@ gateway:
       networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
       networking.gke.io/internal-load-balancer-allow-global-access: "true"
 chunksCache:
-  nodeSelector:
-    cloud.google.com/compute-class: Performance
-    cloud.google.com/machine-family: c3
-    cloud.google.com/pod-isolation: 50m
+#  nodeSelector:
+#    cloud.google.com/compute-class: Performance
+#    cloud.google.com/machine-family: c3
+#    cloud.google.com/pod-isolation: 50m
+  replicas: 2
   resources:
     limits:
       cpu: "1"
@@ -106,7 +107,15 @@ chunksCache:
       memory: 1Gi
   # default is 500MB, with limited memory keep this smaller
   writebackSizeLimit: 10MB
-
+resultsCache:
+  replicas: 2
+  resources:
+    limits:
+      cpu: "1"
+      memory: 1Gi
+    requests:
+      cpu: "1"
+      memory: 1Gi
 memcachedExporter:
   resources:
     limits:
