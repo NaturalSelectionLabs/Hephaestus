@@ -1,3 +1,14 @@
+config:
+  clients:
+    - url: http://loki-gateway/loki/api/v1/push
+      tenant_id: "0"
+  snippets:
+    pipelineStages:
+      - cri: { }
+      - labels:
+          cluster_id: "0"
+      - tenant:
+          source: cluster_id
 tolerations:
   - key: node-role.kubernetes.io/master
     operator: Exists
