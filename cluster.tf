@@ -4,7 +4,8 @@ resource "argocd_cluster" "dev" {
 
   metadata {
     labels = {
-      "env" = "dev"
+      "env"    = "dev"
+      "tenant" = "1"
     }
   }
 
@@ -28,7 +29,8 @@ resource "argocd_cluster" "prod" {
 
   metadata {
     labels = {
-      "env" = "prod"
+      "env"    = "prod"
+      "tenant" = "2"
     }
   }
 
@@ -52,7 +54,8 @@ resource "argocd_cluster" "ops" {
 
   metadata {
     labels = {
-      "env" = "ops"
+      "env"    = "ops"
+      "tenant" = "0"
     }
   }
 
