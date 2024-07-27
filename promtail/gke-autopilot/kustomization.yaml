@@ -7,19 +7,8 @@ helmCharts:
     namespace: guardian
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
-    valuesInline:
-      defaultVolumeMounts:
-        - name: pods
-          mountPath: /var/log/pods
-          readOnly: true
-        - name: run
-          mountPath: /run/promtail
-      defaultVolumes:
-        - name: pods
-          hostPath:
-            path: /var/log/pods
-        - name: run
-          emptyDir: { }
+    valuesFile: values.yaml
+
 #  - name: loki
 #    releaseName: loki
 #    namespace: guardian

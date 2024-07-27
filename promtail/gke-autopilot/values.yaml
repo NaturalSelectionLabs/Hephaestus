@@ -1,0 +1,23 @@
+tolerations:
+  - key: node-role.kubernetes.io/master
+    operator: Exists
+    effect: NoSchedule
+  - key: node-role.kubernetes.io/control-plane
+    operator: Exists
+    effect: NoSchedule
+  - effect: NoSchedule
+    key: kubernetes.io/arch
+    operator: Equal
+    value: amd64
+defaultVolumeMounts:
+  - name: pods
+    mountPath: /var/log/pods
+    readOnly: true
+  - name: run
+    mountPath: /run/promtail
+defaultVolumes:
+  - name: pods
+    hostPath:
+      path: /var/log/pods
+  - name: run
+    emptyDir: { }

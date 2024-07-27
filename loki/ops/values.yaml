@@ -3,11 +3,11 @@ loki:
   storage:
     type: gcs
     bucketNames:
-      chunks: nsl-loki-uscentral1-prod
-      ruler: nsl-loki-uscentral1-prod
-      admin: nsl-loki-uscentral1-prod
+      chunks: nsl-loki-uscentral1-ops
+      ruler: nsl-loki-uscentral1-ops
+      admin: nsl-loki-uscentral1-ops
     gcs:
-      bucket_name: nsl-loki-uscentral1-prod
+      bucket_name: nsl-loki-uscentral1-ops
   server:
     grpc_server_max_recv_msg_size: 16777216
     grpc_server_max_send_msg_size: 16777216
@@ -23,7 +23,7 @@ loki:
         cache_location: /var/loki/index_cache
         cache_ttl: 24h
       gcs:
-        bucket_name: nsl-loki-uscentral1-prod
+        bucket_name: nsl-loki-uscentral1-ops
   commonConfig:
     replication_factor: 1
   rulerConfig:
@@ -90,7 +90,7 @@ gateway:
     type: LoadBalancer
     annotations:
       networking.gke.io/load-balancer-type: "Internal"
-      networking.gke.io/internal-load-balancer-subnet: "dev-loadbalancer"
+      networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
       networking.gke.io/internal-load-balancer-allow-global-access: "true"
 chunksCache:
   # default is 500MB, with limited memory keep this smaller

@@ -726,7 +726,7 @@ resource "argocd_application_set" "promtail-gke-autopilot" {
         selector {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
-            "cluster-type" = "gke-autopilot"
+            "cluster-type"                   = "gke-autopilot"
           }
         }
       }

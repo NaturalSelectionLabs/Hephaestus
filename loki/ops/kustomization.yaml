@@ -4,20 +4,9 @@ resources:
   - ../base
 
 helmCharts:
-  - name: promtail
-    releaseName: promtail
+  - name: loki
+    releaseName: loki
     namespace: guardian
     repo: https://grafana.github.io/helm-charts
-    version: 6.15.x
-    valuesInline:
-      serviceMonitor:
-        enabled: true
-      tolerations:
-        - operator: Exists
-          effect: NoSchedule
-#  - name: loki
-#    releaseName: loki
-#    namespace: guardian
-#    repo: https://grafana.github.io/helm-charts
-#    version: x.x.x
-#    valuesFile: values.yaml
+    version: x.x.x
+    valuesFile: values.yaml
