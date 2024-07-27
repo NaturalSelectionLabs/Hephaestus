@@ -3,27 +3,23 @@ resource "argocd_application_set" "traefik" {
     name = "traefik"
   }
   spec {
+    go_template = true
     generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
-          },
-          {
-            cluster = argocd_cluster.ops.name
-            url     = argocd_cluster.ops.server
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
           }
-        ]
+        }
       }
     }
     template {
       metadata {
-        name = "traefik-{{cluster}}"
+        name = "traefik-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
       }
 
       spec {
@@ -32,7 +28,7 @@ resource "argocd_application_set" "traefik" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "traefik/{{cluster}}"
+          path            = "traefik/{{.name}}"
           kustomize {
             common_annotations = {
               "github.com/url" = var.repo_url
@@ -41,7 +37,7 @@ resource "argocd_application_set" "traefik" {
         }
 
         destination {
-          server    = "{{url}}"
+          name      = "{{.name}}"
           namespace = "guardian"
         }
       }
