@@ -66,7 +66,7 @@ resource "argocd_application" "grafana" {
     source {
       repo_url        = var.repo_url
       target_revision = "HEAD"
-      path            = "grafana/prod"
+      path            = "grafana/ops"
       plugin {
         name = "avp-kustomize"
         env {

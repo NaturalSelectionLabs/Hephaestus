@@ -6,6 +6,8 @@ resources:
     cpu: 1
     memory: 1Gi
 replicas: 3
+plugins:
+  - googlecloud-logging-datasource
 ingress:
   enabled: true
   ingressClassName: traefik
