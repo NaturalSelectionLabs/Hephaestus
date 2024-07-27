@@ -2,6 +2,12 @@ resource "argocd_cluster" "dev" {
   server = "https://${data.google_container_cluster.us_central1_dev.endpoint}"
   name   = "dev"
 
+  metadata {
+    labels = {
+      "env" = "dev"
+    }
+  }
+
   config {
     exec_provider_config {
       command     = "argocd-k8s-auth"
@@ -22,6 +28,12 @@ resource "argocd_cluster" "dev" {
 resource "argocd_cluster" "prod" {
   server = "https://${data.google_container_cluster.us_central1_prod.endpoint}"
   name   = "prod"
+
+  metadata {
+    labels = {
+      "env" = "prod"
+    }
+  }
 
   config {
     exec_provider_config {
