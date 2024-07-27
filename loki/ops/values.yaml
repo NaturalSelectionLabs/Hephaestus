@@ -67,11 +67,11 @@ singleBinary:
       mountPath: /var/loki
   resources:
     limits:
-      cpu: 3
+      cpu: 4
       memory: 4Gi
     requests:
-      cpu: 2
-      memory: 2Gi
+      cpu: 4
+      memory: 4Gi
   extraEnv:
     # Keep a little bit lower than memory limits
     - name: GOMEMLIMIT
