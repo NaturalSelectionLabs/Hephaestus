@@ -4,8 +4,10 @@ resource "argocd_cluster" "dev" {
 
   metadata {
     labels = {
-      "env"    = "dev"
-      "tenant" = "1"
+      "env"          = "dev"
+      "provider"     = "gcp"
+      "cluster-type" = "gke-standard"
+      "tenant"       = "1"
     }
   }
 
@@ -29,8 +31,10 @@ resource "argocd_cluster" "prod" {
 
   metadata {
     labels = {
-      "env"    = "prod"
-      "tenant" = "2"
+      "env"          = "prod"
+      "provider"     = "gcp"
+      "cluster-type" = "gke-standard"
+      "tenant"       = "2"
     }
   }
 
@@ -54,8 +58,10 @@ resource "argocd_cluster" "ops" {
 
   metadata {
     labels = {
-      "env"    = "ops"
-      "tenant" = "0"
+      "env"          = "ops"
+      "provider"     = "gcp"
+      "cluster-type" = "gke-autopilot"
+      "tenant"       = "0"
     }
   }
 
