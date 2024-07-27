@@ -56,6 +56,12 @@ resource "argocd_cluster" "ops" {
   server = "https://${data.google_container_cluster.us_central1_ops.endpoint}"
   name   = "ops"
 
+  metadata {
+    labels = {
+      "env" = "ops"
+    }
+  }
+
   config {
     exec_provider_config {
       command     = "argocd-k8s-auth"
