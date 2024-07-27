@@ -8,11 +8,18 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
     valuesInline:
-      daemonset:
-        # -- Deploys Promtail as a DaemonSet
-        enabled: false
-      deployment:
-        enabled: true
+      defaultVolumeMounts:
+        - name: pods
+          mountPath: /var/log/pods
+          readOnly: true
+        - name: run
+          mountPath: /run/promtail
+      defaultVolumes:
+        - name: pods
+          hostPath:
+            path: /var/log/pods
+        - name: run
+          emptyDir: { }
 #  - name: loki
 #    releaseName: loki
 #    namespace: guardian
