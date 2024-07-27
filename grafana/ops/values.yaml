@@ -65,3 +65,6 @@ grafana.ini:
   #   scopes: https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email
   #   token_url: https://accounts.google.com/o/oauth2/token
 enableServiceLinks: false
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: grafana@naturalselectionlabs.iam.gserviceaccount.com
