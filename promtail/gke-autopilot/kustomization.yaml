@@ -1,0 +1,21 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: promtail
+    releaseName: promtail
+    namespace: guardian
+    repo: https://grafana.github.io/helm-charts
+    version: x.x.x
+    valuesInline:
+      daemonset:
+        # -- Deploys Promtail as a DaemonSet
+        enabled: false
+      deployment:
+        enabled: true
+#  - name: loki
+#    releaseName: loki
+#    namespace: guardian
+#    repo: https://grafana.github.io/helm-charts
+#    version: x.x.x
+#    valuesFile: values.yaml

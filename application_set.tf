@@ -714,3 +714,50 @@ resource "argocd_application_set" "argo-workflow" {
     }
   }
 }
+
+resource "argocd_application_set" "promtail-gke-autopilot" {
+  metadata {
+    name = "promtail-gke-autopilot"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
+            "cluster-type" = "gke-autopilot"
+          }
+        }
+      }
+    }
+    template {
+      metadata {
+        name = "promtail-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
+      }
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "promtail/gke-autopilot"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
+            }
+          }
+        }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "guardian"
+        }
+      }
+    }
+
+  }
+}
