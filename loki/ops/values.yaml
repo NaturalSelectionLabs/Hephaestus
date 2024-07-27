@@ -86,6 +86,7 @@ singleBinary:
       value: "1"
 
 gateway:
+  replicas: 3
   service:
     type: LoadBalancer
     annotations:

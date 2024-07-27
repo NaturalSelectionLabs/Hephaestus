@@ -669,9 +669,9 @@ resource "argocd_application_set" "argo-workflow" {
   }
 }
 
-resource "argocd_application_set" "promtail-gke-autopilot" {
+resource "argocd_application_set" "promtail" {
   metadata {
-    name = "promtail-gke-autopilot"
+    name = "promtail"
   }
   spec {
     go_template = true
@@ -680,7 +680,6 @@ resource "argocd_application_set" "promtail-gke-autopilot" {
         selector {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
-            "cluster-type"                   = "gke-autopilot"
           }
         }
       }
@@ -698,7 +697,7 @@ resource "argocd_application_set" "promtail-gke-autopilot" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "promtail/gke-autopilot"
+          path            = "promtail/{{.name}}"
           kustomize {
             common_annotations = {
               "github.com/url" = var.repo_url
