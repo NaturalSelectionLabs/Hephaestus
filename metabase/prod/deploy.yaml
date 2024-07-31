@@ -26,9 +26,19 @@ spec:
               cpu: 500m
               memory: 512Mi
           livenessProbe:
-            tcpSocket:
+            httpGet:
+              path: /api/health
               port: 3000
             initialDelaySeconds: 15
+            timeoutSeconds: 1
+            periodSeconds: 20
+            successThreshold: 1
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /api/health
+              port: 3000
+            initialDelaySeconds: 60
             timeoutSeconds: 1
             periodSeconds: 20
             successThreshold: 1
