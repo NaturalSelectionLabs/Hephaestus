@@ -21,10 +21,15 @@ spec:
           envFrom:
             - secretRef:
                 name: metabase
+          env:
+            - name: JAVA_OPTS
+              value: >-
+                -XX:+UseContainerSupport
+                -XX:MaxRAMPercentage=100.0
           resources:
             requests:
-              cpu: 500m
-              memory: 512Mi
+              cpu: "1"
+              memory: 1Gi
           livenessProbe:
             httpGet:
               path: /api/health
@@ -38,7 +43,7 @@ spec:
             httpGet:
               path: /api/health
               port: 3000
-            initialDelaySeconds: 60
+            initialDelaySeconds: 120
             timeoutSeconds: 1
             periodSeconds: 20
             successThreshold: 1
