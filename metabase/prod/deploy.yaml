@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: metabase
 spec:
-  replicas: 3
+  replicas: 2
   selector:
     matchLabels:
       app: metabase
@@ -22,12 +22,9 @@ spec:
             - secretRef:
                 name: metabase
           resources:
-            limits:
-              cpu: '1'
-              memory: 2000Mi
             requests:
-              cpu: 100m
-              memory: 1000Mi
+              cpu: 500m
+              memory: 512Mi
           livenessProbe:
             tcpSocket:
               port: 3000

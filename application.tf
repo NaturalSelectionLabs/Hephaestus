@@ -175,7 +175,7 @@ resource "argocd_application" "metabase" {
     }
 
     destination {
-      server    = argocd_cluster.prod.server
+      name      = "ops"
       namespace = "guardian"
     }
   }

@@ -7,7 +7,7 @@ spec:
     - websecure
   routes:
     - kind: Rule
-      match: Host(`mb.prod.nsl.xyz`)
+      match: Host(`metabase.naturalselectionlabs.com`)
       services:
         - name: metabase
           port: 3000
