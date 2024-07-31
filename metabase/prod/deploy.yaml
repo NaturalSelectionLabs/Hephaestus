@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: metabase
-          image: metabase/metabase:v0.46.3
+          image: metabase/metabase:v0.50.18
           ports:
             - containerPort: 3000
               protocol: TCP
