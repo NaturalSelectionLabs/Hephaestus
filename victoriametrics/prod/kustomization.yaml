@@ -5,7 +5,6 @@ generatorOptions:
 resources:
   - svc.yaml
   - route.yaml
-  - alert.yaml
 
 secretGenerator:
   - name: additional-scrape-configs
