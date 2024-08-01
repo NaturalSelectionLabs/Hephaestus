@@ -25,7 +25,22 @@ metrics:
     namespace: ""
     # -- Prometheus ServiceMonitor labels
     additionalLabels: {}
-
+extraArgs:
+  # - --disable-kubernetes
+  # - --dry-run
+  # - --health-port
+  # - 8080
+   - --interval
+   - 5m
+  # - --kubeconfig
+  # - ~/.kube/config
+  # - --match-application-name
+  # - staging-*
+  # - --max-concurrency
+  # - 5
+  # - --once
+  # - --registries-conf-path
+# - /app/config/registries.conf
 config:
   registries:
      - name: Docker Hub
