@@ -5,6 +5,7 @@ resource "argocd_cluster" "dev" {
   metadata {
     labels = {
       "env"          = "dev"
+      "secret"       = "avp-dev"
       "provider"     = "gcp"
       "cluster-type" = "gke-standard"
       "tenant"       = "1"
@@ -32,6 +33,7 @@ resource "argocd_cluster" "prod" {
   metadata {
     labels = {
       "env"          = "prod"
+      "secret"       = "avp-prod"
       "provider"     = "gcp"
       "cluster-type" = "gke-standard"
       "tenant"       = "2"
@@ -59,6 +61,7 @@ resource "argocd_cluster" "ops" {
   metadata {
     labels = {
       "env"          = "ops"
+      "secret"       = "avp-prod"
       "provider"     = "gcp"
       "cluster-type" = "gke-autopilot"
       "tenant"       = "0"
