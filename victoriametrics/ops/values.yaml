@@ -131,7 +131,7 @@ vmcluster:
                 storage: 1Ti
       resources:
         requests:
-          cpu: "2"
+          cpu: "4"
           memory: "4Gi"
     vmselect:
       image:
