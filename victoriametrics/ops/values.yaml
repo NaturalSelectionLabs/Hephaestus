@@ -217,7 +217,7 @@ alertmanager:
   enabled: true
   spec:
     configSecret: "vm-alertmanager-config"
-    replicaCount: 2
+    replicaCount: 3
     externalURL: https://alertmanager.naturalselectionlabs.com
   templateFiles:
     status.tmpl: |-
@@ -243,9 +243,14 @@ alertmanager:
 vmalert:
   enabled: true
   spec:
-    replicaCount: 3
+    replicaCount: 2
     extraArgs:
       external.url: https://grafana.naturalselectionlabs.com
+    externalLabels:
+      cluster_name: us-central1-ops
+      region: us-central1
+      provider: gcp
+      zone: us-central1-a
   ingress:
     enabled: true
     ingressClassName: traefik
