@@ -97,7 +97,7 @@ chunksCache:
   nodeSelector:
     cloud.google.com/compute-class: Performance
     cloud.google.com/machine-family: c3
-    cloud.google.com/pod-isolation: 50m
+    cloud.google.com/pod-isolation: 600m
   tolerations:
     - effect: NoSchedule
       key: cloud.google.com/compute-class
