@@ -397,58 +397,6 @@ resource "argocd_application_set" "exporter" {
   }
 }
 
-resource "argocd_application_set" "alert" {
-  metadata {
-    name = "alert"
-  }
-  spec {
-    go_template = true
-    generator {
-      clusters {
-        selector {
-          match_labels = {
-            "argocd.argoproj.io/secret-type" = "cluster"
-          }
-        }
-      }
-    }
-    template {
-      metadata {
-        name = "alert-{{.name}}"
-        labels = {
-          cluster = "{{.name}}"
-        }
-      }
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-
-        source {
-          repo_url        = "https://github.com/NaturalSelectionLabs/Infrastructure-Alert"
-          target_revision = "HEAD"
-          path            = "{{.name}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Infrastructure-Alert"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{.name}}"
-            }
-          }
-        }
-
-        destination {
-          name      = "{{.name}}"
-          namespace = "guardian"
-        }
-      }
-    }
-
-  }
-}
-
 resource "argocd_application_set" "rabbitmq" {
   metadata {
     name = "rabbitmq"
