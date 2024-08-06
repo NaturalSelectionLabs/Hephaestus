@@ -89,4 +89,4 @@ experimental:
   plugins:
     gatewayflowcontroller:
       moduleName: "github.com/RSS3-Network/gatewayflowcontroller"
-      version: "v0.0.5"
+      version: "v0.0.6"
