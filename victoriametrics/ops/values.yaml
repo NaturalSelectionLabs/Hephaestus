@@ -150,7 +150,8 @@ vmcluster:
           memory: "4Gi"
     vminsert:
       replicaCount: 4
-      extraArgs: {}
+      extraArgs:
+        maxLabelsPerTimeseries: "120"
       resources:
         requests:
           cpu: "0.5"
