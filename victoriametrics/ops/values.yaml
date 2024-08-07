@@ -118,6 +118,8 @@ vmcluster:
     vmstorage:
       replicaCount: 2
       storageDataPath: "/vm-data"
+      extraArgs:
+        cacheExpireDuration: "3h"
       storage:
         volumeClaimTemplate:
           spec:
@@ -134,7 +136,8 @@ vmcluster:
     vmselect:
       replicaCount: 2
       cacheMountPath: "/select-cache"
-      extraArgs: {}
+      extraArgs:
+        cacheExpireDuration: "3h"
       storage:
         volumeClaimTemplate:
           spec:
@@ -151,6 +154,7 @@ vmcluster:
     vminsert:
       replicaCount: 4
       extraArgs:
+        cacheExpireDuration: "3h"
         maxLabelsPerTimeseries: "120"
       resources:
         requests:
