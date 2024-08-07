@@ -79,9 +79,7 @@ vmsingle:
   # spec for VMSingle crd
   # https://docs.victoriametrics.com/operator/api.html#vmsinglespec
   spec:
-    image:
-      tag: v1.87.1
-    retentionPeriod: "180d"
+#    retentionPeriod: "180d"
     replicaCount: 1
     extraArgs: {}
     storage:
@@ -148,8 +146,6 @@ vmagent:
 #        vault.hashicorp.com/agent-run-as-user: "65534"
 #        vault.hashicorp.com/agent-run-as-group: "65534"
     selectAllByDefault: true
-    image:
-      tag: v1.87.1
     scrapeInterval: 25s
     externalLabels:
       cluster_name: us-central1-prod

@@ -76,7 +76,7 @@ vmsingle:
   # spec for VMSingle crd
   # https://docs.victoriametrics.com/operator/api.html#vmsinglespec
   spec:
-    retentionPeriod: "14d"
+#    retentionPeriod: "14d"
     extraArgs: {}
     storage:
       storageClassName: standard
