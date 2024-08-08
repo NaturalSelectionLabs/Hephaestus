@@ -250,6 +250,13 @@ vmalert:
       region: us-central1
       provider: gcp
       zone: us-central1-a
+    resources:
+      requests:
+        cpu: '0.5'
+        memory: 512Mi
+      limits:
+        cpu: '0.5'
+        memory: 512Mi
   ingress:
     enabled: true
     ingressClassName: traefik
