@@ -105,24 +105,23 @@ vmsingle:
         memory: "8Gi"
 
 alertmanager:
-  enabled: true
+  enabled: false
   spec:
     configSecret: "vm-alertmanager-config"
-    replicaCount: 2
     externalURL: https://alertmanager.prod.naturalselectionlabs.com
-  templateFiles:
-    status.tmpl: |-
-      {{ define "status.title" -}}
-      [{{ .Status | toUpper -}}
-       {{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{- end -}}
-      ] {{ template "__alert_severity_prefix_title" . }} {{ .CommonLabels.instance }}
-      {{- end }}
-  # template_2.tmpl: ""
 
 vmalert:
   enabled: true
   spec:
-    replicaCount: 3
+    replicaCount: 2
+    notifierConfigRef:
+      key: notifier.yaml
+      name: vmalert-config
+    externalLabels:
+      cluster_name: us-central1-prod
+      region: us-central1
+      provider: gcp
+      zone: us-central1-a
     extraArgs:
       external.url: https://grafana.naturalselectionlabs.com
 vmagent:
