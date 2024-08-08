@@ -226,18 +226,18 @@ alertmanager:
       ] {{ template "__alert_severity_prefix_title" . }} {{ .CommonLabels.instance }}
       {{- end }}
   # template_2.tmpl: ""
-  ingress:
-    enabled: true
-    ingressClassName: traefik
-    annotations:
-      cert-manager.io/cluster-issuer: "cloudflare"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-    hosts:
-      - alertmanager.naturalselectionlabs.com
-    tls:
-      - secretName: alertmanager-tls
-        hosts:
-          - alertmanager.alertmanager.naturalselectionlabs.com
+#  ingress:
+#    enabled: true
+#    ingressClassName: traefik
+#    annotations:
+#      cert-manager.io/cluster-issuer: "cloudflare"
+#      traefik.ingress.kubernetes.io/router.entrypoints: websecure
+#    hosts:
+#      - alertmanager.naturalselectionlabs.com
+#    tls:
+#      - secretName: alertmanager-tls
+#        hosts:
+#          - alertmanager.alertmanager.naturalselectionlabs.com
 
 vmalert:
   enabled: true
