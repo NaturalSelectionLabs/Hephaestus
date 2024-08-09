@@ -61,7 +61,7 @@ singleBinary:
     enabled: false
   extraVolumes:
     - name: data
-      emptyDir: { }
+      emptyDir: {}
   extraVolumeMounts:
     - name: data
       mountPath: /var/loki
@@ -69,9 +69,11 @@ singleBinary:
     limits:
       cpu: 4
       memory: 4Gi
+      ephemeral-storage: 10Gi
     requests:
       cpu: 4
       memory: 4Gi
+      ephemeral-storage: 10Gi
   extraEnv:
     # Keep a little bit lower than memory limits
     - name: GOMEMLIMIT
