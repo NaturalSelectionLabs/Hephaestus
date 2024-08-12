@@ -275,3 +275,34 @@ resource "argocd_application" "consul" {
     }
   }
 }
+
+resource "argocd_application" "umami" {
+  metadata {
+    name      = "umami"
+    namespace = "argo"
+  }
+  spec {
+    project = argocd_project.guardian.metadata[0].name
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "umami/prod"
+      plugin {
+        name = "avp-kustomize"
+        env {
+          name  = "APP_REPO"
+          value = "NaturalSelectionLabs/Hephaestus"
+        }
+        env {
+          name  = "AVP_SECRET"
+          value = "guardian:avp-prod"
+        }
+      }
+    }
+
+    destination {
+      name      = "ops"
+      namespace = "guardian"
+    }
+  }
+}

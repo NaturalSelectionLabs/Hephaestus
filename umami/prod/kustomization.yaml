@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+helmCharts:
+  - name: umami
+    releaseName: umami
+    namespace: guardian
+    repo: https://christianhuth.github.io/helm-charts
+    valuesFile: values.yaml
+    version: 1.16.x
