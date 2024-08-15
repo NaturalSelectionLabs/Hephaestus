@@ -26,7 +26,7 @@ controller:
       enabled: true
       spec:
         - alert: ArgocdServiceNotSynced
-          expr: argocd_app_info{sync_status!="Synced"} != 0
+          expr: argocd_app_info{autosync_enabled="true",sync_status!="Synced"} != 0
           for: 15m
           labels:
             severity: warning
@@ -35,6 +35,7 @@ controller:
             description: "Service {{ $labels.name }} run by argo is currently not in sync.\n"
             link_text: "App :argo:"
             link_url: "https://argocd.naturalselectionlabs.com/applications/{{ $labels.name }}"
+            runbook_url: "https://www.notion.so/rss3/ArgocdServiceNotSynced-20de749db2854da1b11eb76a9d284592?pvs=4"
         - alert: ArgocdServiceUnhealthy
           expr: argocd_app_info{health_status!="Healthy"} != 0
           for: 15m
@@ -45,6 +46,7 @@ controller:
             description: "Service {{ $labels.name }} run by argo is currently not healthy.\n"
             link_text: "App :argo:"
             link_url: "https://argocd.naturalselectionlabs.com/applications/{{ $labels.name }}"
+            runbook_url: "https://www.notion.so/rss3/ArgocdServiceUnhealthy-6401fb2e538a46e2b0a0ef836f0d3d86?pvs=4"
 server:
   metrics:
     enabled: true
