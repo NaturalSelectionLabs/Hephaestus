@@ -91,6 +91,8 @@ gateway:
   replicas: 3
   service:
     type: LoadBalancer
+    labels:
+      prometheus.io/service-monitor: "false"
     annotations:
       networking.gke.io/load-balancer-type: "Internal"
       networking.gke.io/internal-load-balancer-subnet: "prod-loadbalancer"
