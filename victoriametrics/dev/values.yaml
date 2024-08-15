@@ -136,6 +136,13 @@ vmagent:
     additionalScrapeConfigs:
       key: prometheus-additional.yaml
       name: additional-scrape-configs
+    resources:
+      requests:
+        cpu: '0.5'
+        memory: 512Mi
+      limits:
+        cpu: '1'
+        memory: 1Gi
 
 grafana:
   enabled: false
