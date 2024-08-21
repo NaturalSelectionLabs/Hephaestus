@@ -1,0 +1,52 @@
+server:
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+    ingressClassName: traefik
+
+    hosts:
+      - argowf.prod.naturalselectionlabs.com
+    tls:
+      - secretName: argowf-tls
+        hosts:
+          - argowf.prod.naturalselectionlabs.com
+
+  authModes:
+    - sso
+  sso:
+    enabled: true
+    issuer: https://account.naturalselectionlabs.com/auth/realms/google
+    clientId:
+      # -- Name of secret to retrieve the app OIDC client ID
+      name: argo-workflow-sso
+      # -- Key of secret to retrieve the app OIDC client ID
+      key: client-id
+    clientSecret:
+      # -- Name of a secret to retrieve the app OIDC client secret
+      name: argo-workflow-sso
+      # -- Key of a secret to retrieve the app OIDC client secret
+      key: client-secret
+    # -- The OIDC redirect URL. Should be in the form <argo-root-url>/oauth2/callback.
+    redirectUrl: https://argowf.prod.naturalselectionlabs.com/oauth2/callback
+    rbac:
+      # -- Adds ServiceAccount Policy to server (Cluster)Role.
+      enabled: true
+      # -- Whitelist to allow server to fetch Secrets
+      ## When present, restricts secrets the server can read to a given list.
+      ## You can use it to restrict the server to only be able to access the
+      ## service account token secrets that are associated with service accounts
+      ## used for authorization.
+      secretWhitelist: []
+    # -- Scopes requested from the SSO ID provider
+    ## The 'groups' scope requests group membership information, which is usually used for authorization decisions.
+    scopes:
+      - "openid"
+      - "profile"
+      - "email"
+      - "roles"
+controller:
+  workflowNamespaces:
+    - default
+    - guardian
+    - network
