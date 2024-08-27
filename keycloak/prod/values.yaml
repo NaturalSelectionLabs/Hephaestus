@@ -40,6 +40,10 @@ extraEnv:   |
   - name: KEYCLOAK_STATISTICS
     value: all
 
+extraEnvFrom: |
+  - secretRef:
+      name: keycloak-admin
+
 extraVolumeMounts: |
   - name: db-creds
     mountPath: /secrets/db-creds

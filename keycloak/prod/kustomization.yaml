@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
 - route.yaml
 - secret.yaml
+- admin.yaml
 
 helmCharts:
 - name: keycloak

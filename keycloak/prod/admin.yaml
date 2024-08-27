@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: keycloak-admin
+  namespace: guardian
+  annotations:
+    avp.kubernetes.io/path: "kv/data/guardian/keycloak"
+type: Opaque
+stringData:
+  KEYCLOAK_USER: "<KEYCLOAK_USER>"
+  KEYCLOAK_PASSWORD: "<KEYCLOAK_PASSWORD>"
