@@ -17,7 +17,7 @@ helmCharts:
     namespace: guardian
     repo: https://victoriametrics.github.io/helm-charts/
     valuesFile: values.yaml
-    version: 0.x.x
+    version: 0.24.x
     includeCRDs: true
   - name: prometheus-operator-crds
     releaseName: prometheus
