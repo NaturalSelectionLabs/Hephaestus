@@ -4,6 +4,7 @@ resources:
   - ../base
   - ../rss3
   - runner-deploy.yaml
+  - network
 
 namespace: guardian
 
