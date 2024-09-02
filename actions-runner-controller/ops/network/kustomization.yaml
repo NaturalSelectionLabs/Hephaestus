@@ -3,5 +3,6 @@ kind: Kustomization
 resources:
   - secret.yaml
   - amd64
+  - arm64
 
 namespace: network

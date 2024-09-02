@@ -1,0 +1,24 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../base
+
+nameSuffix: -arm64
+
+patches:
+  - target:
+      kind: RunnerDeployment
+      name: actions-runner
+      group: actions.summerwind.dev
+    patch: |-
+      - op: add
+        path: /spec/template/spec/labels/0
+        value: arm64
+      - op: add
+        path: /spec/template/spec/labels/0
+        value: linux/arm64
+      - op: add
+        path: /spec/template/spec/nodeSelector
+        value:
+          cloud.google.com/compute-class: Scale-Out
+          kubernetes.io/arch: arm64
