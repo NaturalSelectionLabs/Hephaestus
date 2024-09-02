@@ -110,25 +110,22 @@ resource "argocd_application_set" "actions_runner_controller" {
     namespace = "argo"
   }
   spec {
+    go_template = true
     generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
           }
-        ]
+        }
       }
     }
     template {
       metadata {
-        name = "actions-runner-controller-{{cluster}}"
+        name = "actions-runner-controller-{{.name}}"
         labels = {
-          cluster = "{{cluster}}"
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
         }
       }
 
@@ -137,7 +134,7 @@ resource "argocd_application_set" "actions_runner_controller" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "actions-runner-controller/{{cluster}}"
+          path            = "actions-runner-controller/{{.name}}"
           plugin {
             name = "avp-kustomize"
             env {
@@ -146,7 +143,7 @@ resource "argocd_application_set" "actions_runner_controller" {
             }
             env {
               name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+              value = "guardian:{{.metadata.labels.secret}}"
             }
           }
         }
@@ -158,7 +155,7 @@ resource "argocd_application_set" "actions_runner_controller" {
         }
 
         destination {
-          server    = "{{url}}"
+          name      = "{{.name}}"
           namespace = "guardian"
         }
 
