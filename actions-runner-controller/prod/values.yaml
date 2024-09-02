@@ -8,6 +8,8 @@ tolerations:
 runner:
   statusUpdateHook:
     enabled: true
+rbac:
+  allowGrantingKubernetesContainerModePermissions: true
 authSecret:
   name: "action-runner-controller-manager"
 metrics:
