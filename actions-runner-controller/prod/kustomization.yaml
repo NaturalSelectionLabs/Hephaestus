@@ -6,8 +6,6 @@ resources:
   - runner-deploy.yaml
   - network
 
-namespace: guardian
-
 helmCharts:
   - name: actions-runner-controller
     releaseName: actions-runner-controller
