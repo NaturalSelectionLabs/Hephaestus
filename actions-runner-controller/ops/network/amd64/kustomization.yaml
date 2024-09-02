@@ -4,3 +4,16 @@ resources:
   - ../base
 
 nameSuffix: -amd64
+
+patches:
+  - target:
+      kind: RunnerDeployment
+      name: actions-runner
+      group: actions.summerwind.dev
+    patch: |-
+      - op: add
+        path: /spec/template/spec/labels/0
+        value: amd64
+      - op: add
+        path: /spec/template/spec/labels/0
+        value: linux/amd64
