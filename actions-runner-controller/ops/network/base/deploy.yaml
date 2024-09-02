@@ -1,0 +1,24 @@
+apiVersion: actions.summerwind.dev/v1alpha1
+kind: RunnerDeployment
+metadata:
+  name: actions-runner
+spec:
+  replicas: 2
+  template:
+    spec:
+      githubAPICredentialsFrom:
+        secretRef:
+          name: action-runner
+      dockerdWithinRunnerContainer: true
+      group: Default
+      automountServiceAccountToken: true
+      labels:
+        - rss3
+        - rss3-network
+        - rss3-io
+      image: summerwind/actions-runner-dind
+      organization: RSS3-Network
+      resources:
+        requests:
+          cpu: '4'
+          memory: 8Gi

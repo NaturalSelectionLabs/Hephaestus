@@ -1,0 +1,5 @@
+nameReference:
+  - kind: RunnerDeployment
+    fieldSpecs:
+      - path: spec/scaleTargetRef/name
+        kind: HorizontalRunnerAutoscaler
