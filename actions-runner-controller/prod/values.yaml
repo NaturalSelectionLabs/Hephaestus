@@ -5,7 +5,9 @@ tolerations:
     operator: "Equal"
     value: "internal"
     effect: "NoSchedule"
-
+runner:
+  statusUpdateHook:
+    enabled: true
 authSecret:
   name: "action-runner-controller-manager"
 metrics:
