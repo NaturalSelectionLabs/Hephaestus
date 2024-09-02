@@ -20,5 +20,11 @@ patches:
       - op: add
         path: /spec/template/spec/nodeSelector
         value:
-          cloud.google.com/compute-class: Scale-Out
           kubernetes.io/arch: arm64
+      - op: add
+        path: /spec/template/spec/tolerations
+        value:
+          - key: "kubernetes.io/arch"
+            operator: "Equal"
+            value: "arm64"
+            effect: "NoSchedule"
