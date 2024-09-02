@@ -9,6 +9,7 @@ spec:
         secretRef:
           name: action-runner
       dockerdWithinRunnerContainer: true
+      containerMode: kubernetes
       group: Default
       automountServiceAccountToken: true
       labels:
