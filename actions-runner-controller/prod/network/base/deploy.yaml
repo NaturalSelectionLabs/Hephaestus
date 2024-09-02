@@ -10,6 +10,13 @@ spec:
           name: action-runner
       dockerdWithinRunnerContainer: true
       containerMode: kubernetes
+      workVolumeClaimTemplate:
+        storageClassName: premium-rwo
+        accessModes:
+          - ReadWriteOnce
+        resources:
+          requests:
+            storage: 10Gi
       group: Default
       automountServiceAccountToken: true
       labels:
