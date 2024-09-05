@@ -48,6 +48,12 @@ config:
        ping: yes
        credentials: pullsecret:argo/dockerhub-secret
        defaultns: library
+       limit: 10
+     - name: Google Artifact Registry(us-central1)
+       api_url: https://us-central1-docker.pkg.dev
+       prefix: us-central1-docker.pkg.dev
+       credentials: ext:/scripts/gke-workload-identity-auth.sh
+       credsexpire: 30m
     # - name: Google Container Registry
     #   api_url: https://gcr.io
     #   prefix: gcr.io
@@ -65,3 +71,15 @@ config:
     #   insecure: no
   #   credentials: ext:/scripts/auth1.sh
   #   credsexpire: 10h
+
+authScripts:
+  enabled: true
+  scripts:
+    gke-workload-identity-auth.sh: |
+      #!/bin/sh
+      ACCESS_TOKEN=$(wget --header 'Metadata-Flavor: Google' http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/token -q -O - | grep -Eo '"access_token":.*?[^\\]",' | cut -d '"' -f 4)
+      echo "oauth2accesstoken:$ACCESS_TOKEN"
+
+serviceAccount:
+  annotations:
+    iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
