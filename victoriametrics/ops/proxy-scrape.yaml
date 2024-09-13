@@ -1,0 +1,26 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: ScrapeConfig
+metadata:
+  name: gce-proxy
+spec:
+  jobName: gce-proxy
+  scrapeInterval: 15s
+  scrapeTimeout: 15s
+  metricsPath: /metrics
+  gceSDConfigs:
+    - project: naturalselectionlabs
+      zone: us-central1-a
+      filter: "tags.items=ipv6-proxy"
+      port: 8082
+    - project: naturalselectionlabs
+      zone: us-central1-b
+      filter: "tags.items=ipv6-proxy"
+      port: 8082
+    - project: naturalselectionlabs
+      zone: us-central1-c
+      filter: "tags.items=ipv6-proxy"
+      port: 8082
+    - project: naturalselectionlabs
+      zone: us-central1-f
+      filter: "tags.items=ipv6-proxy"
+      port: 8082

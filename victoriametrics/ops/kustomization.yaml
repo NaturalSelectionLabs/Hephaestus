@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - vminsert.yaml
   - route.yaml
+  - proxy-scrape.yaml
 
 secretGenerator:
   - name: additional-scrape-configs
@@ -34,3 +35,8 @@ patches:
     target:
       kind: VMAlert
       name: victoriametrics
+#  - patch: |-
+#      - op: add
+#    target:
+#      kind: ServiceAccount
+#      name: vmagent-victoriametrics

@@ -276,6 +276,7 @@ vmagent:
     prometheus.io/path: /metrics
     prometheus.io/port: '8429'
     prometheus.io/scrape: 'true'
+    iam.gke.io/gcp-service-account: vmagent@naturalselectionlabs.iam.gserviceaccount.com
   # https://docs.victoriametrics.com/operator/api.html#vmagentremotewritespec
   # defined spec will be added to the remoteWrite configuration of VMAgent
   additionalRemoteWrites:
