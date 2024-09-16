@@ -655,3 +655,50 @@ resource "argocd_application_set" "promtail" {
 
   }
 }
+
+resource "argocd_application_set" "keda" {
+  metadata {
+    name = "keda"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
+          }
+        }
+      }
+    }
+    template {
+      metadata {
+        name = "keda-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "keda/base"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
+            }
+          }
+        }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "guardian"
+        }
+      }
+    }
+  }
+}
