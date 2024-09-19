@@ -26,11 +26,11 @@ additionalArguments:
   - "--entryPoints.websecure.forwardedHeaders.insecure"
 resources:
   requests:
-    cpu: "100m"
-    memory: "400Mi"
+    cpu: "0.5"
+    memory: "1Gi"
   limits:
-    cpu: "500m"
-    memory: "1000Mi"
+    cpu: "0.5"
+    memory: "1Gi"
 instanceLabelOverride: traefik
 
 autoscaling:
@@ -44,7 +44,7 @@ autoscaling:
         name: cpu
         target:
           type: Utilization
-          averageUtilization: 200
+          averageUtilization: 70
 #  - type: Resource
 #    resource:
 #      name: memory
