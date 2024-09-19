@@ -25,13 +25,13 @@ metrics:
     namespace: ""
     # -- Prometheus ServiceMonitor labels
     additionalLabels: {}
-extraArgs:
+#extraArgs:
   # - --disable-kubernetes
   # - --dry-run
   # - --health-port
   # - 8080
-   - --interval
-   - 5m
+#   - --interval
+#   - 5m
   # - --kubeconfig
   # - ~/.kube/config
   # - --match-application-name
