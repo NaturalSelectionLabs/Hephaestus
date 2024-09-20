@@ -702,3 +702,56 @@ resource "argocd_application_set" "keda" {
     }
   }
 }
+
+resource "argocd_application_set" "cloud-sql-proxy" {
+  metadata {
+    name      = "cloud-sql-proxy"
+    namespace = "argo"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "provider" = "gcp"
+          }
+        }
+      }
+    }
+    template {
+      metadata {
+        name = "cloud-sql-proxy-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "cloud-sql-proxy"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
+            }
+          }
+        }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "guardian"
+        }
+
+
+        sync_policy {
+          sync_options = ["ServerSideApply=true"]
+        }
+
+      }
+    }
+  }
+}
