@@ -343,34 +343,31 @@ resource "argocd_application_set" "exporter" {
     name = "exporter"
   }
   spec {
+    go_template = true
     generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          },
-          {
-            cluster = argocd_cluster.prod.name
-            url     = argocd_cluster.prod.server
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
           }
-        ]
+        }
       }
     }
     template {
       metadata {
-        name = "exporter-{{cluster}}"
+        name = "exporter-{{.name}}"
         labels = {
-          cluster = "{{cluster}}"
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
         }
       }
+
       spec {
         project = argocd_project.guardian.metadata[0].name
-
         source {
           repo_url        = "https://github.com/NaturalSelectionLabs/Cluster-Exporter"
           target_revision = "HEAD"
-          path            = "exporters/{{cluster}}"
+          path            = "exporters/{{.name}}"
           plugin {
             name = "avp-kustomize"
             env {
@@ -379,15 +376,20 @@ resource "argocd_application_set" "exporter" {
             }
             env {
               name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
+              value = "guardian:{{.metadata.labels.secret}}"
             }
           }
         }
 
         destination {
-          server    = "{{url}}"
+          name      = "{{.name}}"
           namespace = "guardian"
         }
+
+        sync_policy {
+          sync_options = ["ServerSideApply=true"]
+        }
+
       }
     }
 
