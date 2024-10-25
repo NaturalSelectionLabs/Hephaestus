@@ -26,11 +26,11 @@ additionalArguments:
   - "--entryPoints.websecure.forwardedHeaders.insecure"
 resources:
   requests:
-    cpu: "0.5"
-    memory: "1Gi"
+    cpu: "1"
+    memory: "2Gi"
   limits:
-    cpu: "0.5"
-    memory: "1Gi"
+    cpu: "1"
+    memory: "2Gi"
 instanceLabelOverride: traefik
 
 autoscaling:
