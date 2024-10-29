@@ -81,3 +81,31 @@ resource "argocd_cluster" "ops" {
   }
 
 }
+
+resource "argocd_cluster" "open" {
+  server = "https://${data.google_container_cluster.open.endpoint}"
+  name   = "open"
+
+  metadata {
+    labels = {
+      "env"          = "open"
+      "secret"       = "avp-prod"
+      "provider"     = "gcp"
+      "cluster-type" = "gke-autopilot"
+      "tenant"       = "3"
+    }
+  }
+
+  config {
+    exec_provider_config {
+      command     = "argocd-k8s-auth"
+      args        = ["gcp"]
+      api_version = "client.authentication.k8s.io/v1beta1"
+    }
+    tls_client_config {
+      insecure = false
+      ca_data  = base64decode(data.google_container_cluster.open.master_auth[0].cluster_ca_certificate)
+    }
+  }
+
+}
