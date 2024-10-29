@@ -1,0 +1,109 @@
+service:
+  enabled: true
+  type: LoadBalancer
+  annotations:
+    networking.gke.io/internal-load-balancer-allow-global-access: "true"
+deployment:
+  kind: Deployment
+  replicas: 5
+ingressRoute:
+  dashboard:
+    enabled: true
+    matchRule: Host(`traefik.open.naturalselectionlabs.com`)
+    entryPoints: ["websecure"]
+    middlewares:
+      - name: traefik-forward-auth
+    tls:
+      secretName: traefik-dashboard-cert
+
+#tlsStore:
+#  default:
+#    defaultCertificate:
+#      secretName: traefik-default-cert
+logs:
+  access:
+    enabled: true
+    bufferingsize: "100"
+    format: "json"
+additionalArguments:
+  - "--entryPoints.web.forwardedHeaders.insecure"  # for X-Forward-For
+  - "--entryPoints.websecure.forwardedHeaders.insecure"
+resources:
+  requests:
+    cpu: "0.5"
+    memory: "2Gi"
+  limits:
+    cpu: "0.5"
+    memory: "2Gi"
+instanceLabelOverride: traefik
+
+autoscaling:
+  # -- Create HorizontalPodAutoscaler object.
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 4
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 200
+affinity:
+  podAntiAffinity:
+    requiredDuringSchedulingIgnoredDuringExecution:
+      - labelSelector:
+          matchLabels:
+            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+        topologyKey: kubernetes.io/hostname
+
+providers:
+  kubernetesIngress:
+    publishedService:
+      enabled: true
+  kubernetesCRD:
+    enabled: true
+    allowCrossNamespace: true
+    allowExternalNameServices: true
+  kubernetesGateway:
+    enabled: false
+
+metrics:
+  prometheus:
+    entryPoint: metrics
+    addEntryPointsLabels: true
+    addRoutersLabels: true
+    addServicesLabels: true
+    buckets: "0.005,0.01,0.1,0.5,2.0,5.0,15.0,60.0"
+    service:
+      enabled: true
+    disableAPICheck: true
+    serviceMonitor:
+      jobLabel: traefik
+      interval: 30s
+      honorLabels: true
+      metricRelabelings:
+        - sourceLabels:
+            - service
+          regex: ^([^-]+)-.+-.*$
+          replacement: ${1}
+          targetLabel: target_namespace
+        - sourceLabels:
+            - service
+          regex: ^[^-]+-(.*)-[^@]+@.*$
+          replacement: ${1}
+          targetLabel: target_service
+        - sourceLabels:
+            - __meta_kubernetes_pod_node_name
+          separator: ;
+          regex: ^(.*)$
+          targetLabel: nodename
+          replacement: $1
+          action: replace
+#  openTelemetry:
+#    address: jaeger-collector:4318
+tracing:
+  jaeger:
+    samplingServerURL: http://jaeger-agent.guardian:5778/sampling
+    localAgentHostPort: jaeger-agent.guardian:6831
+    disableAttemptReconnecting: false
