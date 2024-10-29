@@ -54,3 +54,24 @@ resource "argocd_project" "namespaced" {
     }
   }
 }
+
+resource "argocd_project" "open" {
+  metadata {
+    name      = "open"
+    namespace = "argo"
+  }
+
+  spec {
+    source_namespaces = ["*"]
+    source_repos      = ["*"]
+
+    cluster_resource_whitelist {
+      group = "*"
+      kind  = "*"
+    }
+    destination {
+      name      = argocd_cluster.open.name
+      namespace = "*"
+    }
+  }
+}
