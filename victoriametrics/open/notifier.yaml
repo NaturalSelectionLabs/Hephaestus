@@ -1,0 +1,4 @@
+consul_sd_configs:
+  - server: consul.internal.naturalselectionlabs.com
+    services:
+      - vmalertmanager-victoriametrics-guardian

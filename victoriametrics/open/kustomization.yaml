@@ -1,0 +1,35 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+generatorOptions:
+  disableNameSuffixHash: true
+resources: []
+secretGenerator:
+  - name: additional-scrape-configs
+    files:
+      - prometheus-additional.yaml
+  - name: vmalert-config
+    files:
+      - notifier.yaml
+helmCharts:
+  - name: victoria-metrics-k8s-stack
+    releaseName: victoriametrics
+    namespace: guardian
+    repo: https://victoriametrics.github.io/helm-charts/
+    valuesFile: values.yaml
+    version: 0.24.x
+    includeCRDs: true
+  - name: prometheus-operator-crds
+    releaseName: prometheus
+    namespace: guardian
+    repo: https://prometheus-community.github.io/helm-charts
+    version: x.x.x
+
+patches:
+  - patch: |-
+      - op: add
+        path: /spec/extraArgs/external.alert.source
+        value: |
+          explore?orgId=1&left={"datasource":"vm-open","queries":[{"expr":{{$expr|jsonEscape|queryEscape}},"refId":"A"}],"range":{"from":"now-1h","to":"now"}}
+    target:
+      kind: VMAlert
+      name: victoriametrics
