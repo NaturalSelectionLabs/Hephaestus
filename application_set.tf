@@ -116,6 +116,7 @@ resource "argocd_application_set" "actions_runner_controller" {
         selector {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
+            "cluster-type" = "gke-standard"
           }
         }
       }
