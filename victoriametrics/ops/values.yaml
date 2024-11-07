@@ -131,8 +131,8 @@ vmcluster:
                 storage: 1Ti
       resources:
         requests:
-          cpu: "4"
-          memory: "4Gi"
+          cpu: "8"
+          memory: "8Gi"
     vmselect:
       replicaCount: 2
       cacheMountPath: "/select-cache"
