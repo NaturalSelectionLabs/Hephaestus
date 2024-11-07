@@ -101,7 +101,7 @@ chunksCache:
   nodeSelector:
     cloud.google.com/compute-class: Performance
     cloud.google.com/machine-family: c3
-    cloud.google.com/pod-isolation: 600m
+#    cloud.google.com/pod-isolation: 600m
   tolerations:
     - effect: NoSchedule
       key: cloud.google.com/compute-class
@@ -118,11 +118,11 @@ chunksCache:
   replicas: 2
   resources:
     limits:
-      cpu: "500m"
-      memory: 1Gi
+      cpu: "2"
+      memory: 4Gi
     requests:
-      cpu: "500m"
-      memory: 1Gi
+      cpu: "2"
+      memory: 4Gi
   # default is 500MB, with limited memory keep this smaller
   writebackSizeLimit: 10MB
 resultsCache:
