@@ -134,10 +134,14 @@ vmcluster:
           cpu: "8"
           memory: "8Gi"
     vmselect:
-      replicaCount: 2
+      replicaCount: 3
       cacheMountPath: "/select-cache"
       extraArgs:
         cacheExpireDuration: "3h"
+        search.maxUniqueTimeseries: "2000000"
+        search.maxQueryLen: "1500000"
+        search.maxSamplesPerSeries: "20000000"
+        search.maxSamplesPerQuery: "20000000"
       serviceSpec:
         metadata:
           annotations:
