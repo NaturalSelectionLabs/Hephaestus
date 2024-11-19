@@ -1,4 +1,6 @@
 global:
+  logging:
+    format: json
   domain: argocd.naturalselectionlabs.com
 redis:
   # -- Enable redis
@@ -134,6 +136,8 @@ repoServer:
       - /var/run/argocd/argocd-cmp-server
       - --loglevel
       - debug
+      - --logformat
+      - json
       image: quay.io/argoproj/argocd:v2.8.4
       resources:
         requests:
