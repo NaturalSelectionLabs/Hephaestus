@@ -17,7 +17,7 @@ spec:
           emptyDir: {}
       initContainers:
         - name: init-plugins
-          image: busybox
+          image: curlimages/curl
           command: ['/bin/sh', '-c']
           env:
             - name: METABASE_CLICKHOUSE_DRIVER_VERSION
