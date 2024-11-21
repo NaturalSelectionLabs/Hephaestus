@@ -12,6 +12,22 @@ spec:
       labels:
         app: metabase
     spec:
+      volumes:
+        - name: plugins
+          emptyDir: {}
+      initContainers:
+        - name: init-plugins
+          image: busybox
+          command: ['/bin/sh', '-c']
+          env:
+            - name: METABASE_CLICKHOUSE_DRIVER_VERSION
+              value: 1.50.7
+          volumeMounts:
+            - mountPath: /plugins
+              name: plugins
+          args:
+            - |
+              curl -L -o /plugins/ch.jar https://github.com/ClickHouse/metabase-clickhouse-driver/releases/download/$METABASE_CLICKHOUSE_DRIVER_VERSION/clickhouse.metabase-driver.jar
       containers:
         - name: metabase
           image: metabase/metabase:v0.50.18
@@ -30,6 +46,9 @@ spec:
             requests:
               cpu: "2"
               memory: 2Gi
+          volumeMounts:
+            - mountPath: /plugins
+              name: plugins
           livenessProbe:
             httpGet:
               path: /api/health
