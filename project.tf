@@ -28,7 +28,8 @@ resource "argocd_project" "namespaced" {
     "pregod",
     "search",
     "diygod",
-    "follow"
+    "follow",
+    "overlord"
   ])
 
   metadata {

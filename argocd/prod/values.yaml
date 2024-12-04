@@ -319,6 +319,9 @@ configs:
       p, role:open, applications, *, open/*, allow
       p, role:open, logs, *, open/*, allow
       p, role:open, exec, *, open/*, allow
+      p, role:overlord, applications, *, overlord/*, allow
+      p, role:overlord, logs, *, overlord/*, allow
+      p, role:overlord, exec, *, overlord/*, allow
       g, admin, role:org-admin
       g, github, role:org-admin
       g, devops, role:org-admin
@@ -331,6 +334,7 @@ configs:
       g, diygod, role:diygod
       g, follow, role:follow
       g, open, role:open
+      g, overlord, role:overlord
 
     # -- OIDC scopes to examine during rbac enforcement (in addition to `sub` scope).
     # The scope value can be a string, or a list of strings.
