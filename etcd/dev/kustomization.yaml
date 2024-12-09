@@ -6,7 +6,7 @@ resources:
 helmCharts:
   - name: etcd
     releaseName: etcd
-    repo: https://charts.bitnami.com/bitnami
+    repo: oci://registry-1.docker.io/bitnamicharts
     valuesFile: values.yaml
-    version: x.x.x
+    version: 10.x.x
     namespace: guardian
