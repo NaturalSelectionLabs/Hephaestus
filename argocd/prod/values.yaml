@@ -138,7 +138,7 @@ repoServer:
       - debug
       - --logformat
       - json
-      image: quay.io/argoproj/argocd:v2.8.4
+      image: quay.io/argoproj/argocd:v2.13.3
       resources:
         requests:
           cpu: 1
