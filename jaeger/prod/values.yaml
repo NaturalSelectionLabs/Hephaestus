@@ -63,11 +63,11 @@ collector:
         port: 4318
   resources:
     limits:
-      cpu: "2"
-      memory: 1Gi
+      cpu: "1.5"
+      memory: 512Mi
     requests:
-      cpu: "1"
-      memory: 256Mi
+      cpu: "0.5"
+      memory: 128Mi
   nodeSelector:
     rss3.io/usage: internal
   tolerations:
