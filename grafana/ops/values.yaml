@@ -69,3 +69,14 @@ enableServiceLinks: false
 serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: grafana@naturalselectionlabs.iam.gserviceaccount.com
+
+datasources:
+  datasources.yaml:
+    apiVersion: 1
+    datasources:
+      - name: BigQuery
+        type: grafana-bigquery-datasource
+        editable: true
+        enabled: true
+        jsonData:
+          authenticationType: gce
