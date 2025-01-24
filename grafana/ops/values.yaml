@@ -8,6 +8,7 @@ resources:
 replicas: 3
 plugins:
   - googlecloud-logging-datasource
+  - grafana-bigquery-datasource
 ingress:
   enabled: true
   ingressClassName: traefik
