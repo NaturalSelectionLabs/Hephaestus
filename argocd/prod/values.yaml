@@ -69,10 +69,10 @@ server:
     annotations: {}
   resources:
     requests:
-      cpu: 0.5
+      cpu: 0.25
       memory: 1Gi
     limits:
-      cpu: 0.5
+      cpu: 0.25
       memory: 1Gi
   autoscaling:
     enabled: true
@@ -141,10 +141,10 @@ repoServer:
       image: quay.io/argoproj/argocd:v2.13.3
       resources:
         requests:
-          cpu: 1
+          cpu: "0.25"
           memory: 1Gi
         limits:
-          cpu: 1
+          cpu: "0.25"
           memory: 1Gi
       env:
         - name: AVP_SECRET

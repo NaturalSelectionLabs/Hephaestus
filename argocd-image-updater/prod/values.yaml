@@ -83,3 +83,11 @@ authScripts:
 serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
+
+resources:
+  limits:
+    cpu: "0.25"
+    memory: 1Gi
+  requests:
+    cpu: "0.25"
+    memory: 1Gi
