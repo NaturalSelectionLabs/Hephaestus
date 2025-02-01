@@ -113,7 +113,7 @@ repoServer:
     rules: []
   initContainers:
     - name: download-tools
-      image: registry.access.redhat.com/ubi8
+      image: redhat/ubi8
       env:
         - name: AVP_VERSION
           value: 1.16.1
