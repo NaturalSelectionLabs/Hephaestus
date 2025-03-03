@@ -14,3 +14,11 @@ helmCharts:
     valuesFile: values.yaml
     version: 20.x.x
     namespace: guardian
+
+replicas:
+  - name: kafka-console
+    count: 0
+  - name: kafka
+    count: 0
+  - name: kafka-zookeeper
+    count: 0

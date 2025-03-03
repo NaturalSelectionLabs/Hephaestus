@@ -507,59 +507,6 @@ resource "argocd_application_set" "etcd" {
   }
 }
 
-resource "argocd_application_set" "pyroscope" {
-  metadata {
-    name = "pyroscope"
-  }
-  spec {
-    generator {
-      list {
-        elements = [
-          {
-            cluster = argocd_cluster.dev.name
-            url     = argocd_cluster.dev.server
-          }
-          #           {
-          #             cluster = argocd_cluster.prod.name
-          #             url     = argocd_cluster.prod.server
-          #           }
-        ]
-      }
-    }
-    template {
-      metadata {
-        name = "pyroscope-{{cluster}}"
-      }
-
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "pyroscope/{{cluster}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:avp-{{cluster}}"
-            }
-          }
-        }
-
-        destination {
-          server    = "{{url}}"
-          namespace = "guardian"
-        }
-      }
-    }
-  }
-}
-
 resource "argocd_application_set" "argo-workflow" {
   metadata {
     name = "argo-workflow"
@@ -717,7 +664,7 @@ resource "argocd_application_set" "cloud_native_pg" {
         selector {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
-            "cluster-type" = "gke-standard"
+            "cluster-type"                   = "gke-standard"
           }
         }
       }
