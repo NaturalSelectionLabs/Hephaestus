@@ -15,16 +15,6 @@ data "google_container_cluster" "us_central1_ops" {
   location = "us-central1"
 }
 
-locals {
-  project_open = "open-440103"
-}
-
-data "google_container_cluster" "open" {
-  project  = local.project_open
-  name     = "open"
-  location = "us-central1"
-}
-
 provider "kubernetes" {
   alias                  = "us-central1-dev"
   host                   = "https://${data.google_container_cluster.us_central1_dev.endpoint}"
