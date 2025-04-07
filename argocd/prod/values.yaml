@@ -319,6 +319,9 @@ configs:
       p, role:open, applications, *, open/*, allow
       p, role:open, logs, *, open/*, allow
       p, role:open, exec, *, open/*, allow
+      p, role:open, applications, *, aa/*, allow
+      p, role:open, logs, *, aa/*, allow
+      p, role:open, exec, *, aa/*, allow
       p, role:overlord, applications, *, overlord/*, allow
       p, role:overlord, logs, *, overlord/*, allow
       p, role:overlord, exec, *, overlord/*, allow
