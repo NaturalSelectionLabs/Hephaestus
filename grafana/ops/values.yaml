@@ -1,10 +1,10 @@
 resources:
   limits:
-    cpu: 1
-    memory: 1Gi
+    cpu: 0.5
+    memory: 512Mi
   requests:
-    cpu: 1
-    memory: 1Gi
+    cpu: 0.5
+    memory: 512Mi
 replicas: 3
 plugins:
   - googlecloud-logging-datasource

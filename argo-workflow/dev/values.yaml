@@ -12,6 +12,14 @@ server:
         hosts:
           - argowf.dev.naturalselectionlabs.com
 
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
+
   authModes:
     - sso
   sso:
@@ -46,6 +54,13 @@ server:
       - "email"
       - "roles"
 controller:
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 500m
+      memory: 256Mi
   workflowNamespaces:
     - default
     - guardian
