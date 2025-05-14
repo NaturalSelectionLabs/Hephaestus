@@ -307,6 +307,9 @@ configs:
       p, role:ai, applications, *, ai/*, allow
       p, role:ai, logs, *, ai/*, allow
       p, role:ai, exec, *, ai/*, allow
+      p, role:aa, applications, *, aa/*, allow
+      p, role:aa, logs, *, aa/*, allow
+      p, role:aa, exec, *, aa/*, allow
       p, role:follow, applications, *, follow/*, allow
       p, role:follow, logs, *, follow/*, allow
       p, role:follow, exec, *, follow/*, allow
@@ -333,6 +336,7 @@ configs:
       g, aiop, role:pregod
       g, aiop, role:copilot
       g, aiop, role:ai
+      g, aiop, role:aa
       g, crossbell, role:crossbell
       g, diygod, role:diygod
       g, follow, role:follow
