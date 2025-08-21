@@ -85,6 +85,16 @@ resource "argocd_cluster" "ops" {
 resource "argocd_cluster" "ovh" {
   server = "https://k8s.ovh.naturalselectionlabs.com"
 
+  metadata {
+    labels = {
+      "env"          = "ovh"
+      "secret"       = "avp-ovh"
+      "provider"     = "ovh"
+      "cluster-type" = "rke2"
+      "tenant"       = "3"
+    }
+  }
+
   config {
     bearer_token = var.OVH_TOKEN
     tls_client_config {
