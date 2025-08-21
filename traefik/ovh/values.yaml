@@ -70,9 +70,3 @@ metrics:
           targetLabel: nodename
           replacement: $1
           action: replace
-
-tracing:
-  jaeger:
-    samplingServerURL: http://jaeger-agent.guardian:5778/sampling
-    localAgentHostPort: jaeger-agent.guardian:6831
-    disableAttemptReconnecting: false
