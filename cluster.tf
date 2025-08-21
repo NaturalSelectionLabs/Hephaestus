@@ -84,6 +84,7 @@ resource "argocd_cluster" "ops" {
 
 resource "argocd_cluster" "ovh" {
   server = "https://k8s.ovh.naturalselectionlabs.com"
+  name   = "ovh"
 
   metadata {
     labels = {
