@@ -12,9 +12,9 @@ metadata:
     service: httpbin
 spec:
   ports:
-  - name: http
-    port: 8000
-    targetPort: 80
+    - name: http
+      port: 8000
+      targetPort: 80
   selector:
     app: httpbin
 ---
@@ -36,13 +36,13 @@ spec:
     spec:
       serviceAccountName: httpbin
       containers:
-      - image: docker.io/kennethreitz/httpbin
-        imagePullPolicy: IfNotPresent
-        name: httpbin
-        ports:
-        - containerPort: 80
+        - image: docker.io/kennethreitz/httpbin
+          imagePullPolicy: IfNotPresent
+          name: httpbin
+          ports:
+            - containerPort: 80
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: httpbin
@@ -58,7 +58,7 @@ spec:
       middlewares:
         - name: httpbin-stripprefix
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: httpbin-stripprefix
@@ -67,12 +67,12 @@ spec:
     prefixes:
       - /httpbin
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 metadata:
   name: httpbin-test-header
   annotations:
-    traefik-route-validate.incubator4.com/validate: 'false'
+    traefik-route-validate.incubator4.com/validate: "false"
 spec:
   entryPoints:
     - web
@@ -86,7 +86,7 @@ spec:
         - name: httpbin-stripprefix
         - name: httpbin-add-header
 ---
-apiVersion: traefik.containo.us/v1alpha1
+apiVersion: traefik.io/v1alpha1
 kind: Middleware
 metadata:
   name: httpbin-add-header
