@@ -14,6 +14,8 @@ env:
   TF_VAR_GITHUB_APP_ID: ${{ secrets.TF_VAR_GITHUB_APP_ID }}
   TF_VAR_GITHUB_APP_PRIVATE_KEY_BASE64: ${{ secrets.TF_VAR_GITHUB_APP_PRIVATE_KEY_BASE64 }}
   GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+  TF_VAR_OVH_TOKEN: ${{ secrets.OVH_TOKEN }}
+  TF_VAR_OVH_CA_DATA: ${{ secrets.OVH_CA_DATA }}
 
 jobs:
   terraform:

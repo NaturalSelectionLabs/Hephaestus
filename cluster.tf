@@ -81,3 +81,14 @@ resource "argocd_cluster" "ops" {
   }
 
 }
+
+resource "argocd_cluster" "ovh" {
+  server = "https://k8s.ovh.naturalselectionlabs.com"
+
+  config {
+    bearer_token = var.OVH_TOKEN
+    tls_client_config {
+      ca_data = base64decode(var.OVH_CA_DATA)
+    }
+  }
+}
