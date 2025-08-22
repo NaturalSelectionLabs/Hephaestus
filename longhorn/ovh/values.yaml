@@ -1,5 +1,3 @@
-defaultSettings:
-  defaultDataPath: /var/lib/longhorn/nvme2n1
 ingress:
   enabled: true
   ingressClassName: traefik
