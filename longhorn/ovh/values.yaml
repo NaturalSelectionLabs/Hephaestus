@@ -1,3 +1,5 @@
+defaultSettings:
+  v2DataEngine: true
 ingress:
   enabled: true
   ingressClassName: traefik
