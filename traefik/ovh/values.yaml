@@ -8,8 +8,6 @@ ports:
     nodePort: 30080
   websecure:
     nodePort: 30443
-  traefik:
-    nodePort: 38080
 deployment:
   kind: Deployment
   replicas: 2
