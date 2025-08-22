@@ -743,7 +743,7 @@ resource "argocd_application_set" "longhorn" {
 
         destination {
           name      = "{{.name}}"
-          namespace = "guardian"
+          namespace = "longhorn-system"
         }
       }
     }
