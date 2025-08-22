@@ -50,7 +50,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/httpbin`) && !HeaderRegexp(`Accept-Language`, `.*`)
+    - match: PathPrefix(`/httpbin`) && !HeadersRegexp(`Accept-Language`, `.*`)
       kind: Rule
       services:
         - name: httpbin
@@ -77,7 +77,7 @@ spec:
   entryPoints:
     - web
   routes:
-    - match: PathPrefix(`/httpbin`) && HeaderRegexp(`Accept-Language`, `.*`)
+    - match: PathPrefix(`/httpbin`) && HeadersRegexp(`Accept-Language`, `.*`)
       kind: Rule
       services:
         - name: httpbin

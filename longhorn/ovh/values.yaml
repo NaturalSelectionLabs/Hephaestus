@@ -1,0 +1,11 @@
+defaultSettings:
+  defaultDataPath: /var/lib/longhorn/nvme2n1
+ingress:
+  enabled: true
+  ingressClassName: traefik
+  host: longhorn.ovh.naturalselectionlabs.com
+  tls: true
+  tlsSecret: longhorn-tls
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare"
+    traefik.ingress.kubernetes.io/router.entrypoints: websecure
