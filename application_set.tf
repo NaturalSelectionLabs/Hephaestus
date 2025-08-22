@@ -700,3 +700,52 @@ resource "argocd_application_set" "cloud_native_pg" {
     }
   }
 }
+
+resource "argocd_application_set" "longhorn" {
+  metadata {
+    name = "longhorn"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
+            "provider"                       = "ovh"
+            "cluster-type"                   = "rke2"
+          }
+        }
+      }
+    }
+    template {
+      metadata {
+        name = "longhorn-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "longhorn/{{.name}}"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
+            }
+          }
+        }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "guardian"
+        }
+      }
+    }
+  }
+}
