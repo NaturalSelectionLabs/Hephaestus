@@ -5,7 +5,7 @@ resources: []
 helmCharts:
   - name: longhorn
     releaseName: longhorn
-    namespace: guardian
+    namespace: longhorn-system
     repo: https://charts.longhorn.io
     valuesFile: values.yaml
     includeCRDs: true
