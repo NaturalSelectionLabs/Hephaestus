@@ -5,7 +5,7 @@ metadata:
   namespace: guardian
 spec:
   dnsNames:
-    - "*.naturalselectionlabs.com"
+    - "*.ovh.naturalselectionlabs.com"
   issuerRef:
     kind: ClusterIssuer
     name: cloudflare
