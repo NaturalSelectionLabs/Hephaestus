@@ -1,9 +1,18 @@
 service:
   enabled: true
   type: NodePort
+  externalIPs:
+    - 142.44.140.96
+ports:
+  web:
+    nodePort: 30080
+  websecure:
+    nodePort: 30443
+  traefik:
+    nodePort: 38080
 deployment:
   kind: Deployment
-  replicas: 3
+  replicas: 2
 ingressRoute:
   dashboard:
     enabled: true
