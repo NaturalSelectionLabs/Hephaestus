@@ -37,10 +37,12 @@ instanceLabelOverride: traefik
 affinity:
   podAntiAffinity:
     preferredDuringSchedulingIgnoredDuringExecution:
-      - labelSelector:
-          matchLabels:
-            app.kubernetes.io/name: '{{ template "traefik.name" . }}'
-        topologyKey: kubernetes.io/hostname
+      - weight: 100
+        podAffinityTerm:
+          labelSelector:
+            matchLabels:
+              app.kubernetes.io/name: '{{ template "traefik.name" . }}'
+          topologyKey: kubernetes.io/hostname
 
 providers:
   kubernetesIngress:
