@@ -664,7 +664,7 @@ resource "argocd_application_set" "cloud_native_pg" {
         selector {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
-            "cluster-type"                   = "gke-standard"
+            "cluster-type"                   = "rke2"
           }
         }
       }
