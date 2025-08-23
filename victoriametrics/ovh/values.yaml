@@ -79,12 +79,12 @@ vmsingle:
     #    retentionPeriod: "14d"
     extraArgs: {}
     storage:
-      storageClassName: standard
+      storageClassName: longhorn
       accessModes:
         - ReadWriteOnce
       resources:
         requests:
-          storage: 200Gi
+          storage: 100Gi
 
 alertmanager:
   enabled: false
