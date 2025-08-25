@@ -54,5 +54,9 @@ resource "argocd_project" "namespaced" {
       server    = argocd_cluster.dev.server
       namespace = "*"
     }
+    destination {
+      server    = argocd_cluster.ovh.server
+      namespace = "*"
+    }
   }
 }
