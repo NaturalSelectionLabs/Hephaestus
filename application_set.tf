@@ -793,7 +793,7 @@ resource "argocd_application_set" "knative" {
 
         destination {
           name      = "{{.name}}"
-          namespace = "guardian"
+          namespace = "knative-operator"
         }
       }
     }

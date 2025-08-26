@@ -7,6 +7,6 @@ helmCharts:
   - name: knative-operator
     releaseName: knative-operator
     repo: https://knative.github.io/operator
-    namespace: guardian
+    namespace: knative-operator
     # valuesFile: values.yaml
     version: x.x.x
