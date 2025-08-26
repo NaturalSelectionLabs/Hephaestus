@@ -11,6 +11,7 @@ spec:
       scale-to-zero-grace-period: "40s"
     network:
       ingress-class: "traefik"
+      autocreate-cluster-domain-claims: "true"
     certmanager:
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
