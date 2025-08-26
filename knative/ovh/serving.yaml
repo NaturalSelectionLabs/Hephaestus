@@ -9,6 +9,8 @@ spec:
     autoscaler:
       enable-scale-to-zero: "true"
       scale-to-zero-grace-period: "40s"
+    network:
+      ingress-class: "traefik"
     certmanager:
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
