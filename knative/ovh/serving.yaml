@@ -3,7 +3,19 @@ kind: KnativeServing
 metadata:
   name: knative-serving
 spec:
+  high-availability:
+    replicas: 2
   config:
     autoscaler:
       enable-scale-to-zero: "true"
       scale-to-zero-grace-period: "40s"
+    certmanager:
+      clusterLocalIssuerRef: |
+        kind: ClusterIssuer
+        name: cloudflare
+      issuerRef: |
+        kind: ClusterIssuer
+        name: cloudflare
+      systemInternalIssuerRef: |
+        kind: ClusterIssuer
+        name: cloudflare
