@@ -749,3 +749,53 @@ resource "argocd_application_set" "longhorn" {
     }
   }
 }
+
+
+resource "argocd_application_set" "knative" {
+  metadata {
+    name = "knative"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
+            "provider"                       = "ovh"
+            "cluster-type"                   = "rke2"
+          }
+        }
+      }
+    }
+    template {
+      metadata {
+        name = "knative-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+          env     = "{{.metadata.labels.env}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          repo_url        = var.repo_url
+          target_revision = "HEAD"
+          path            = "knative/{{.name}}"
+          kustomize {
+            common_annotations = {
+              "github.com/url" = var.repo_url
+            }
+          }
+        }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "knative-operator"
+        }
+      }
+    }
+  }
+}
