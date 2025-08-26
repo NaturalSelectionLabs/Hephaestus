@@ -1,5 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - https://github.com/knative/operator/blob/main/config/default/kustomization.yaml
+resources: []
+
+helmCharts:
+  - name: knative-operator
+    releaseName: knative-operator
+    repo: https://knative.github.io/operator
+    # valuesFile: values.yaml
+    version: x.x.x
