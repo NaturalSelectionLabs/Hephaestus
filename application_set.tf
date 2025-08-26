@@ -791,6 +791,17 @@ resource "argocd_application_set" "knative" {
           }
         }
 
+        // rbac.authorization.k8s.io/ClusterRole/knative-serving-operator-aggregated-stable
+        // .rules
+        ignore_difference {
+          group = "rbac.authorization.k8s.io"
+          kind  = "ClusterRole"
+          name  = "knative-serving-operator-aggregated-stable"
+          jq_path_expressions = [
+            ".rules"
+          ]
+        }
+
         destination {
           name      = "{{.name}}"
           namespace = "knative-operator"
