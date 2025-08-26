@@ -55,7 +55,9 @@ providers:
     allowExternalNameServices: true
     publishedService:
       enabled: true
-
+  kubernetesGateway:
+    # -- Enable Traefik Gateway provider for Gateway API
+    enabled: true
 metrics:
   prometheus:
     entryPoint: metrics
