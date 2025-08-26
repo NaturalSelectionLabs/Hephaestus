@@ -1,0 +1,9 @@
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+spec:
+  config:
+    autoscaler:
+      enable-scale-to-zero: "true"
+      scale-to-zero-grace-period: "40s"
