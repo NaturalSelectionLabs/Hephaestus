@@ -1,7 +1,13 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: knative-serving
+---
 apiVersion: operator.knative.dev/v1beta1
 kind: KnativeServing
 metadata:
   name: knative-serving
+  namespace: knative-serving
 spec:
   high-availability:
     replicas: 2
@@ -16,7 +22,7 @@ spec:
       enable-scale-to-zero: "true"
       scale-to-zero-grace-period: "40s"
     network:
-      ingress-class: "traefik"
+      ingress-class: "kourier.ingress.networking.knative.dev"
       autocreate-cluster-domain-claims: "true"
     certmanager:
       clusterLocalIssuerRef: |
