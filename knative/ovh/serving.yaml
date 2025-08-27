@@ -23,6 +23,7 @@ spec:
       scale-to-zero-grace-period: "40s"
     network:
       ingress-class: "kourier.ingress.networking.knative.dev"
+      external-domain-tls: "true"
       autocreate-cluster-domain-claims: "true"
     certmanager:
       clusterLocalIssuerRef: |
