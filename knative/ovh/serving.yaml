@@ -8,6 +8,9 @@ spec:
   ingress:
     kourier:
       enabled: true
+      service-type: "NodePort"
+      http-port: 31080
+      https-port: 31443
   config:
     autoscaler:
       enable-scale-to-zero: "true"
