@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "*.tf"
+      - ".github/workflows/terraform.yaml"
     branches:
       - "*"
   pull_request:
