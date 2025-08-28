@@ -16,6 +16,9 @@ env:
   GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
   TF_VAR_OVH_TOKEN: ${{ secrets.OVH_TOKEN }}
   TF_VAR_OVH_CA_DATA: ${{ secrets.OVH_CA_DATA }}
+  TF_VAR_FOLO_SERVER_URL: ${{ secrets.FOLO_SERVER_URL }}
+  TF_VAR_FOLO_TOKEN: ${{ secrets.FOLO_TOKEN }}
+  TF_VAR_FOLO_CA_DATA: ${{ secrets.FOLO_CA_DATA }}
 
 jobs:
   terraform:
