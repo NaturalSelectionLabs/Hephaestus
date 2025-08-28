@@ -25,6 +25,8 @@ spec:
       ingress-class: "kourier.ingress.networking.knative.dev"
       external-domain-tls: "true"
       autocreate-cluster-domain-claims: "true"
+    domain:
+      ovh.nsl.xyz: ""
     certmanager:
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
