@@ -802,6 +802,15 @@ resource "argocd_application_set" "knative" {
           ]
         }
 
+        // ignore namespace knative-serving labels and annotations
+        ignore_difference {
+          group = "*"
+          kind  = "Namespace"
+          name  = "knative-serving"
+
+          jq_path_expressions = [".metadata.labels", ".metadata.annotations"]
+        }
+
         destination {
           name      = "{{.name}}"
           namespace = "knative-operator"

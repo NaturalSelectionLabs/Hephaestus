@@ -30,7 +30,8 @@ resource "argocd_project" "namespaced" {
     "search",
     "diygod",
     "follow",
-    "overlord"
+    "overlord",
+    "rsshub"
   ])
 
   metadata {
@@ -47,15 +48,7 @@ resource "argocd_project" "namespaced" {
       kind  = "*"
     }
     destination {
-      server    = argocd_cluster.prod.server
-      namespace = "*"
-    }
-    destination {
-      server    = argocd_cluster.dev.server
-      namespace = "*"
-    }
-    destination {
-      server    = argocd_cluster.ovh.server
+      server    = "*"
       namespace = "*"
     }
   }
