@@ -31,3 +31,15 @@ variable "OVH_TOKEN" {
 variable "OVH_CA_DATA" {
   type = string
 }
+
+variable "FOLO_SERVER_URL" {
+  type = string
+}
+
+variable "FOLO_TOKEN" {
+  type = string
+}
+
+variable "FOLO_CA_DATA" {
+  type = string
+}

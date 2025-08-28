@@ -103,3 +103,24 @@ resource "argocd_cluster" "ovh" {
     }
   }
 }
+
+
+resource "argocd_cluster" "folo" {
+  server = var.FOLO_SERVER_URL
+  name   = "folo"
+
+  metadata {
+    labels = {
+      "env"          = "folo"
+      "secret"       = "avp-folo"
+      "provider"     = "alicloud"
+      "cluster-type" = "ack"
+    }
+  }
+  config {
+    bearer_token = var.FOLO_TOKEN
+    tls_client_config {
+      ca_data = base64decode(var.FOLO_CA_DATA)
+    }
+  }
+}
