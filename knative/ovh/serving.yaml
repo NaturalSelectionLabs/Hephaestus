@@ -31,10 +31,10 @@ spec:
     certmanager:
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
-        name: cloudflare
+        name: knative-selfsigned-issuer
       issuerRef: |
         kind: ClusterIssuer
         name: cloudflare
       systemInternalIssuerRef: |
         kind: ClusterIssuer
-        name: cloudflare
+        name: knative-selfsigned-issuer
