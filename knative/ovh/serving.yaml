@@ -28,6 +28,9 @@ spec:
       autocreate-cluster-domain-claims: "true"
     domain:
       ovh.nsl.xyz: ""
+    features:
+      kubernetes.podspec-persistent-volume-claim: "Enabled"
+      kubernetes.podspec-persistent-volume-write: "Enabled"
     certmanager:
       clusterLocalIssuerRef: |
         kind: ClusterIssuer
