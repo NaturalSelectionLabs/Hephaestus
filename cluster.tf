@@ -92,6 +92,7 @@ resource "argocd_cluster" "ovh" {
       "secret"       = "avp-ovh"
       "provider"     = "ovh"
       "cluster-type" = "rke2"
+      "region"       = "ca-bhs"
       "tenant"       = "3"
     }
   }
@@ -114,6 +115,7 @@ resource "argocd_cluster" "folo" {
       "env"          = "folo"
       "secret"       = "avp-folo"
       "provider"     = "alicloud"
+      "region"       = "us-east-1"
       "cluster-type" = "ack"
     }
   }
