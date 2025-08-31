@@ -23,14 +23,10 @@ resource "argocd_project" "namespaced" {
   for_each = toset([
     "ai",
     "aa",
-    "copilot",
     "crossbell",
     "network",
-    "pregod",
-    "search",
     "diygod",
     "follow",
-    "overlord",
     "rsshub"
   ])
 
