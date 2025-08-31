@@ -109,70 +109,70 @@ resource "argocd_application_set" "victoria_metrics" {
   }
 }
 
-resource "argocd_application_set" "actions_runner_controller" {
-  metadata {
-    name      = "actions-runner-controller"
-    namespace = "argo"
-  }
-  spec {
-    go_template = true
-    generator {
-      clusters {
-        selector {
-          match_labels = {
-            "argocd.argoproj.io/secret-type" = "cluster"
-            "cluster-type"                   = "gke-standard"
-          }
-        }
-      }
-    }
-    template {
-      metadata {
-        name = "actions-runner-controller-{{.name}}"
-        labels = {
-          cluster = "{{.name}}"
-          env     = "{{.metadata.labels.env}}"
-        }
-      }
+# resource "argocd_application_set" "actions_runner_controller" {
+#   metadata {
+#     name      = "actions-runner-controller"
+#     namespace = "argo"
+#   }
+#   spec {
+#     go_template = true
+#     generator {
+#       clusters {
+#         selector {
+#           match_labels = {
+#             "argocd.argoproj.io/secret-type" = "cluster"
+#             "cluster-type"                   = "gke-standard"
+#           }
+#         }
+#       }
+#     }
+#     template {
+#       metadata {
+#         name = "actions-runner-controller-{{.name}}"
+#         labels = {
+#           cluster = "{{.name}}"
+#           env     = "{{.metadata.labels.env}}"
+#         }
+#       }
 
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "actions-runner-controller/{{.name}}"
-          plugin {
-            name = "avp-kustomize"
-            env {
-              name  = "APP_REPO"
-              value = "NaturalSelectionLabs/Hephaestus"
-            }
-            env {
-              name  = "AVP_SECRET"
-              value = "guardian:{{.metadata.labels.secret}}"
-            }
-          }
-        }
+#       spec {
+#         project = argocd_project.guardian.metadata[0].name
+#         source {
+#           repo_url        = var.repo_url
+#           target_revision = "HEAD"
+#           path            = "actions-runner-controller/{{.name}}"
+#           plugin {
+#             name = "avp-kustomize"
+#             env {
+#               name  = "APP_REPO"
+#               value = "NaturalSelectionLabs/Hephaestus"
+#             }
+#             env {
+#               name  = "AVP_SECRET"
+#               value = "guardian:{{.metadata.labels.secret}}"
+#             }
+#           }
+#         }
 
-        ignore_difference {
-          group               = "admissionregistration.k8s.io"
-          kind                = "*"
-          jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
-        }
+#         ignore_difference {
+#           group               = "admissionregistration.k8s.io"
+#           kind                = "*"
+#           jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
+#         }
 
-        destination {
-          name      = "{{.name}}"
-          namespace = "guardian"
-        }
+#         destination {
+#           name      = "{{.name}}"
+#           namespace = "guardian"
+#         }
 
-        sync_policy {
-          sync_options = ["ServerSideApply=true"]
-        }
+#         sync_policy {
+#           sync_options = ["ServerSideApply=true"]
+#         }
 
-      }
-    }
-  }
-}
+#       }
+#     }
+#   }
+# }
 
 resource "argocd_application_set" "cert_manager" {
   metadata {
