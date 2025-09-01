@@ -107,7 +107,7 @@ resource "argocd_cluster" "ovh" {
 
 
 resource "argocd_cluster" "folo" {
-  server = var.FOLO_SERVER_URL
+  server = data.alicloud_cs_cluster_credential.folo.kube_config.host
   name   = "folo"
 
   metadata {
@@ -120,9 +120,9 @@ resource "argocd_cluster" "folo" {
     }
   }
   config {
-    bearer_token = var.FOLO_TOKEN
+    bearer_token = data.kubernetes_secret.argocd_manager[provider.kubernetes.ack-folo].data.token
     tls_client_config {
-      ca_data = base64decode(var.FOLO_CA_DATA)
+      ca_data = base64decode(data.alicloud_cs_cluster_credential.folo.kube_config.cluster_ca_certificate)
     }
   }
 }
