@@ -1,26 +1,19 @@
-locals {
-  cluster_ids = {
-    common = "c0f3a81dd784c40b1bd75f140332da998"
-    folo   = "cb75cfa28dac844d6ac175e587ee60801"
-  }
-}
-
 data "alicloud_cs_kubernetes_clusters" "common" {
-  ids            = [local.cluster_ids.common]
+  name_regex     = "common"
   enable_details = true
 }
 
 data "alicloud_cs_kubernetes_clusters" "folo" {
-  ids            = [local.cluster_ids.folo]
+  name_regex     = "folo"
   enable_details = true
 }
 
 data "alicloud_cs_cluster_credential" "common" {
-  cluster_id = local.cluster_ids.common
+  cluster_id = data.alicloud_cs_kubernetes_clusters.common.clusters.0.id
 }
 
 data "alicloud_cs_cluster_credential" "folo" {
-  cluster_id = local.cluster_ids.folo
+  cluster_id = data.alicloud_cs_kubernetes_clusters.folo.clusters.0.id
 }
 
 provider "kubernetes" {
