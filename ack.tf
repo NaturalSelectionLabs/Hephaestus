@@ -6,12 +6,12 @@ locals {
 }
 
 data "alicloud_cs_kubernetes_clusters" "common" {
-  ids            = local.cluster_ids.common
+  ids            = [local.cluster_ids.common]
   enable_details = true
 }
 
 data "alicloud_cs_kubernetes_clusters" "folo" {
-  ids            = local.cluster_ids.folo
+  ids            = [local.cluster_ids.folo]
   enable_details = true
 }
 
