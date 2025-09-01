@@ -9,17 +9,17 @@ data "alicloud_cs_managed_kubernetes_clusters" "folo" {
 }
 
 data "alicloud_cs_cluster_credential" "common" {
-  cluster_id = data.alicloud_cs_kubernetes_clusters.common.clusters.0.id
+  cluster_id = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.id
 }
 
 data "alicloud_cs_cluster_credential" "folo" {
-  cluster_id = data.alicloud_cs_kubernetes_clusters.folo.clusters.0.id
+  cluster_id = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.id
 }
 
 provider "kubernetes" {
   alias = "ack-common"
 
-  host                   = data.alicloud_cs_kubernetes_clusters.common.clusters.0.connections.api_server_internet
+  host                   = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.connections.api_server_internet
   client_certificate     = data.alicloud_cs_cluster_credential.common.certificate_authority.client_cert
   client_key             = data.alicloud_cs_cluster_credential.common.certificate_authority.client_key
   cluster_ca_certificate = data.alicloud_cs_cluster_credential.common.certificate_authority.cluster_cert
