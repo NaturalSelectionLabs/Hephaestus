@@ -24,10 +24,6 @@ variable "GITHUB_APP_PRIVATE_KEY_BASE64" {
   type = string
 }
 
-variable "OVH_TOKEN" {
-  type = string
-}
-
 variable "OVH_CA_DATA" {
   type = string
 }
