@@ -120,7 +120,7 @@ resource "argocd_cluster" "folo" {
     }
   }
   config {
-    bearer_token = data.kubernetes_secret.argocd_manager[provider.kubernetes.ack-folo].data.token
+    bearer_token = module.folo-argocd-manager.bearer_token
     tls_client_config {
       ca_data = base64decode(data.alicloud_cs_cluster_credential.folo.kube_config.cluster_ca_certificate)
     }

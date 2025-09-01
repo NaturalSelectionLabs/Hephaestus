@@ -1,9 +1,4 @@
 resource "kubernetes_service_account" "argocd_manager" {
-  for_each = toset([
-    provider.kubernetes.ack-common,
-    provider.kubernetes.ack-folo
-  ])
-  provider = each.value
   metadata {
     name      = "argocd-manager"
     namespace = "kube-system"
@@ -11,11 +6,6 @@ resource "kubernetes_service_account" "argocd_manager" {
 }
 
 resource "kubernetes_cluster_role" "argocd_manager" {
-  for_each = toset([
-    provider.kubernetes.ack-common,
-    provider.kubernetes.ack-folo
-  ])
-  provider = each.value
   metadata {
     name = "argocd-manager-role"
   }
@@ -33,11 +23,6 @@ resource "kubernetes_cluster_role" "argocd_manager" {
 }
 
 resource "kubernetes_cluster_role_binding" "argocd_manager" {
-  for_each = toset([
-    provider.kubernetes.ack-common,
-    provider.kubernetes.ack-folo
-  ])
-  provider = each.value
   metadata {
     name = "argocd-manager-role-binding"
   }
@@ -56,11 +41,6 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
 }
 
 data "kubernetes_secret" "argocd_manager" {
-  for_each = toset([
-    provider.kubernetes.ack-common,
-    provider.kubernetes.ack-folo
-  ])
-  provider = each.value
   metadata {
     name      = kubernetes_service_account.argocd_manager.default_secret_name
     namespace = kubernetes_service_account.argocd_manager.metadata.0.namespace
