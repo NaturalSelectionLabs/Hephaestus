@@ -9,6 +9,21 @@ data "alicloud_cs_cluster_credential" "common" {
   cluster_id = local.cluster_ids.common
 }
 
-output "cluster_name" {
-  value = data.alicloud_cs_cluster_credential.common.cluster_name
+data "alicloud_cs_cluster_credential" "folo" {
+  cluster_id = local.cluster_ids.folo
+}
+
+
+provider "kubernetes" {
+  alias                  = "ack-common"
+  host                   = data.alicloud_cs_cluster_credential.common.kube_config.host
+  token                  = data.alicloud_cs_cluster_credential.common.kube_config.token
+  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.common.kube_config.cluster_ca_certificate)
+}
+
+provider "kubernetes" {
+  alias                  = "ack-folo"
+  host                   = data.alicloud_cs_cluster_credential.folo.kube_config.host
+  token                  = data.alicloud_cs_cluster_credential.folo.kube_config.token
+  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.folo.kube_config.cluster_ca_certificate)
 }

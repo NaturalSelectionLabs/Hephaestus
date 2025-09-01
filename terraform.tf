@@ -5,8 +5,8 @@ terraform {
       version = "5.36.0"
     }
     argocd = {
-      source  = "oboukili/argocd"
-      version = "6.1.1"
+      source  = "argoproj-labs/argocd"
+      version = "~> 7"
     }
     alicloud = {
       source  = "aliyun/alicloud"
