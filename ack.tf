@@ -10,5 +10,5 @@ data "alicloud_cs_kubernetes_clusters" "cluster" {
 }
 
 output "clusters" {
-  value = data.alicloud_cs_kubernetes_clusters.cluster.clusters
+  value = data.alicloud_cs_kubernetes_clusters.cluster.names
 }
