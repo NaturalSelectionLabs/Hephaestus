@@ -20,6 +20,7 @@ env:
   TF_VAR_FOLO_SERVER_URL: ${{ secrets.FOLO_SERVER_URL }}
   TF_VAR_FOLO_TOKEN: ${{ secrets.FOLO_TOKEN }}
   TF_VAR_FOLO_CA_DATA: ${{ secrets.FOLO_CA_DATA }}
+  ALIBABA_CLOUD_REGION: us-east-1
 
 jobs:
   terraform:
@@ -32,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - uses: aliyun/configure-aliyun-credentials-action@v1
         with:
@@ -44,13 +45,81 @@ jobs:
 
       - uses: hashicorp/setup-terraform@v2
 
+      - name: Format
+        id: fmt
+        run: terraform fmt -check -recursive
+        continue-on-error: true
+
       - name: Init
-        run: terraform init
+        id: init
+        run: terraform init -backend-config "prefix=terraform/${{ github.repository }}"
+
+      - name: Validate
+        id: validate
+        run: terraform validate -no-color
 
       - name: Plan
         id: plan
-        run: terraform plan
+        run: terraform plan -no-color
 
-      - name: Terraform Apply
+      - name: PR comment
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          PLAN: "terraform\n${{ steps.plan.outputs.stdout }}"
+        with:
+          github-token: ${{ github.token }}
+          script: |
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            })
+            const botComment = comments.find(comment => {
+              return comment.user.type === 'Bot' && comment.body.includes('Terraform Format and Style')
+            })
+
+            // 2. Prepare format of the comment
+            const output = `#### Terraform Format and Style 🖌\`${{ steps.fmt.outcome }}\`
+            #### Terraform Initialization ⚙️\`${{ steps.init.outcome }}\`
+            #### Terraform Validation 🤖\`${{ steps.validate.outcome }}\`
+            <details><summary>Validation Output</summary>
+
+            \`\`\`\n
+            ${{ steps.validate.outputs.stdout }}
+            \`\`\`
+
+            </details>
+
+            #### Terraform Plan 📖\`${{ steps.plan.outcome }}\`
+
+            <details><summary>Show Plan</summary>
+
+            \`\`\`\n
+            ${process.env.PLAN}
+            \`\`\`
+
+            </details>
+
+            *Pusher: @${{ github.actor }}, Action: \`${{ github.event_name }}\`, Working Directory: \`${{ env.tf_actions_working_dir }}\`, Workflow: \`${{ github.workflow }}\`*`;
+
+            // 3. If we have a comment, update it, otherwise create a new one
+            if (botComment) {
+              github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: botComment.id,
+                body: output
+              })
+            } else {
+              github.rest.issues.createComment({
+                issue_number: context.issue.number,
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                body: output
+              })
+            }
+
+      - name: Apply
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: terraform apply -auto-approve -input=false

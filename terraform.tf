@@ -13,9 +13,9 @@ terraform {
       version = "~> 1.258.0"
     }
   }
-  backend "gcs" {
+
+  backend "oss" {
     bucket = "nsl-ops"
-    prefix = "infrastructure/argocd"
   }
 }
 
