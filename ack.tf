@@ -1,9 +1,9 @@
-data "alicloud_cs_kubernetes_clusters" "common" {
+data "alicloud_cs_managed_kubernetes_clusters" "common" {
   name_regex     = "common"
   enable_details = true
 }
 
-data "alicloud_cs_kubernetes_clusters" "folo" {
+data "alicloud_cs_managed_kubernetes_clusters" "folo" {
   name_regex     = "folo"
   enable_details = true
 }
