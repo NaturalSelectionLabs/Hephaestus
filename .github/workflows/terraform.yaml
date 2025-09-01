@@ -14,9 +14,8 @@ env:
   TF_VAR_PAT: ${{ secrets.TF_VAR_PAT }}
   TF_VAR_GITHUB_APP_ID: ${{ secrets.TF_VAR_GITHUB_APP_ID }}
   TF_VAR_GITHUB_APP_PRIVATE_KEY_BASE64: ${{ secrets.TF_VAR_GITHUB_APP_PRIVATE_KEY_BASE64 }}
-  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
-  TF_VAR_OVH_TOKEN: ${{ secrets.OVH_TOKEN }}
   TF_VAR_OVH_CA_DATA: ${{ secrets.OVH_CA_DATA }}
+  GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
   ALIBABA_CLOUD_REGION: us-east-1
 
 jobs:
@@ -39,6 +38,13 @@ jobs:
           role-session-name: "github-action-session"
           role-session-expiration: 1800
           audience: "sts.aliyuncs.com"
+
+      - name: Set OVH Kubeconfig
+        run: |
+          mkdir -p ~/.kube
+          echo "$OVH_KUBECONFIG" | base64 -d > ~/.kube/config.ovh
+        env:
+          OVH_KUBECONFIG: ${{ secrets.OVH_KUBECONFIG }}
 
       - uses: hashicorp/setup-terraform@v2
 

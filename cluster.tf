@@ -98,7 +98,7 @@ resource "argocd_cluster" "ovh" {
   }
 
   config {
-    bearer_token = var.OVH_TOKEN
+    bearer_token = module.ovh-argocd-manager.bearer_token
     tls_client_config {
       ca_data = base64decode(var.OVH_CA_DATA)
     }
