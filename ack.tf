@@ -5,6 +5,16 @@ locals {
   }
 }
 
+data "alicloud_cs_kubernetes_clusters" "common" {
+  ids            = local.cluster_ids.common
+  enable_details = true
+}
+
+data "alicloud_cs_kubernetes_clusters" "folo" {
+  ids            = local.cluster_ids.folo
+  enable_details = true
+}
+
 data "alicloud_cs_cluster_credential" "common" {
   cluster_id = local.cluster_ids.common
 }
@@ -14,17 +24,20 @@ data "alicloud_cs_cluster_credential" "folo" {
 }
 
 provider "kubernetes" {
-  alias                  = "ack-common"
-  host                   = data.alicloud_cs_cluster_credential.common.kube_config.host
-  token                  = data.alicloud_cs_cluster_credential.common.kube_config.token
-  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.common.kube_config.cluster_ca_certificate)
+  alias = "ack-common"
+
+  host                   = data.alicloud_cs_kubernetes_clusters.common.connections.api_server_internet
+  client_certificate     = data.alicloud_cs_cluster_credential.common.certificate_authority.client_cert
+  client_key             = data.alicloud_cs_cluster_credential.common.certificate_authority.client_key
+  cluster_ca_certificate = data.alicloud_cs_cluster_credential.common.certificate_authority.cluster_cert
 }
 
 provider "kubernetes" {
   alias                  = "ack-folo"
-  host                   = data.alicloud_cs_cluster_credential.folo.kube_config.host
-  token                  = data.alicloud_cs_cluster_credential.folo.kube_config.token
-  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.folo.kube_config.cluster_ca_certificate)
+  host                   = data.alicloud_cs_kubernetes_clusters.folo.connections.api_server_internet
+  client_certificate     = data.alicloud_cs_cluster_credential.folo.certificate_authority.client_cert
+  client_key             = data.alicloud_cs_cluster_credential.folo.certificate_authority.client_key
+  cluster_ca_certificate = data.alicloud_cs_cluster_credential.folo.certificate_authority.cluster_cert
 }
 
 module "folo-argocd-manager" {
