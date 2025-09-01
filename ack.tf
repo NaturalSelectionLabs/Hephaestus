@@ -5,10 +5,10 @@ locals {
   }
 }
 
-data "alicloud_cs_kubernetes_clusters" "cluster" {
-  ids = [for k, v in local.cluster_ids : v]
+data "alicloud_cs_cluster_credential" "common" {
+  cluster_id = local.cluster_ids.common
 }
 
-output "clusters" {
-  value = data.alicloud_cs_kubernetes_clusters.cluster.names
+output "cluster_name" {
+  value = data.alicloud_cs_cluster_credential.common.cluster_name
 }
