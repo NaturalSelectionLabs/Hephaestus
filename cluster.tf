@@ -126,3 +126,24 @@ resource "argocd_cluster" "folo" {
     }
   }
 }
+
+resource "argocd_cluster" "common" {
+  server = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.connections.api_server_internet
+  name   = "common"
+
+  metadata {
+    labels = {
+      "env"          = "common"
+      "secret"       = "avp-common"
+      "provider"     = "alicloud"
+      "region"       = "us-east-1"
+      "cluster-type" = "ack"
+    }
+  }
+  config {
+    bearer_token = module.common-argocd-manager.bearer_token
+    tls_client_config {
+      ca_data = base64decode(data.alicloud_cs_cluster_credential.common.certificate_authority.cluster_cert)
+    }
+  }
+}
