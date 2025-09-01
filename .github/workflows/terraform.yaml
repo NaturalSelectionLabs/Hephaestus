@@ -34,10 +34,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Debug OIDC Claims
-        uses: github/actions-oidc-debugger@main
-        with:
-          audience: "${{ github.server_url }}/${{ github.repository_owner }}"
       - uses: aliyun/configure-aliyun-credentials-action@v1
         with:
           role-to-assume: "acs:ram::5621254376179407:role/terraform"

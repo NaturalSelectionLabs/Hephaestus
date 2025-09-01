@@ -8,6 +8,10 @@ terraform {
       source  = "oboukili/argocd"
       version = "6.1.1"
     }
+    alicloud = {
+      source  = "aliyun/alicloud"
+      version = "~> 1.258.0"
+    }
   }
   backend "gcs" {
     bucket = "nsl-ops"
@@ -26,4 +30,8 @@ provider "argocd" {
 provider "google" {
   project = "naturalselectionlabs"
   # Configuration options
+}
+
+provider "alicloud" {
+  region = "us-east-1"
 }
