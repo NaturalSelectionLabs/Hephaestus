@@ -26,12 +26,22 @@ jobs:
     name: "Terraform"
     runs-on: ubuntu-latest
     permissions:
+      id-token: write
       contents: read
       pull-requests: write
 
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+
+      - uses: aliyun/configure-aliyun-credentials-action@v1
+        with:
+          role-to-assume: "acs:ram::5621254376179407:role/terraform"
+          oidc-provider-arn: "acs:ram::5621254376179407:oidc-provider/github"
+          role-session-name: "github-action-session"
+          role-session-expiration: 1800
+          audience: "sts.aliyuncs.com"
+
       - uses: hashicorp/setup-terraform@v2
 
       - name: Init
