@@ -40,11 +40,13 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
   }
 }
 
-data "kubernetes_secret" "argocd_manager" {
+resource "kubernetes_secret" "argocd_manager" {
   metadata {
     namespace = kubernetes_service_account.argocd_manager.metadata.0.namespace
+    name      = format("%s-token", kubernetes_service_account.argocd_manager.metadata.0.name)
     annotations = {
       "kubernetes.io/service-account.name" = kubernetes_service_account.argocd_manager.metadata.0.name
     }
   }
+  type = "kubernetes.io/service-account-token"
 }
