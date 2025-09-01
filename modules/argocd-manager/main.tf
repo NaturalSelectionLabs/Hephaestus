@@ -42,7 +42,9 @@ resource "kubernetes_cluster_role_binding" "argocd_manager" {
 
 data "kubernetes_secret" "argocd_manager" {
   metadata {
-    name      = kubernetes_service_account.argocd_manager.default_secret_name
     namespace = kubernetes_service_account.argocd_manager.metadata.0.namespace
+    annotations = {
+      "kubernetes.io/service-account.name" = kubernetes_service_account.argocd_manager.metadata.0.name
+    }
   }
 }

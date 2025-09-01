@@ -107,7 +107,7 @@ resource "argocd_cluster" "ovh" {
 
 
 resource "argocd_cluster" "folo" {
-  server = data.alicloud_cs_cluster_credential.folo.kube_config.host
+  server = data.alicloud_cs_kubernetes_clusters.folo.clusters.0.connections.api_server_internet
   name   = "folo"
 
   metadata {
