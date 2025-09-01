@@ -27,7 +27,7 @@ provider "kubernetes" {
 
 provider "kubernetes" {
   alias                  = "ack-folo"
-  host                   = data.alicloud_cs_kubernetes_clusters.folo.clusters.0.connections.api_server_internet
+  host                   = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.connections.api_server_internet
   client_certificate     = data.alicloud_cs_cluster_credential.folo.certificate_authority.client_cert
   client_key             = data.alicloud_cs_cluster_credential.folo.certificate_authority.client_key
   cluster_ca_certificate = data.alicloud_cs_cluster_credential.folo.certificate_authority.cluster_cert
