@@ -329,9 +329,6 @@ configs:
       p, role:ai, applications, *, ai/*, allow
       p, role:ai, logs, *, ai/*, allow
       p, role:ai, exec, *, ai/*, allow
-      p, role:aa, applications, *, aa/*, allow
-      p, role:aa, logs, *, aa/*, allow
-      p, role:aa, exec, *, aa/*, allow
       p, role:follow, applications, *, follow/*, allow
       p, role:follow, logs, *, follow/*, allow
       p, role:follow, exec, *, follow/*, allow
@@ -344,9 +341,6 @@ configs:
       p, role:open, applications, *, open/*, allow
       p, role:open, logs, *, open/*, allow
       p, role:open, exec, *, open/*, allow
-      p, role:open, applications, *, aa/*, allow
-      p, role:open, logs, *, aa/*, allow
-      p, role:open, exec, *, aa/*, allow
       p, role:overlord, applications, *, overlord/*, allow
       p, role:overlord, logs, *, overlord/*, allow
       p, role:overlord, exec, *, overlord/*, allow
@@ -358,7 +352,6 @@ configs:
       g, aiop, role:pregod
       g, aiop, role:copilot
       g, aiop, role:ai
-      g, aiop, role:aa
       g, crossbell, role:crossbell
       g, diygod, role:diygod
       g, follow, role:follow
