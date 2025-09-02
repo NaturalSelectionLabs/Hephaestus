@@ -57,10 +57,9 @@ server:
   ingress:
     # -- Enable an ingress resource for the Argo CD server
     enabled: true
-    ingressClassName: "traefik"
+    ingressClassName: "alb"
     annotations:
       cert-manager.io/cluster-issuer: "cloudflare"
-      traefik.ingress.kubernetes.io/router.entrypoints: websecure
     tls: true
   ingressGrpc:
     # -- Enable an ingress resource for the Argo CD server for dedicated [gRPC-ingress]
