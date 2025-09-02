@@ -62,6 +62,12 @@ resource "argocd_application_set" "victoria_metrics" {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
           }
+
+          match_expressions {
+            key      = "provider"
+            operator = "NotIn"
+            values   = ["alicloud"]
+          }
         }
       }
     }
