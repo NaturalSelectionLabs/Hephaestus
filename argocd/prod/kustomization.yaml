@@ -6,6 +6,8 @@ configMapGenerator:
   - name: gcp-credential
     files:
       - credential-configuration.json
+    options:
+      disableNameSuffixHash: true
 
 helmCharts:
   - name: argo-cd
