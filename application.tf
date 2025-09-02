@@ -50,7 +50,7 @@ resource "argocd_application" "argocd-image-updater" {
     }
 
     destination {
-      name      = argocd_cluster.ops.name
+      name      = argocd_cluster.common.name
       namespace = "argo"
     }
   }
