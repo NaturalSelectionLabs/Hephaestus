@@ -2,6 +2,11 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources: []
 
+configMapGenerator:
+  - name: gcp-credential
+    files:
+      - credential-configuration.json
+
 helmCharts:
   - name: argo-cd
     releaseName: argocd
@@ -10,8 +15,3 @@ helmCharts:
     version: 7.x.x
     apiVersions:
       - monitoring.coreos.com/v1
-
-configMapGenerator:
-  - name: gcp-credential
-    files:
-      - credential-configuration.json
