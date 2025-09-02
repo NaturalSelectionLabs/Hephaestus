@@ -18,7 +18,7 @@ resource "argocd_application" "argocd" {
     }
 
     destination {
-      name      = "ops"
+      name      = "common"
       namespace = "argo"
     }
   }

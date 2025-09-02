@@ -6,7 +6,7 @@ redis:
   # -- Enable redis
   enabled: false
 externalRedis:
-  host: 10.1.40.3
+  host: r-7goqq5xexvafy15m2q.redis.rds.aliyuncs.com
 #  existingSecret: argocd-redis
 controller:
   replicas: 3
@@ -102,7 +102,7 @@ repoServer:
         - list
         - watch
       apiGroups:
-        - ''
+        - ""
       resources:
         - secrets
         - configmaps
@@ -133,11 +133,11 @@ repoServer:
     # argocd-vault-plugin with plain YAML
     - name: avp-kustomize
       command:
-      - /var/run/argocd/argocd-cmp-server
-      - --loglevel
-      - debug
-      - --logformat
-      - json
+        - /var/run/argocd/argocd-cmp-server
+        - --loglevel
+        - debug
+        - --logformat
+        - json
       image: quay.io/argoproj/argocd:v2.13.3
       resources:
         requests:
@@ -217,12 +217,12 @@ configs:
             userIDKey: email
             userNameKey: email
     # OIDC configuration as an alternative to dex (optional).
-#    oidc.config: |
-#      name: nsl
-#      issuer: https://account.naturalselectionlabs.com/auth/realms/google
-#      clientID: argocd
-#      clientSecret: $oidc.keycloak.clientSecret
-#      requestedScopes: ["openid", "profile", "email", "roles"]
+    #    oidc.config: |
+    #      name: nsl
+    #      issuer: https://account.naturalselectionlabs.com/auth/realms/google
+    #      clientID: argocd
+    #      clientSecret: $oidc.keycloak.clientSecret
+    #      requestedScopes: ["openid", "profile", "email", "roles"]
     #   rootCA: |
     #     -----BEGIN CERTIFICATE-----
     #     ... encoded certificate data here ...
@@ -234,11 +234,11 @@ configs:
     #     - openid
     #     - profile
     #     - email
-#    resource.customizations.ignoreDifferences.all: |
-#      managedFieldsManagers:
-#      - kube-controller-manager
-#      jqPathExpressions:
-#      - .spec.replicas
+    #    resource.customizations.ignoreDifferences.all: |
+    #      managedFieldsManagers:
+    #      - kube-controller-manager
+    #      jqPathExpressions:
+    #      - .spec.replicas
     resource.customizations.ignoreDifferences.apps_Deployment: |
       jqPathExpressions:
       - .spec.template.spec.initContainers[].resources
@@ -271,7 +271,7 @@ configs:
           command:
             - sh
             - "-c"
-            - "kustomize edit set annotation \"github.com/url:${ARGOCD_ENV_APP_REPO}\"; kustomize edit set image ${ARGOCD_ENV_IMAGE_NAME}:${ARGOCD_ENV_IMAGE_TAG}; kustomize build --enable-helm . | argocd-vault-plugin -s ${ARGOCD_ENV_AVP_SECRET} generate -"
+            - 'kustomize edit set annotation "github.com/url:${ARGOCD_ENV_APP_REPO}"; kustomize edit set image ${ARGOCD_ENV_IMAGE_NAME}:${ARGOCD_ENV_IMAGE_TAG}; kustomize build --enable-helm . | argocd-vault-plugin -s ${ARGOCD_ENV_AVP_SECRET} generate -'
         lockRepo: false
   rbac:
     # -- Create the argocd-rbac-cm configmap with ([Argo CD RBAC policy]) definitions.
@@ -280,11 +280,11 @@ configs:
     create: true
 
     # -- Annotations to be added to argocd-rbac-cm configmap
-    annotations: { }
+    annotations: {}
 
     # -- The name of the default role which Argo CD will falls back to, when authorizing API requests (optional).
     # If omitted or empty, users may be still be able to login, but will see no apps, projects, etc...
-    policy.default: 'role:readonly'
+    policy.default: "role:readonly"
 
     # -- File containing user-defined policies and role definitions.
     # @default -- `''` (See [values.yaml])
