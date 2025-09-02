@@ -10,3 +10,8 @@ helmCharts:
     version: 7.x.x
     apiVersions:
       - monitoring.coreos.com/v1
+
+configMapGenerator:
+  - name: gcp-credential
+    files:
+      - credential-configuration.json
