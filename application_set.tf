@@ -583,6 +583,11 @@ resource "argocd_application_set" "promtail" {
           match_labels = {
             "argocd.argoproj.io/secret-type" = "cluster"
           }
+          match_expressions {
+            key      = "provider"
+            operator = "NotIn"
+            values   = ["alicloud"]
+          }
         }
       }
     }
