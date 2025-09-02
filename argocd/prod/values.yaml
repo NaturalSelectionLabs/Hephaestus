@@ -81,10 +81,12 @@ server:
     ingressClassName: "alb"
     annotations:
       cert-manager.io/cluster-issuer: "cloudflare"
+      # alb.ingress.kubernetes.io/healthcheck-enabled: "true"
+      alb.ingress.kubernetes.io/backend-protocol: "grpc"
     tls: true
   ingressGrpc:
     # -- Enable an ingress resource for the Argo CD server for dedicated [gRPC-ingress]
-    enabled: true
+    enabled: false
     # -- Additional ingress annotations for dedicated [gRPC-ingress]
     annotations: {}
   resources:
