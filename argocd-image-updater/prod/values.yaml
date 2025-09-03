@@ -85,7 +85,7 @@ authScripts:
   scripts:
     gke-workload-identity-auth.sh: |
       #!/bin/sh
-      /shared-cli/google-cloud-sdk/bin/gcloud auth login --cred-file $GOOGLE_APPLICATION_CREDENTIALS
+      /shared-cli/google-cloud-sdk/bin/gcloud auth login --cred-file $GOOGLE_APPLICATION_CREDENTIALS --quiet
       ACCESS_TOKEN=$(/shared-cli/google-cloud-sdk/bin/gcloud auth print-access-token)
       echo "oauth2accescoken:$ACCESS_TOKEN"
 
