@@ -101,7 +101,7 @@ resources:
     cpu: "0.25"
     memory: 1Gi
 
-env:
+extraEnv:
   - name: GOOGLE_APPLICATION_CREDENTIALS
     value: "/etc/workload-identity/credential-configuration.json"
 volumeMounts:
