@@ -91,11 +91,11 @@ ingress:
       paths:
         - path: /
           pathType: Prefix
-      # Example TLS configuration
-      tls:
-        - hosts:
-            - account.naturalselectionlabs.com
-          secretName: "keycloak-tls"
+  # Example TLS configuration
+  tls:
+    - hosts:
+        - account.naturalselectionlabs.com
+      secretName: "keycloak-tls"
 
   # ingress for console only (/auth/admin)
   console:
