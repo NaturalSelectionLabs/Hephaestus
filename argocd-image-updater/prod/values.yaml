@@ -114,6 +114,8 @@ volumeMounts:
   - name: shared-cli
     mountPath: "/shared-cli"
     readOnly: true
+  - name: gcloud-config
+    mountPath: "/app/.config"
 volumes:
   - name: token
     projected:
@@ -126,4 +128,6 @@ volumes:
     configMap:
       name: gcp-credential
   - name: shared-cli
+    emptyDir: {}
+  - name: gcloud-config
     emptyDir: {}
