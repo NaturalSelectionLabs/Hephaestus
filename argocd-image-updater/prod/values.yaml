@@ -85,7 +85,6 @@ authScripts:
   scripts:
     gke-workload-identity-auth.sh: |
       #!/bin/sh
-      /shared-cli/google-cloud-sdk/bin/gcloud auth login --cred-file $GOOGLE_APPLICATION_CREDENTIALS
       ACCESS_TOKEN=$(/shared-cli/google-cloud-sdk/bin/gcloud auth print-access-token)
       echo "oauth2accescoken:$ACCESS_TOKEN"
 
@@ -114,8 +113,6 @@ volumeMounts:
   - name: shared-cli
     mountPath: "/shared-cli"
     readOnly: true
-  - name: gcloud-config
-    mountPath: "/app/.config"
 volumes:
   - name: token
     projected:
@@ -128,6 +125,4 @@ volumes:
     configMap:
       name: gcp-credential
   - name: shared-cli
-    emptyDir: {}
-  - name: gcloud-config
     emptyDir: {}
