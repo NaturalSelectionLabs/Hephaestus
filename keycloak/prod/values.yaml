@@ -77,48 +77,45 @@ rbac:
       verbs:
         - get
         - list
-#ingress:
-#  enabled: true
-#  ingressClassName: "traefik"
-#  # The Service port targeted by the Ingress
-#  servicePort: http
-#  # Ingress annotations
-#  annotations:
-#    cert-manager.io/cluster-issuer: "cloudflare"
-#    traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#  rules:
-#    -
-#      host: 'account.naturalselectionlabs.com'
-#      # Paths for the host
-#      paths:
-#        - path: /
-#          pathType: Prefix
-#  # Example TLS configuration
-#      tls:
-#        - hosts:
-#            - keycloak.example.com
-#          secretName: "keycloak-tls"
-#
-#  # ingress for console only (/auth/admin)
-#  console:
-#    # If `true`, an Ingress is created for console path only
-#    enabled: true
-#    # The name of Ingress Class associated with the console ingress only
-#    ingressClassName: "traefik"
-#    # Ingress annotations for console ingress only
-#    # Useful to set nginx.ingress.kubernetes.io/whitelist-source-range particularly
-#    annotations:
-#      traefik.ingress.kubernetes.io/router.entrypoints: websecure
-#    rules:
-#      -
-#        # Ingress host
-#        host: 'account.naturalselectionlabs.com'
-#        # Paths for the host
-#        paths:
-#          - path: /auth/admin/
-#            pathType: Prefix
-#    # Console TLS configuration
-#    tls:
-#      - hosts:
-#          - keycloak.example.com
-#        secretName: "keycloak-tls"
+ingress:
+  enabled: true
+  ingressClassName: "alb"
+  # The Service port targeted by the Ingress
+  servicePort: http
+  # Ingress annotations
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare"
+  rules:
+    - host: "account.naturalselectionlabs.com"
+      # Paths for the host
+      paths:
+        - path: /
+          pathType: Prefix
+      # Example TLS configuration
+      tls:
+        - hosts:
+            - account.naturalselectionlabs.com
+          secretName: "keycloak-tls"
+
+  # ingress for console only (/auth/admin)
+  console:
+    # If `true`, an Ingress is created for console path only
+    enabled: true
+    # The name of Ingress Class associated with the console ingress only
+    ingressClassName: "alb"
+    # Ingress annotations for console ingress only
+    # Useful to set nginx.ingress.kubernetes.io/whitelist-source-range particularly
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+    rules:
+      - # Ingress host
+        host: "admin.naturalselectionlabs.com"
+        # Paths for the host
+        paths:
+          - path: /auth/admin/
+            pathType: Prefix
+    # Console TLS configuration
+    tls:
+      - hosts:
+          - admin.naturalselectionlabs.com
+        secretName: "keycloak-admin-tls"
