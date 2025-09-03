@@ -3,7 +3,7 @@ keycloak:
   persistence:
     deployPostgres: false
 replicas: 3
-extraEnv:   |
+extraEnv: |
   - name: JAVA_OPTS
     value: >-
       -XX:+UseContainerSupport
@@ -24,7 +24,7 @@ extraEnv:   |
   - name: DB_VENDOR
     value: postgres
   - name: DB_ADDR
-    value: "10.147.0.8"
+    value: "pgm-7gogu826854l62i9.pg.rds.aliyuncs.com"
   - name: DB_PORT
     value: "5432"
   - name: DB_DATABASE
@@ -66,11 +66,10 @@ resources:
 serviceMonitor:
   enabled: true
 
-
 rbac:
   create: true
   rules:
-  # RBAC rules for KUBE_PING
+    # RBAC rules for KUBE_PING
     - apiGroups:
         - ""
       resources:
@@ -78,7 +77,6 @@ rbac:
       verbs:
         - get
         - list
-
 #ingress:
 #  enabled: true
 #  ingressClassName: "traefik"

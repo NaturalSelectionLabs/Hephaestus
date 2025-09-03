@@ -143,7 +143,7 @@ resource "argocd_application" "keycloak" {
     }
 
     destination {
-      name      = "ops"
+      name      = argocd_cluster.common.name
       namespace = "guardian"
     }
   }

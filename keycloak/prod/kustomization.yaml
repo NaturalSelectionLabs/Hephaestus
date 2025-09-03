@@ -1,13 +1,13 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
-- route.yaml
-- secret.yaml
-- admin.yaml
+  - route.yaml
+  # - secret.yaml
+  # - admin.yaml
 
 helmCharts:
-- name: keycloak
-  releaseName: keycloak
-  repo: https://codecentric.github.io/helm-charts
-  valuesFile: values.yaml
-  version: 18.x.x
+  - name: keycloak
+    releaseName: keycloak
+    repo: https://codecentric.github.io/helm-charts
+    valuesFile: values.yaml
+    version: 18.x.x
