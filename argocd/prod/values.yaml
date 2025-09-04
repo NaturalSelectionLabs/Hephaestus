@@ -317,6 +317,7 @@ configs:
       p, role:org-admin, repositories, *, *, allow
       p, role:org-admin, logs, get, *, allow
       p, role:org-admin, exec, create, */*, allow
+      p, role:org-admin, projects, *, *, allow
       p, role:network, applications, *, network/*, allow
       p, role:network, logs, *, network/*, allow
       p, role:network, exec, *, network/*, allow
