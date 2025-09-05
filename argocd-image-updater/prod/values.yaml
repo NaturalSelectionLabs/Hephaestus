@@ -85,6 +85,17 @@ initContainers:
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
+  - name: init-jq
+    image: alpine:latest
+    command:
+      [
+        "/bin/sh",
+        "-c",
+        "wget -O /shared-cli/jq https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 && chmod +x /shared-cli/jq",
+      ]
+    volumeMounts:
+      - name: shared-cli
+        mountPath: /shared-cli
 
 authScripts:
   enabled: true
