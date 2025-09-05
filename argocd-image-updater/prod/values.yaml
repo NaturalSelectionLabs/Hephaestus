@@ -87,7 +87,7 @@ authScripts:
       #!/bin/sh
       /shared-cli/google-cloud-sdk/bin/gcloud auth login --cred-file $GOOGLE_APPLICATION_CREDENTIALS --quiet
       ACCESS_TOKEN=$(/shared-cli/google-cloud-sdk/bin/gcloud auth print-access-token)
-      echo "oauth2accescoken:$ACCESS_TOKEN"
+      echo "oauth2accesstoken:$ACCESS_TOKEN"
 
 serviceAccount:
   annotations:
