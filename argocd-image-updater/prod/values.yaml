@@ -79,23 +79,6 @@ initContainers:
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
-  - name: init-curl
-    image: curlimages/curl
-    command: ["/bin/sh", "-c", "cp -R /usr/bin/curl /shared-cli"]
-    volumeMounts:
-      - name: shared-cli
-        mountPath: /shared-cli
-  - name: init-jq
-    image: alpine:latest
-    command:
-      [
-        "/bin/sh",
-        "-c",
-        "wget -O /shared-cli/jq https://github.com/jqlang/jq/releases/download/jq-1.7.1/jq-linux-amd64 && chmod +x /shared-cli/jq",
-      ]
-    volumeMounts:
-      - name: shared-cli
-        mountPath: /shared-cli
 
 authScripts:
   enabled: true
@@ -112,10 +95,10 @@ serviceAccount:
 
 resources:
   limits:
-    cpu: "0.25"
-    memory: 1Gi
+    cpu: "1"
+    memory: 2Gi
   requests:
-    cpu: "0.25"
+    cpu: "0.5"
     memory: 1Gi
 
 extraEnv:
