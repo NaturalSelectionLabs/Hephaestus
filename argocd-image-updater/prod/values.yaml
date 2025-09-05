@@ -79,6 +79,12 @@ initContainers:
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
+  - name: init-curl
+    image: curlimages/curl
+    command: ["/bin/sh", "-c", "cp -R /usr/bin/curl /shared-cli"]
+    volumeMounts:
+      - name: shared-cli
+        mountPath: /shared-cli
 
 authScripts:
   enabled: true
