@@ -55,6 +55,10 @@ config:
       credentials: ext:/scripts/gke-workload-identity-auth.sh
       credsexpire: 10m
       limit: 5
+    - name: Alibaba Cloud Container Registry
+      api_url: https://container-registry-vpc.us-east-1.cr.aliyuncs.com
+      prefix: container-registry-vpc.us-east-1.cr.aliyuncs.com
+      credentials: pullsecret:argo/acr-credential-secret-aggregation
     # - name: Google Container Registry
     #   api_url: https://gcr.io
     #   prefix: gcr.io
