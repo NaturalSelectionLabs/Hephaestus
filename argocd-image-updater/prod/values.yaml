@@ -54,6 +54,7 @@ config:
       prefix: us-central1-docker.pkg.dev
       credentials: ext:/scripts/gke-workload-identity-auth.sh
       credsexpire: 10m
+      limit: 5
     # - name: Google Container Registry
     #   api_url: https://gcr.io
     #   prefix: gcr.io
