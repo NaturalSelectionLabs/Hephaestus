@@ -8,6 +8,11 @@ data "alicloud_cs_managed_kubernetes_clusters" "folo" {
   enable_details = true
 }
 
+data "alicloud_cs_serverless_kubernetes_clusters" "xlog" {
+  name_regex     = "xlog"
+  enable_details = true
+}
+
 data "alicloud_cs_cluster_credential" "common" {
   cluster_id = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.id
 }
