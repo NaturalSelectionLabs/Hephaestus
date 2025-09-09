@@ -84,14 +84,16 @@ initContainers:
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
-  - name: init-aliyun-cli
-    # use curl image
+  # install kubectl and jq
+  - name: init-tools
     image: curlimages/curl
     command: ["/bin/sh", "-c"]
     args:
       - |
-        curl -SLO https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-amd64.tgz
-        tar -xzf aliyun-cli-linux-latest-amd64.tgz -C /shared-cli
+        curl -SLO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
+        curl -SLO https://github.com/stedolan/jq/releases/download/jq-1.7/jq-linux64
+        chmod +x kubectl jq
+        mv kubectl jq /shared-cli
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
@@ -132,8 +134,6 @@ volumeMounts:
     readOnly: true
   - name: gcloud-config
     mountPath: "/app/.config"
-  - name: aliyun-config
-    mountPath: "/app/.aliyun"
 volumes:
   - name: token
     projected:
@@ -148,6 +148,4 @@ volumes:
   - name: shared-cli
     emptyDir: {}
   - name: gcloud-config
-    emptyDir: {}
-  - name: aliyun-config
     emptyDir: {}
