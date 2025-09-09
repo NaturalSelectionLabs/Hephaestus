@@ -2,6 +2,12 @@ resource "argocd_cluster" "dev" {
   server = "https://${data.google_container_cluster.us_central1_dev.endpoint}"
   name   = "dev"
 
+  lifecycle {
+    ignore_changes = [
+      config.tls_client_config.ca_data
+    ]
+  }
+
   metadata {
     labels = {
       "env"          = "dev"
@@ -29,6 +35,11 @@ resource "argocd_cluster" "dev" {
 resource "argocd_cluster" "prod" {
   server = "https://${data.google_container_cluster.us_central1_prod.endpoint}"
   name   = "prod"
+  lifecycle {
+    ignore_changes = [
+      config.tls_client_config.ca_data
+    ]
+  }
 
   metadata {
     labels = {
@@ -57,6 +68,12 @@ resource "argocd_cluster" "prod" {
 resource "argocd_cluster" "ops" {
   server = "https://${data.google_container_cluster.us_central1_ops.endpoint}"
   name   = "ops"
+
+  lifecycle {
+    ignore_changes = [
+      config.tls_client_config.ca_data
+    ]
+  }
 
   metadata {
     labels = {
