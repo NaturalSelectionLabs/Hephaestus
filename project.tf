@@ -22,7 +22,6 @@ resource "argocd_project" "guardian" {
 resource "argocd_project" "namespaced" {
   for_each = toset([
     "ai",
-    "crossbell",
     "network",
     "diygod",
     "follow",
