@@ -84,6 +84,20 @@ initContainers:
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
+  - name: init-aliyun-cli
+    # use curl image
+    image: curlimages/curl
+    command: ["/bin/sh", "-c"]
+    args:
+      - |
+        PLATFORM=$(uname -m)
+        curl -SLO https://aliyuncli.alicdn.com/aliyun-cli-linux-latest-$PLATFORM.tgz
+        tar -xzf aliyun-cli-linux-latest-$PLATFORM.tgz -C /shared-cli
+        mv /shared-cli/aliyun /shared-cli/aliyun-cli
+        rm aliyun-cli-linux-latest-$PLATFORM.tgz
+    volumeMounts:
+      - name: shared-cli
+        mountPath: /shared-cli
 
 authScripts:
   enabled: true
