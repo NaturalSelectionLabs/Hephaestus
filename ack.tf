@@ -9,7 +9,7 @@ data "alicloud_cs_managed_kubernetes_clusters" "folo" {
 }
 
 data "alicloud_cs_serverless_kubernetes_clusters" "xlog" {
-  name_regex     = "xlog"
+  ids            = ["c13642a08155d49ee8c852dfc4fbd637b"]
   enable_details = true
 }
 
