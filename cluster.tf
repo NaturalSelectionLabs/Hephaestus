@@ -4,7 +4,7 @@ resource "argocd_cluster" "dev" {
 
   lifecycle {
     ignore_changes = [
-      config.tls_client_config.ca_data
+      config.0.tls_client_config.0.ca_data
     ]
   }
 
@@ -37,7 +37,7 @@ resource "argocd_cluster" "prod" {
   name   = "prod"
   lifecycle {
     ignore_changes = [
-      config.tls_client_config.ca_data
+      config.0.tls_client_config.0.ca_data
     ]
   }
 
@@ -71,7 +71,7 @@ resource "argocd_cluster" "ops" {
 
   lifecycle {
     ignore_changes = [
-      config.tls_client_config.ca_data
+      config.0.tls_client_config.0.ca_data
     ]
   }
 
