@@ -8,21 +8,12 @@ data "alicloud_cs_managed_kubernetes_clusters" "folo" {
   enable_details = true
 }
 
-data "alicloud_cs_serverless_kubernetes_clusters" "xlog" {
-  ids            = ["c13642a08155d49ee8c852dfc4fbd637b"]
-  enable_details = true
-}
-
 data "alicloud_cs_cluster_credential" "common" {
   cluster_id = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.id
 }
 
 data "alicloud_cs_cluster_credential" "folo" {
   cluster_id = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.id
-}
-
-data "alicloud_cs_cluster_credential" "xlog" {
-  cluster_id = data.alicloud_cs_serverless_kubernetes_clusters.xlog.clusters.0.id
 }
 
 provider "kubernetes" {
