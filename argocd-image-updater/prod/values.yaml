@@ -93,7 +93,7 @@ initContainers:
         curl -SLO https://dl.k8s.io/release/v1.28.0/bin/linux/amd64/kubectl
         chmod +x kubectl
         curl -SLO https://github.com/stedolan/jq/releases/download/jq-1.7/jq-linux64
-        chmod +x jq
+        chmod +x jq-linux64 && mv jq-linux64 jq
         mv kubectl jq /shared-cli
     volumeMounts:
       - name: shared-cli
