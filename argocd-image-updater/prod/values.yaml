@@ -107,6 +107,13 @@ authScripts:
       /shared-cli/google-cloud-sdk/bin/gcloud auth login --cred-file $GOOGLE_APPLICATION_CREDENTIALS --quiet
       ACCESS_TOKEN=$(/shared-cli/google-cloud-sdk/bin/gcloud auth print-access-token)
       echo "oauth2accesstoken:$ACCESS_TOKEN"
+    aliyun-auth.sh: |
+      #!/bin/sh
+      PATH=/shared-cli:$PATH
+      kubectl get secret -n argo acr-credential-secret-aggregation \
+        -o jsonpath='{.data.\.dockerconfigjson}' \
+        | base64 -d \
+        | jq -r '.auths."container-registry.us-east-1.cr.aliyuncs.com" | "\(.Username):\(.Password)"'
 
 serviceAccount:
   annotations:
