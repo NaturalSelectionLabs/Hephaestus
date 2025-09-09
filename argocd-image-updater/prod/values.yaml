@@ -132,6 +132,8 @@ volumeMounts:
     readOnly: true
   - name: gcloud-config
     mountPath: "/app/.config"
+  - name: aliyun-config
+    mountPath: "/app/.aliyun"
 volumes:
   - name: token
     projected:
@@ -146,4 +148,6 @@ volumes:
   - name: shared-cli
     emptyDir: {}
   - name: gcloud-config
+    emptyDir: {}
+  - name: aliyun-config
     emptyDir: {}
