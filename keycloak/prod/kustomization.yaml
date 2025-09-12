@@ -12,3 +12,14 @@ helmCharts:
     repo: https://codecentric.github.io/helm-charts
     valuesFile: values.yaml
     version: 18.x.x
+
+patches:
+  # patch ingress port from name: http to number 80
+  - target:
+      kind: Ingress
+      name: keycloak-http
+    patch: |-
+      - op: replace
+        path: /spec/rules/0/http/paths/0/backend/service/port
+        value:
+          number: 80
