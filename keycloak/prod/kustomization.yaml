@@ -17,7 +17,7 @@ patches:
   # patch ingress port from name: http to number 80
   - target:
       kind: Ingress
-      name: keycloak-http
+      name: keycloak
     patch: |-
       - op: replace
         path: /spec/rules/0/http/paths/0/backend/service/port
