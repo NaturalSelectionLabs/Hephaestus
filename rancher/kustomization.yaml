@@ -4,6 +4,7 @@ kind: Kustomization
 helmCharts:
   - name: rancher
     releaseName: rancher
+    namespace: guardian
     repo: https://releases.rancher.com/server-charts/stable
     version: 2.x.x
     valuesFile: values.yaml
