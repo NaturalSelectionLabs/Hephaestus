@@ -6,3 +6,4 @@ helmCharts:
     releaseName: rancher
     repo: https://releases.rancher.com/server-charts/stable
     version: 2.x.x
+    valuesFile: values.yaml

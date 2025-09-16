@@ -1,0 +1,11 @@
+hostname: rancher.naturalselectionlabs.com
+ingress:
+  enabled: true
+  extraAnnotations:
+    cert-manager.io/cluster-issuer: "cloudflare"
+  tls:
+    source: secret
+  includeDefaultExtraAnnotations: false
+  ingressClassName: alb
+  # Certain ingress controllers will require the pathType or path to be set to a different value.
+  pathType: Prefix
