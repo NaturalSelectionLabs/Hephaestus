@@ -102,6 +102,13 @@ server:
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
+  extensions:
+    enabled: true
+    extensionList:
+      - name: extension-deps
+        env:
+          - name: EXTENSION_URL
+            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.1/extension.tar
 repoServer:
   metrics:
     enabled: true
