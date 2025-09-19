@@ -15,5 +15,7 @@ helmCharts:
     repo: https://argoproj.github.io/argo-helm
     valuesFile: values.yaml
     version: x.x.x
+    additionalValuesFiles:
+      - resource.yaml
     apiVersions:
       - monitoring.coreos.com/v1

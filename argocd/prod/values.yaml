@@ -285,13 +285,6 @@ configs:
       # 'all' - all resources
       # 'none' - disabled
       ignoreResourceStatusField: crd
-    resource.exclusions: |
-      - apiGroups:
-        - securityinspector.alibabacloud.com
-        kinds:
-        - ConfigAuditReport
-        clusters:
-        - "*"
   params:
     server.insecure: true
     reposerver.enable.git.submodule: false
