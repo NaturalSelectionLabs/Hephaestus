@@ -1,9 +1,9 @@
 configs:
   cm:
     resource.links: |
-      - url: https://grafana.naturalselectionlabs.com/d/WjNUQy94z/5-7c-general-logs?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&var-datasource=d755e44f-61a2-4c4f-932d-f53cda0ab31e&var-namespace={{.metadata.namespace}}&var-app={{.metadata.name}}&var-component=$__all&var-pod=$__all&var-container=$__all&var-query0=
+      - url: https://grafana.naturalselectionlabs.com/d/WjNUQy94z/5-7c-general-logs?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&var-datasource=d755e44f-61a2-4c4f-932d-f53cda0ab31e&var-namespace={{.resource.metadata.namespace}}&var-app={{.resource.metadata.name}}&var-component=$__all&var-pod=$__all&var-container=$__all&var-query0=
         title: 5-7c General Logs
-        if: kind == "Deployment"
+        if: resource.kind == "Deployment"
     resource.exclusions: |
       ### Network resources created by the Kubernetes control plane and excluded to reduce the number of watched events and UI clutter
       - apiGroups:
