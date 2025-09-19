@@ -1,5 +1,6 @@
 configs:
   cm:
+    application.allowedNodeLabels: topology.kubernetes.io/zone,topology.kubernetes.io/region,node.kubernetes.io/instance-type
     resource.links: |
       - url: https://grafana.naturalselectionlabs.com/d/WjNUQy94z/5-7c-general-logs?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&var-datasource=d755e44f-61a2-4c4f-932d-f53cda0ab31e&var-namespace={{.resource.metadata.namespace}}&var-app={{.resource.metadata.name}}&var-component=$__all&var-pod=$__all&var-container=$__all&var-query0=
         title: 5-7c General Logs
