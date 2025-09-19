@@ -105,19 +105,18 @@ server:
   extensions:
     enabled: true
     extensionList:
-      []
       # - name: extension-metrics
       #   env:
       #     - name: EXTENSION_URL
       #       value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.0/extension.tar.gz
       #     - name: EXTENSION_CHECKSUM_URL
       #       value: https://github.com/argoproj-labs/argocd-extension-metrics/releases/download/v1.0.0/extension_checksums.txt
-      # - name: extension-deps
-      #   env:
-      #     - name: EXTENSION_URL
-      #       value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension.tar
-      #     - name: EXTENSION_CHECKSUM_URL
-      #       value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension_checksums.txt
+      - name: extension-deps
+        env:
+          - name: EXTENSION_URL
+            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension.tar
+          - name: EXTENSION_CHECKSUM_URL
+            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension_checksums.txt
 repoServer:
   metrics:
     enabled: true
