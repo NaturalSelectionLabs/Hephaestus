@@ -108,7 +108,9 @@ server:
       - name: extension-deps
         env:
           - name: EXTENSION_URL
-            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.3/extension.tar
+            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension.tar
+          - name: EXTENSION_CHECKSUM_URL
+            value: https://github.com/NaturalSelectionLabs/argocd-extension-deps/releases/download/v0.0.4/extension_checksums.txt
 repoServer:
   metrics:
     enabled: true
