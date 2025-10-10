@@ -2,9 +2,7 @@ global:
   storageClass: "standard"
 
 image:
-  registry: docker.io
   repository: bitnamilegacy/rabbitmq
-  tag: 3.11.6-debian-11-r0
   pullPolicy: IfNotPresent
 
 namespaceOverride: "guardian"
