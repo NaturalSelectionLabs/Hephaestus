@@ -1,5 +1,7 @@
 global:
   storageClass: "standard"
+  security:
+    allowInsecureImages: true
 
 image:
   repository: bitnamilegacy/rabbitmq
