@@ -128,7 +128,7 @@ configuration: |-
   vm_memory_high_watermark.{{ .Values.memoryHighWatermark.type }} = {{ .Values.memoryHighWatermark.value }}
   {{- end }}
 
-replicaCount: 3
+replicaCount: 1
 podAnnotations: {}
 
 resources:
