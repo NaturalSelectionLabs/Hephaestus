@@ -3,7 +3,7 @@ global:
 
 image:
   registry: docker.io
-  repository: bitnami/rabbitmq
+  repository: bitnamilegacy/rabbitmq
   tag: 3.11.6-debian-11-r0
   pullPolicy: IfNotPresent
 
@@ -133,11 +133,11 @@ podAnnotations: {}
 
 resources:
   limits:
-     cpu: 2000m
-     memory: 2Gi
+    cpu: 2000m
+    memory: 2Gi
   requests:
-     cpu: 100m
-     memory: 300Mi
+    cpu: 100m
+    memory: 300Mi
 
 persistence:
   storageClass: "standard"
