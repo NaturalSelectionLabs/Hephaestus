@@ -129,11 +129,12 @@ resource "argocd_cluster" "folo" {
 
   metadata {
     labels = {
-      "env"          = "folo"
-      "secret"       = "avp-folo"
-      "provider"     = "alicloud"
-      "region"       = "us-east-1"
-      "cluster-type" = "ack"
+      "env"            = "folo"
+      "secret"         = "avp-folo"
+      "provider"       = "alicloud"
+      "region"         = "us-east-1"
+      "cluster-type"   = "ack"
+      "ack-cluster-id" = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.id
     }
   }
   config {
@@ -150,11 +151,12 @@ resource "argocd_cluster" "common" {
 
   metadata {
     labels = {
-      "env"          = "common"
-      "secret"       = "avp-common"
-      "provider"     = "alicloud"
-      "region"       = "us-east-1"
-      "cluster-type" = "ack"
+      "env"            = "common"
+      "secret"         = "avp-common"
+      "provider"       = "alicloud"
+      "region"         = "us-east-1"
+      "cluster-type"   = "ack"
+      "ack-cluster-id" = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.id
     }
   }
   config {
@@ -171,11 +173,12 @@ resource "argocd_cluster" "vsl" {
 
   metadata {
     labels = {
-      "env"          = "vsl"
-      "secret"       = "avp-vsl"
-      "provider"     = "alicloud"
-      "region"       = "us-east-1"
-      "cluster-type" = "ack"
+      "env"            = "vsl"
+      "secret"         = "avp-vsl"
+      "provider"       = "alicloud"
+      "region"         = "us-east-1"
+      "cluster-type"   = "ack"
+      "ack-cluster-id" = data.alicloud_cs_managed_kubernetes_clusters.vsl.clusters.0.id
     }
   }
 
