@@ -178,4 +178,11 @@ resource "argocd_cluster" "vsl" {
       "cluster-type" = "ack"
     }
   }
+
+  config {
+    bearer_token = module.vsl-argocd-manager.bearer_token
+    tls_client_config {
+      ca_data = base64decode(data.alicloud_cs_cluster_credential.vsl.certificate_authority.cluster_cert)
+    }
+  }
 }
