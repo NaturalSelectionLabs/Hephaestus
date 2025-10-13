@@ -164,3 +164,18 @@ resource "argocd_cluster" "common" {
     }
   }
 }
+
+resource "argocd_cluster" "vsl" {
+  server = data.alicloud_cs_managed_kubernetes_clusters.vsl.clusters.0.connections.api_server_internet
+  name   = "vsl"
+
+  metadata {
+    labels = {
+      "env"          = "vsl"
+      "secret"       = "avp-vsl"
+      "provider"     = "alicloud"
+      "region"       = "us-east-1"
+      "cluster-type" = "ack"
+    }
+  }
+}

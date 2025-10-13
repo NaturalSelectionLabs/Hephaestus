@@ -8,12 +8,21 @@ data "alicloud_cs_managed_kubernetes_clusters" "folo" {
   enable_details = true
 }
 
+data "alicloud_cs_managed_kubernetes_clusters" "vsl" {
+  name_regex     = "vsl"
+  enable_details = true
+}
+
 data "alicloud_cs_cluster_credential" "common" {
   cluster_id = data.alicloud_cs_managed_kubernetes_clusters.common.clusters.0.id
 }
 
 data "alicloud_cs_cluster_credential" "folo" {
   cluster_id = data.alicloud_cs_managed_kubernetes_clusters.folo.clusters.0.id
+}
+
+data "alicloud_cs_cluster_credential" "vsl" {
+  cluster_id = data.alicloud_cs_managed_kubernetes_clusters.vsl.clusters.0.id
 }
 
 provider "kubernetes" {
@@ -34,11 +43,11 @@ provider "kubernetes" {
 }
 
 provider "kubernetes" {
-  alias                  = "ack-xlog"
-  host                   = data.alicloud_cs_serverless_kubernetes_clusters.xlog.clusters.0.connections.api_server_internet
-  client_certificate     = base64decode(data.alicloud_cs_cluster_credential.xlog.certificate_authority.client_cert)
-  client_key             = base64decode(data.alicloud_cs_cluster_credential.xlog.certificate_authority.client_key)
-  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.xlog.certificate_authority.cluster_cert)
+  alias                  = "ack-vsl"
+  host                   = data.alicloud_cs_managed_kubernetes_clusters.vsl.clusters.0.connections.api_server_internet
+  client_certificate     = base64decode(data.alicloud_cs_cluster_credential.vsl.certificate_authority.client_cert)
+  client_key             = base64decode(data.alicloud_cs_cluster_credential.vsl.certificate_authority.client_key)
+  cluster_ca_certificate = base64decode(data.alicloud_cs_cluster_credential.vsl.certificate_authority.cluster_cert)
 }
 
 module "folo-argocd-manager" {
@@ -52,5 +61,12 @@ module "common-argocd-manager" {
   source = "./modules/argocd-manager"
   providers = {
     kubernetes = kubernetes.ack-common
+  }
+}
+
+module "vsl-argocd-manager" {
+  source = "./modules/argocd-manager"
+  providers = {
+    kubernetes = kubernetes.ack-vsl
   }
 }
