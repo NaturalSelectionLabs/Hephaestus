@@ -79,14 +79,14 @@ config:
 
 initContainers:
   - name: init-gcloud
-    image: google/cloud-sdk:alpine
+    image: gcr.io/google/cloud-sdk:alpine
     command: ["sh", "-c", "cp -R /google-cloud-sdk /shared-cli"]
     volumeMounts:
       - name: shared-cli
         mountPath: /shared-cli
   # install kubectl and jq
   - name: init-tools
-    image: curlimages/curl
+    image: quay.io/curl/curl:8.16.0
     command: ["/bin/sh", "-c"]
     args:
       - |
