@@ -79,7 +79,7 @@ config:
 
 initContainers:
   - name: init-gcloud
-    image: gcr.io/google/cloud-sdk:alpine
+    image: gcr.io/google.com/cloudsdktool/cloud-sdk:543.0.0-alpine
     command: ["sh", "-c", "cp -R /google-cloud-sdk /shared-cli"]
     volumeMounts:
       - name: shared-cli
