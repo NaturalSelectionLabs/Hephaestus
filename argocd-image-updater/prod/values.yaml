@@ -59,6 +59,7 @@ config:
       api_url: https://container-registry-vpc.us-east-1.cr.aliyuncs.com
       prefix: container-registry-vpc.us-east-1.cr.aliyuncs.com
       credentials: ext:/scripts/aliyun-auth.sh
+      credsexpire: 15m
     # - name: Google Container Registry
     #   api_url: https://gcr.io
     #   prefix: gcr.io
