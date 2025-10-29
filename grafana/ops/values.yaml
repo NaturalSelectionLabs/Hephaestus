@@ -11,10 +11,10 @@ replicas: 3
 #  - grafana-bigquery-datasource
 ingress:
   enabled: true
-  ingressClassName: traefik
+  ingressClassName: alb
   annotations:
     cert-manager.io/cluster-issuer: "cloudflare"
-    traefik.ingress.kubernetes.io/router.entrypoints: websecure
+    # traefik.ingress.kubernetes.io/router.entrypoints: websecure
   hosts:
     - grafana.naturalselectionlabs.com
   tls:
@@ -35,7 +35,7 @@ grafana.ini:
     serve_from_sub_path: false
   database:
     type: postgres
-    host: 10.147.0.8
+    host: pgm-7gogu826854l62i9.pg.rds.aliyuncs.com
     user: postgres
     name: grafana
   auth:
@@ -54,7 +54,7 @@ grafana.ini:
     signout_redirect_url: https://account.naturalselectionlabs.com/auth/realms/google/protocol/openid-connect/logout?post_logout_redirect_uri=https%3A%2F%2grafana.naturalselectionlabs.com%2Flogin
     role_attribute_path: contains(groups[*], 'admin') && 'Admin' || contains(groups[*], 'grafana-editor') && 'Editor' || 'Viewer'
   unified_alerting:
-    enabled: true
+    enabled: false
     ha_listen_address: "${POD_IP}:9094"
     ha_peers: "grafana-alerting.guardian:9094"
     ha_advertise_address: "${POD_IP}:9094"
@@ -69,14 +69,13 @@ enableServiceLinks: false
 serviceAccount:
   annotations:
     iam.gke.io/gcp-service-account: grafana@naturalselectionlabs.iam.gserviceaccount.com
-
-datasources:
-  datasources.yaml:
-    apiVersion: 1
-    datasources:
-      - name: BigQuery
-        type: grafana-bigquery-datasource
-        editable: true
-        enabled: true
-        jsonData:
-          authenticationType: gce
+# datasources:
+#   datasources.yaml:
+#     apiVersion: 1
+#     datasources:
+#       - name: BigQuery
+#         type: grafana-bigquery-datasource
+#         editable: true
+#         enabled: true
+#         jsonData:
+#           authenticationType: gce

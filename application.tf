@@ -81,7 +81,7 @@ resource "argocd_application" "grafana" {
     }
 
     destination {
-      name      = "ops"
+      name      = "common"
       namespace = "guardian"
     }
   }
