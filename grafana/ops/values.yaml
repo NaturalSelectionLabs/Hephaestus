@@ -6,7 +6,8 @@ resources:
     cpu: 0.5
     memory: 512Mi
 replicas: 3
-#plugins:
+plugins:
+  - aliyun-log-service-datasource
 #  - googlecloud-logging-datasource
 #  - grafana-bigquery-datasource
 ingress:
