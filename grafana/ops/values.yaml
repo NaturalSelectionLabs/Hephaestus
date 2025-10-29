@@ -7,7 +7,7 @@ resources:
     memory: 512Mi
 replicas: 3
 plugins:
-  - https://github.com/aliyun/aliyun-log-grafana-datasource-plugin/archive/refs/tags/2.38.zip
+  - https://github.com/aliyun/aliyun-log-grafana-datasource-plugin/archive/refs/tags/2.38.zip;aliyun-log
 #  - googlecloud-logging-datasource
 #  - grafana-bigquery-datasource
 ingress:
