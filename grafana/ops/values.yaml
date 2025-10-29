@@ -80,3 +80,19 @@ serviceAccount:
 #         enabled: true
 #         jsonData:
 #           authenticationType: gce
+
+extraVolumeMounts:
+  - name: plugins
+    mountPath: /var/lib/grafana/plugins
+    subPath: configs/grafana/plugins
+    readOnly: false
+  - name: dashboards
+    mountPath: /var/lib/grafana/dashboards
+    hostPath: /usr/shared/grafana/dashboards
+    readOnly: false
+
+extraVolumes:
+  - name: plugins
+    emptyDir: {}
+  - name: dashboards
+    emptyDir: {}
