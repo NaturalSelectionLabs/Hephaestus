@@ -39,6 +39,8 @@ grafana.ini:
     host: pgm-7gogu826854l62i9.pg.rds.aliyuncs.com
     user: postgres
     name: grafana
+  plugins:
+    allow_loading_unsigned_plugins: aliyun-log-service-datasource
   auth:
     oauth_allow_insecure_email_lookup: true
   auth.generic_oauth:
