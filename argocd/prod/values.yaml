@@ -276,15 +276,6 @@ configs:
     #      - kube-controller-manager
     #      jqPathExpressions:
     #      - .spec.replicas
-    resource.customizations.ignoreDifferences.apps_Deployment: |
-      jqPathExpressions:
-      - .spec.template.spec.initContainers[].resources
-    resource.compareoptions: |
-      # disables status field diffing in specified resource types
-      # 'crd' - CustomResourceDefinitions (default)
-      # 'all' - all resources
-      # 'none' - disabled
-      ignoreResourceStatusField: crd
   params:
     server.insecure: true
     reposerver.enable.git.submodule: false

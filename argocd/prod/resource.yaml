@@ -5,6 +5,18 @@ configs:
       - url: https://grafana.naturalselectionlabs.com/d/WjNUQy94z/5-7c-general-logs?orgId=1&from=now-5m&to=now&timezone=Asia%2FShanghai&var-datasource=d755e44f-61a2-4c4f-932d-f53cda0ab31e&var-namespace={{.resource.metadata.namespace}}&var-app={{.resource.metadata.name}}&var-component=$__all&var-pod=$__all&var-container=$__all&var-query0=
         title: 5-7c General Logs
         if: resource.kind == "Deployment"
+    resource.customizations.ignoreDifferences.apps_Deployment: |
+      jqPathExpressions:
+      - .spec.template.spec.initContainers[].resources
+    resource.customizations.ignoreDifferences.ServiceAccount: |
+      jqPathExpressions:
+      - .imagePullSecrets
+    resource.compareoptions: |
+      # disables status field diffing in specified resource types
+      # 'crd' - CustomResourceDefinitions (default)
+      # 'all' - all resources
+      # 'none' - disabled
+      ignoreResourceStatusField: crd
     resource.exclusions: |
       ### Network resources created by the Kubernetes control plane and excluded to reduce the number of watched events and UI clutter
       - apiGroups:
