@@ -233,6 +233,7 @@ configs:
     controller.kubectl.parallelism.limit: "10"
     controller.status.processors: "50"
     controller.operation.processors: "25"
+    controller.diff.server.side: "true"
     kustomize.buildOptions: --enable-helm
     dex.config: |
       connectors:
