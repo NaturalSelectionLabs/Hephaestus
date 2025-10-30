@@ -1,0 +1,9 @@
+loki:
+  service:
+    type: LoadBalancer
+    nodePort:
+    port: 3100
+    annotations:
+      service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
+    labels: {}
+    targetPort: http-metrics

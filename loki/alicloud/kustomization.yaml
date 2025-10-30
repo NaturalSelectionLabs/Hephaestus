@@ -1,5 +1,10 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-resources:
-  - ../base
+helmCharts:
+  - name: loki-stack
+    releaseName: loki-stack
+    namespace: guardian
+    repo: https://grafana.github.io/helm-charts
+    version: x.x.x
+    valuesFile: values.yaml
