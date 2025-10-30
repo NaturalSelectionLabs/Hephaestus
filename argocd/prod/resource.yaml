@@ -8,6 +8,10 @@ configs:
     resource.customizations.ignoreDifferences.apps_Deployment: |
       jqPathExpressions:
       - .spec.template.spec.initContainers[].resources
+    resource.customizations.ignoreDifferences.apps_StatefulSet: |
+      jqPathExpressions:
+      - .spec.template.spec.initContainers[].resources
+      - .spec.volumeClaimTemplates[].metadata.creationTimestamp
     resource.customizations.ignoreDifferences.ServiceAccount: |
       jqPathExpressions:
       - .imagePullSecrets
