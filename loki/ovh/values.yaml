@@ -1,0 +1,14 @@
+loki:
+  image:
+    tag: "2.9.3"
+  ingress:
+    enabled: true
+    ingressClassName: traefik
+    annotations:
+      cert-manager.io/cluster-issuer: "cloudflare"
+    hosts:
+      - host: loki.ovh.naturalselectionlabs.com
+    tls:
+      - secretName: loki-tls
+        hosts:
+          - loki.ovh.naturalselectionlabs.com
