@@ -1,13 +1,21 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
-  name: pyroscope
+  name: traefik-forward-auth
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - match: Host(`traefik-auth.naturalselectionlabs.com`)
-      kind: Rule
-      services:
-        - name: traefik-forward-auth
-          port: auth-http
+  ingressClassName: alb
+  tls:
+    - hosts:
+        - traefik-auth.naturalselectionlabs.com
+      secretName: traefik-forward-auth-tls
+  rules:
+    - host: traefik-auth.naturalselectionlabs.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: traefik-forward-auth
+                port:
+                  number: 4181

@@ -209,7 +209,7 @@ resource "argocd_application" "traefik-forward-auth" {
     }
 
     destination {
-      name      = "ops"
+      name      = argocd_cluster.common.name
       namespace = "guardian"
     }
   }
