@@ -32,6 +32,8 @@ extraArgs:
   # - 8080
   - --interval
   - 5m
+  - --logformat
+  - json
 # - --kubeconfig
 # - ~/.kube/config
 # - --match-application-name
