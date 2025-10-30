@@ -644,7 +644,7 @@ resource "argocd_application_set" "keda" {
           match_expressions {
             key      = "provider"
             operator = "NotIn"
-            values   = ["alicloud"]
+            values   = ["alicloud", "gcp"]
           }
         }
       }
