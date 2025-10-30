@@ -145,7 +145,7 @@ resource "argocd_application" "metabase" {
     }
 
     destination {
-      name      = "ops"
+      name      = argocd_cluster.common.name
       namespace = "guardian"
     }
   }

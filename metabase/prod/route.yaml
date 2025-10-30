@@ -1,13 +1,23 @@
-apiVersion: traefik.containo.us/v1alpha1
-kind: IngressRoute
+apiVersion: networking.k8s.io/v1
+kind: Ingress
 metadata:
   name: metabase
+  annotations:
+    cert-manager.io/cluster-issuer: "cloudflare"
 spec:
-  entryPoints:
-    - websecure
-  routes:
-    - kind: Rule
-      match: Host(`metabase.naturalselectionlabs.com`)
-      services:
-        - name: metabase
-          port: 3000
+  ingressClassName: alb
+  rules:
+    - host: metabase.naturalselectionlabs.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: metabase
+                port:
+                  number: 3000
+  tls:
+    - hosts:
+        - metabase.naturalselectionlabs.com
+      secretName: metabase-tls
