@@ -577,56 +577,56 @@ resource "argocd_application_set" "rabbitmq" {
 #   }
 # }
 
-resource "argocd_application_set" "promtail" {
-  metadata {
-    name = "promtail"
-  }
-  spec {
-    go_template = true
-    generator {
-      clusters {
-        selector {
-          match_labels = {
-            "argocd.argoproj.io/secret-type" = "cluster"
-          }
-          match_expressions {
-            key      = "provider"
-            operator = "NotIn"
-            values   = ["alicloud"]
-          }
-        }
-      }
-    }
-    template {
-      metadata {
-        name = "promtail-{{.name}}"
-        labels = {
-          cluster = "{{.name}}"
-          env     = "{{.metadata.labels.env}}"
-        }
-      }
-      spec {
-        project = argocd_project.guardian.metadata[0].name
-        source {
-          repo_url        = var.repo_url
-          target_revision = "HEAD"
-          path            = "promtail/{{.name}}"
-          kustomize {
-            common_annotations = {
-              "github.com/url" = var.repo_url
-            }
-          }
-        }
+# resource "argocd_application_set" "promtail" {
+#   metadata {
+#     name = "promtail"
+#   }
+#   spec {
+#     go_template = true
+#     generator {
+#       clusters {
+#         selector {
+#           match_labels = {
+#             "argocd.argoproj.io/secret-type" = "cluster"
+#           }
+#           match_expressions {
+#             key      = "provider"
+#             operator = "NotIn"
+#             values   = ["alicloud"]
+#           }
+#         }
+#       }
+#     }
+#     template {
+#       metadata {
+#         name = "promtail-{{.name}}"
+#         labels = {
+#           cluster = "{{.name}}"
+#           env     = "{{.metadata.labels.env}}"
+#         }
+#       }
+#       spec {
+#         project = argocd_project.guardian.metadata[0].name
+#         source {
+#           repo_url        = var.repo_url
+#           target_revision = "HEAD"
+#           path            = "promtail/{{.name}}"
+#           kustomize {
+#             common_annotations = {
+#               "github.com/url" = var.repo_url
+#             }
+#           }
+#         }
 
-        destination {
-          name      = "{{.name}}"
-          namespace = "guardian"
-        }
-      }
-    }
+#         destination {
+#           name      = "{{.name}}"
+#           namespace = "guardian"
+#         }
+#       }
+#     }
 
-  }
-}
+#   }
+# }
 
 resource "argocd_application_set" "keda" {
   metadata {
