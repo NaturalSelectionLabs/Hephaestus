@@ -1,4 +1,6 @@
 loki:
+  image:
+    tag: "2.9.3"
   service:
     type: LoadBalancer
     nodePort:
