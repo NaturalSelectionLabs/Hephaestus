@@ -66,14 +66,14 @@ resource "argocd_application_set" "victoria_metrics" {
           match_expressions {
             key      = "provider"
             operator = "NotIn"
-            values   = ["alicloud"]
+            values   = ["alicloud", "gcp"]
           }
         }
       }
     }
     template {
       metadata {
-        name = "victoriametrics-{{.name}}"
+        name = "vm-{{.name}}"
         labels = {
           cluster = "{{.name}}"
           env     = "{{.metadata.labels.env}}"
@@ -86,7 +86,7 @@ resource "argocd_application_set" "victoria_metrics" {
         source {
           repo_url        = var.repo_url
           target_revision = "HEAD"
-          path            = "victoriametrics/{{.name}}"
+          path            = "victoriametrics/{{.provider}}"
           kustomize {
             common_annotations = {
               "github.com/url" = var.repo_url
