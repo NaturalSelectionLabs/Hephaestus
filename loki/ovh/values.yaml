@@ -8,6 +8,15 @@ loki:
       cert-manager.io/cluster-issuer: "cloudflare"
     hosts:
       - host: loki.ovh.naturalselectionlabs.com
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: loki-stack
+                port:
+                  number: 3100
+
     tls:
       - secretName: loki-tls
         hosts:
