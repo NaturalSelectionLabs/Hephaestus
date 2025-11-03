@@ -236,6 +236,8 @@ configs:
     controller.diff.server.side: "true"
     kustomize.buildOptions: --enable-helm
     dex.config: |
+      expiry:
+        idTokens: 168h
       connectors:
         - type: oidc
           id: keycloak
