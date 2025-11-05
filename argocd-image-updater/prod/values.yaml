@@ -63,7 +63,7 @@ config:
       credentials: ext:/scripts/aliyun-auth.sh
       credsexpire: 15m
     - name: GitHub Container Registry
-      api_url: https://ghcr.io/v2
+      api_url: https://ghcr.io
       prefix: ghcr.io
       credentials: pullsecret:argo/rsshub-pull-secret
       ping: yes
