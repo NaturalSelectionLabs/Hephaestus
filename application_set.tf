@@ -895,6 +895,11 @@ resource "argocd_application_set" "otel-operator" {
             }
           }
         }
+
+        destination {
+          name      = "{{.name}}"
+          namespace = "guardian"
+        }
       }
     }
   }
