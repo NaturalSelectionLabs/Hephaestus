@@ -847,3 +847,55 @@ resource "argocd_application_set" "knative" {
     }
   }
 }
+
+
+resource "argocd_application_set" "otel-operator" {
+  metadata {
+    name = "otel-operator"
+  }
+  spec {
+    go_template = true
+    generator {
+      clusters {
+        selector {
+          match_labels = {
+            "argocd.argoproj.io/secret-type" = "cluster"
+          }
+          match_expressions {
+            key      = "provider"
+            operator = "NotIn"
+            values   = ["gcp"]
+          }
+        }
+      }
+    }
+
+    template {
+      metadata {
+        name = "otel-operator-{{.name}}"
+        labels = {
+          cluster = "{{.name}}"
+        }
+      }
+
+      spec {
+        project = argocd_project.guardian.metadata[0].name
+
+        source {
+          chart           = "opentelemetry-operator"
+          repo_url        = "https://open-telemetry.github.io/opentelemetry-helm-charts"
+          target_revision = "x.x.x"
+
+          helm {
+            release_name = "opentelemetry-operator"
+
+            parameter {
+              name  = "admissionWebhooks.certManager.enabled"
+              value = "true"
+            }
+          }
+        }
+      }
+    }
+  }
+}
