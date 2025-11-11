@@ -4,7 +4,7 @@ injector:
 server:
   extraSecretEnvironmentVars:
     - envName: VAULT_TOKEN
-      secretName: vault-unseal-key
+      secretName: vault-unseal-token
       secretKey: VAULT_TOKEN
   resources:
     requests:
