@@ -269,3 +269,28 @@ resource "argocd_application" "vault-unseal" {
     }
   }
 }
+
+resource "argocd_application" "vault" {
+  metadata {
+    name      = "vault"
+    namespace = "argo"
+  }
+  spec {
+    project = argocd_project.guardian.metadata[0].name
+    source {
+      repo_url        = var.repo_url
+      target_revision = "HEAD"
+      path            = "vault/main"
+      kustomize {
+        common_annotations = {
+          "github.com/url" = var.repo_url
+        }
+      }
+    }
+
+    destination {
+      name      = argocd_cluster.common.name
+      namespace = "guardian"
+    }
+  }
+}
