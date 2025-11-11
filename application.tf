@@ -288,6 +288,12 @@ resource "argocd_application" "vault" {
       }
     }
 
+    ignore_difference {
+      group               = "admissionregistration.k8s.io"
+      kind                = "*"
+      jq_path_expressions = [".webhooks[].clientConfig.caBundle"]
+    }
+
     destination {
       name      = argocd_cluster.common.name
       namespace = "guardian"
