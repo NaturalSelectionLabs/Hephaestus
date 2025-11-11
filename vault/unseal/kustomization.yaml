@@ -3,7 +3,7 @@ kind: Kustomization
 resources: []
 helmCharts:
   - name: vault
-    releaseName: vault
+    releaseName: vault-unseal
     repo: https://helm.releases.hashicorp.com
     valuesFile: values.yaml
     version: x.x.x
