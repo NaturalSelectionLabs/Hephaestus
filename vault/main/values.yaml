@@ -1,0 +1,79 @@
+injector:
+  metrics:
+    enabled: true
+server:
+  extraSecretEnvironmentVars:
+    - envName: VAULT_TOKEN
+      secretName: vault-unseal-key
+      secretKey: VAULT_TOKEN
+  resources:
+    requests:
+      memory: 256Mi
+      cpu: 100m
+    limits:
+      memory: 512Mi
+      cpu: 350m
+
+  ingress:
+    enabled: true
+    annotations:
+      cert-manager.io/cluster-issuer: cloudflare
+    ingressClassName: alb
+    hosts:
+      - host: vault.naturalselectionlabs.com
+    tls:
+      - secretName: vault-tls
+        hosts:
+          - vault.naturalselectionlabs.com
+
+  authDelegator:
+    enabled: true
+
+  dataStorage:
+    enabled: true
+    size: 20Gi
+    storageClass: alicloud-disk-essd
+
+  ha:
+    enabled: true
+    replicas: 3
+
+    raft:
+      enabled: true
+      config: |
+        ui = true
+
+        listener "tcp" {
+          tls_disable = 1
+          address = "[::]:8200"
+          cluster_address = "[::]:8201"
+        }
+
+        storage "raft" {
+          path = "/vault/data"
+          retry_join {
+            leader_api_addr = "http://vault-0.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-1.vault-internal:8200"
+          }
+          retry_join {
+            leader_api_addr = "http://vault-2.vault-internal:8200"
+          }
+        }
+
+        seal "transit" {
+          address = "http://vault-unseal:8200"
+          disable_renewal = "false"
+          key_name = "autounseal"
+          mount_path = "transit/"
+          tls_skip_verify = "true"
+        }
+
+
+        telemetry {
+          prometheus_retention_time = "30s"
+          disable_hostname = true
+        }
+
+        service_registration "kubernetes" {}
