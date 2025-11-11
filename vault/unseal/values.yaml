@@ -1,6 +1,5 @@
 injector:
-  metrics:
-    enabled: false
+  enabled: false
 
 server:
   volumes:
