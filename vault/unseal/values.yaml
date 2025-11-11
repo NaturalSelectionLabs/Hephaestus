@@ -3,6 +3,23 @@ injector:
     enabled: false
 
 server:
+  volumes:
+    - name: vault-unseal-key
+      secret:
+        defaultMode: 420
+        secretName: vault-unseal-key
+  volumeMounts:
+    - name: vault-unseal-key
+      mountPath: /unseal
+      readOnly: true
+  postStart:
+    - sh
+    - -c
+    - |
+      sleep 10
+      for keyfile in /unseal/key.*; do
+        vault operator unseal "$(cat "$keyfile")"
+      done
   resources:
     requests:
       memory: 256Mi
