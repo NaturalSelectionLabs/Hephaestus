@@ -28,7 +28,7 @@ server:
       cpu: 350m
 
   ingress:
-    enabled: true
+    enabled: false
     annotations:
       cert-manager.io/cluster-issuer: cloudflare
     ingressClassName: alb
