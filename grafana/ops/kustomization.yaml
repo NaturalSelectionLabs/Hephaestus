@@ -11,6 +11,7 @@ helmCharts:
     version: x.x.x
   - name: grafana-mcp
     releaseName: grafana-mcp
+    namespace: guardian
     repo: https://grafana.github.io/helm-charts
     version: x.x.x
     valuesInline:
