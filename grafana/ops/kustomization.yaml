@@ -9,3 +9,10 @@ helmCharts:
     repo: https://grafana.github.io/helm-charts
     valuesFile: values.yaml
     version: x.x.x
+  - name: grafana-mcp
+    releaseName: grafana-mcp
+    repo: https://grafana.github.io/helm-charts
+    version: x.x.x
+    valuesInline:
+      grafana:
+        url: https://grafana.naturalselectionlabs.com
