@@ -17,3 +17,20 @@ helmCharts:
     valuesInline:
       grafana:
         url: https://grafana.naturalselectionlabs.com
+        apiKeySecret:
+          name: grafana-mcp
+          key: token
+      ingress:
+        enabled: true
+        className: alb
+        annotations:
+          cert-manager.io/cluster-issuer: "cloudflare"
+        hosts:
+          - host: mcp-grafana.naturalselectionlabs.com
+            paths:
+              - path: /
+                pathType: Prefix
+        tls:
+          - secretName: grafana-mcp-tls
+            hosts:
+              - mcp-grafana.naturalselectionlabs.com
