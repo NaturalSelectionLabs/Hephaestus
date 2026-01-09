@@ -9,14 +9,14 @@ externalRedis:
   host: r-7goqq5xexvafy15m2q.redis.rds.aliyuncs.com
 #  existingSecret: argocd-redis
 controller:
-  replicas: 3
+  replicas: 1
   resources:
     requests:
-      cpu: 4
-      memory: 4Gi
+      cpu: 1
+      memory: 2Gi
     limits:
-      cpu: 4
-      memory: 4Gi
+      cpu: 1
+      memory: 2Gi
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
@@ -98,7 +98,7 @@ server:
       memory: 1Gi
   autoscaling:
     enabled: true
-    minReplicas: 2
+    minReplicas: 1
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
@@ -131,8 +131,8 @@ repoServer:
       memory: 2Gi
   autoscaling:
     enabled: true
-    minReplicas: 3
-    maxReplicas: 7
+    minReplicas: 1
+    maxReplicas: 3
   rbac:
     - verbs:
         - get
@@ -213,7 +213,7 @@ applicationSet:
     enabled: true
     serviceMonitor:
       enabled: true
-  replicas: 2
+  replicas: 1
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
