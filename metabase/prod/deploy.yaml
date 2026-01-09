@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: metabase
 spec:
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: metabase
@@ -18,7 +18,7 @@ spec:
       initContainers:
         - name: init-plugins
           image: curlimages/curl
-          command: ['/bin/sh', '-c']
+          command: ["/bin/sh", "-c"]
           env:
             - name: METABASE_CLICKHOUSE_DRIVER_VERSION
               value: 1.50.7

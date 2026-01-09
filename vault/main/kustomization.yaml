@@ -8,3 +8,7 @@ helmCharts:
     valuesFile: values.yaml
     version: x.x.x
     namespace: guardian
+
+replicas:
+  - name: vault
+    count: 0

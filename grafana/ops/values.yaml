@@ -5,7 +5,7 @@ resources:
   requests:
     cpu: 0.5
     memory: 512Mi
-replicas: 3
+replicas: 2
 plugins:
   - https://github.com/aliyun/aliyun-log-grafana-datasource-plugin/archive/refs/tags/2.38.zip;aliyun-log-service-datasource
 #  - googlecloud-logging-datasource
