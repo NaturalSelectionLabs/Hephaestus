@@ -12,8 +12,8 @@ controller:
   replicas: 1
   resources:
     requests:
-      cpu: 1
-      memory: 2Gi
+      cpu: 0.5
+      memory: 1Gi
     limits:
       cpu: 1
       memory: 2Gi
@@ -124,8 +124,8 @@ repoServer:
       enabled: true
   resources:
     requests:
-      cpu: 1
-      memory: 2Gi
+      cpu: "0.25"
+      memory: 512Mi
     limits:
       cpu: 1
       memory: 2Gi
