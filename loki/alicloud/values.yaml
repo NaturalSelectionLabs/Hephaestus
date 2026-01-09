@@ -9,3 +9,12 @@ loki:
       service.beta.kubernetes.io/alibaba-cloud-loadbalancer-address-type: "intranet"
     labels: {}
     targetPort: http-metrics
+
+promtail:
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 100m
+      memory: 128Mi
