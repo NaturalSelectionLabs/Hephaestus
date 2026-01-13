@@ -12,11 +12,11 @@ controller:
   replicas: 1
   resources:
     requests:
+      cpu: 0.1
+      memory: 128Mi
+    limits:
       cpu: 0.5
       memory: 1Gi
-    limits:
-      cpu: 1
-      memory: 2Gi
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
@@ -91,10 +91,10 @@ server:
     annotations: {}
   resources:
     requests:
-      cpu: 0.25
-      memory: 1Gi
+      cpu: 0.1
+      memory: 128Mi
     limits:
-      cpu: 0.25
+      cpu: 0.5
       memory: 1Gi
   autoscaling:
     enabled: true
@@ -124,11 +124,11 @@ repoServer:
       enabled: true
   resources:
     requests:
-      cpu: "0.25"
-      memory: 512Mi
+      cpu: "0.1"
+      memory: 128Mi
     limits:
-      cpu: 1
-      memory: 2Gi
+      cpu: 0.5
+      memory: 1Gi
   autoscaling:
     enabled: true
     minReplicas: 1
