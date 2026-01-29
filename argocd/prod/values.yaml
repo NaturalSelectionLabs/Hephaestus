@@ -16,7 +16,7 @@ controller:
       memory: 2Gi
     limits:
       cpu: 1
-      memory: 2Gi
+      memory: 4Gi
   serviceAccount:
     annotations:
       iam.gke.io/gcp-service-account: argocd@naturalselectionlabs.iam.gserviceaccount.com
