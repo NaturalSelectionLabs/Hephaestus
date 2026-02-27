@@ -3,6 +3,7 @@ kind: Kustomization
 resources:
   - alert-svc.yaml
   - secret.yaml
+  - vpa.yaml
 helmCharts:
   - name: grafana
     releaseName: grafana
